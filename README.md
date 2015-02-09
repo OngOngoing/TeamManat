@@ -11,4 +11,4 @@ Exceed vote by TeamManat @OngOngoing @ChinCluBi @smart2538 @NitiK
 
 - [Wiki](https://github.com/SSD2015/TeamManat/wiki)
 - [Vision-Statement](https://github.com/SSD2015/TeamManat/wiki/Vision-Statement)
-- [Java Web Framework Comparison](https://docs.google.com/document/d/1yUn-WS6-5OvnuSOwO7qyyWzldSsXh37U5cIy7-qavEc/edit?usp=sharing)
+- [Java Web Framework Comparison](https://github.com/SSD2015/TeamManat/wiki/Java-Web-Framework-Comparison)
