@@ -1,5 +1,5 @@
 # TeamManat
-Exceed vote by TeamManat @OngOngoing @ChinCluBi @smart2538 @NitiK 
+_Exceed vote by TeamManat @OngOngoing @ChinCluBi @smart2538 @NitiK_
 
 ## Member List 
 | ID | GitHub | Name |
