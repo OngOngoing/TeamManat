@@ -1,4 +1,7 @@
 # TeamManat
+
+![Mock-Up](https://github.com/SSD2015/TeamManat/blob/master/img/c-login.png)
+
 _Exceed vote by TeamManat @OngOngoing @ChinCluBi @smart2538 @NitiK_
 
 ## Member List 
