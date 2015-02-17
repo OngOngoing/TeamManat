@@ -1,6 +1,6 @@
 # TeamManat
 
-![Mock-Up](https://github.com/SSD2015/TeamManat/blob/master/img/c-login.png)
+![Mock-Up](https://github.com/SSD2015/TeamManat/blob/master/img/mock_up.png)
 
 _Exceed vote by TeamManat @OngOngoing @ChinCluBi @smart2538 @NitiK_
 
