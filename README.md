@@ -11,6 +11,7 @@ _Exceed vote by TeamManat @OngOngoing @ChinCluBi @smart2538 @NitiK_
 | 5610545811 | @OngOngoing | Sorrawit Chancherngkit |
 | 5610546290 | @smart2538 | Worapon	Olanwanitchakul |
 | 5610545013 | @NitiK | Niti Petcharatmora |
+| 5610546800 | @XMistralX | Supason Kotanut |
 
 - [Wiki](https://github.com/SSD2015/TeamManat/wiki)
 - [Vision-Statement](https://github.com/SSD2015/TeamManat/wiki/Vision-Statement)
