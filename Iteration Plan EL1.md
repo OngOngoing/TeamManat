@@ -7,6 +7,8 @@
 |  User can vote  | Users can vote the projects. The vote is stored and can be retrieved. |
 |  User can view project's page  | The project page is rendered and show the project's description. |
 |  Application is deployed  | Application can be deployed on the web. |
+| Vote can be edited | previous vote can be editted |
+
 
 ## Iteration Objective(s)
 
@@ -17,6 +19,7 @@
 | Project page | 3 |
 | Web Deployment | 2 |
 | Mobile Deployment | 3 |
+| Vote Editing UI | 2 |
 
 
 
