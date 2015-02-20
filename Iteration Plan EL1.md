@@ -14,8 +14,8 @@
 
 | Objective/Feature/Task | Priority (1=very high, 5=low) |
 |------------------------|:-----------------------------:|
-| Voting system Backend | 1 |
-| Voting page Frontend | 2 |
+| Voting system Backend (Server side) | 1 |
+| Voting page Frontend (Client side) | 2 |
 | Project page | 3 |
 | Web Deployment | 2 |
 | Mobile Deployment | 3 |
