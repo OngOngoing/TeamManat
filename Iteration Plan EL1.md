@@ -19,7 +19,8 @@
 | Project page | 3 |
 | Web Deployment | 2 |
 | Mobile Deployment | 3 |
-| Editing a vote | 2 |
+| Editing a vote UI | 4 |
+| Editing a vote (System) | 3 |
 
 
 
