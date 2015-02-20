@@ -21,6 +21,7 @@
 | Mobile Deployment | 3 |
 | Editing a vote UI | 4 |
 | Editing a vote (System) | 3 |
+| Show list of projects (Lobby Page) | 5 |
 
 
 
@@ -29,5 +30,5 @@
 
 | Objective/Feature/Task | Priority (1=very high, 5=low) |
 |------------------------|:-----------------------------:|
-| Show list of projects (Lobby Page) | 5 |
+| User Authentication | 4 |
 
