@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="SBT: net.contentobjects.jnotify:jnotify:0.94:jar">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.ivy2/cache/net.contentobjects.jnotify/jnotify/jars/jnotify-0.94.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
