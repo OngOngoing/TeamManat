@@ -18,7 +18,7 @@
 | Voting page Frontend (Client side) | 2 |
 | Project page | 3 |
 | Web Deployment | 2 |
-| Mobile Deployment | 3 |
+| User Login (Authentication) | 5 |
 | Editing a vote UI | 4 |
 | Editing a vote (System) | 3 |
 | Show list of projects (Lobby Page) | 5 |
@@ -30,5 +30,5 @@
 
 | Objective/Feature/Task | Priority (1=very high, 5=low) |
 |------------------------|:-----------------------------:|
-| User Authentication | 4 |
+| Mobile Deployment | 4 |
 
