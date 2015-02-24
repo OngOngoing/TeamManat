@@ -13,7 +13,7 @@ _Exceed vote by TeamManat @OngOngoing @ChinCluBi @smart2538 @NitiK_
 | 5610545013 | @NitiK | Niti Petcharatmora |
 | 5610546800 | @XMistralX | Supason Kotanut |
 
-- [Wiki](/wiki)
-- [Vision-Statement](/wiki/Vision-Statement)
-- [Java Web Framework Comparison](/wiki/Java-Web-Framework-Comparison)
+- [Wiki](https://github.com/SSD2015/TeamManat/wiki)
+- [Vision-Statement](https://github.com/SSD2015/TeamManat/wiki/Vision-Statement)
+- [Java Web Framework Comparison](https://github.com/SSD2015/TeamManat/wiki/Java-Web-Framework-Comparison)
 - [Iteration Planning EL1](Iteration Plan EL1.md)
