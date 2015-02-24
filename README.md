@@ -16,4 +16,6 @@ _Exceed vote by TeamManat @OngOngoing @ChinCluBi @smart2538 @NitiK_
 - [Wiki](https://github.com/SSD2015/TeamManat/wiki)
 - [Vision-Statement](https://github.com/SSD2015/TeamManat/wiki/Vision-Statement)
 - [Java Web Framework Comparison](https://github.com/SSD2015/TeamManat/wiki/Java-Web-Framework-Comparison)
-- [Iteration Planning EL1](Iteration Plan EL1.md)
+- [Iteration Planning EL1](page/Iteration Plan EL1.md)
+
+_This file will be packaged with your application, when using 'activator dist'._
