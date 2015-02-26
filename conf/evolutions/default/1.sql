@@ -6,7 +6,9 @@
 create table user (
   id                        integer primary key AUTOINCREMENT,
   username                  varchar(255),
-  password                  varchar(255))
+  password                  varchar(255),
+  name                      varchar(255),
+  type                      integer)
 ;
 
 

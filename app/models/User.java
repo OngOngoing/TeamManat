@@ -11,15 +11,18 @@ public class User extends Model {
     public Long id;
 
     @Required
-    public String username;
-    public String password;
+    public String username,password,name;
+    public int type;
+
 
     public static Finder<Long, User> find = new Finder<Long, User>(Long.class, User.class);
 
-    public static User create(String username, String password){
+    public static User create(String name ,String username, String password , int type ){
         User user = new User();
+        user.name = name;
         user.username = username;
         user.password = BCrypt.hashpw(password, BCrypt.gensalt());
+        user.type = type;
         user.save();
         return user;
     }
