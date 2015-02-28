@@ -15,7 +15,7 @@
             <h1 class="light-blue-text darken-2">Project List</h1>
             <ul class="collection">
                 @projects.map { project =>
-                    <a href="votepage.html?project=@project.id" class="collection-item">@project.name<span class="new badge">@project.id</span></a>
+                    <a href="votepage/@project.id" class="collection-item">@project.name<span class="new badge">@project.id</span></a>
                 }
             </ul>
 

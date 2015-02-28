@@ -9,7 +9,7 @@ import play.db.ebean.*;
 public class Project extends Model
 {
     @Id
-    public Long id;
+    public int id;
 
     @Required
     public String name;
