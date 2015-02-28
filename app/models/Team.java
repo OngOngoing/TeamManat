@@ -5,21 +5,19 @@ import play.data.validation.Constraints.Required;
 import org.mindrot.jbcrypt.BCrypt;
 import play.db.ebean.*;
 
-/**
- * Created by Mistral on 2/26/15 AD.
- */
+@Entity
 public class Team extends Model {
 
     @Id
     public long id;
 
     @Required
-    public User[] users;
+    public String teamName;
 
-    public static Team create(User[] users)
+    public static Team create(String teamName)
     {
         Team team = new Team();
-        team.users = users;
+        team.teamName = teamName;
         team.save();
         return team;
     }

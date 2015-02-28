@@ -5,9 +5,7 @@ import play.data.validation.Constraints.Required;
 import org.mindrot.jbcrypt.BCrypt;
 import play.db.ebean.*;
 
-/**
- * Created by Mistral on 2/26/15 AD.
- */
+@Entity
 public class Vote extends Model {
     @Id
     public long id;
