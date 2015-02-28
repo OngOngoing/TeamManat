@@ -4,7 +4,7 @@
 
 # Home page
 GET        /                    controllers.Application.index()
-GET        /votepage/:id        controllers.VotePage.index(id:Int)
+GET        /votepage/:id        controllers.VotePage.index(id:Long)
 GET        /projectlist         controllers.ProjectList.index()
 
 # Map static resources from the /public folder to the /assets URL path
