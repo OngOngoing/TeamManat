@@ -28,11 +28,6 @@ public class User extends Model {
     }
 
     public static User login(String username, String password){
-        User user = User.find.where().eq("username", username).findUnique();
-        if(user != null && user.password == BCrypt.hashpw(password, BCrypt.gensalt())){
-            return user;
-        }else{
-            return null;
-        }
+        return User.find.where().eq("username", username).eq("password", BCrypt.hashpw(password, BCrypt.gensalt())).findUnique();
     }
 }

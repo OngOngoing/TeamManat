@@ -8,7 +8,7 @@ import views.html.projectlist;
 public class ProjectList extends Controller {
 
     public static Result index() {
-        return ok(projectlist.render("Hello", Project.find.all()));
+        return ok(projectlist.render("Project List", Project.find.all()));
     }
 
 }
