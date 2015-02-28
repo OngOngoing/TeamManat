@@ -5,9 +5,7 @@ import play.data.validation.Constraints.Required;
 import org.mindrot.jbcrypt.BCrypt;
 import play.db.ebean.*;
 
-/**
- * Created by Mistral on 2/26/15 AD.
- */
+@Entity
 public class Project extends Model
 {
     @Id
@@ -27,4 +25,6 @@ public class Project extends Model
         project.save();
         return project;
     }
+
+    public static Finder<Long, Project> find = new Finder<Long, Project>(Long.class, Project.class);
 }

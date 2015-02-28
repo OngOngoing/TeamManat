@@ -2,7 +2,6 @@ package models;
 
 import javax.persistence.*;
 import play.data.validation.Constraints.Required;
-import org.mindrot.jbcrypt.BCrypt;
 import play.db.ebean.*;
 
 /**

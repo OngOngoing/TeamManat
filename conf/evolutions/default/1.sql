@@ -3,6 +3,12 @@
 
 # --- !Ups
 
+create table project (
+  id                        integer primary key AUTOINCREMENT,
+  name                      varchar(255),
+  description               varchar(255))
+;
+
 create table user (
   id                        integer primary key AUTOINCREMENT,
   username                  varchar(255),
@@ -17,6 +23,8 @@ create table user (
 # --- !Downs
 
 PRAGMA foreign_keys = OFF;
+
+drop table project;
 
 drop table user;
 
