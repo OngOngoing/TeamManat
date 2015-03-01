@@ -9,7 +9,7 @@ import play.db.ebean.*;
 public class Project extends Model
 {
     @Id
-    public Long id;
+    public int id;
 
     @Required
     public String name;
@@ -25,4 +25,6 @@ public class Project extends Model
         project.save();
         return project;
     }
+
+    public static Finder<Long, Project> find = new Finder<Long, Project>(Long.class, Project.class);
 }
