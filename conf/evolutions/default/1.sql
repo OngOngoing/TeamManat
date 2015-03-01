@@ -9,12 +9,27 @@ create table project (
   description               varchar(255))
 ;
 
+create table team (
+  id                        integer primary key AUTOINCREMENT,
+  team_name                 varchar(255),
+  description               varchar(255))
+;
+
 create table user (
   id                        integer primary key AUTOINCREMENT,
   username                  varchar(255),
   password                  varchar(255),
   name                      varchar(255),
-  type                      integer)
+  type                      integer,
+  team_num                  integer)
+;
+
+create table vote (
+  id                        integer primary key AUTOINCREMENT,
+  score                     integer,
+  type                      varchar(255),
+  user_id                   varchar(255),
+  vote_id                   varchar(255))
 ;
 
 
@@ -26,7 +41,11 @@ PRAGMA foreign_keys = OFF;
 
 drop table project;
 
+drop table team;
+
 drop table user;
+
+drop table vote;
 
 PRAGMA foreign_keys = ON;
 

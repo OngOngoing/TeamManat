@@ -13,11 +13,13 @@ public class Team extends Model {
 
     @Required
     public String teamName;
+    public String description;
 
-    public static Team create(String teamName)
+    public static Team create(String teamName, String description)
     {
         Team team = new Team();
         team.teamName = teamName;
+        team.description = description;
         team.save();
         return team;
     }
