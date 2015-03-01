@@ -1,4 +1,4 @@
-@(title: String)(id: Int)
+@(title: String)(project: Project)
 
 <!DOCTYPE html>
 
@@ -18,7 +18,11 @@
                         Welcome!
                     </div>
                     <div class="panel-body">
-                        Team Manat! Template VotePage
+                        Team Manat! Template VotePage<br>
+                        @project.name<br>
+                        @project.description<br>
+                        @project.team.description<br>
+
                     </div>
                 </div>
             </div>
