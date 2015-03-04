@@ -1,4 +1,4 @@
-name := """eXceedVote"""
+name := """exceedvote"""
 
 version := "1.0"
 
