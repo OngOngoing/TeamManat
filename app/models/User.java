@@ -2,7 +2,6 @@ package models;
 
 import javax.persistence.*;
 import play.data.validation.Constraints.Required;
-import org.mindrot.jbcrypt.BCrypt;
 import play.db.ebean.*;
 
 @Entity
@@ -17,7 +16,7 @@ public class User extends Model {
     public User(String username, String password, String name, int type, int team){
         this.name = name;
         this.username = username;
-        this.password = BCrypt.hashpw(password, BCrypt.gensalt());
+        this.password = password;
         this.type = type;
         this.teamNum = team;
     }

@@ -1,3 +1,15 @@
+html {
+    height: 100%;
+}
+body {
+    height: 100%;
+    background-repeat: no-repeat;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    -webkit-background-size: cover;
+    background-size: cover;
+    background-attachment: fixed;
+}
 .colorBg {
     padding: 50px 0;
     min-height: 100%;
@@ -22,4 +34,43 @@
     background-image: -webkit-gradient(radial, center top, 0, center top, 487, color-stop(0, #8beae3), color-stop(1, #34dbce));
     background-image: -webkit-radial-gradient(center top, circle farthest-side, #8beae3 0%, #34dbce 100%);
     background-image: radial-gradient(circle farthest-side at center top, #8beae3 0%, #34dbce 100%);
+}
+.login-window .wrap {
+    padding-top: 250px;
+}
+.login-window .form-wrap {
+    background-color: #333333;
+    padding: 50px 50px 100px 50px;
+    position: relative;
+}
+.login-window .form-control:focus {
+    border: none;
+    border-bottom: 1px solid #505050;
+    box-shadow: 0 0 5px #cccccc;
+}
+.login-window input[type="text"],
+.login-window input[type="password"],
+.login-window input[type="email"] {
+    background: none;
+    border: none;
+    border-bottom: 1px solid #505050;
+    box-shadow: none;
+    padding: 10px 0 10px 10px;
+    border-radius: 0;
+    margin-bottom: 20px;
+    color: #cccccc;
+}
+.login-window .signup {
+    padding: 8px 15px;
+    background-color: #78b310;
+    color: #ffffff;
+    -webkit-transition: background-color 300ms linear;
+    -moz-transition: background-color 300ms linear;
+    -o-transition: background-color 300ms linear;
+    -ms-transition: background-color 300ms linear;
+    transition: background-color 300ms linear;
+}
+.login-window .title {
+    text-align: left;
+    color: #cccccc;
 }

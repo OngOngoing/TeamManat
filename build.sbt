@@ -1,4 +1,4 @@
-name := """TeamManat"""
+name := """eXceedVote"""
 
 version := "1.0-SNAPSHOT"
 
@@ -11,6 +11,5 @@ libraryDependencies ++= Seq(
   javaEbean,
   cache,
   javaWs,
-  "org.xerial" % "sqlite-jdbc" % "3.7.2",
-  "org.mindrot" % "jbcrypt" % "0.3m"
+  "org.mariadb.jdbc" % "mariadb-java-client" % "1.1.8"
 )
