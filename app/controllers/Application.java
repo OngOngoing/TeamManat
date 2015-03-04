@@ -12,14 +12,14 @@ public class Application extends Controller {
         if(user != null) {
             return redirect(routes.ProjectList.index());
         }else{
-            return ok(index.render(Form.form(Login.class)));
+            return ok(login.render(Form.form(Login.class)));
         }
     }
 
     public static Result authenticate() {
         Form<Login> loginForm = Form.form(Login.class).bindFromRequest();
         if (loginForm.hasErrors()) {
-            return badRequest(index.render(loginForm));
+            return badRequest(login.render(loginForm));
         } else {
             session().clear();
             session("username", loginForm.get().username);
