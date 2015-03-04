@@ -18,7 +18,7 @@
 | Voting page Frontend (Client side) | 2 |
 | Project page | 3 |
 | Web Deployment | 2 |
-| User Login (Authentication) | 5 |
+| User Login (Authentication) | 3 |
 | Editing a vote UI | 4 |
 | Editing a vote (System) | 3 |
 | Show list of projects (Lobby Page) | 5 |
