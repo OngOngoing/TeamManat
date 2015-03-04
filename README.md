@@ -1,5 +1,8 @@
 # TeamManat
 
+Can't make it online, please help
+https://github.com/SSD2015/TeamManat/issues/6#issuecomment-77246963
+
 ![Mock-Up](img/mock_up.png)
 
 _Exceed vote by TeamManat @OngOngoing @ChinCluBi @smart2538 @NitiK_
