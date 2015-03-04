@@ -25,6 +25,7 @@ public class User extends Model {
     public static Finder<Long, User> find = new Finder<Long, User>(Long.class, User.class);
 
     public static User authenticate(String username, String password){
+        System.out.println("Username"+username+"Password"+password);
         return find.where().eq("username", username).eq("password", password).findUnique();
     }
 
