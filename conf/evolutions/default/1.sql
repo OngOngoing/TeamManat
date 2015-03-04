@@ -6,7 +6,8 @@
 create table project (
   id                        integer primary key AUTOINCREMENT,
   name                      varchar(255),
-  description               varchar(255))
+  description               varchar(255),
+  picture                   varchar(255))
 ;
 
 create table team (
@@ -28,8 +29,8 @@ create table vote (
   id                        integer primary key AUTOINCREMENT,
   score                     integer,
   type                      varchar(255),
-  user_id                   varchar(255),
-  vote_id                   varchar(255))
+  user_id                   integer,
+  project_id                integer)
 ;
 
 

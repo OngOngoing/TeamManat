@@ -14,6 +14,7 @@ public class Project extends Model
     @Required
     public String name;
     public String description;
+    public String picture = "/img/teamDummy.jpg";
     public Team team;
 
     public static Project create(String name , String description , Team team)
@@ -22,6 +23,7 @@ public class Project extends Model
         project.name = name;
         project.description = description;
         project.team = team;
+        project.picture = "/img/teamDummy.jpg";
         project.save();
         return project;
     }

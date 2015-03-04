@@ -12,17 +12,18 @@ public class Vote extends Model {
     @Required
     public int score;
     public String type;
-    public String userId;
-    public String voteId;
+    public Long userId;
+    public Long projectId;
 
-    public static Vote create(int score , String type , String userId , String voteId)
+    public static Vote create(int score , String type , Long userId , Long projectId)
     {
         Vote vote = new Vote();
         vote.score = score;
         vote.type = type;
         vote.userId = userId;
-        vote.voteId = voteId;
+        vote.projectId = projectId;
         vote.save();
         return vote;
     }
+    public static Finder<Long, Vote> find = new Finder<Long, Vote>(Long.class, Vote.class);
 }

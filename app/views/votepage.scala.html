@@ -1,4 +1,4 @@
-@(project: Project)
+@(project: Project)(Vote: List[Vote])
 
 <!DOCTYPE html>
 
@@ -19,8 +19,18 @@
                     </div>
                     <div class="panel-body">
                         Team Manat! Template VotePage<br>
+                        <img>@project.picture</img>
                         @project.name<br>
                         @project.description<br>
+                        @project.team<br>
+                        <form action="/votepage" method="post">
+                            <input type="text" name="score">
+                            <input type="hidden" name="projectId" value="@project.id">
+                            <input type="hidden" name="userId" value="1">
+                            <input type="hidden" name="type" value="1">
+                                <button type="submit">vote</button>
+                        </form>
+
                     </div>
                 </div>
             </div>
