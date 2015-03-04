@@ -6,7 +6,8 @@
 create table project (
   id                        integer primary key AUTOINCREMENT,
   name                      varchar(255),
-  description               varchar(255))
+  description               varchar(255),
+  picture                   varchar(255))
 ;
 
 create table team (

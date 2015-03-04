@@ -11,7 +11,7 @@ import views.html.*;
 
 public class VotePage extends Controller {
     public static Result index(Long id) {
-        return ok(votepage.render(Project.find.byId(id)));
+        return ok(votepage.render(Project.find.byId(id), Vote.find.all()));
     }
     public static Result addVote(){
 		Vote vote = Form.form(Vote.class).bindFromRequest().get();

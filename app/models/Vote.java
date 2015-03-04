@@ -25,4 +25,5 @@ public class Vote extends Model {
         vote.save();
         return vote;
     }
+    public static Finder<Long, Vote> find = new Finder<Long, Vote>(Long.class, Vote.class);
 }
