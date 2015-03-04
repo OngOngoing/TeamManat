@@ -21,7 +21,14 @@
                         Team Manat! Template VotePage<br>
                         @project.name<br>
                         @project.description<br>
-                        @project.team.description<br>
+                        @project.team<br>
+                        <form action="/votepage" method="post">
+                            <input type="text" name="score">
+                            <input type="hidden" name="projectId" value="@project.id">
+                            <input type="hidden" name="userId" value="1">
+                            <input type="hidden" name="type" value="1">
+                                <button type="submit">Add</button>
+                        </form>
 
                     </div>
                 </div>
