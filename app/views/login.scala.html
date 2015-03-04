@@ -30,11 +30,12 @@
                                 <div class="col-md-4"></div>
                             </div>
                             <div class="row">
+                                <div class="txt-center">Username : test , Password : test </div>
                                 @if(form.hasGlobalErrors) {
-                                    <h3>@form.globalError.message</h3>
+                                    <div class="txt-center"><h3>@form.globalError.message</h3></div>
                                 }
                                 @if(flash.contains("success")) {
-                                    <h3>@flash.get("success")</h3>
+                                    <div class="txt-center"><h3>@flash.get("success")</h3></div>
                                 }
                             </div>
                         </form>
