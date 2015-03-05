@@ -1,6 +1,10 @@
 # TeamManat
-### Website
-http://128.199.68.147:49173/
+### Install
+- Install sql
+- Create new database with name "exceedvote"
+- Run this application
+- Access to localhost:9000/install
+- Enjoy!
 ### Mock Up
 ![Mock-Up](img/mock_up.png)
 
