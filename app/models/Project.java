@@ -14,14 +14,14 @@ public class Project extends Model
     public String name;
     public String description;
     public String picture = "/img/teamDummy.jpg";
-    public Team team;
+    public long teamId;
 
-    public static Project create(String name , String description , Team team)
+    public static Project create(String name , String description , Long team)
     {
         Project project = new Project();
         project.name = name;
         project.description = description;
-        project.team = team;
+        project.teamId = team;
         project.picture = "/img/teamDummy.jpg";
         project.save();
         return project;
