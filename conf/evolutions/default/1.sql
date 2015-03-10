@@ -8,6 +8,7 @@ create table project (
   name                      varchar(255),
   description               varchar(255),
   picture                   varchar(255),
+  team_id                   bigint,
   constraint pk_project primary key (id))
 ;
 
