@@ -7,6 +7,7 @@
         <title>Exceed Vote</title>
         <link rel="stylesheet" media="screen" href="@routes.Assets.at("stylesheets/materialize.min.css")">
         <link rel="stylesheet" media="screen" href="@routes.Assets.at("stylesheets/animate.css")">
+        <link rel="stylesheet" media="screen" href="@routes.Assets.at("stylesheets/projectlist.css")">
         <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
     </head>
     <body>
@@ -17,7 +18,7 @@
 
             <ul class="collection">
                 @projects.map { project =>
-                    <a href="votepage/@project.id" class="collection-item">@project.name<span class="new badge">@project.id</span></a>
+                    <a href="votepage/@project.id" class="collection-item">@project.name<span class="rated badge">@project.id</span></a>
                 }
             </ul>
 
