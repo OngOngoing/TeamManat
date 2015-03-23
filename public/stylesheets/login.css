@@ -36,12 +36,14 @@ body {
     background-image: radial-gradient(circle farthest-side at center top, #8beae3 0%, #34dbce 100%);
 }
 .login-window .wrap {
-    padding-top: 250px;
+    padding-top: 5%;
+    padding-bottom: 5%;
 }
 .login-window .form-wrap {
     background-color: #333333;
     padding: 50px 50px 100px 50px;
     position: relative;
+    border-radius:0.5em;
 }
 .login-window .form-control:focus {
     border: none;
