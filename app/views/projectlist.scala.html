@@ -1,4 +1,4 @@
-@(projects: List[Project])
+@(projects: List[Project])(votes : List[Vote])
 
 <!DOCTYPE html>
 
@@ -14,11 +14,17 @@
 
         <div class="container animated fadeInUp">
                 <!-- Page Content goes here -->
-            <h1 class="light-blue-text darken-2">Project List</h1>
+            <h1 class="light-blue-text darken-2 lobby-banner">Project List</h1>
 
             <ul class="collection">
                 @projects.map { project =>
-                    <a href="votepage/@project.id" class="collection-item">@project.name<span class="rated badge">@project.id</span></a>
+                    <a href="votepage/@project.id" class="collection-item trigger">@project.name
+                        @votes.map { vote =>
+                            @if(vote.projectId == project.id){
+                                <span class="rated badge">@vote.score</span>
+                            }
+                        }
+                    </a>
                 }
             </ul>
 
@@ -31,7 +37,7 @@
             <div class="row center">
 
                 <div class="col s12">
-                    <a class="waves-effect waves-light btn-large" href="@routes.Application.logout()">Logout</a>
+                    <a class="waves-effect waves-light btn-large trigger" href="@routes.Application.logout()">Logout</a>
 
                 </div>
 

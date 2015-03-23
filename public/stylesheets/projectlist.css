@@ -17,4 +17,38 @@
     border-radius: 2px;
     background-clip: padding-box; }
   span.badge.rated:after {
-    content: " points rated"; }
+    content: " points rated";
+  }
+
+  .lobby-banner {
+      display: block;
+      text-align: center;
+      font-family:Roboto Light;
+      line-height: 120%;
+      -webkit-font-smoothing: antialiased;
+      color: #009688;
+      background-image: -webkit-linear-gradient(92deg,#009688,#00bfa5);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      -webkit-animation: hue 40s infinite linear;
+  }
+
+  .trigger {
+      background-color: #009688;
+      -webkit-animation: hue 40s infinite linear;
+  }
+
+
+/*-----------------------------------*\
+  $ANIMATIONS
+\*-----------------------------------*/
+
+@-webkit-keyframes hue {
+    from {
+        -webkit-filter: hue-rotate(0deg);
+    }
+
+    to {
+        -webkit-filter: hue-rotate(-360deg);
+    }
+}
