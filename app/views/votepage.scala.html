@@ -25,12 +25,9 @@
                             <input type="hidden" name="type" value="1">
                             <select name="score">
                                 <option value="" disabled selected>Choose your rate score</option>
-                                <option value="0">0</option>
-                                <option value="1">1</option>
-                                <option value="2">2</option>
-                                <option value="3">3</option>
-                                <option value="4">4</option>
-                                <option value="5">5</option>
+                                @for(index <- 0 until 6) {
+                                    <option value="@index">@index</option>
+                                }
                             </select>
                             <button type="submit" class="waves-effect waves-light btn-large"><i class="mdi-action-thumb-up right" onclick="toast('Vote submitted', 4000)"></i>Rate</button>
                         </div>
@@ -45,12 +42,11 @@
                                 <label>Edit your rated score</label>
                                 <select name="score">
                                     <option value="" disabled selected>@thisVote.score</option>
-                                    <option value="0">0</option>
-                                    <option value="1">1</option>
-                                    <option value="2">2</option>
-                                    <option value="3">3</option>
-                                    <option value="4">4</option>
-                                    <option value="5">5</option>
+                                    @for(index <- 0 until 6) {
+                                        @if(index != thisVote.score) {
+                                            <option value="@index">@index</option>
+                                        }
+                                    }
                                 </select>
                                 <button type="submit" class="waves-effect waves-light btn-large"><i class="mdi-action-thumb-up right" onclick="toast('Vote submitted', 4000)"></i>Edit</button>
                         </form>
