@@ -22,10 +22,11 @@ public class Application extends Controller {
     public static class Login {
 
         public String username;
-        public String userpass;
+        public String password;
 
         public String validate() {
-            if(User.authenticate(username, userpass) == null) {
+            System.out.println(username + " " + password);
+            if(User.authenticate(username, password) == null) {
                 return "Invalid user or password";
             }
             return null;

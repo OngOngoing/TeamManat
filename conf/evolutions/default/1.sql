@@ -19,15 +19,15 @@ create table team (
   constraint pk_team primary key (id))
 ;
 
-create table account (
+create table user_account (
   id                        bigint auto_increment not null,
   username                  varchar(255),
   password                  varchar(255),
   firstname                 varchar(255),
   lastname                  varchar(255),
-  type                      integer,
-  team_num                  integer,
-  constraint pk_account primary key (id))
+  idtype                    integer,
+  teamNum                   integer,
+  constraint pk_user_account primary key (id))
 ;
 
 create table vote (
@@ -50,7 +50,7 @@ drop table project;
 
 drop table team;
 
-drop table account;
+drop table user_account;
 
 drop table vote;
 
