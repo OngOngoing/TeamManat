@@ -19,6 +19,20 @@ public class Application extends Controller {
         }
     }
 
+    public static class Login {
+
+        public String username;
+        public String userpass;
+
+        public String validate() {
+            if(User.authenticate(username, userpass) == null) {
+                return "Invalid user or password";
+            }
+            return null;
+        }
+
+    }
+
     public static Result authenticate() {
         Form<Login> loginForm = Form.form(Login.class).bindFromRequest();
         if (loginForm.hasErrors()) {

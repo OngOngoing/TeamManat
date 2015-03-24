@@ -35,7 +35,7 @@ public class User extends Model {
     public static Finder<Long, User> find = new Finder<Long, User>(Long.class, User.class);
 
     public static User authenticate(String username, String password){
-        return find.where().eq("username", username).eq("password", password).findUnique();
+        return User.find.where().eq("username", username).eq("password", password).findUnique();
     }
 
     public static User create(String username, String password, String fname,String lname, int type, int team){
