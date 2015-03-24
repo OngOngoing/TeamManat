@@ -15,11 +15,11 @@
         <!---------------\
         TAB
         ---------------->
-        <div class="row">
+        <div class="row animated fadeIn container">
             <div class="col s12">
                 <ul class="tabs trigger">
                     <li class="tab col s3"><a href="#users">Manage User</a></li>
-                    <li class="tab col s3"><a class="active" href="#votes">Manage Vote</a></li>
+                    <li class="tab col s3"><a class="active" href="#rates">Manage User's Rate</a></li>
                     <li class="tab col s3"><a href="#test3">Test 3</a></li>
                     <li class="tab col s3"><a href="#test4">Test 4</a></li>
                 </ul>
@@ -35,57 +35,58 @@
             <!-- ADD USER -->
 
             <div id="users" class="col s12 animated fadeIn">
+
                 <div class ="section">
                     <ul class="collapsible" data-collapsible="accordion">
                         <li>
                             <div class="collapsible-header teal-text lighten-1 trigger"><i class="mdi-social-person-add"></i>Add User</div>
                             <div class="collapsible-body">
+                                <div class="container">
+                                    <div class="row">
+                                        <form class="col s12" action="/adminpage/addUser" method="post">
+                                            <div class="row">
+                                                <div class="input-field col s6">
+                                                    <input id="firstname" name="firstname" type="text" class="validate">
+                                                    <label for="firstname">First Name</label>
+                                                </div>
+                                                <div class="input-field col s6">
+                                                    <input id="lastname" name="lastname" type="text" class="validate">
+                                                    <label for="lastname">Last Name</label>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="input-field col s12">
+                                                    <input id="username" name="username" type="text" class="validate">
+                                                    <label for="username">Username</label>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="input-field col s12">
+                                                    <input id="password" name="password" type="password" class="validate">
+                                                    <label for="password">Password</label>
+                                                </div>
+                                            </div>
 
-                                <div class="row">
-                                    <form class="col s12" action="/adminpage/addUser" method="post">
-                                        <div class="row">
-                                            <div class="input-field col s6">
-                                                <input id="firstname" name="firstname" type="text" class="validate">
-                                                <label for="firstname">First Name</label>
-                                            </div>
-                                            <div class="input-field col s6">
-                                                <input id="lastname" name="lastname" type="text" class="validate">
-                                                <label for="lastname">Last Name</label>
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="input-field col s12">
-                                                <input id="username" name="username" type="text" class="validate">
-                                                <label for="username">Username</label>
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="input-field col s12">
-                                                <input id="password" name="password" type="password" class="validate">
-                                                <label for="password">Password</label>
-                                            </div>
-                                        </div>
+                                            <div class="row">
+                                                <div class="input-field col s12">
+                                                    <input value="0" name="type" type="radio" id="type1" />
+                                                    <label for="type1">Type 0 (Admin)</label>
 
-                                        <div class="row">
-                                            <div class="input-field col s12">
-                                                <input value="0" name="type" type="radio" id="type1" />
-                                                <label for="type1">Type 0</label>
-
-                                                <input value="1" name="type" type="radio" id="type2" />
-                                                <label for="type2">Type 1</label>
+                                                    <input value="1" name="type" type="radio" id="type2" />
+                                                    <label for="type2">Type 1 (Normal User)</label>
+                                                </div>
                                             </div>
-                                        </div>
 
-                                        <div class="row">
-                                            <div class="input-field col s12">
-                                                <button class="btn waves-effect waves-light" type="submit" name="action">Submit
-                                                    <i class="mdi-content-send right"></i>
-                                                </button>
+                                            <div class="row">
+                                                <div class="input-field col s12">
+                                                    <button class="btn waves-effect waves-light" type="submit" name="action">Add
+                                                        <i class="mdi-content-send right"></i>
+                                                    </button>
+                                                </div>
                                             </div>
-                                        </div>
-                                    </form>
+                                        </form>
+                                    </div>
                                 </div>
-
                             </div>
                         </li>
                     </ul>
@@ -97,15 +98,14 @@
                     @users.map { user =>
                         <li class="collection-item avatar">
                             <i class="mdi-social-person circle teal lighten-1 trigger"></i>
-                            <span class="title teal-text lighten-1 trigger">@user.id</span>
-                            <p>@user.username <br>
-                            @user.password
+                            <span class="title teal-text lighten-1 trigger">ID : @user.id</span>
+                            <p>Username : @user.username <br>
+                            Password : @user.password
                             </p>
-                            <a href="#!" class="secondary-content"><i class="mdi-action-grade"></i></a>
+                            <a href="#!" class="secondary-content"><i class="mdi-navigation-close trigger"></i></a>
                         </li>
                     }
                     </ul>
-
                 </div>
 
 
@@ -114,16 +114,16 @@
         <!---------------\
         TAB 2
         ---------------->
-            <div id="votes" class="col s12 animated fadeIn">
+            <div id="rates" class="col s12 animated fadeIn">
                 <ul class="collection">
                 @votes.map { vote =>
                     <li class="collection-item avatar">
                         <i class="mdi-action-description circle teal lighten-1 trigger"></i>
-                        <span class="title">@vote.id</span>
-                        <p>UserId @vote.userId vote to ProjectId @vote.projectId <br>
+                        <span class="title teal-text lighten-1 trigger">Rate ID : @vote.id</span>
+                        <p>UserId @vote.userId rate ProjectId @vote.projectId <br>
                         score = @vote.score
                         </p>
-                        <a href="#!" class="secondary-content"><i class="mdi-action-grade"></i></a>
+                        <a href="#!" class="secondary-content"><i class="mdi-navigation-close trigger"></i></a>
                     </li>
                 }
                 </ul>
@@ -152,7 +152,7 @@
 
 
         <!-- FLOATING BUTTON -->
-        <div class="fixed-action-btn animated bounceInUp" style="bottom: 45px; right: 50px;">
+        <div class="fixed-action-btn animated bounceInUp" style="bottom: 45px; right: 4%;">
             <a class="btn-floating btn-large trigger" href="..">
                 <i class="large mdi-action-home waves-effect waves-light"></i>
             </a>

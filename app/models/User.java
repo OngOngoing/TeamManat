@@ -19,7 +19,7 @@ public class User extends Model {
     @Column(name="lastname")
     public String lastname;
     @Column(name="type")
-    public int type; // 0 - Normal member : 1 - Administrator
+    public int type; // 0 - Administrator : 1 - Normal Users
     @Column(name="teamNum")
     public int teamNum;
 

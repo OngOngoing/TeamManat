@@ -42,6 +42,7 @@ public class Application extends Controller {
     }
     // MockDataBase for testing
     public static Result mockDatabase(){
+        User.create("admin", "admin", "Admin's Firstname", "Admin's Lastname", 0, 0);
         User.create("test1", "test1", "TestFirstname1", "TestLastName1", 1, 1); // Add new account : username => test1 password => test1
         User.create("test2", "test2", "TestFirstname2", "TestLastName2", 1, 1); // Add new account : username => test2 password => test2
         Project.create("Project Test 1","Description of project test 1", (long) 1);

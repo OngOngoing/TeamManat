@@ -26,7 +26,7 @@ public class AdminPage extends Controller {
     public static Result addUser(){
         User user = Form.form(User.class).bindFromRequest().get();
         user.save();
-        return redirect(routes.AdminPage.index());
+        return redirect(routes.AdminPage.index()+"#users");
     }
 
 }
