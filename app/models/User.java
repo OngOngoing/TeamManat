@@ -14,15 +14,18 @@ public class User extends Model {
     public String username;
     @Column(name="password")
     public String password;
-    @Column(name="fullname")
-    public String fullname;
+    @Column(name="firstname")
+    public String firstname;
+    @Column(name="lastname")
+    public String lastname;
     @Column(name="type")
     public int type; // 0 - Normal member : 1 - Administrator
     @Column(name="teamNum")
     public int teamNum;
 
-    public User(String username, String password, String name, int type, int team){
-        this.fullname = name;
+    public User(String username, String password, String fname,String lname, int type, int team){
+        this.firstname = fname;
+        this.lastname = lname;
         this.username = username;
         this.password = password;
         this.type = type;
@@ -35,8 +38,8 @@ public class User extends Model {
         return find.where().eq("username", username).eq("password", password).findUnique();
     }
 
-    public static User create(String username, String password, String name, int type, int team){
-        User newUser = new User(username, password, name, type, team);
+    public static User create(String username, String password, String fname,String lname, int type, int team){
+        User newUser = new User(username, password, fname, lname, type, team);
         newUser.save();
         return newUser;
     }
