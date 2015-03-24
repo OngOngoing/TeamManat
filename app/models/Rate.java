@@ -24,7 +24,7 @@ public class Rate extends Model {
         rate.projectId = projectId;
         rate.comment = comment;
         rate.save();
-        return vote;
+        return rate;
     }
 
     public static Finder<Long, Rate> find = new Finder<Long, Rate>(Long.class, Rate.class);

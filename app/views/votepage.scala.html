@@ -23,13 +23,14 @@
                             <input type="hidden" name="projectId" value="@project.id">
                             <input type="hidden" name="userId" value="@userId">
                             <input type="hidden" name="type" value="1">
+                            <input type="hidden" name="score" value="0">
                             <!--<select name="score">
                                 <option value="" disabled selected>Choose your rate score</option>
                                 @for(index <- 0 until 6) {
                                     <option value="@index">@index</option>
                                 }
-                            </select>-->
-                            <div id="rating-star" class="rating-star">
+                            </select>
+                            <<div id="rating-star" class="rating-star">
                                 <input type="checkbox" name="star" class="star-1" id="star-1" value="1" />
                                 <label class="star-1" for="star-1">1</label>
                                 <input type="checkbox" name="star" class="star-2" id="star-2" value="2" />
@@ -41,7 +42,15 @@
                                 <input type="checkbox" name="star" class="star-5" id="star-5" value="5" />
                                 <label class="star-5" for="star-5">5</label>
                                 <span></span>
-                            </div>
+                            </div>-->
+                            <ul class="pagination">
+                                <li class="waves-effect" name="s1"><a href="#!">1</a></li>
+                                <li class="waves-effect" name="s2"><a href="#!">2</a></li>
+                                <li class="waves-effect" name="s3"><a href="#!">3</a></li>
+                                <li class="waves-effect" name="s4"><a href="#!">4</a></li>
+                                <li class="waves-effect" name="s5"><a href="#!">5</a></li>
+                            </ul>
+
                             <button type="submit" class="waves-effect waves-light btn-large"><i class="mdi-action-thumb-up right" onclick="toast('Vote submitted', 4000)"></i>Rate</button>
                         </div>
                     </form>
