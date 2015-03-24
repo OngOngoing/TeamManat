@@ -18,8 +18,8 @@ public class User extends Model {
     public String firstname;
     @Column(name="lastname")
     public String lastname;
-    @Column(name="type")
-    public int type; // 0 - Administrator : 1 - Normal Users
+    @Column(name="idtype")
+    public int idtype; // 0 - Administrator : 1 - Normal Users
     @Column(name="teamNum")
     public int teamNum;
 
@@ -28,7 +28,7 @@ public class User extends Model {
         this.lastname = lname;
         this.username = username;
         this.password = password;
-        this.type = type;
+        this.idtype = type;
         this.teamNum = team;
     }
 

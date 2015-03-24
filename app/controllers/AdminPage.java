@@ -20,7 +20,14 @@ public class AdminPage extends Controller {
         List votes = Vote.find.all();
         List users = User.find.all();
 
-        return ok(adminpage.render(users, Project.find.all(), votes));
+        User thisUser = User.find.byId(userId);
+
+        if(thisUser.idtype != 0) {
+            return redirect(routes.ProjectList.index());
+        }
+        else {
+            return ok(adminpage.render(users, Project.find.all(), votes));
+        }
     }
 
     public static Result addUser(){

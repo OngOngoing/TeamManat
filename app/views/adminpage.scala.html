@@ -69,10 +69,17 @@
 
                                             <div class="row">
                                                 <div class="input-field col s12">
-                                                    <input value="0" name="type" type="radio" id="type1" />
+                                                    <input name="teamNum" id="teamNum" type="number" class="validate">
+                                                    <label for="teamNum">TeamID</label>
+                                                </div>
+                                            </div>
+
+                                            <div class="row">
+                                                <div class="input-field col s12">
+                                                    <input value="0" name="idtype" type="radio" id="type1" />
                                                     <label for="type1">Type 0 (Admin)</label>
 
-                                                    <input value="1" name="type" type="radio" id="type2" />
+                                                    <input value="1" name="idtype" type="radio" id="type2" />
                                                     <label for="type2">Type 1 (Normal User)</label>
                                                 </div>
                                             </div>
@@ -99,8 +106,8 @@
                         <li class="collection-item avatar">
                             <i class="mdi-social-person circle teal lighten-1 trigger"></i>
                             <span class="title teal-text lighten-1 trigger">ID : @user.id</span>
-                            <p>Username : @user.username <br>
-                            Password : @user.password
+                            <p>Username : @user.username  Password : @user.password<br>
+                            Type : @user.idtype  TeamID : @user.teamNum
                             </p>
                             <a href="#!" class="secondary-content"><i class="mdi-navigation-close trigger"></i></a>
                         </li>
