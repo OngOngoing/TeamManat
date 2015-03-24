@@ -23,7 +23,8 @@ create table user_account (
   id                        bigint auto_increment not null,
   username                  varchar(255),
   password                  varchar(255),
-  fullname                  varchar(255),
+  firstname                 varchar(255),
+  lastname                  varchar(255),
   type                      integer,
   teamNum                   integer,
   constraint pk_user_account primary key (id))

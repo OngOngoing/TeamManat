@@ -23,22 +23,22 @@
                             <input type="hidden" name="projectId" value="@project.id">
                             <input type="hidden" name="userId" value="@userId">
                             <input type="hidden" name="type" value="1">
-                            <select name="score">
+                            <!--<select name="score">
                                 <option value="" disabled selected>Choose your rate score</option>
                                 @for(index <- 0 until 6) {
                                     <option value="@index">@index</option>
                                 }
-                            </select>
+                            </select>-->
                             <div id="rating-star" class="rating-star">
-                                <input type="checkbox" name="star" class="star-1" id="star-1" value="s1" />
+                                <input type="checkbox" name="star" class="star-1" id="star-1" value="1" />
                                 <label class="star-1" for="star-1">1</label>
-                                <input type="checkbox" name="star" class="star-2" id="star-2" value="s2" />
+                                <input type="checkbox" name="star" class="star-2" id="star-2" value="2" />
                                 <label class="star-2" for="star-2">2</label>
-                                <input type="checkbox" name="star" class="star-3" id="star-3" value="s3" />
+                                <input type="checkbox" name="star" class="star-3" id="star-3" value="3" />
                                 <label class="star-3" for="star-3">3</label>
-                                <input type="checkbox" name="star" class="star-4" id="star-4" value="s4" />
+                                <input type="checkbox" name="star" class="star-4" id="star-4" value="4" />
                                 <label class="star-4" for="star-4">4</label>
-                                <input type="checkbox" name="star" class="star-5" id="star-5" value="s5" />
+                                <input type="checkbox" name="star" class="star-5" id="star-5" value="5" />
                                 <label class="star-5" for="star-5">5</label>
                                 <span></span>
                             </div>
@@ -97,7 +97,7 @@
         <script type="text/javascript">
         $(document).ready(function() {
         $('input[type=checkbox][name=star]').change(function() {
-            if ( this.value == 's1' ) {
+            if ( this.value == '1' ) {
             if ( $ ( '.star-1' ).prop ( 'checked' ) == false ) {
             $ ( '.star-1' ).prop ( 'checked', false ) ;
             $ ( '.star-2' ).prop ( 'checked', false ) ;
@@ -111,7 +111,7 @@
             $ ( '.star-4' ).prop ( 'checked', false ) ;
             $ ( '.star-5' ).prop ( 'checked', false ) ;
             }
-            } else if ( this.value == 's2' ) {
+            } else if ( this.value == '2' ) {
             if ( $ ( '.star-2' ).prop ( 'checked' )== false ) {
             $ ( '.star-1' ).prop ( 'checked', false ) ;
             $ ( '.star-2' ).prop ( 'checked', false ) ;
@@ -125,7 +125,7 @@
             $ ( '.star-4' ).prop ( 'checked', false ) ;
             $ ( '.star-5' ).prop ( 'checked', false ) ;
             }
-            } else if ( this.value == 's3' ) {
+            } else if ( this.value == '3' ) {
             if ( $ ( '.star-3' ).prop ( 'checked' )== false ) {
             $ ( '.star-1' ).prop ( 'checked', false ) ;
             $ ( '.star-2' ).prop ( 'checked', false ) ;
@@ -139,7 +139,7 @@
             $ ( '.star-4' ).prop ( 'checked', false ) ;
             $ ( '.star-5' ).prop ( 'checked', false ) ;
             }
-            } else if ( this.value == 's4' ) {
+            } else if ( this.value == '4' ) {
             if ( $ ( '.star-4' ).prop ( 'checked' )== false ) {
             $ ( '.star-1' ).prop ( 'checked', false ) ;
             $ ( '.star-2' ).prop ( 'checked', false ) ;
@@ -153,7 +153,7 @@
             $ ( '.star-4' ).prop ( 'checked', true ) ;
             $ ( '.star-5' ).prop ( 'checked', false ) ;
             }
-            } else if ( this.value == 's5' ) {
+            } else if ( this.value == '5' ) {
             if ( $ ( '.star-5' ).prop ( 'checked' )== false ) {
             $ ( '.star-1' ).prop ( 'checked', false ) ;
             $ ( '.star-2' ).prop ( 'checked', false ) ;
