@@ -10,7 +10,7 @@
         <link rel="stylesheet" media="screen" href="@routes.Assets.at("stylesheets/animate.css")">
     </head>
     <body>
-        <div class="container animated zoomIn">
+        <div class="container">
             <h1>@project.name - VotePage</h1>
             <div class="divider"></div>
             <div class="section">
@@ -41,7 +41,7 @@
                                 <input type="hidden" name="type" value="1">
                                 <label>Edit your rated score</label>
                                 <select name="score">
-                                    <option value="" disabled selected>@thisVote.score</option>
+                                    <option value="@thisVote.score" selected>@thisVote.score</option>
                                     @for(index <- 0 until 6) {
                                         @if(index != thisVote.score) {
                                             <option value="@index">@index</option>
