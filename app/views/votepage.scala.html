@@ -1,4 +1,4 @@
-@(userId: Long)(project: Project)(thisVote: Vote)(votes: List[Vote])
+@(userId: Long)(project: Project)(thisRate: Rate)(votes: List[Vote])(rates: List[Rate])
 
 <!DOCTYPE html>
 
@@ -17,7 +17,7 @@
                 <img class="materialboxed" src=@routes.Assets.at(project.picture) ><br>
                 @project.name<br>
                 @project.description<br>
-                @if(thisVote == null) {
+                @if(thisRate == null) {
                     <form action="/votepage" method="post">
                         <div class="input-field">
                             <input type="hidden" name="projectId" value="@project.id">
@@ -43,21 +43,23 @@
                                 <label class="star-5" for="star-5">5</label>
                                 <span></span>
                             </div>-->
-                                <a class="waves-effect waves-teal btn-flat" name="s4" href="#!">1</a>
+                            <div id="rating">
+                                <a class="waves-effect waves-teal btn-flat" name="s1" href="#!">1</a>
                                 <a class="waves-effect waves-teal btn-flat" name="s2" href="#!">2</a>
                                 <a class="waves-effect waves-teal btn-flat" name="s3" href="#!">3</a>
                                 <a class="waves-effect waves-teal btn-flat" name="s4" href="#!">4</a>
-                                <a class="waves-effect waves-teal btn-flat" name="s5" href="#!">5</a><br>
-                                <div class="row">
-                                  <form class="col s12">
+                                <a class="waves-effect waves-teal btn-flat" name="s5" href="#!">5</a>
+                            </div>
+                            <div class="row">
+                                <form class="col s12">
                                     <div class="row">
-                                      <div class="input-field col s12">
-                                        <textarea id="textarea1" class="materialize-textarea" name="comment"></textarea>
-                                        <label for="textarea1">Comment</label>
-                                      </div>
+                                        <div class="input-field col s12">
+                                            <textarea id="textarea1" class="materialize-textarea" name="comment"></textarea>
+                                            <label for="textarea1">Comment</label>
+                                        </div>
                                     </div>
-                                  </form>
-                                </div>
+                                </form>
+                            </div>
 
                             <button type="submit" class="waves-effect waves-light btn-large"><i class="mdi-action-thumb-up right" onclick="toast('Vote submitted', 4000)"></i>Rate</button>
                         </div>
@@ -69,15 +71,26 @@
                                 <input type="hidden" name="projectId" value="@project.id">
                                 <input type="hidden" name="userId" value="@userId">
                                 <input type="hidden" name="type" value="1">
-                                <label>Edit your rated score</label>
-                                <select name="score">
-                                    <option value="@thisVote.score" selected>@thisVote.score</option>
-                                    @for(index <- 0 until 6) {
-                                        @if(index != thisVote.score) {
-                                            <option value="@index">@index</option>
-                                        }
-                                    }
-                                </select>
+                                <input type="hidden" name="score" value="@thisRate.score">
+
+                                <div id="rating">
+                                    <a class="waves-effect waves-teal btn-flat" name="s1" href="#!">1</a>
+                                    <a class="waves-effect waves-teal btn-flat" name="s2" href="#!">2</a>
+                                    <a class="waves-effect waves-teal btn-flat" name="s3" href="#!">3</a>
+                                    <a class="waves-effect waves-teal btn-flat" name="s4" href="#!">4</a>
+                                    <a class="waves-effect waves-teal btn-flat" name="s5" href="#!">5</a>
+                                </div>
+                                <div class="row">
+                                    <form class="col s12">
+                                        <div class="row">
+                                            <div class="input-field col s12">
+                                                <textarea id="textarea1" class="materialize-textarea" name="comment" >@thisRate.comment</textarea>
+                                                <label for="textarea1">Comment</label>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                                
                                 <button type="submit" class="waves-effect waves-light btn-large"><i class="mdi-action-thumb-up right" onclick="toast('Vote submitted', 4000)"></i>Edit</button>
                         </form>
                     </div>
@@ -91,6 +104,12 @@
                         <div class="collapsible-body"><p>
                         @votes.map { vote =>
                             UserId @vote.userId rate @vote.score score to projectId @vote.projectId <br>
+                        }
+                        </p>
+                        </div>
+                        <div class="collapsible-body"><p>
+                        @rates.map { rate =>
+                            UserId @rate.userId rate @rate.score score to projectId @rate.projectId comment @rate.comment <br>
                         }
                         </p>
                         </div>

@@ -9,8 +9,8 @@ GET         /projectlist          controllers.ProjectList.index()
 GET         /adminpage            controllers.AdminPage.index()
 POST        /adminpage/addUser    controllers.AdminPage.addUser()
 GET         /logout               controllers.Application.logout()
-POST        /votepage             controllers.VotePage.addVote()
-POST        /votepage/edit        controllers.VotePage.editVote()
+POST        /votepage             controllers.VotePage.addRate()
+POST        /votepage/edit        controllers.VotePage.editRate()
 # Create initial data for testing.
 GET         /install              controllers.Application.mockDatabase()
 # Map static resources from the /public folder to the /assets URL path
