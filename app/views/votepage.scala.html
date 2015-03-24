@@ -43,13 +43,21 @@
                                 <label class="star-5" for="star-5">5</label>
                                 <span></span>
                             </div>-->
-                            <ul class="pagination">
-                                <li class="waves-effect" name="s1"><a href="#!">1</a></li>
-                                <li class="waves-effect" name="s2"><a href="#!">2</a></li>
-                                <li class="waves-effect" name="s3"><a href="#!">3</a></li>
-                                <li class="waves-effect" name="s4"><a href="#!">4</a></li>
-                                <li class="waves-effect" name="s5"><a href="#!">5</a></li>
-                            </ul>
+                                <a class="waves-effect waves-teal btn-flat" name="s4" href="#!">1</a>
+                                <a class="waves-effect waves-teal btn-flat" name="s2" href="#!">2</a>
+                                <a class="waves-effect waves-teal btn-flat" name="s3" href="#!">3</a>
+                                <a class="waves-effect waves-teal btn-flat" name="s4" href="#!">4</a>
+                                <a class="waves-effect waves-teal btn-flat" name="s5" href="#!">5</a><br>
+                                <div class="row">
+                                  <form class="col s12">
+                                    <div class="row">
+                                      <div class="input-field col s12">
+                                        <textarea id="textarea1" class="materialize-textarea" name="comment"></textarea>
+                                        <label for="textarea1">Comment</label>
+                                      </div>
+                                    </div>
+                                  </form>
+                                </div>
 
                             <button type="submit" class="waves-effect waves-light btn-large"><i class="mdi-action-thumb-up right" onclick="toast('Vote submitted', 4000)"></i>Rate</button>
                         </div>
