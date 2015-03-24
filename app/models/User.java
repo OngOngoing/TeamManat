@@ -5,16 +5,24 @@ import play.data.validation.Constraints.Required;
 import play.db.ebean.*;
 
 @Entity
+@Table(name = "user_account")
 public class User extends Model {
     @Id
     public Long id;
 
-    @Required
-    public String username,password,name;
-    public int type,teamNum;
+    @Column(name="username")
+    public String username;
+    @Column(name="password")
+    public String password;
+    @Column(name="fullname")
+    public String fullname;
+    @Column(name="type")
+    public int type; // 0 - Normal member : 1 - Administrator
+    @Column(name="teamNum")
+    public int teamNum;
 
     public User(String username, String password, String name, int type, int team){
-        this.name = name;
+        this.fullname = name;
         this.username = username;
         this.password = password;
         this.type = type;
