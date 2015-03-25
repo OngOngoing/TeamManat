@@ -1,15 +1,12 @@
 package controllers;
 
-import models.Project;
-import models.User;
-import models.Vote;
+import models.*;
 import play.Logger;
 import play.data.Form;
 import play.mvc.Controller;
 import play.mvc.Result;
 import play.mvc.Security;
 import views.html.adminpage;
-import views.html.projectlist;
 
 import java.util.List;
 import java.util.Map;
@@ -19,13 +16,13 @@ public class AdminPage extends Controller {
     @Security.Authenticated(Secured.class)
     public static Result index() {
         Long userId = Long.parseLong(session().get("userId"));
-        List votes = Vote.find.all();
+        List rates = Rate.find.all();
         List users = User.find.all();
 
         User thisUser = User.find.byId(userId);
 
         if(thisUser.idtype == 0) {
-            return ok(adminpage.render(users, Project.find.all(), votes));
+            return ok(adminpage.render(users, Project.find.all(), rates));
         }
         else {
             return redirect(routes.ProjectList.index());

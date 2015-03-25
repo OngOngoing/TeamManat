@@ -1,4 +1,4 @@
-@(projects: List[Project])(votes : List[Vote])(user : User)
+@(projects: List[Project])(rates : List[Rate])(user : User)
 
 <!DOCTYPE html>
 
@@ -19,9 +19,9 @@
             <ul class="collection">
                 @projects.map { project =>
                     <a href="votepage/@project.id" class="collection-item trigger">@project.name
-                        @votes.map { vote =>
-                            @if(vote.projectId == project.id){
-                                <span class="rated badge">@vote.score</span>
+                        @rates.map { rate =>
+                            @if(rate.projectId == project.id){
+                                <span class="rated badge">@rate.score</span>
                             }
                         }
                     </a>

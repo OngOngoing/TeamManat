@@ -1,4 +1,4 @@
-@(users: List[User])(projects: List[Project])(votes : List[Vote])
+@(users: List[User])(projects: List[Project])(rates : List[Rate])
 
 <!DOCTYPE html>
 
@@ -151,12 +151,12 @@
         ---------------->
             <div id="rates" class="col s12 animated fadeIn">
                 <ul class="collection">
-                @votes.map { vote =>
+                @rates.map { rate =>
                     <li class="collection-item avatar">
                         <i class="mdi-action-description circle teal lighten-1 trigger"></i>
-                        <span class="title teal-text lighten-1 trigger">Rate ID : @vote.id</span>
-                        <p>UserId @vote.userId rate ProjectId @vote.projectId <br>
-                        score = @vote.score
+                        <span class="title teal-text lighten-1 trigger">Rate ID : @rate.id</span>
+                        <p>UserId @rate.userId rate ProjectId @rate.projectId <br>
+                        score = @rate.score
                         </p>
                         <a href="#!" class="secondary-content"><i class="mdi-navigation-close trigger"></i></a>
                     </li>
