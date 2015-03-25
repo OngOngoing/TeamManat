@@ -18,9 +18,9 @@
         <div class="row animated fadeIn container">
             <div class="col s12">
                 <ul class="tabs trigger">
-                    <li class="tab col s3"><a href="#users">Manage User</a></li>
-                    <li class="tab col s3"><a class="active" href="#rates">Manage User's Rate</a></li>
-                    <li class="tab col s3"><a href="#test3">Test 3</a></li>
+                    <li class="tab col s3"><a href="#users">Users</a></li>
+                    <li class="tab col s3"><a class="active" href="#rates">Rate</a></li>
+                    <li class="tab col s3"><a href="#projects">Project</a></li>
                     <li class="tab col s3"><a href="#test4">Test 4</a></li>
                 </ul>
             </div>
@@ -168,7 +168,117 @@
         <!---------------\
         TAB 3
         ---------------->
-            <div id="test3" class="col s12">
+            <div id="projects" class="col s12" animated fadeIns>
+                <div class ="section">
+                    <ul class="collapsible" data-collapsible="accordion">
+                        <li>
+                            <div class="collapsible-header teal-text lighten-1 trigger"><i class="mdi-social-person-add"></i>Add Projects</div>
+                            <div class="collapsible-body">
+                                <div class="container">
+                                    <div class="row">
+                                        <form class="col s12" action="/adminpage/addUser" method="post">
+                                            <div class="row">
+                                                <div class="input-field col s12">
+                                                    <i class="mdi-action-account-circle prefix"></i>
+                                                    <input id="icon_prefix" type="text" class="validate">
+                                                    <label for="icon_prefix">Project Name</label>
+                                                </div>
+                                            </div>
+                                            <div class="row">      
+                                                <div class="input-field col s12">
+                                                    <i class="mdi-editor-mode-edit prefix"></i>
+                                                    <textarea id="icon_prefix2" class="materialize-textarea"></textarea>
+                                                    <label for="icon_prefix2">Description</label>
+                                                </div>
+
+                                            </div>
+                                            <div class="row">
+                                                <form action="#">
+                                                    <div class="file-field input-field">
+                                                      <input class="file-path validate" type="text"/>
+                                                      <div class="btn">
+                                                        <span>Upload</span>
+                                                        <input type="file" />
+                                                      </div>
+                                                    </div>
+                                                </form>
+                                            </div>
+
+                                            <div class="row">
+                                                <div class="input-field col s12">
+                                                    <input name="projectId" id="projectId" type="number" class="validate">
+                                                    <label for="projectId">Team ID</label>
+                                                </div>
+                                            </div>
+
+                                            <div class="row">
+                                                <div class="input-field col s12">
+                                                    <input value="0" name="idtype" type="radio" id="type1" />
+                                                    <label for="type1">Type 0 (Admin)</label>
+
+                                                    <input value="1" name="idtype" type="radio" id="type2" />
+                                                    <label for="type2">Type 1 (Normal User)</label>
+                                                </div>
+                                            </div>
+
+                                            <div class="row">
+                                                <div class="input-field col s12">
+                                                    <button class="btn waves-effect waves-light" type="submit" name="action">Add
+                                                        <i class="mdi-content-send right"></i>
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+
+
+                    <!-- SHOW ALL PROJECT -->
+
+
+                    <ul class="collection">
+
+                    <form action="/adminpage/deleteUsers" method="post">
+                    @users.map { user =>    
+
+                        <li class="collection-item avatar">
+                        @if(user.idtype != 0) {
+                            <input type="checkbox" name="id" id= "@user.id" value="@user.id" />
+                        }
+                        <label class="check" for="@user.id"></label>
+                            <i class="mdi-social-person circle teal lighten-1 trigger"></i>
+
+                      
+                            <span class="title teal-text lighten-1 trigger"> Project Name : @user.id</span>
+                            <p>Username : @user.username  Password : @user.password<br>
+                            Type : @user.idtype  TeamID : @user.projectId
+                            </p>
+                            <a href="adminPage/deleteUser/@user.id" class="secondary-content"><i class="mdi-navigation-close trigger"></i></a>
+                        </li>
+                    }
+
+                        <!-- FLOATING BUTTON -->
+                        <!--
+                        <div class="fixed-action-btn animated bounceInUp" style="bottom: 45px; right: 4%;">
+                            <a class="btn-floating btn-large trigger" href="..">
+                                <i class="large mdi-action-home waves-effect waves-light"></i>
+                            </a>
+                            <ul>
+                                <li><a class="btn-floating tooltipped" data-position="left" data-delay="50" data-tooltip="Delete all checked users" type="submit" name="action"><i class="large mdi-action-settings-power"></i></a></li>
+                            </ul>
+                        </div>
+                        -->
+                        <button class="btn waves-effect waves-light" type="submit" name="action">Deletes
+                            <i class="mdi-content-send right"></i>
+                        </button>
+
+                    </form>
+
+                    </ul>
+                </div>
             </div>
 
 
@@ -181,8 +291,17 @@
         </div>
 
 
+        <div class="fixed-action-btn animated bounceInUp" style="bottom: 45px; right: 50px;">
+            <a class="btn-floating btn-large trigger" href="..">
+                <i class="large mdi-action-home waves-effect waves-light"></i>
+            </a>
+            <ul>
+                <li><a class="btn-floating green " href="../logout"><i class="large mdi-action-settings-power"></i></a></li>
+            </ul>
+        </div>
 
                 <!-- End of Page Content -->
+
 
 
 
