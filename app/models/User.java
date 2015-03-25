@@ -1,6 +1,8 @@
 package models;
 
 import javax.persistence.*;
+import javax.validation.constraints.*;
+
 import play.data.validation.Constraints.Required;
 import play.db.ebean.*;
 
@@ -10,17 +12,19 @@ public class User extends Model {
     @Id
     public Long id;
 
-    @Column(name="username")
+    @Required
+    @Column(unique=true)
     public String username;
-    @Column(name="password")
+
+    @NotNull
+    @Required
     public String password;
-    @Column(name="firstname")
+
+    @NotNull
+    @Required
     public String firstname;
-    @Column(name="lastname")
     public String lastname;
-    @Column(name="idtype")
     public int idtype; // 0 - Administrator : 1 - Normal Users
-    @Column(name="teamNum")
     public int teamNum;
 
     public User(String username, String password, String fname,String lname, int type, int team){

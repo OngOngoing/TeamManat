@@ -55,6 +55,7 @@ public class Application extends Controller {
     public static Result login(){
         return ok(login.render(Form.form(Login.class)));
     }
+
     // MockDataBase for testing
     public static Result mockDatabase(){
         User.create("admin", "admin", "Admin's Firstname", "Admin's Lastname", 0, 0);
