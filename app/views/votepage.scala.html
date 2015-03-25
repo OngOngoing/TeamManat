@@ -24,13 +24,10 @@
                             <input id="userId" type="hidden" name="userId" value="@userId">
                             <input id="type" type="hidden" name="type" value="1">
                             <input id="score" type="hidden" name="score" value="0">
-                            
                             <div id="rating">
-                                <a id="s1" class="waves-effect waves-teal btn-flat btn-floating" name="s1" href="#!">1</a>
-                                <a id="s2" class="waves-effect waves-teal btn-flat btn-floating" name="s2" href="#!">2</a>
-                                <a id="s3" class="waves-effect waves-teal btn-flat btn-floating" name="s3" href="#!">3</a>
-                                <a id="s4" class="waves-effect waves-teal btn-flat btn-floating" name="s4" href="#!">4</a>
-                                <a id="s5" class="waves-effect waves-teal btn-flat btn-floating" name="s5" href="#!">5</a>
+                                @for(index<-1 until 6){
+                                    <a id="s@index" class="waves-effect waves-teal btn btn-flat btn-floating" name="s@index" href="#!">@index</a>
+                                }
                             </div>
                             <div class="row">
                                 <div class="input-field col s12">
@@ -44,19 +41,19 @@
                     </form>
                 } else {
                     <div class="section">
-                        <h5>You have already rated to this project.</h5>
                         <form action="/votepage/edit" method="post">
                                 <input id="projectId" type="hidden" name="projectId" value="@project.id">
                                 <input id="userId" type="hidden" name="userId" value="@userId">
                                 <input id="type" type="hidden" name="type" value="1">
-                                <input id="score" type="hidden" name="score" value="0">
+                                <input id="score" type="hidden" name="score" value="@thisRate.score">
 
-                                <div id="rating">
-                                    <a id="s1" class="waves-effect waves-teal btn-flat btn-floating" name="s1" href="#">1</a>
-                                    <a id="s2" class="waves-effect waves-teal btn-flat btn-floating" name="s2" href="#">2</a>
-                                    <a id="s3" class="waves-effect waves-teal btn-flat btn-floating" name="s3" href="#">3</a>
-                                    <a id="s4" class="waves-effect waves-teal btn-flat btn-floating" name="s4" href="#">4</a>
-                                    <a id="s5" class="waves-effect waves-teal btn-flat btn-floating" name="s5" href="#">5</a>
+                                @for(index<-1 until 6){
+                                    @if(thisRate.score == index){
+                                        <a id="s@index" class="waves-effect waves-teal btn btn-floating" name="s@index" href="#!">@index</a>
+                                    }else{
+                                        <a id="s@index" class="waves-effect waves-teal btn btn-floating btn-flat" name="s@index" href="#!">@index</a>
+                                    }
+                                }
                                 </div>
                                 <div class="row">
                                     <div class="input-field col s12">
