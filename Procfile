@@ -1,1 +1,2 @@
-web: target/universal/stage/bin/vote -Dhttp.port=${PORT} -DapplyEvolutions.default=true -Ddb.default.driver=org.mariadb.jdbc.Driver -Ddb.default.url=jdbc:mysql://172.17.42.1:49153/db\?user=root\&password=zsbTXyaiaD2MUupp
+web: target/universal/stage/bin/vote -Dhttp.port=${PORT} -DapplyEvolutions.default=true -DapplyDownEvolutions.
+default=true -Ddb.default.driver=org.mariadb.jdbc.Driver -Ddb.default.url=jdbc:mysql://172.17.42.1:49153/db\?user=root\&password=zsbTXyaiaD2MUupp
