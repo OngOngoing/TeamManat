@@ -2,16 +2,16 @@
 # This file defines all application routes (Higher priority routes first)
 # ~~~~
 
-GET         /                     controllers.Application.index()
-POST        /login                controllers.Application.authenticate()
-GET         /votepage/:id         controllers.VotePage.index(id:Long)
-GET         /projectlist          controllers.ProjectList.index()
-GET         /adminpage            controllers.AdminPage.index()
-POST        /adminpage/addUser    controllers.AdminPage.addUser()
-GET         /logout               controllers.Application.logout()
-POST        /votepage             controllers.VotePage.addRate()
-POST        /votepage/edit        controllers.VotePage.editRate()
+GET         /                         controllers.Application.index()
+POST        /login                    controllers.Application.authenticate()
+GET         /votepage/:id             controllers.VotePage.index(id:Long)
+GET         /projectlist              controllers.ProjectList.index()
+GET         /adminpage                controllers.AdminPage.index()
+POST        /adminpage/addUser        controllers.AdminPage.addUser()
+GET         /logout                   controllers.Application.logout()
+POST        /votepage                 controllers.VotePage.addRate()
+POST        /votepage/edit            controllers.VotePage.editRate()
 # Create initial data for testing.
-GET         /install              controllers.Application.mockDatabase()
+GET         /install                  controllers.Application.mockDatabase()
 # Map static resources from the /public folder to the /assets URL path
-GET         /assets/*file         controllers.Assets.at(path="/public", file)
+GET         /assets/*file             controllers.Assets.at(path="/public", file)
