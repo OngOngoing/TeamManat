@@ -3,6 +3,7 @@ package controllers;
 import models.Project;
 import models.User;
 import models.Vote;
+import play.Logger;
 import play.data.Form;
 import play.mvc.Controller;
 import play.mvc.Result;
@@ -11,6 +12,7 @@ import views.html.adminpage;
 import views.html.projectlist;
 
 import java.util.List;
+import java.util.Map;
 
 public class AdminPage extends Controller {
 
@@ -22,17 +24,31 @@ public class AdminPage extends Controller {
 
         User thisUser = User.find.byId(userId);
 
-        if(thisUser.idtype != 0) {
-            return redirect(routes.ProjectList.index());
+        if(thisUser.idtype == 0) {
+            return ok(adminpage.render(users, Project.find.all(), votes));
         }
         else {
-            return ok(adminpage.render(users, Project.find.all(), votes));
+            return redirect(routes.ProjectList.index());
         }
     }
 
     public static Result addUser(){
         User user = Form.form(User.class).bindFromRequest().get();
         user.save();
+        return redirect(routes.AdminPage.index()+"#users");
+    }
+
+    public static Result deleteUsers(){
+
+        Map<String, String[]> map = request().body().asFormUrlEncoded();
+        String[] checkedVal = map.get("id"); // get selected topics
+
+        for(String id : checkedVal) {
+            User user = User.find.byId(Long.parseLong(id));
+            Logger.debug("DELETE "+ user.id);
+            user.delete();
+        }
+
         return redirect(routes.AdminPage.index()+"#users");
     }
 
