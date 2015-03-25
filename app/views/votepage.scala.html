@@ -20,17 +20,17 @@
                 @if(thisRate == null) {
                     <form action="/votepage" method="post">
                         <div class="input-field">
-                            <input type="hidden" name="projectId" value="@project.id">
-                            <input type="hidden" name="userId" value="@userId">
-                            <input type="hidden" name="type" value="1">
-                            <input type="hidden" name="score" value="0">
+                            <input id="projectId" type="hidden" name="projectId" value="@project.id">
+                            <input id="userId" type="hidden" name="userId" value="@userId">
+                            <input id="type" type="hidden" name="type" value="1">
+                            <input id="score" type="hidden" name="score" value="0">
                             
                             <div id="rating">
-                                <a class="waves-effect waves-teal btn-flat" name="s1" href="#!">1</a>
-                                <a class="waves-effect waves-teal btn-flat" name="s2" href="#!">2</a>
-                                <a class="waves-effect waves-teal btn-flat" name="s3" href="#!">3</a>
-                                <a class="waves-effect waves-teal btn-flat" name="s4" href="#!">4</a>
-                                <a class="waves-effect waves-teal btn-flat" name="s5" href="#!">5</a>
+                                <a id="s1" class="waves-effect waves-teal btn-flat btn-floating" name="s1" href="#!">1</a>
+                                <a id="s2" class="waves-effect waves-teal btn-flat btn-floating" name="s2" href="#!">2</a>
+                                <a id="s3" class="waves-effect waves-teal btn-flat btn-floating" name="s3" href="#!">3</a>
+                                <a id="s4" class="waves-effect waves-teal btn-flat btn-floating" name="s4" href="#!">4</a>
+                                <a id="s5" class="waves-effect waves-teal btn-flat btn-floating" name="s5" href="#!">5</a>
                             </div>
                             <div class="row">
                                 <div class="input-field col s12">
@@ -46,17 +46,17 @@
                     <div class="section">
                         <h5>You have already rated to this project.</h5>
                         <form action="/votepage/edit" method="post">
-                                <input type="hidden" name="projectId" value="@project.id">
-                                <input type="hidden" name="userId" value="@userId">
-                                <input type="hidden" name="type" value="1">
-                                <input type="hidden" name="score" value="@thisRate.score">
+                                <input id="projectId" type="hidden" name="projectId" value="@project.id">
+                                <input id="userId" type="hidden" name="userId" value="@userId">
+                                <input id="type" type="hidden" name="type" value="1">
+                                <input id="score" type="hidden" name="score" value="0">
 
                                 <div id="rating">
-                                    <a id="s1" class="waves-effect waves-teal btn-flat" name="s1" href="#">1</a>
-                                    <a id="s2" class="waves-effect waves-teal btn-flat" name="s2" href="#">2</a>
-                                    <a id="s3" class="waves-effect waves-teal btn-flat" name="s3" href="#">3</a>
-                                    <a id="s4" class="waves-effect waves-teal btn-flat" name="s4" href="#">4</a>
-                                    <a id="s5" class="waves-effect waves-teal btn-flat" name="s5" href="#">5</a>
+                                    <a id="s1" class="waves-effect waves-teal btn-flat btn-floating" name="s1" href="#">1</a>
+                                    <a id="s2" class="waves-effect waves-teal btn-flat btn-floating" name="s2" href="#">2</a>
+                                    <a id="s3" class="waves-effect waves-teal btn-flat btn-floating" name="s3" href="#">3</a>
+                                    <a id="s4" class="waves-effect waves-teal btn-flat btn-floating" name="s4" href="#">4</a>
+                                    <a id="s5" class="waves-effect waves-teal btn-flat btn-floating" name="s5" href="#">5</a>
                                 </div>
                                 <div class="row">
                                     <div class="input-field col s12">
