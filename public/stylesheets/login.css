@@ -40,31 +40,31 @@ body {
     padding-bottom: 5%;
 }
 .login-window .form-wrap {
-    background-color: #333333;
+    background-color: #e0f2f1;
     padding: 50px 50px 100px 50px;
     position: relative;
     border-radius:0.5em;
 }
 .login-window .form-control:focus {
     border: none;
-    border-bottom: 1px solid #505050;
-    box-shadow: 0 0 5px #cccccc;
+    border-bottom: 1px solid #b2dfdb;
+    box-shadow: 0 0 5px #80cbc4;
 }
 .login-window input[type="text"],
 .login-window input[type="password"],
 .login-window input[type="email"] {
     background: none;
     border: none;
-    border-bottom: 1px solid #505050;
+    border-bottom: 1px solid #b2dfdb;
     box-shadow: none;
     padding: 10px 0 10px 10px;
     border-radius: 0;
     margin-bottom: 20px;
-    color: #cccccc;
+    color: #565656;
 }
 .login-window .signup {
     padding: 8px 15px;
-    background-color: #78b310;
+    background-color: #34dbce;
     color: #ffffff;
     -webkit-transition: background-color 300ms linear;
     -moz-transition: background-color 300ms linear;
@@ -74,9 +74,43 @@ body {
 }
 .login-window .title {
     text-align: left;
-    color: #cccccc;
+    color: #34dbce;
 }
  .txt-center {
     text-align: center;
     color: #cccccc;
+}
+
+
+
+
+.trigger {
+    -webkit-animation: hue 40s infinite linear;
+}
+
+.trigger-text {
+    color: #34dbce;
+    background-image: -webkit-linear-gradient(92deg,#8beae3, #34dbce);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.pageBanner {
+    font-family:Roboto Light;
+    line-height: 120%;
+    -webkit-font-smoothing: antialiased;
+}
+
+/*-----------------------------------*\
+  $ANIMATIONS
+\*-----------------------------------*/
+
+@-webkit-keyframes hue {
+    from {
+        -webkit-filter: hue-rotate(0deg);
+    }
+
+    to {
+        -webkit-filter: hue-rotate(-360deg);
+    }
 }
