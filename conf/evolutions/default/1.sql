@@ -32,11 +32,12 @@ create table team (
 create table user_account (
   id                        bigint auto_increment not null,
   username                  varchar(255),
-  password                  varchar(255),
-  firstname                 varchar(255),
+  password                  varchar(255) not null,
+  firstname                 varchar(255) not null,
   lastname                  varchar(255),
   idtype                    integer,
-  teamNum                   integer,
+  team_num                  integer,
+  constraint uq_user_account_username unique (username),
   constraint pk_user_account primary key (id))
 ;
 
