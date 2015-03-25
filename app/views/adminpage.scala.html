@@ -101,17 +101,45 @@
 
                     <!-- SHOW ALL USERS -->
 
+
                     <ul class="collection">
-                    @users.map { user =>
+
+                    <form action="/adminpage/deleteUsers" method="post">
+                    @users.map { user =>    
+
                         <li class="collection-item avatar">
+                        @if(user.idtype != 0) {
+                            <input type="checkbox" name="id" id= "@user.id" value="@user.id" />
+                        }
+                        <label class="check" for="@user.id"></label>
                             <i class="mdi-social-person circle teal lighten-1 trigger"></i>
+
+                      
                             <span class="title teal-text lighten-1 trigger">ID : @user.id</span>
                             <p>Username : @user.username  Password : @user.password<br>
                             Type : @user.idtype  TeamID : @user.projectId
                             </p>
-                            <a href="#!" class="secondary-content"><i class="mdi-navigation-close trigger"></i></a>
+                            <a href="adminPage/deleteUser/@user.id" class="secondary-content"><i class="mdi-navigation-close trigger"></i></a>
                         </li>
                     }
+
+                        <!-- FLOATING BUTTON -->
+                        <!--
+                        <div class="fixed-action-btn animated bounceInUp" style="bottom: 45px; right: 4%;">
+                            <a class="btn-floating btn-large trigger" href="..">
+                                <i class="large mdi-action-home waves-effect waves-light"></i>
+                            </a>
+                            <ul>
+                                <li><a class="btn-floating tooltipped" data-position="left" data-delay="50" data-tooltip="Delete all checked users" type="submit" name="action"><i class="large mdi-action-settings-power"></i></a></li>
+                            </ul>
+                        </div>
+                        -->
+                        <button class="btn waves-effect waves-light" type="submit" name="action">Deletes
+                            <i class="mdi-content-send right"></i>
+                        </button>
+
+                    </form>
+
                     </ul>
                 </div>
 
@@ -153,15 +181,6 @@
         </div>
 
 
-        <!-- FLOATING BUTTON -->
-        <div class="fixed-action-btn animated bounceInUp" style="bottom: 45px; right: 4%;">
-            <a class="btn-floating btn-large trigger" href="..">
-                <i class="large mdi-action-home waves-effect waves-light"></i>
-            </a>
-            <ul>
-                <li><a class="btn-floating green " href="../logout"><i class="large mdi-action-settings-power"></i></a></li>
-            </ul>
-        </div>
 
                 <!-- End of Page Content -->
 
