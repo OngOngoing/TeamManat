@@ -11,12 +11,21 @@
     </head>
     <body>
         <div class="container">
-            <h1>@project.name - VotePage</h1>
+            <div class="animated fadeInDown">
+                <h2 class="trigger-text trigger pageBanner">@project.name</h2>
+            </div>
             <div class="divider"></div>
+
             <div class="section">
-                <img class="materialboxed" src=@routes.Assets.at(project.picture) ><br>
-                @project.name<br>
-                @project.description<br>
+                <img class="materialboxed animated fadeIn" src=@routes.Assets.at(project.picture)>
+            </div>
+            <div class="section animated fadeIn">
+                @project.description
+
+            </div>
+                <div class="divider"></div>
+
+            <div class="section animated fadeIn">
                 @if(thisRate == null) {
                     <form action="/votepage" method="post">
                         <div class="input-field">
@@ -26,17 +35,17 @@
                             <input id="score" type="hidden" name="score" value="0">
                             <div id="rating">
                                 @for(index<-1 until 6){
-                                    <a id="s@index" class="waves-effect waves-teal btn btn-flat btn-floating" name="s@index" href="#!">@index</a>
+                                    <a id="s@index" class="waves-effect waves-teal btn btn-flat btn-floating trigger" name="s@index" href="#!">@index</a>
                                 }
                             </div>
                             <div class="row">
                                 <div class="input-field col s12">
-                                    <textarea id="textarea1" class="materialize-textarea" name="comment"></textarea>
+                                    <textarea id="textarea1" class="materialize-textarea trigger" name="comment"></textarea>
                                     <label for="textarea1">Comment</label>
                                 </div>
                             </div>
 
-                            <button type="submit" class="waves-effect waves-light btn-large"><i class="mdi-action-thumb-up right" onclick="toast('Vote submitted', 4000)"></i>Rate</button>
+                            <button type="submit" class="waves-effect waves-light btn-large trigger"><i class="mdi-action-thumb-up right" onclick="toast('Vote submitted', 4000)"></i>Rate</button>
                         </div>
                     </form>
                 } else {
@@ -49,48 +58,29 @@
 
                                 @for(index<-1 until 6){
                                     @if(thisRate.score == index){
-                                        <a id="s@index" class="waves-effect waves-teal btn btn-floating" name="s@index" href="#!">@index</a>
+                                        <a id="s@index" class="waves-effect waves-teal btn btn-floating trigger" name="s@index" href="#!">@index</a>
                                     }else{
-                                        <a id="s@index" class="waves-effect waves-teal btn btn-floating btn-flat" name="s@index" href="#!">@index</a>
+                                        <a id="s@index" class="waves-effect waves-teal btn btn-floating btn-flat trigger" name="s@index" href="#!">@index</a>
                                     }
                                 }
-                                </div>
+
                                 <div class="row">
                                     <div class="input-field col s12">
-                                        <textarea id="textarea1" class="materialize-textarea" name="comment" >@thisRate.comment</textarea>
+                                        <textarea id="textarea1" class="materialize-textarea trigger" name="comment" >@thisRate.comment</textarea>
                                         <label for="textarea1">Comment</label>
                                     </div>
                                 </div>
                                 
-                                <button type="submit" class="waves-effect waves-light btn-large"><i class="mdi-action-thumb-up right" onclick="toast('Vote submitted', 4000)"></i>Edit</button>
+                                <button type="submit" class="waves-effect waves-light btn-large trigger"><i class="mdi-action-thumb-up right" onclick="toast('Vote submitted', 4000)"></i>Edit</button>
                         </form>
                     </div>
                 }
             </div>
 
-            <div class ="section">
-                <ul class="collapsible" data-collapsible="accordion">
-                    <li>
-                        <div class="collapsible-header"><i class="mdi-image-filter-drama"></i>All Votes</div>
-                        <div class="collapsible-body"><p>
-                        @votes.map { vote =>
-                            UserId @vote.userId rate @vote.score score to projectId @vote.projectId <br>
-                        }
-                        </p>
-                        </div>
-                        <div class="collapsible-body"><p>
-                        @rates.map { rate =>
-                            UserId @rate.userId rate @rate.score score to projectId @rate.projectId comment @rate.comment <br>
-                        }
-                        </p>
-                        </div>
-                    </li>
-                </ul>
-            </div>
         </div>
 
-        <div class="fixed-action-btn animated bounceInUp" style="bottom: 45px; right: 50px;">
-            <a class="btn-floating btn-large blue" href="..">
+        <div class="fixed-action-btn animated bounceInUp" style="bottom: 45px; right: 40px;">
+            <a class="btn-floating btn-large trigger" href="..">
                 <i class="large mdi-action-home waves-effect waves-light"></i>
             </a>
             <ul>

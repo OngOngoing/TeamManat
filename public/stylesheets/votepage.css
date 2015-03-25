@@ -71,3 +71,38 @@
     -o-transition: -o-width 0.5s;
     transition: width 0.5s;
 }
+
+
+
+.trigger {
+    -webkit-animation: hue 40s infinite linear;
+}
+
+.trigger-text {
+    color: #26a69a;
+    background-image: -webkit-linear-gradient(92deg,#26a69a,#80cbc4);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.pageBanner {
+    font-family:Roboto Light;
+    line-height: 120%;
+    -webkit-font-smoothing: antialiased;
+}
+
+
+
+/*-----------------------------------*\
+  $ANIMATIONS
+\*-----------------------------------*/
+
+@-webkit-keyframes hue {
+    from {
+        -webkit-filter: hue-rotate(0deg);
+    }
+
+    to {
+        -webkit-filter: hue-rotate(-360deg);
+    }
+}

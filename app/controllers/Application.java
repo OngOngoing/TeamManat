@@ -60,9 +60,9 @@ public class Application extends Controller {
         User.create("admin", "admin", "Admin's Firstname", "Admin's Lastname", 0, -1);
         User.create("test1", "test1", "TestFirstname1", "TestLastName1", 1, 1); // Add new account : username => test1 password => test1
         User.create("test2", "test2", "TestFirstname2", "TestLastName2", 1, 1); // Add new account : username => test2 password => test2
-        Project.create("Project Test 1","Description of project test 1", (long) 1);
-        Project.create("Project Test 2","Description of project test 2", (long) 1);
-        Project.create("Project Test 3","Description of project test 3", (long) 2);
+        Project.create("Project Test 1","Description of project test 1");
+        Project.create("Project Test 2","Description of project test 2");
+        Project.create("Project Test 3","Description of project test 3");
         flash("success", "A initial data for test the system was created.");
         return redirect(routes.Application.index());
     }

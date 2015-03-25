@@ -46,30 +46,30 @@
                                         <form class="col s12" action="/adminpage/addUser" method="post">
                                             <div class="row">
                                                 <div class="input-field col s6">
-                                                    <input id="firstname" name="firstname" type="text" class="validate">
+                                                    <input id="firstname" name="firstname" type="text" class="validate" required>
                                                     <label for="firstname">First Name</label>
                                                 </div>
                                                 <div class="input-field col s6">
-                                                    <input id="lastname" name="lastname" type="text" class="validate">
+                                                    <input id="lastname" name="lastname" type="text" class="validate" required>
                                                     <label for="lastname">Last Name</label>
                                                 </div>
                                             </div>
                                             <div class="row">
                                                 <div class="input-field col s12">
-                                                    <input id="username" name="username" type="text" class="validate">
+                                                    <input id="username" name="username" type="text" class="validate" required>
                                                     <label for="username">Username</label>
                                                 </div>
                                             </div>
                                             <div class="row">
                                                 <div class="input-field col s12">
-                                                    <input id="password" name="password" type="password" class="validate">
+                                                    <input id="password" name="password" type="password" class="validate" required>
                                                     <label for="password">Password</label>
                                                 </div>
                                             </div>
 
                                             <div class="row">
                                                 <div class="input-field col s12">
-                                                    <input name="projectId" id="projectId" type="number" class="validate">
+                                                    <input name="projectId" id="projectId" type="number" class="validate" required>
                                                     <label for="projectId">Project ID</label>
                                                 </div>
                                             </div>
@@ -79,7 +79,7 @@
                                                     <input value="0" name="idtype" type="radio" id="type1" />
                                                     <label for="type1">Type 0 (Admin)</label>
 
-                                                    <input value="1" name="idtype" type="radio" id="type2" />
+                                                    <input class="with-gap" value="1" name="idtype" type="radio" id="type2" checked/>
                                                     <label for="type2">Type 1 (Normal User)</label>
                                                 </div>
                                             </div>
@@ -101,46 +101,47 @@
 
                     <!-- SHOW ALL USERS -->
 
-
-                    <ul class="collection">
-
                     <form action="/adminpage/deleteUsers" method="post">
-                    @users.map { user =>    
+                        <ul class="collection">
 
-                        <li class="collection-item avatar">
-                        @if(user.idtype != 0) {
-                            <input type="checkbox" name="id" id= "@user.id" value="@user.id" />
+
+                        @users.map { user =>
+
+                            <li class="collection-item avatar">
+                            @if(user.idtype != 0) {
+                                <input type="checkbox" name="id" id= "@user.id" value="@user.id" />
+                            }
+                            <label class="check" for="@user.id"></label>
+                                <i class="mdi-social-person circle teal lighten-1 trigger"></i>
+
+
+                                <span class="title teal-text lighten-1 trigger">ID : @user.id</span>
+                                <p>Username : @user.username  Password : @user.password<br>
+                                Type : @user.idtype  TeamID : @user.projectId
+                                </p>
+                                <a href="#" class="secondary-content"><i class="mdi-editor-mode-edit trigger"></i></a>
+                            </li>
                         }
-                        <label class="check" for="@user.id"></label>
-                            <i class="mdi-social-person circle teal lighten-1 trigger"></i>
 
-                      
-                            <span class="title teal-text lighten-1 trigger">ID : @user.id</span>
-                            <p>Username : @user.username  Password : @user.password<br>
-                            Type : @user.idtype  TeamID : @user.projectId
-                            </p>
-                            <a href="adminPage/deleteUser/@user.id" class="secondary-content"><i class="mdi-navigation-close trigger"></i></a>
-                        </li>
-                    }
+                            <!-- FLOATING BUTTON -->
+                            <!--
+                            <div class="fixed-action-btn animated bounceInUp" style="bottom: 45px; right: 4%;">
+                                <a class="btn-floating btn-large trigger" href="..">
+                                    <i class="large mdi-action-home waves-effect waves-light"></i>
+                                </a>
+                                <ul>
+                                    <li><a class="btn-floating tooltipped" data-position="left" data-delay="50" data-tooltip="Delete all checked users" type="submit" name="action"><i class="large mdi-action-settings-power"></i></a></li>
+                                </ul>
+                            </div>
+                            -->
+                        </ul>
 
-                        <!-- FLOATING BUTTON -->
-                        <!--
-                        <div class="fixed-action-btn animated bounceInUp" style="bottom: 45px; right: 4%;">
-                            <a class="btn-floating btn-large trigger" href="..">
-                                <i class="large mdi-action-home waves-effect waves-light"></i>
-                            </a>
-                            <ul>
-                                <li><a class="btn-floating tooltipped" data-position="left" data-delay="50" data-tooltip="Delete all checked users" type="submit" name="action"><i class="large mdi-action-settings-power"></i></a></li>
-                            </ul>
-                        </div>
-                        -->
-                        <button class="btn waves-effect waves-light" type="submit" name="action">Deletes
-                            <i class="mdi-content-send right"></i>
+                        <button class="btn waves-effect waves-light trigger" type="submit" name="action">Delete
+                            <i class="mdi-action-delete right"></i>
                         </button>
 
                     </form>
 
-                    </ul>
                 </div>
 
 
@@ -291,7 +292,7 @@
         </div>
 
 
-        <div class="fixed-action-btn animated bounceInUp" style="bottom: 45px; right: 50px;">
+        <div class="fixed-action-btn animated bounceInUp" style="bottom: 45px; right: 40px;">
             <a class="btn-floating btn-large trigger" href="..">
                 <i class="large mdi-action-home waves-effect waves-light"></i>
             </a>
