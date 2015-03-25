@@ -4,6 +4,7 @@ import play.mvc.*;
 import play.data.*;
 import models.Project;
 import models.Vote;
+import models.Rate;
 
 import views.html.*;
 
@@ -15,22 +16,23 @@ public class VotePage extends Controller {
     @Security.Authenticated(Secured.class)
     public static Result index(Long id) {
         Long userId = Long.parseLong(session().get("userId"));
-        Vote vote = Vote.find.where().eq("userId", userId).eq("projectId",id).findUnique();
-        return ok(votepage.render(userId ,Project.find.byId(id), vote, Vote.find.all()));
+        Rate rate = Rate.find.where().eq("userId", userId).eq("projectId",id).findUnique();
+        return ok(votepage.render(userId ,Project.find.byId(id), rate, Vote.find.all(),Rate.find.all()));
     }
 
-    public static Result addVote(){
-		Vote vote = Form.form(Vote.class).bindFromRequest().get();
-    	vote.save();
-    	return redirect(routes.VotePage.index(vote.projectId));
+    public static Result addRate(){
+		Rate rate = Form.form(Rate.class).bindFromRequest().get();
+    	rate.save();
+    	return redirect(routes.VotePage.index(rate.projectId));
     }
 
-    public static Result editVote() {
-        Vote newvote = Form.form(Vote.class).bindFromRequest().get();
-        Vote oldvote = Vote.find.where().eq("userId", newvote.userId).eq("projectId",newvote.projectId).findUnique();
-        oldvote.score = newvote.score;
-        oldvote.save();
-        return redirect(routes.VotePage.index(oldvote.projectId));
+    public static Result editRate() {
+        Rate newrate = Form.form(Rate.class).bindFromRequest().get();
+        Rate oldrate = Rate.find.where().eq("userId", newrate.userId).eq("projectId",newrate.projectId).findUnique();
+        oldrate.score = newrate.score;
+        oldrate.comment = newrate.comment;
+        oldrate.save();
+        return redirect(routes.VotePage.index(oldrate.projectId));
     }
 
 }

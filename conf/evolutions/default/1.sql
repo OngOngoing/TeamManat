@@ -12,6 +12,16 @@ create table project (
   constraint pk_project primary key (id))
 ;
 
+create table rate (
+  id                        bigint auto_increment not null,
+  score                     integer,
+  type                      varchar(255),
+  user_id                   bigint,
+  project_id                bigint,
+  comment                   varchar(255),
+  constraint pk_rate primary key (id))
+;
+
 create table team (
   id                        bigint auto_increment not null,
   team_name                 varchar(255),
@@ -47,6 +57,8 @@ create table vote (
 SET FOREIGN_KEY_CHECKS=0;
 
 drop table project;
+
+drop table rate;
 
 drop table team;
 
