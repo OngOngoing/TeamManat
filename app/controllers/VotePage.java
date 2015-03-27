@@ -17,6 +17,9 @@ public class VotePage extends Controller {
     public static Result index(Long id) {
         Long userId = Long.parseLong(session().get("userId"));
         Rate rate = Rate.find.where().eq("userId", userId).eq("projectId",id).findUnique();
+        if(id > Project.find.all().size()) {
+            return redirect(routes.ProjectList.index());
+        }
         return ok(votepage.render(userId ,Project.find.byId(id), rate, Vote.find.all(),Rate.find.all()));
     }
 

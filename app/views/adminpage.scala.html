@@ -43,7 +43,7 @@
                             <div class="collapsible-body">
                                 <div class="container">
                                     <div class="row">
-                                        <form class="col s12" action="/adminpage/addUser" method="post">
+                                        <form class="col s12" action="@routes.AdminPage.addUser()" method="post">
                                             <div class="row">
                                                 <div class="input-field col s6">
                                                     <input id="firstname" name="firstname" type="text" class="validate" required>
@@ -53,6 +53,8 @@
                                                     <input id="lastname" name="lastname" type="text" class="validate" required>
                                                     <label for="lastname">Last Name</label>
                                                 </div>
+
+
                                             </div>
                                             <div class="row">
                                                 <div class="input-field col s12">
@@ -101,27 +103,28 @@
 
                     <!-- SHOW ALL USERS -->
 
-                    <form action="/adminpage/deleteUsers" method="post">
+                    <form action="@routes.AdminPage.deleteUsers()" method="post">
                         <ul class="collection">
 
+                            @users.map { user =>
+                                <li class="collection-item avatar">
+                                    @if(user.idtype != 0) {
+                                        <input type="checkbox" name="id" id= "@user.id" value="@user.id" />
+                                    }
+                                    <label class="check" for="@user.id"></label>
+                                    @if(user.idtype == 0) {
+                                        <i class="mdi-social-whatshot circle teal lighten-1 trigger"></i>
+                                    } else {
+                                        <i class="mdi-social-person circle teal lighten-1 trigger"></i>
+                                    }
 
-                        @users.map { user =>
-
-                            <li class="collection-item avatar">
-                            @if(user.idtype != 0) {
-                                <input type="checkbox" name="id" id= "@user.id" value="@user.id" />
+                                    <span class="title teal-text lighten-1 trigger">ID : @user.id</span>
+                                    <p>Username : @user.username  Password : @user.password<br>
+                                    Type : @user.idtype  TeamID : @user.projectId
+                                    </p>
+                                    <a href="#" class="secondary-content"><i class="mdi-editor-mode-edit trigger"></i></a>
+                                </li>
                             }
-                            <label class="check" for="@user.id"></label>
-                                <i class="mdi-social-person circle teal lighten-1 trigger"></i>
-
-
-                                <span class="title teal-text lighten-1 trigger">ID : @user.id</span>
-                                <p>Username : @user.username  Password : @user.password<br>
-                                Type : @user.idtype  TeamID : @user.projectId
-                                </p>
-                                <a href="#" class="secondary-content"><i class="mdi-editor-mode-edit trigger"></i></a>
-                            </li>
-                        }
 
                             <!-- FLOATING BUTTON -->
                             <!--
@@ -166,119 +169,46 @@
 
             </div>
 
+
         <!---------------\
         TAB 3
         ---------------->
-            <div id="projects" class="col s12" animated fadeIns>
+            <div id="projects" class="col s12 animated fadeIn">
+                <div class="divider"></div>
                 <div class ="section">
-                    <ul class="collapsible" data-collapsible="accordion">
-                        <li>
-                            <div class="collapsible-header teal-text lighten-1 trigger"><i class="mdi-social-person-add"></i>Add Projects</div>
-                            <div class="collapsible-body">
-                                <div class="container">
-                                    <div class="row">
-                                        <form class="col s12" action="/adminpage/addUser" method="post">
-                                            <div class="row">
-                                                <div class="input-field col s12">
-                                                    <i class="mdi-action-account-circle prefix"></i>
-                                                    <input id="icon_prefix" type="text" class="validate">
-                                                    <label for="icon_prefix">Project Name</label>
-                                                </div>
-                                            </div>
-                                            <div class="row">      
-                                                <div class="input-field col s12">
-                                                    <i class="mdi-editor-mode-edit prefix"></i>
-                                                    <textarea id="icon_prefix2" class="materialize-textarea"></textarea>
-                                                    <label for="icon_prefix2">Description</label>
-                                                </div>
 
-                                            </div>
-                                            <div class="row">
-                                                <form action="#">
-                                                    <div class="file-field input-field">
-                                                      <input class="file-path validate" type="text"/>
-                                                      <div class="btn">
-                                                        <span>Upload</span>
-                                                        <input type="file" />
-                                                      </div>
-                                                    </div>
-                                                </form>
-                                            </div>
 
-                                            <div class="row">
-                                                <div class="input-field col s12">
-                                                    <input name="projectId" id="projectId" type="number" class="validate">
-                                                    <label for="projectId">Team ID</label>
-                                                </div>
-                                            </div>
 
-                                            <div class="row">
-                                                <div class="input-field col s12">
-                                                    <input value="0" name="idtype" type="radio" id="type1" />
-                                                    <label for="type1">Type 0 (Admin)</label>
+                        <!-- Modal Trigger -->
+                    <div class="row center">
+                        <a class="waves-effect waves-light btn-large modal-trigger trigger" id="addProjectButton" href="#addProjectModal"><i class="mdi-content-add right"></i>Add Project</a>
 
-                                                    <input value="1" name="idtype" type="radio" id="type2" />
-                                                    <label for="type2">Type 1 (Normal User)</label>
-                                                </div>
-                                            </div>
+                    </div>
 
-                                            <div class="row">
-                                                <div class="input-field col s12">
-                                                    <button class="btn waves-effect waves-light" type="submit" name="action">Add
-                                                        <i class="mdi-content-send right"></i>
-                                                    </button>
-                                                </div>
-                                            </div>
-                                        </form>
-                                    </div>
-                                </div>
-                            </div>
-                        </li>
-                    </ul>
+
 
 
                     <!-- SHOW ALL PROJECT -->
-
-
-                    <ul class="collection">
-
-                    <form action="/adminpage/deleteUsers" method="post">
-                    @users.map { user =>    
-
-                        <li class="collection-item avatar">
-                        @if(user.idtype != 0) {
-                            <input type="checkbox" name="id" id= "@user.id" value="@user.id" />
-                        }
-                        <label class="check" for="@user.id"></label>
-                            <i class="mdi-social-person circle teal lighten-1 trigger"></i>
-
-                      
-                            <span class="title teal-text lighten-1 trigger"> Project Name : @user.id</span>
-                            <p>Username : @user.username  Password : @user.password<br>
-                            Type : @user.idtype  TeamID : @user.projectId
-                            </p>
-                            <a href="adminPage/deleteUser/@user.id" class="secondary-content"><i class="mdi-navigation-close trigger"></i></a>
-                        </li>
+                    @projects.map { project =>
+                        <div class="col s12 m6">
+                            <div class="card">
+                                <div class="card-image waves-effect waves-block waves-light">
+                                    <img class="activator" src=@routes.Assets.at(project.picture)>
+                                </div>
+                                <div class="card-content">
+                                    <span class="card-title activator grey-text text-darken-4">@project.name<i class="mdi-navigation-more-vert right"></i></span>
+                                    <p><a href="@routes.VotePage.index(project.id)">Edit this project</a></p>
+                                </div>
+                                <div class="card-reveal">
+                                    <span class="card-title grey-text text-darken-4">[ID : @project.id] @project.name<i class="mdi-navigation-close right"></i></span>
+                                    <p>@project.description</p>
+                                </div>
+                            </div>
+                        </div>
                     }
 
-                        <!-- FLOATING BUTTON -->
-                        <!--
-                        <div class="fixed-action-btn animated bounceInUp" style="bottom: 45px; right: 4%;">
-                            <a class="btn-floating btn-large trigger" href="..">
-                                <i class="large mdi-action-home waves-effect waves-light"></i>
-                            </a>
-                            <ul>
-                                <li><a class="btn-floating tooltipped" data-position="left" data-delay="50" data-tooltip="Delete all checked users" type="submit" name="action"><i class="large mdi-action-settings-power"></i></a></li>
-                            </ul>
-                        </div>
-                        -->
-                        <button class="btn waves-effect waves-light" type="submit" name="action">Deletes
-                            <i class="mdi-content-send right"></i>
-                        </button>
 
-                    </form>
 
-                    </ul>
                 </div>
             </div>
 
@@ -287,11 +217,59 @@
         TAB 4
         ---------------->
             <div id="test4" class="col s12">
+
+
             </div>
 
         </div>
 
+            <!-- Modal Structure -->
+        <div id="addProjectModal" class="modal modal-fixed-footer">
+            <form class="col s12" action="@routes.AdminPage.addProject()" method="post">
+                <div class="modal-content">
+                    <h4>Add Project</h4>
 
+                    <div class="row">
+                        <div class="input-field col s12">
+                            <i class="mdi-action-account-circle prefix"></i>
+                            <input id="icon_prefix" name="name" type="text" class="validate" required>
+                            <label for="icon_prefix">Project Name</label>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="file-field input-field">
+                            <input class="file-path validate" type="text"/>
+                            <div class="btn">
+                                <span>Upload</span>
+                                <input type="file" />
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="input-field col s12">
+                            <i class="mdi-editor-mode-edit prefix"></i>
+                            <textarea id="project_description" name="description" class="materialize-textarea" required></textarea>
+                            <label for="project_description">Description</label>
+                        </div>
+                    </div>
+
+
+                </div>
+                <div class="modal-footer">
+                    <a href="#" class="waves-effect waves-green btn-flat modal-action modal-close">Cancel</a>
+                    <button class="btn waves-effect waves-light" type="submit" name="action">Add
+                        <i class="mdi-content-send right"></i>
+                    </button>
+                </div>
+            </form>
+
+        </div>
+
+
+
+            <!-- FOLATING BUTTON -->
         <div class="fixed-action-btn animated bounceInUp" style="bottom: 45px; right: 40px;">
             <a class="btn-floating btn-large trigger" href="..">
                 <i class="large mdi-action-home waves-effect waves-light"></i>
@@ -308,5 +286,6 @@
 
         <script src="http://code.jquery.com/jquery-2.1.3.min.js"></script>
         <script src="@routes.Assets.at("javascripts/materialize.min.js")" type="text/javascript"></script>
+        <script src="@routes.Assets.at("javascripts/adminpage.js")" type="text/javascript"></script>
     </body>
 </html>
