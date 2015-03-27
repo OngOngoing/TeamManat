@@ -1,7 +1,7 @@
 package controllers;
 
-import models.Project;
-import models.User;
+import com.avaje.ebean.Ebean;
+import models.*;
 import play.mvc.*;
 import play.data.*;
 
@@ -57,6 +57,8 @@ public class Application extends Controller {
 
     // MockDataBase for testing
     public static Result mockDatabase(){
+        Ebean.delete(User.find.all());
+        Ebean.delete(Project.find.all());
         User.create("admin", "admin", "Admin's Firstname", "Admin's Lastname", 0, -1);
         User.create("test1", "test1", "TestFirstname1", "TestLastName1", 1, 1); // Add new account : username => test1 password => test1
         User.create("test2", "test2", "TestFirstname2", "TestLastName2", 1, 1); // Add new account : username => test2 password => test2
