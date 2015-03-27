@@ -4,7 +4,6 @@
 
 GET         /                             controllers.Application.index()
 POST        /login                        controllers.Application.authenticate()
-GET         /votepage/:id                 controllers.VotePage.index(id:Long)
 GET         /projectlist                  controllers.ProjectList.index()
 
 # Admin Page
@@ -15,8 +14,10 @@ POST        /adminpage/addProject         controllers.AdminPage.addProject()
 
 
 GET         /logout                       controllers.Application.logout()
-POST        /votepage                     controllers.VotePage.addRate()
-POST        /votepage/edit                controllers.VotePage.editRate()
+
+GET         /rateproject/:id              controllers.RateProject.index(id:Long)
+POST        /rateproject                  controllers.RateProject.addRate()
+POST        /rateproject/edit             controllers.RateProject.editRate()
 # Create initial data for testing.
 GET         /install                      controllers.Application.mockDatabase()
 # Map static resources from the /public folder to the /assets URL path

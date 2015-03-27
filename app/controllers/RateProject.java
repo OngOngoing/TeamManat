@@ -1,16 +1,16 @@
 package controllers;
 
-import play.mvc.*;
-import play.data.*;
 import models.Project;
-import models.Vote;
 import models.Rate;
+import models.Vote;
+import play.data.Form;
+import play.mvc.Controller;
+import play.mvc.Result;
+import play.mvc.Security;
+import views.html.rateproject;
 
-import views.html.*;
 
-
-
-public class VotePage extends Controller {
+public class RateProject extends Controller {
 
 
     @Security.Authenticated(Secured.class)
@@ -20,13 +20,13 @@ public class VotePage extends Controller {
         if(id > Project.find.all().size()) {
             return redirect(routes.ProjectList.index());
         }
-        return ok(votepage.render(userId ,Project.find.byId(id), rate, Vote.find.all(),Rate.find.all()));
+        return ok(rateproject.render(userId, Project.find.byId(id), rate, Rate.find.all()));
     }
 
     public static Result addRate(){
 		Rate rate = Form.form(Rate.class).bindFromRequest().get();
     	rate.save();
-    	return redirect(routes.VotePage.index(rate.projectId));
+    	return redirect(routes.RateProject.index(rate.projectId));
     }
 
     public static Result editRate() {
@@ -35,7 +35,7 @@ public class VotePage extends Controller {
         oldrate.score = newrate.score;
         oldrate.comment = newrate.comment;
         oldrate.save();
-        return redirect(routes.VotePage.index(oldrate.projectId));
+        return redirect(routes.RateProject.index(oldrate.projectId));
     }
 
 }

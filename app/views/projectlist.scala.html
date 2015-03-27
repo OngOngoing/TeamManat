@@ -18,7 +18,7 @@
 
             <ul class="collection">
                 @projects.map { project =>
-                    <a href="votepage/@project.id" class="collection-item trigger">@project.name
+                    <a href="@routes.RateProject.index(project.id)" class="collection-item trigger">@project.name
                         @rates.map { rate =>
                             @if(rate.projectId == project.id){
                                 <span class="rated badge">@rate.score</span>
