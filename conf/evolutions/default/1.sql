@@ -8,7 +8,6 @@ create table project (
   name                      varchar(255),
   description               varchar(255),
   picture                   varchar(255),
-  team_id                   bigint,
   constraint pk_project primary key (id))
 ;
 
@@ -20,6 +19,13 @@ create table rate (
   project_id                bigint,
   comment                   varchar(255),
   constraint pk_rate primary key (id))
+;
+
+create table team (
+  id                        bigint auto_increment not null,
+  team_name                 varchar(255),
+  description               varchar(255),
+  constraint pk_team primary key (id))
 ;
 
 create table user_account (
@@ -53,6 +59,8 @@ SET FOREIGN_KEY_CHECKS=0;
 drop table project;
 
 drop table rate;
+
+drop table team;
 
 drop table user_account;
 

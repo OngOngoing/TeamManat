@@ -34,6 +34,11 @@ public class AdminPage extends Controller {
         user.save();
         return redirect(routes.AdminPage.index()+"#users");
     }
+    public static Result addProject(){
+        Project project = Form.form(Project.class).bindFromRequest().get();
+        project.save();
+        return redirect(routes.AdminPage.index()+"#projects");
+    }
 
     public static Result deleteUsers(){
 

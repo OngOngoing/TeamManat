@@ -8,6 +8,7 @@
         <link rel="stylesheet" media="screen" href="@routes.Assets.at("stylesheets/materialize.min.css")">
         <link rel="stylesheet" media="screen" href="@routes.Assets.at("stylesheets/animate.css")">
         <link rel="stylesheet" media="screen" href="@routes.Assets.at("stylesheets/votepage.css")">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
     </head>
     <body>
         <div class="container">
@@ -27,30 +28,35 @@
 
             <div class="section animated fadeIn">
                 @if(thisRate == null) {
-                    <form action="/votepage" method="post">
-                        <div class="input-field">
-                            <input id="projectId" type="hidden" name="projectId" value="@project.id">
-                            <input id="userId" type="hidden" name="userId" value="@userId">
-                            <input id="type" type="hidden" name="type" value="1">
-                            <input id="score" type="hidden" name="score" value="0">
-                            <div id="rating">
-                                @for(index<-1 until 6){
-                                    <a id="s@index" class="waves-effect waves-teal btn btn-flat btn-floating trigger" name="s@index" href="#!">@index</a>
-                                }
-                            </div>
-                            <div class="row">
-                                <div class="input-field col s12">
-                                    <textarea id="textarea1" class="materialize-textarea trigger" name="comment"></textarea>
-                                    <label for="textarea1">Comment</label>
-                                </div>
-                            </div>
+                    <div class="row">
+                        <div class="input-field col s12">
+                            <form action="/votepage" method="post">
+                                <div class="input-field">
+                                    <input id="projectId" type="hidden" name="projectId" value="@project.id">
+                                    <input id="userId" type="hidden" name="userId" value="@userId">
+                                    <input id="type" type="hidden" name="type" value="1">
+                                    <input id="score" type="hidden" name="score" value="0">
+                                    <div id="rating">
+                                        @for(index<-1 until 6){
+                                            <a id="s@index" class="waves-effect waves-teal btn btn-flat btn-floating btn-large trigger" name="s@index" href="#!">@index</a>
+                                        }
+                                    </div>
+                                    <div class="row">
+                                        <div class="input-field col s12">
+                                            <textarea id="textarea1" class="materialize-textarea trigger" name="comment"></textarea>
+                                            <label for="textarea1">Comment</label>
+                                        </div>
+                                    </div>
 
-                            <button type="submit" class="waves-effect waves-light btn-large trigger"><i class="mdi-action-thumb-up right" onclick="toast('Vote submitted', 4000)"></i>Rate</button>
+                                    <button type="submit" class="waves-effect waves-light btn-large trigger"><i class="mdi-action-thumb-up right" onclick="toast('Vote submitted', 4000)"></i>Rate</button>
+                                </div>
+                            </form>
                         </div>
-                    </form>
+                    </div>
                 } else {
-                    <div class="section">
-                        <form action="/votepage/edit" method="post">
+                    <div class="row">
+                        <div class="input-field col s12">
+                            <form action="/votepage/edit" method="post">
                                 <input id="projectId" type="hidden" name="projectId" value="@project.id">
                                 <input id="userId" type="hidden" name="userId" value="@userId">
                                 <input id="type" type="hidden" name="type" value="1">
@@ -58,9 +64,10 @@
 
                                 @for(index<-1 until 6){
                                     @if(thisRate.score == index){
-                                        <a id="s@index" class="waves-effect waves-teal btn btn-floating trigger" name="s@index" href="#!">@index</a>
+                                        <a id="s@index" class="waves-effect waves-teal btn btn-floating trigger btn-large" name="s@index" href="#!">@index</a>
                                     }else{
-                                        <a id="s@index" class="waves-effect waves-teal btn btn-floating btn-flat trigger" name="s@index" href="#!">@index</a>
+                                        <a id="s@index" class="waves-effect waves-teal btn btn-floating btn-flat trigger btn-large" name="s@index" href="#!">@index</a>
+
                                     }
                                 }
 
@@ -70,9 +77,10 @@
                                         <label for="textarea1">Comment</label>
                                     </div>
                                 </div>
-                                
+
                                 <button type="submit" class="waves-effect waves-light btn-large trigger"><i class="mdi-action-thumb-up right" onclick="toast('Vote submitted', 4000)"></i>Edit</button>
-                        </form>
+                            </form>
+                        </div>
                     </div>
                 }
             </div>
