@@ -21,13 +21,6 @@ create table rate (
   constraint pk_rate primary key (id))
 ;
 
-create table team (
-  id                        bigint auto_increment not null,
-  team_name                 varchar(255),
-  description               varchar(255),
-  constraint pk_team primary key (id))
-;
-
 create table user_account (
   id                        bigint auto_increment not null,
   username                  varchar(255),
@@ -49,6 +42,13 @@ create table vote (
   constraint pk_vote primary key (id))
 ;
 
+create table web_config (
+  id                        bigint auto_increment not null,
+  key_name                  varchar(255),
+  key_value                 varchar(255),
+  constraint pk_web_config primary key (id))
+;
+
 
 
 
@@ -60,11 +60,11 @@ drop table project;
 
 drop table rate;
 
-drop table team;
-
 drop table user_account;
 
 drop table vote;
+
+drop table web_config;
 
 SET FOREIGN_KEY_CHECKS=1;
 

@@ -24,7 +24,6 @@ public class Application extends Controller {
         public String password;
 
         public String validate() {
-            System.out.println(username + " " + password);
             if(User.authenticate(username, password) == null) {
                 return "Invalid user or password";
             }
@@ -57,8 +56,6 @@ public class Application extends Controller {
 
     // MockDataBase for testing
     public static Result mockDatabase(){
-        Ebean.delete(User.find.all());
-        Ebean.delete(Project.find.all());
         User.create("admin", "admin", "Admin's Firstname", "Admin's Lastname", 0, -1);
         User.create("test1", "test1", "TestFirstname1", "TestLastName1", 1, 1); // Add new account : username => test1 password => test1
         User.create("test2", "test2", "TestFirstname2", "TestLastName2", 1, 1); // Add new account : username => test2 password => test2

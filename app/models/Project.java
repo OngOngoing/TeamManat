@@ -17,12 +17,15 @@ public class Project extends Model
 
     public static Project create(String name , String description)
     {
-        Project project = new Project();
-        project.name = name;
-        project.description = description;
-        project.picture = "img/TeamDummy.jpg";
-        project.save();
-        return project;
+        if(Project.find.where().eq("name", name).findUnique() == null) {
+            Project project = new Project();
+            project.name = name;
+            project.description = description;
+            project.picture = "img/TeamDummy.jpg";
+            project.save();
+            return project;
+        }
+        return null;
     }
 
     public static Finder<Long, Project> find = new Finder<Long, Project>(Long.class, Project.class);
