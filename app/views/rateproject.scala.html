@@ -30,7 +30,7 @@
                 @if(thisRate == null) {
                     <div class="row">
                         <div class="input-field col s12">
-                            <form action="/votepage" method="post">
+                            <form action="/rateproject" method="post">
                                 <div class="input-field">
                                     <input id="projectId" type="hidden" name="projectId" value="@project.id">
                                     <input id="userId" type="hidden" name="userId" value="@userId">
@@ -56,7 +56,7 @@
                 } else {
                     <div class="row">
                         <div class="input-field col s12">
-                            <form action="/votepage/edit" method="post">
+                            <form action="/rateproject/edit" method="post">
                                 <input id="projectId" type="hidden" name="projectId" value="@project.id">
                                 <input id="userId" type="hidden" name="userId" value="@userId">
                                 <input id="type" type="hidden" name="type" value="1">
