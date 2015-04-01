@@ -45,9 +45,12 @@ public class AdminPage extends Controller {
         Map<String, String[]> map = request().body().asFormUrlEncoded();
         String[] checkedVal = map.get("id"); // get selected topics
 
+        if(checkedVal == null) {
+            return redirect(routes.AdminPage.index()+"#users");
+        }
+
         for(String id : checkedVal) {
             User user = User.find.byId(Long.parseLong(id));
-            Logger.debug("DELETE "+ user.id);
             user.delete();
         }
 
