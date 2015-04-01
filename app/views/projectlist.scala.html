@@ -11,14 +11,15 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
     </head>
     <body>
-
-        <div class="container animated fadeIn">
-            <!-- Page Content goes here -->
-            <nav class="teal lighten-1 trigger">
+        <nav class="teal lighten-1 trigger" id="head">
+            <div class="container">
                 <div class="nav-wrapper">
                     Time~
                 </div>
-            </nav>
+            </div>
+        </nav>
+        <div class="container animated fadeIn">
+            <!-- Page Content goes here -->
 
             <ul class="collection">
                 @projects.map { project =>
