@@ -46,6 +46,9 @@ create table web_config (
   id                        bigint auto_increment not null,
   key_name                  varchar(255),
   key_value                 varchar(255),
+  id_type                   integer,
+  description               varchar(255),
+  constraint uq_web_config_key_name unique (key_name),
   constraint pk_web_config primary key (id))
 ;
 
