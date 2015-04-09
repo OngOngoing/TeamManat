@@ -1,5 +1,8 @@
 # TeamManat
 
+Project URL
+http://exceed.givto.me/
+
 ### Install
 - Install sql
 - Create new database with name "exceedvote"
