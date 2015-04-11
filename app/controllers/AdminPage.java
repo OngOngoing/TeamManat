@@ -16,13 +16,13 @@ public class AdminPage extends Controller {
     @Security.Authenticated(Secured.class)
     public static Result index() {
         Long userId = Long.parseLong(session().get("userId"));
-        List rates = Rate.find.all();
-        List users = User.find.all();
+        List rates = Rate.findAll();
+        List users = User.findAll();
 
-        User thisUser = User.find.byId(userId);
+        User thisUser = User.findByUserId(userId);
 
         if(thisUser.idtype == 0) {
-            return ok(adminpage.render(users, Project.find.all(), rates));
+            return ok(adminpage.render(users, Project.findAll(), rates));
         }
         else {
             return redirect(routes.ProjectList.index());
@@ -49,8 +49,8 @@ public class AdminPage extends Controller {
             return redirect(routes.AdminPage.index()+"#users");
         }
 
-        for(String id : checkedVal) {
-            User user = User.find.byId(Long.parseLong(id));
+        for(String userId : checkedVal) {
+            User user = User.findByUserId(Long.parseLong(userId));
             user.delete();
         }
 

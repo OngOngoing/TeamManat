@@ -14,13 +14,13 @@ public class RateProject extends Controller {
 
 
     @Security.Authenticated(Secured.class)
-    public static Result index(Long id) {
+    public static Result index(Long projectId) {
         Long userId = Long.parseLong(session().get("userId"));
-        Rate rate = Rate.find.where().eq("userId", userId).eq("projectId",id).findUnique();
-        if(id > Project.find.all().size()) {
+        Rate rate = Rate.findByUserIdAndProjectId(userId,projectId);
+        if(projectId > Project.findAll().size()) {
             return redirect(routes.ProjectList.index());
         }
-        return ok(rateproject.render(userId, Project.find.byId(id), rate, Rate.find.all()));
+        return ok(rateproject.render(userId, Project.findById(projectId), rate, Rate.findAll()));
     }
 
     public static Result addRate(){
@@ -31,7 +31,7 @@ public class RateProject extends Controller {
 
     public static Result editRate() {
         Rate newrate = Form.form(Rate.class).bindFromRequest().get();
-        Rate oldrate = Rate.find.where().eq("userId", newrate.userId).eq("projectId",newrate.projectId).findUnique();
+        Rate oldrate = Rate.findByUserIdAndProjectId(newrate.userId,newrate.projectId);
         oldrate.score = newrate.score;
         oldrate.comment = newrate.comment;
         oldrate.save();

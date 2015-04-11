@@ -11,10 +11,10 @@ public class ProjectList extends Controller {
     @Security.Authenticated(Secured.class)
     public static Result index() {
         Long userId = Long.parseLong(session().get("userId"));
-        List votes = Rate.find.where().eq("userId", userId).findList();
-        User user = User.find.byId(userId);
+        List rates = Rate.findListByUserId(userId);
+        User user = User.findByUserId(userId);
 
-        return ok(projectlist.render(Project.find.all(),votes,user));
+        return ok(projectlist.render(Project.findAll(),rates,user));
     }
 
 }

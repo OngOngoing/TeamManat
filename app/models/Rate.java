@@ -3,6 +3,7 @@ package models;
 import javax.persistence.*;
 import play.data.validation.Constraints.Required;
 import play.db.ebean.*;
+import java.util.List;
 
 @Entity
 public class Rate extends Model {
@@ -27,5 +28,17 @@ public class Rate extends Model {
         return rate;
     }
 
-    public static Finder<Long, Rate> find = new Finder<Long, Rate>(Long.class, Rate.class);
+    private static Finder<Long, Rate> find = new Finder<Long, Rate>(Long.class, Rate.class);
+
+    public static Rate findByUserIdAndProjectId(long userId, Long projectId){
+        return find.where().eq("userId", userId).eq("projectId",projectId).findUnique();
+    }
+
+    public static List<Rate> findAll(){
+        return find.all();
+    }
+
+    public static List<Rate> findListByUserId(Long userId){
+        return find.where().eq("userId", userId).findList();
+    }
 }

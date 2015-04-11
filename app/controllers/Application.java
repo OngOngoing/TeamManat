@@ -38,7 +38,7 @@ public class Application extends Controller {
             return badRequest(login.render(loginForm));
         } else {
             session().clear();
-            User currentUser = User.find.where().eq("username", loginForm.get().username).findUnique();
+            User currentUser = User.findByUsername(loginForm.get().username);
             session("userId", String.valueOf(currentUser.id));
             return redirect(routes.ProjectList.index());
         }

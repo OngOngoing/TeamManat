@@ -3,6 +3,7 @@ package models;
 import javax.persistence.*;
 import play.data.validation.Constraints.Required;
 import play.db.ebean.*;
+import java.util.List;
 
 @Entity
 public class Project extends Model
@@ -29,4 +30,12 @@ public class Project extends Model
     }
 
     public static Finder<Long, Project> find = new Finder<Long, Project>(Long.class, Project.class);
+
+    public static Project findById(Long projectId){
+        return find.byId(projectId);
+    }
+
+    public static List<Project> findAll(){
+        return find.all();
+    }
 }

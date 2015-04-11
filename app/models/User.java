@@ -5,7 +5,7 @@ import javax.validation.constraints.*;
 
 import play.data.validation.Constraints.Required;
 import play.db.ebean.*;
-
+import java.util.List;
 @Entity
 @Table(name = "user_account")
 public class User extends Model {
@@ -36,7 +36,7 @@ public class User extends Model {
         this.projectId = project;
     }
 
-    public static Finder<Long, User> find = new Finder<Long, User>(Long.class, User.class);
+    private static Finder<Long, User> find = new Finder<Long, User>(Long.class, User.class);
 
     public static User authenticate(String username, String password){
         return User.find.where().eq("username", username).eq("password", password).findUnique();
@@ -49,5 +49,17 @@ public class User extends Model {
             return newUser;
         }
         return null;
+    }
+
+    public static User findByUserId(Long userId){
+        return find.byId(userId);
+    }
+
+    public static User findByUsername(String username){
+        return find.where().eq("username", username).findUnique();
+    }
+
+    public static List<User> findAll(){
+        return find.all();
     }
 }
