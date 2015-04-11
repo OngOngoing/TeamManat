@@ -36,9 +36,10 @@
                                     <input id="userId" type="hidden" name="userId" value="@userId">
                                     <input id="type" type="hidden" name="type" value="1">
                                     <input id="score" type="hidden" name="score" value="0">
-                                    <div id="rating">
+                                    <div class = "row" id="rating">
+                                        <div class = "col card-panel teal lighten-2 trigger"> Creative   </div>
                                         @for(index<-1 until 6){
-                                            <a id="s@index" class="waves-effect waves-teal btn btn-flat btn-floating btn-large trigger" name="s@index" href="#!">@index</a>
+                                            <a id="s@index" class="col waves-effect waves-teal btn btn-flat btn-floating btn-large trigger" name="s@index" href="#!">@index</a>
                                         }
                                     </div>
                                     <div class="row">
