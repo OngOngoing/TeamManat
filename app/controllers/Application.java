@@ -1,6 +1,7 @@
 package controllers;
 
-import com.avaje.ebean.Ebean;
+import java.text.*;
+import java.util.*;
 import models.*;
 import play.mvc.*;
 import play.data.*;
@@ -56,6 +57,15 @@ public class Application extends Controller {
 
     // MockDataBase for testing
     public static Result mockDatabase(){
+        //Web App setting
+        Calendar calendar = Calendar.getInstance();
+        SimpleDateFormat dateFormat = new SimpleDateFormat("mm-dd-yyyy hh:mm");
+        WebConfig.create("startTime", dateFormat.format(calendar.getTime()), WebConfig.TYPE_DATE, "Date for starting vote.");
+
+        calendar.set(Calendar.HOUR, calendar.get(Calendar.HOUR) + 1);
+        WebConfig.create("stopTime", dateFormat.format(calendar.getTime()), WebConfig.TYPE_DATE, "Date for stopping vote.");
+        WebConfig.create("siteType", "1", WebConfig.TYPE_INTEGER, "1 for vote, 2 for rate.");
+        //Mock user and project
         User.create("admin", "admin", "Admin's Firstname", "Admin's Lastname", 0, -1);
         User.create("test1", "test1", "TestFirstname1", "TestLastName1", 1, 1); // Add new account : username => test1 password => test1
         User.create("test2", "test2", "TestFirstname2", "TestLastName2", 1, 1); // Add new account : username => test2 password => test2
