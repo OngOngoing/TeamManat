@@ -15,13 +15,15 @@ public class Rate extends Model {
     public Long userId;
     public Long projectId;
     public String comment;
+    public Long criteriaId;
 
-    public static Rate create(int score , String type , Long userId , Long projectId, String comment)
+    public static Rate create(int score , String type , Long userId , Long criteriaId , Long projectId, String comment)
     {
         Rate rate = new Rate();
         rate.score = score;
         rate.type = type;
         rate.userId = userId;
+        rate.criteriaId = criteriaId;
         rate.projectId = projectId;
         rate.comment = comment;
         rate.save();
