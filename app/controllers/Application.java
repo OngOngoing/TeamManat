@@ -59,7 +59,7 @@ public class Application extends Controller {
     public static Result mockDatabase(){
         //Web App setting
         Calendar calendar = Calendar.getInstance();
-        SimpleDateFormat dateFormat = new SimpleDateFormat("mm-dd-yyyy hh:mm");
+        SimpleDateFormat dateFormat = new SimpleDateFormat("M-d-y H:m");
         Settings.create("startTime", dateFormat.format(calendar.getTime()), Settings.TYPE_DATE, "Date for starting vote.");
 
         calendar.set(Calendar.HOUR, calendar.get(Calendar.HOUR) + 1);

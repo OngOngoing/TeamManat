@@ -5,10 +5,8 @@ $(document).ready(function(){
 
     $( "input[name='datePicker']").each(function() {
         $(this).datetimepicker({
-            controlType: 'select',
-            oneLine: true,
-            dateFormat: 'mm-dd-yy',
-            timeFormat: 'hh:mm'
+            format:'m-d-Y H:m',
+            mask:true
         });
     });
 
