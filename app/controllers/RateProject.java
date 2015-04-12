@@ -3,6 +3,7 @@ package controllers;
 import models.Project;
 import models.Rate;
 import models.Vote;
+import models.Criteria;
 import play.data.Form;
 import play.mvc.Controller;
 import play.mvc.Result;
@@ -20,7 +21,7 @@ public class RateProject extends Controller {
         if(projectId > Project.findAll().size()) {
             return redirect(routes.ProjectList.index());
         }
-        return ok(rateproject.render(userId, Project.findById(projectId), rate, Rate.findAll()));
+        return ok(rateproject.render(userId, Project.findById(projectId), rate, Rate.findAll(), Criteria.findAll()));
     }
 
     public static Result addRate(){

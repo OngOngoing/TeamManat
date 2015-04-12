@@ -3,6 +3,13 @@
 
 # --- !Ups
 
+create table criteria (
+  id                        bigint auto_increment not null,
+  name                      varchar(255),
+  description               varchar(255),
+  constraint pk_criteria primary key (id))
+;
+
 create table project (
   id                        integer auto_increment not null,
   name                      varchar(255),
@@ -18,7 +25,18 @@ create table rate (
   user_id                   bigint,
   project_id                bigint,
   comment                   varchar(255),
+  criteria_id               bigint,
   constraint pk_rate primary key (id))
+;
+
+create table settings (
+  id                        bigint auto_increment not null,
+  key_name                  varchar(255),
+  key_value                 varchar(255),
+  id_type                   integer,
+  description               varchar(255),
+  constraint uq_settings_key_name unique (key_name),
+  constraint pk_settings primary key (id))
 ;
 
 create table user_account (
@@ -42,16 +60,6 @@ create table vote (
   constraint pk_vote primary key (id))
 ;
 
-create table web_config (
-  id                        bigint auto_increment not null,
-  key_name                  varchar(255),
-  key_value                 varchar(255),
-  id_type                   integer,
-  description               varchar(255),
-  constraint uq_web_config_key_name unique (key_name),
-  constraint pk_web_config primary key (id))
-;
-
 
 
 
@@ -59,15 +67,17 @@ create table web_config (
 
 SET FOREIGN_KEY_CHECKS=0;
 
+drop table criteria;
+
 drop table project;
 
 drop table rate;
 
+drop table settings;
+
 drop table user_account;
 
 drop table vote;
-
-drop table web_config;
 
 SET FOREIGN_KEY_CHECKS=1;
 
