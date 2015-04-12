@@ -18,7 +18,7 @@ public class AdminPage extends Controller {
         Long userId = Long.parseLong(session().get("userId"));
         List rates = Rate.findAll();
         List users = User.findAll();
-        List webconfig = WebConfig.findAll();
+        List webconfig = Settings.findAll();
 
         User thisUser = User.findByUserId(userId);
 
