@@ -60,11 +60,11 @@ public class Application extends Controller {
         //Web App setting
         Calendar calendar = Calendar.getInstance();
         SimpleDateFormat dateFormat = new SimpleDateFormat("mm-dd-yyyy hh:mm");
-        WebConfig.create("startTime", dateFormat.format(calendar.getTime()), WebConfig.TYPE_DATE, "Date for starting vote.");
+        Settings.create("startTime", dateFormat.format(calendar.getTime()), Settings.TYPE_DATE, "Date for starting vote.");
 
         calendar.set(Calendar.HOUR, calendar.get(Calendar.HOUR) + 1);
-        WebConfig.create("stopTime", dateFormat.format(calendar.getTime()), WebConfig.TYPE_DATE, "Date for stopping vote.");
-        WebConfig.create("siteType", "1", WebConfig.TYPE_INTEGER, "1 for vote, 2 for rate.");
+        Settings.create("stopTime", dateFormat.format(calendar.getTime()), Settings.TYPE_DATE, "Date for stopping vote.");
+        Settings.create("siteType", "1", Settings.TYPE_INTEGER, "1 for vote, 2 for rate.");
         //Mock user and project
         User.create("admin", "admin", "Admin's Firstname", "Admin's Lastname", 0, -1);
         User.create("test1", "test1", "TestFirstname1", "TestLastName1", 1, 1); // Add new account : username => test1 password => test1
