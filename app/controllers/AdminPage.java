@@ -18,11 +18,12 @@ public class AdminPage extends Controller {
         Long userId = Long.parseLong(session().get("userId"));
         List rates = Rate.findAll();
         List users = User.findAll();
+        List webconfig = WebConfig.findAll();
 
         User thisUser = User.findByUserId(userId);
 
         if(thisUser.idtype == 0) {
-            return ok(adminpage.render(users, Project.findAll(), rates));
+            return ok(adminpage.render(users, Project.findAll(), rates, webconfig));
         }
         else {
             return redirect(routes.ProjectList.index());

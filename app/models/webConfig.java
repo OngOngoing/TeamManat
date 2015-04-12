@@ -3,6 +3,8 @@ package models;
 import javax.persistence.*;
 import play.db.ebean.*;
 
+import java.util.List;
+
 @Entity
 public class WebConfig extends Model{
 
@@ -14,6 +16,9 @@ public class WebConfig extends Model{
     public String keyValue;
     public int idType; // 1 = Date ; 2 = Integer ; 3 = String ; 4 = boolean
     public String description;
+
+    private static Finder<Long, WebConfig> find = new Finder<Long, WebConfig>(Long.class, WebConfig.class);
+
     public WebConfig(String k, String v, int type, String d){
         this.keyName = k;
         this.keyValue = v;
@@ -28,5 +33,10 @@ public class WebConfig extends Model{
         }
         return null;
     }
-    public static Finder<Long, WebConfig> find = new Finder<Long, WebConfig>(Long.class, WebConfig.class);
+    public static List<WebConfig> findAll(){
+        return find.all();
+    }
+    public static WebConfig value(String name){
+        return find.where().eq("keyName", name).findUnique();
+    }
 }
