@@ -13,8 +13,9 @@ public class ProjectList extends Controller {
         Long userId = Long.parseLong(session().get("userId"));
         List rates = Rate.findListByUserId(userId);
         User user = User.findByUserId(userId);
+        Settings setting = Settings.value("stopTime");
 
-        return ok(projectlist.render(Project.findAll(),rates,user));
+        return ok(projectlist.render(Project.findAll(),rates,user,setting));
     }
 
 }

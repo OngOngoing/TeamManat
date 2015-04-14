@@ -2,14 +2,19 @@
 $(document).ready(function(){
     // the "href" attribute of .modal-trigger must specify the modal ID that wants to be triggered
     $('.modal-trigger').leanModal();
-
+/*
     $( "input[name='datePicker']").each(function() {
         $(this).datetimepicker({
             format:'m-d-Y H:m',
             mask:true
         });
     });
-
+*/
+    $( ".datePicker").each(function() {
+        $(this).datetimepicker({
+            format:'m-d-Y H:m'
+        });
+    });
     $(".materialize-textarea").focus(
         function(){
             if ($('.hiddendiv').length === 0) {

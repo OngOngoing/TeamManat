@@ -1,6 +1,7 @@
 package models;
 
 import javax.persistence.*;
+
 import play.db.ebean.*;
 import java.util.List;
 
@@ -31,6 +32,11 @@ public class Settings extends Model{
             return con;
         }
         return null;
+    }
+    public static void update(String n, String v){
+        Settings con = Settings.value(n);
+        con.keyValue = v;
+        con.save();
     }
     public static List<Settings> findAll(){
         return find.all();

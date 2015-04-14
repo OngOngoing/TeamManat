@@ -55,7 +55,6 @@
                                                     <label for="lastname">Last Name</label>
                                                 </div>
 
-
                                             </div>
                                             <div class="row">
                                                 <div class="input-field col s12">
@@ -128,8 +127,8 @@
                                 </li>
                             }
 
-                                <!-- FLOATING BUTTON -->
-                                <!--
+                            <!-- FLOATING BUTTON -->
+                            <!--
                             <div class="fixed-action-btn animated bounceInUp" style="bottom: 45px; right: 4%;">
                                 <a class="btn-floating btn-large trigger" href="..">
                                     <i class="large mdi-action-home waves-effect waves-light"></i>
@@ -148,7 +147,6 @@
                     </form>
 
                 </div>
-
 
             </div>
 
@@ -179,7 +177,6 @@
                 <div class="divider"></div>
                 <div class ="section">
 
-
                         <!-- Modal Trigger -->
                     <div class="row center">
                         <a class="waves-effect waves-light btn-large modal-trigger trigger" id="addProjectButton" href="#addProjectModal"><i class="mdi-content-add right"></i>
@@ -208,7 +205,6 @@
                         </div>
                     }
 
-
                 </div>
             </div>
 
@@ -220,48 +216,57 @@
                 <div class="row"></div>
                     <!-- SHOW ALL config -->
                 <div class="row collection">
-                @configs.map { config =>
-                    <div class="row collection-item">
-                        <div class="col s12">
-                            <div class="row">
-                                <div class="input-field col s6" style="text-align : center">
-                                    <input id="keyName" type="text" class="validate" value=@config.keyName>
-                                    <label for="keyname">Key Name</label>
+                @helper.form(action = routes.AdminPage.saveSetting()) {
+                    @configs.map { config =>
+                        <div class="row collection-item">
+                            <div class="col s12">
+                                <div class="row">
+                                    <div class="input-field col s6" style="text-align : center">
+                                        <input id="keyName" type="text" class="validate" value="@config.keyName">
+                                        <label for="keyname">Key Name</label>
+                                    </div>
+                                    @if(config.idType == 1) {
+                                        <div class="input-field col s6" style="text-align : center">
+                                            <input id="keyName" type="text" class="validate datePicker" value="@config.keyValue" name="@config.keyName">
+                                            <label for="keyName">Key Value</label>
+                                        </div>
+                                    }
+                                    @if(config.idType == 2) {
+                                        <div class="input-field col s6" style="text-align : center">
+                                            <input id="keyValue" type="text" class="validate" value="@config.keyValue" name="@config.keyName">
+                                            <label for="keyValue">Key Value</label>
+                                        </div>
+                                    }
+                                    @if(config.idType == 3) {
+                                        <div class="input-field col s6" style="text-align : center">
+                                            <input id="keyValue" type="text" class="validate" value="@config.keyValue" name="@config.keyName">
+                                            <label for="keyValue">Key Value</label>
+                                        </div>
+                                    }
+                                    @if(config.idType == 4) {
+                                        <div class="switch col s6" style="text-align : center">
+                                            <label>
+                                                Off
+                                                <input type="checkbox">
+                                                <span class="lever"></span>
+                                                On
+                                            </label>
+                                            <label for="keyValue">Key Value</label>
+                                        </div>
+                                    }
                                 </div>
-                                @if(config.idType == 1) {
-                                    <div class="input-field col s6" style="text-align : center">
-                                        <input id="keyName" type="text" class="validate" value="@config.keyValue" name="datePicker">
-                                        <label for="keyName">Key Value</label>
-                                    </div>
-                                }
-                                @if(config.idType == 2) {
-                                    <div class="input-field col s6" style="text-align : center">
-                                        <input id="keyValue" type="text" class="validate" value=@config.keyValue>
-                                        <label for="keyValue">Key Value</label>
-                                    </div>
-                                }
-                                @if(config.idType == 3) {
-                                    <div class="input-field col s6" style="text-align : center">
-                                        <input id="keyValue" type="text" class="validate" value=@config.keyValue>
-                                        <label for="keyValue">Key Value</label>
-                                    </div>
-                                }
-                                @if(config.idType == 4) {
-                                    <div class="switch col s6" style="text-align : center">
-                                        <label>
-                                            Off
-                                            <input type="checkbox">
-                                            <span class="lever"></span>
-                                            On
-                                        </label>
-                                        <label for="keyValue">Key Value</label>
-                                    </div>
-                                }
+                                <div class="row" style="text-align : right">@config.description</div>
                             </div>
-                            <div class="row" style="text-align : right">@config.description</div>
                         </div>
-                    </div>
+                    }
                 }
+                </div>
+                <div class="row">
+                    <div class="col s12">
+                        <button class="btn waves-effect waves-light" type="submit" name="action">Save
+                            <i class="mdi-content-send right"></i>
+                        </button>
+                    </div>
                 </div>
             </div>
         </div>
@@ -297,7 +302,6 @@
                             <label for="project_description">Description</label>
                         </div>
                     </div>
-
 
                 </div>
                 <div class="modal-footer">
