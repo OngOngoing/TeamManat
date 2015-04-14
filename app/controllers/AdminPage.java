@@ -12,9 +12,9 @@ public class AdminPage extends Controller {
     @Security.Authenticated(Secured.class)
     public static Result index() {
         Long userId = Long.parseLong(session().get("userId"));
-        List rates = Rate.findAll();
-        List users = User.findAll();
-        List webconfig = Settings.findAll();
+        List<Rate> rates = Rate.findAll();
+        List<User> users = User.findAll();
+        List<Settings> webconfig = Settings.findAll();
 
         User thisUser = User.findByUserId(userId);
 

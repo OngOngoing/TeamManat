@@ -1,26 +1,32 @@
 package controllers;
 
-import models.Project;
-import models.Rate;
-import models.Vote;
+import models.*;
 import play.data.Form;
-import play.mvc.Controller;
-import play.mvc.Result;
-import play.mvc.Security;
+import play.mvc.*;
 import views.html.rateproject;
+
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 
 public class RateProject extends Controller {
-
 
     @Security.Authenticated(Secured.class)
     public static Result index(Long projectId) {
         Long userId = Long.parseLong(session().get("userId"));
         Rate rate = Rate.findByUserIdAndProjectId(userId,projectId);
+        List<Settings> webconfig = Settings.findAll();
+
+        Map setting = new HashMap();
+        for(Settings item : webconfig) {
+            setting.put(item.keyName, item.keyValue);
+        }
+
         if(projectId > Project.findAll().size()) {
             return redirect(routes.ProjectList.index());
         }
-        return ok(rateproject.render(userId, Project.findById(projectId), rate, Rate.findAll()));
+        return ok(rateproject.render(userId, Project.findById(projectId), rate, Rate.findAll(), setting));
     }
 
     public static Result addRate(){
