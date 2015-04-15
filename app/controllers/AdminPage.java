@@ -1,24 +1,20 @@
 package controllers;
 
 import models.*;
-import play.Logger;
-import play.data.Form;
-import play.mvc.Controller;
-import play.mvc.Result;
-import play.mvc.Security;
+import play.data.*;
+import play.mvc.*;
 import views.html.adminpage;
 
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class AdminPage extends Controller {
 
     @Security.Authenticated(Secured.class)
     public static Result index() {
         Long userId = Long.parseLong(session().get("userId"));
-        List rates = Rate.findAll();
-        List users = User.findAll();
-        List webconfig = Settings.findAll();
+        List<Rate> rates = Rate.findAll();
+        List<User> users = User.findAll();
+        List<Settings> webconfig = Settings.findAll();
 
         User thisUser = User.findByUserId(userId);
 
@@ -56,6 +52,15 @@ public class AdminPage extends Controller {
         }
 
         return redirect(routes.AdminPage.index()+"#users");
+    }
+
+    public static Result saveSetting(){
+        DynamicForm dynamicForm = new DynamicForm().bindFromRequest();
+        List<Settings> settings = Settings.findAll();
+        for(Settings item : settings){
+            Settings.update(item.keyName, dynamicForm.get(item.keyName));
+        }
+        return redirect(routes.AdminPage.index()+"#configs");
     }
 
 }

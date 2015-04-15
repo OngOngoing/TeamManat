@@ -11,6 +11,7 @@ GET         /adminpage                    controllers.AdminPage.index()
 POST        /adminpage/addUser            controllers.AdminPage.addUser()
 POST        /adminpage/deleteUsers        controllers.AdminPage.deleteUsers()
 POST        /adminpage/addProject         controllers.AdminPage.addProject()
+POST        /adminpage/saveSetting        controllers.AdminPage.saveSetting()
 
 
 GET         /logout                       controllers.Application.logout()

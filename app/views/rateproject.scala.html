@@ -1,4 +1,14 @@
-@(userId: Long)(project: Project)(thisRate: Rate)(rates: List[Rate])(criterias: List[Criteria])
+@(userId: Long)(project: Project)(thisRate: Rate)(rates: List[Rate])(criterias: List[Criteria])(setting: Map[String, String])
+@canRate = @{
+    import java.util.Calendar
+    import java.text.SimpleDateFormat
+
+    val today = Calendar.getInstance.getTime
+    val curTimeFormat = new SimpleDateFormat("MM-d-y HH:mm")
+    val stopTime = curTimeFormat.parse(setting.get("stopTime").toString)
+
+    today.before(stopTime)
+}
 
 <!DOCTYPE html>
 
@@ -21,12 +31,12 @@
                 <img class="materialboxed animated fadeIn" src=@routes.Assets.at(project.picture)>
             </div>
             <div class="section animated fadeIn">
-                @project.description
+            @project.description
 
             </div>
-                <div class="divider"></div>
-
-            <div class="section animated fadeIn">
+            <div class="divider"></div>
+            @if(canRate) {
+                <div class="section animated fadeIn">
                 @if(thisRate == null) {
                     <div class="row">
                         <div class="input-field col s12">
@@ -51,7 +61,8 @@
                                         </div>
                                     </div>
 
-                                    <button type="submit" class="waves-effect waves-light btn-large trigger"><i class="mdi-action-thumb-up right" onclick="toast('Vote submitted', 4000)"></i>Rate</button>
+                                    <button type="submit" class="waves-effect waves-light btn-large trigger"><i class="mdi-action-thumb-up right" onclick="toast ( 'Vote submitted', 4000 )"></i>
+                                        Rate</button>
                                 </div>
                             </form>
                         </div>
@@ -65,10 +76,10 @@
                                 <input id="type" type="hidden" name="type" value="1">
                                 <input id="score" type="hidden" name="score" value="@thisRate.score">
 
-                                @for(index<-1 until 6){
-                                    @if(thisRate.score == index){
+                                @for(index <- 1 until 6) {
+                                    @if(thisRate.score == index) {
                                         <a id="s@index" class="waves-effect waves-teal btn btn-floating trigger btn-large" name="s@index" href="#!">@index</a>
-                                    }else{
+                                    } else {
                                         <a id="s@index" class="waves-effect waves-teal btn btn-floating btn-flat trigger btn-large" name="s@index" href="#!">@index</a>
 
                                     }
@@ -81,16 +92,21 @@
                                     </div>
                                 </div>
 
-                                <button type="submit" class="waves-effect waves-light btn-large trigger"><i class="mdi-action-thumb-up right" onclick="toast('Vote submitted', 4000)"></i>Edit</button>
+                                <button type="submit" class="waves-effect waves-light btn-large trigger"><i class="mdi-action-thumb-up right" onclick="toast ( 'Vote submitted', 4000 )"></i>
+                                    Edit</button>
                             </form>
                         </div>
                     </div>
                 }
-            </div>
-
+                </div>
+            }else{
+                <div class="section animated fadeIn">
+                    <div class="row">Rate time's up.</div>
+                </div>
+            }
         </div>
 
-        <div class="fixed-action-btn animated bounceInUp" style="bottom: 45px; right: 40px;">
+        <div class="fixed-action-btn animated bounceInUp" style="bottom : 45 px ; right : 40 px ;">
             <a class="btn-floating btn-large trigger" href="..">
                 <i class="large mdi-action-home waves-effect waves-light"></i>
             </a>
