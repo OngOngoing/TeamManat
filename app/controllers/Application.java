@@ -66,9 +66,9 @@ public class Application extends Controller {
         Settings.create("stopTime", dateFormat.format(calendar.getTime()), Settings.TYPE_DATE, "Date for stopping vote.");
         Settings.create("siteType", "1", Settings.TYPE_INTEGER, "1 for vote, 2 for rate.");
         //Mock user and project
-        User.create("admin", "admin", "Admin's Firstname", "Admin's Lastname", User.ADMINISTRATOR, -1);
-        User.create("test1", "test1", "TestFirstname1", "TestLastName1", User.NORMAL_USER, 1); // Add new account : username => test1 password => test1
-        User.create("test2", "test2", "TestFirstname2", "TestLastName2", User.NORMAL_USER, 1); // Add new account : username => test2 password => test2
+        User.create("admin", "admin", "Admin's Firstname", "Admin's Lastname", User.ADMINISTRATOR);
+        User.create("test1", "test1", "TestFirstname1", "TestLastName1", User.NORMAL_USER); // Add new account : username => test1 password => test1
+        User.create("test2", "test2", "TestFirstname2", "TestLastName2", User.NORMAL_USER); // Add new account : username => test2 password => test2
         Project.create("Project Test 1","Description of project test 1");
         Project.create("Project Test 2","Description of project test 2");
         Project.create("Project Test 3","Description of project test 3");

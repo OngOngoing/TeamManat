@@ -43,9 +43,9 @@ public class User extends Model {
         return User.find.where().eq("username", username).eq("password", password).findUnique();
     }
 
-    public static User create(String username, String password, String fname,String lname, int type, int projectId){
+    public static User create(String username, String password, String fname,String lname, int type){
         if(User.find.where().eq("username", username).findUnique() == null) {
-            User newUser = new User(username, password, fname, lname, type, projectId);
+            User newUser = new User(username, password, fname, lname, type, -1);
             newUser.save();
             return newUser;
         }
