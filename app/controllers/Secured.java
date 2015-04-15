@@ -14,4 +14,5 @@ public class Secured extends Security.Authenticator {
     public Result onUnauthorized(Context ctx) {
         return redirect(routes.Application.index());
     }
+
 }

@@ -43,5 +43,4 @@ public class RateProject extends Controller {
         oldrate.save();
         return redirect(routes.RateProject.index(oldrate.projectId));
     }
-
 }
