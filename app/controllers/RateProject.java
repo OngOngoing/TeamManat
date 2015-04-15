@@ -26,7 +26,7 @@ public class RateProject extends Controller {
         if(projectId > Project.findAll().size()) {
             return redirect(routes.ProjectList.index());
         }
-        return ok(rateproject.render(userId, Project.findById(projectId), rate, Rate.findAll(), Criteria.findAll(), setting))
+        return ok(rateproject.render(userId, Project.findById(projectId), rate, Rate.findAll(), Criteria.findAll(), setting));
     }
 
     public static Result addRate(){
