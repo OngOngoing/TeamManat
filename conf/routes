@@ -11,7 +11,6 @@ GET         /adminpage                    controllers.AdminPage.index()
 POST        /adminpage/addUser            controllers.AdminPage.addUser()
 POST        /adminpage/deleteUsers        controllers.AdminPage.deleteUsers()
 POST        /adminpage/addProject         controllers.AdminPage.addProject()
-POST        /adminpage/saveSetting        controllers.AdminPage.saveSetting()
 
 
 GET         /logout                       controllers.Application.logout()
@@ -19,6 +18,11 @@ GET         /logout                       controllers.Application.logout()
 GET         /rateproject/:id              controllers.RateProject.index(id:Long)
 POST        /rateproject                  controllers.RateProject.addRate()
 POST        /rateproject/edit             controllers.RateProject.editRate()
+
+GET         /vote                         controllers.VoteController.index()
+POST        /vote/submit                  controllers.VoteController.addVote()
+POST        /vote/edit                    controllers.VoteController.editVote()
+
 # Create initial data for testing.
 GET         /install                      controllers.Application.mockDatabase()
 # Map static resources from the /public folder to the /assets URL path
