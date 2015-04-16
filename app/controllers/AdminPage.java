@@ -1,6 +1,7 @@
 package controllers;
 
 import models.*;
+import play.Logger;
 import play.data.*;
 import play.mvc.*;
 import views.html.adminpage;
@@ -51,6 +52,20 @@ public class AdminPage extends Controller {
             user.delete();
         }
 
+        return redirect(routes.AdminPage.index()+"#users");
+    }
+
+    public static Result editUser(){
+        User newuser = Form.form(User.class).bindFromRequest().get();
+        User olduser = User.findByUserId(newuser.id);
+        Logger.info("WTF");
+        olduser.firstname = newuser.firstname;
+        olduser.lastname = newuser.lastname;
+        olduser.username = newuser.username;
+        olduser.password = newuser.password;
+        olduser.idtype = newuser.idtype;
+        olduser.projectId = newuser.projectId;
+        olduser.update();
         return redirect(routes.AdminPage.index()+"#users");
     }
 

@@ -18,6 +18,13 @@ create table project (
   constraint pk_project primary key (id))
 ;
 
+create table project_image (
+  id                        bigint auto_increment not null,
+  project_id                bigint,
+  image                     longblob,
+  constraint pk_project_image primary key (id))
+;
+
 create table rate (
   id                        bigint auto_increment not null,
   score                     integer,
@@ -70,6 +77,8 @@ SET FOREIGN_KEY_CHECKS=0;
 drop table criteria;
 
 drop table project;
+
+drop table project_image;
 
 drop table rate;
 
