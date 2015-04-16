@@ -190,16 +190,16 @@
                         <div class="col s12 m6">
                             <div class="card">
                                 <div class="card-image waves-effect waves-block waves-light">
-                                    <img class="activator" src=@routes.Assets.at(project.picture)>
+                                    <img class="activator" src=@routes.Assets.at("img/TeamDummy.jpg")>
                                 </div>
                                 <div class="card-content">
-                                    <span class="card-title activator grey-text text-darken-4">@project.name <i class="mdi-navigation-more-vert right"></i></span>
+                                    <span class="card-title activator grey-text text-darken-4">@project.projectName <i class="mdi-navigation-more-vert right"></i></span>
                                     <p><a href="@routes.EditProject.index(project.id)">Edit this project</a></p>
                                 </div>
                                 <div class="card-reveal">
                                     <span class="card-title grey-text text-darken-4">
-                                        [ID : @project.id] @project.name<i class="mdi-navigation-close right"></i></span>
-                                    <p>@project.description</p>
+                                        [ID : @project.id] @project.projectName<i class="mdi-navigation-close right"></i></span>
+                                    <p>@project.projectDescription</p>
                                 </div>
                             </div>
                         </div>
@@ -224,25 +224,25 @@
                                         <input id="keyName" type="text" class="validate" value="@config.keyName">
                                         <label for="keyname">Key Name</label>
                                     </div>
-                                    @if(config.idType == 1) {
+                                    @if(config.idType == Settings.TYPE_DATE) {
                                         <div class="input-field col s6" style="text-align : center">
                                             <input id="keyName" type="text" class="validate datePicker" value="@config.keyValue" name="@config.keyName">
                                             <label for="keyName">Key Value</label>
                                         </div>
                                     }
-                                    @if(config.idType == 2) {
+                                    @if(config.idType == Settings.TYPE_INTEGER) {
                                         <div class="input-field col s6" style="text-align : center">
                                             <input id="keyValue" type="text" class="validate" value="@config.keyValue" name="@config.keyName">
                                             <label for="keyValue">Key Value</label>
                                         </div>
                                     }
-                                    @if(config.idType == 3) {
+                                    @if(config.idType == Settings.TYPE_STRING) {
                                         <div class="input-field col s6" style="text-align : center">
                                             <input id="keyValue" type="text" class="validate" value="@config.keyValue" name="@config.keyName">
                                             <label for="keyValue">Key Value</label>
                                         </div>
                                     }
-                                    @if(config.idType == 4) {
+                                    @if(config.idType == Settings.TYPE_BOOLEAN) {
                                         <div class="switch col s6" style="text-align : center">
                                             <label>
                                                 Off

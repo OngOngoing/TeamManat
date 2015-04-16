@@ -23,7 +23,7 @@
 
             <ul class="collection">
                 @projects.map { project =>
-                    <a href="@routes.RateProject.index(project.id)" class="collection-item trigger">@project.name
+                    <a href="@routes.RateProject.index(project.id)" class="collection-item trigger">@project.projectName
                         @rates.map { rate =>
                             @if(rate.projectId == project.id){
                                 <span class="rated badge">@rate.score</span>
@@ -32,7 +32,6 @@
                     </a>
                 }
             </ul>
-
                 <!-- End of Page Content -->
         </div>
 

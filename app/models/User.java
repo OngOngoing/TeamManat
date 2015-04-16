@@ -9,7 +9,7 @@ import java.util.List;
 @Entity
 @Table(name = "user_account")
 public class User extends Model {
-    public final static int GUEST_USER = 1, NORMAL_USER = 2, ADMINISTRATOR = 3;
+    public final static int GUEST_USER = 1, NOTMAL_USER = 2, ADMINISTRATOR = 3;
     @Id
     public Long id;
 

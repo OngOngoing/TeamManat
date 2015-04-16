@@ -15,6 +15,7 @@ public class RateProject extends Controller {
     @Security.Authenticated(Secured.class)
     public static Result index(Long projectId) {
         Long userId = Long.parseLong(session().get("userId"));
+        User user = User.findByUserId(userId);
         Rate rate = Rate.findByUserIdAndProjectId(userId,projectId);
         List<Settings> webconfig = Settings.findAll();
 
@@ -26,7 +27,7 @@ public class RateProject extends Controller {
         if(projectId > Project.findAll().size()) {
             return redirect(routes.ProjectList.index());
         }
-        return ok(rateproject.render(userId, Project.findById(projectId), rate, Rate.findAll(), Criteria.findAll(), setting));
+        return ok(rateproject.render(user, Project.findById(projectId), rate, Rate.findAll(), Criteria.findAll(), setting));
     }
 
     public static Result addRate(){

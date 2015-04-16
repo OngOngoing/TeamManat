@@ -21,6 +21,7 @@ POST        /rateproject                  controllers.RateProject.addRate()
 POST        /rateproject/edit             controllers.RateProject.editRate()
 
 GET         /editproject/:proId           controllers.EditProject.index(proId:Long)
+POST        /editproject/addmember        controllers.EditProject.addMember()
 # Create initial data for testing.
 GET         /install                      controllers.Application.mockDatabase()
 # Map static resources from the /public folder to the /assets URL path

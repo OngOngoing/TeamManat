@@ -12,10 +12,16 @@ create table criteria (
 
 create table project (
   id                        integer auto_increment not null,
-  name                      varchar(255),
-  description               varchar(255),
-  picture                   varchar(255),
+  project_name              varchar(255),
+  project_description       varchar(255),
   constraint pk_project primary key (id))
+;
+
+create table project_image (
+  id                        bigint auto_increment not null,
+  project_id                bigint,
+  image                     longblob,
+  constraint pk_project_image primary key (id))
 ;
 
 create table rate (
@@ -70,6 +76,8 @@ SET FOREIGN_KEY_CHECKS=0;
 drop table criteria;
 
 drop table project;
+
+drop table project_image;
 
 drop table rate;
 
