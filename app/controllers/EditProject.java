@@ -23,33 +23,46 @@ public class EditProject extends Controller {
         return ok(editproject.render(user, project, members));
     }
     @Security.Authenticated(Secured.class)
-    public static Result addMember(int projectId){
+    public static Result addMember(Long projectId){
         User user = User.findByUserId(Long.parseLong(session().get("userId")));
         if(user.idtype != User.ADMINISTRATOR)
             return redirect(routes.ProjectList.index());
         DynamicForm dynamicForm = new DynamicForm().bindFromRequest();
         String input = dynamicForm.get("searchUser");
         if(!input.matches("[0-9]+")){
-            flash("error", "Please input UserId only!");
+            flash("error", "Please input User ID only!");
             return redirect(routes.EditProject.index(projectId));
         }
         Long userId = Long.parseLong(input);
         User editUser = User.findByUserId(userId);
         if(editUser == null){
-            flash("error", "Can't found user!");
+            flash("error", "User not found");
             return redirect(routes.EditProject.index(projectId));
         }
         editUser.projectId = projectId;
-        editUser.save();
-        flash("success", "User was added!");
+        editUser.update();
+        flash("success", "User is added!");
         return redirect(routes.EditProject.index(projectId));
     }
-    public static Result delete(Long userId, int proId){
+    public static Result edit(Long projectId){
+        Project project = Project.findById(projectId);
+        if(project != null){
+            DynamicForm dynamicForm = new DynamicForm().bindFromRequest();
+            String name = dynamicForm.get("projectName");
+            String description = dynamicForm.get("description");
+            project.projectName = name;
+            project.projectDescription = description;
+            project.update();
+            flash("p_success", "Project is updated!");
+        }
+        return redirect(routes.EditProject.index(projectId));
+    }
+    public static Result delete(Long userId, Long proId){
         User editUser = User.findByUserId(userId);
         if (editUser != null) {
-            editUser.projectId = -1;
-            editUser.save();
-            flash("d_success", "User was deleted!");
+            editUser.projectId = Long.parseLong("-1");
+            editUser.update();
+            flash("d_success", "User is successfully deleted");
         }
         return redirect(routes.EditProject.index(proId));
     }

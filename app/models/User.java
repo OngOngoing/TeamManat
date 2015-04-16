@@ -27,9 +27,9 @@ public class User extends Model {
     public String firstname;
     public String lastname;
     public int idtype; // 0 - Administrator : 1 - Normal Users
-    public int projectId; // -1 - None Project // Project Owner
+    public Long projectId; // -1 - None Project // Project Owner
 
-    public User(String username, String password, String fname,String lname, int type, int project){
+    public User(String username, String password, String fname,String lname, int type, Long project){
         this.firstname = fname;
         this.lastname = lname;
         this.username = username;
@@ -46,7 +46,7 @@ public class User extends Model {
 
     public static User create(String username, String password, String fname,String lname, int type){
         if(User.find.where().eq("username", username).findUnique() == null) {
-            User newUser = new User(username, password, fname, lname, type, -1);
+            User newUser = new User(username, password, fname, lname, type, Long.parseLong("-1"));
             newUser.save();
             return newUser;
         }
@@ -67,8 +67,8 @@ public class User extends Model {
 
     public static List<User> findByKeyword(String key){
         List < User > listUser = find.setMaxRows(5).where().or(
-                        Expr.like("firstname", "%" + key + "%"),
-                        Expr.or(Expr.like("lastname", "%" + key + "%"),
+                Expr.like("firstname", "%" + key + "%"),
+                Expr.or(Expr.like("lastname", "%" + key + "%"),
                         Expr.eq("id", key))).findList();
         return listUser;
     }

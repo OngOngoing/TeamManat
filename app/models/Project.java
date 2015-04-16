@@ -9,7 +9,7 @@ import java.util.List;
 public class Project extends Model
 {
     @Id
-    public int id;
+    public Long id;
 
     @Required
     public String projectName;

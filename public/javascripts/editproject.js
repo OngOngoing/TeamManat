@@ -9,7 +9,7 @@ $(document).ready(function(){
         if (value.length >= minlength ) {
             $.ajax({
                 type: "POST",
-                url: "./searchuser",
+                url: "../searchuser",
                 data: {
                     'search_keyword' : value
                 },
