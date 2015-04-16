@@ -11,7 +11,6 @@ public class Rate extends Model {
     public long id;
     @Required
     public int score;
-    public String type;
     public Long userId;
     public Long projectId;
     public Long criteriaId;

@@ -45,11 +45,21 @@ public class RateProject extends Controller {
 
     public static Result editRate() {
         DynamicForm form = new DynamicForm().bindFromRequest();
+        Long userId = Long.parseLong(session().get("userId"));
         long projectId = Long.parseLong(form.get("projectId"));
-        /*Rate newrate = Form.form(Rate.class).bindFromRequest().get();
-        Rate oldrate = Rate.findByUserIdAndProjectId(newrate.userId,newrate.projectId);
-        oldrate.score = newrate.score;
-        oldrate.save();*/
+        List<Rate> rates = Rate.findListByUserIdAndProjectId(userId,projectId);
+        for(Rate r : rates){
+            for(Criteria c : Criteria.findAll()){
+                if(r.criteriaId == c.id){
+                    int score = Integer.parseInt(form.get(""+c.id));
+                    r.score = score;
+                }
+            }
+            r.update();
+        }
+        Comment thisComment = Comment.findByUserIdAndProjectId(userId,projectId);
+        thisComment.comment = form.get("comment");
+        thisComment.update();
         return redirect(routes.RateProject.index(projectId));
     }
 

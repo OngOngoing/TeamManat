@@ -85,10 +85,11 @@
                                     }
                                 }-->
                                 @thisRate.map { rate =>
-                                    <input id="@rate.criteriaId" type="hidden" name="@rate.criteriaId" value="0">
+                                    
                                         <div class = "row" id="rating">
                                             @criterias.map { criteria =>
                                                 @if(rate.criteriaId == criteria.id ){
+                                                    <input id="@rate.criteriaId" type="hidden" name="@rate.criteriaId" value="@rate.score">
                                                     <div class = "col card-panel btn btn-large teal lighten-2 trigger">@criteria.name</div>
                                                 }
                                             }

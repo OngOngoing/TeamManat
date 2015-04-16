@@ -36,7 +36,6 @@ create table project_image (
 create table rate (
   id                        bigint auto_increment not null,
   score                     integer,
-  type                      varchar(255),
   user_id                   bigint,
   project_id                bigint,
   criteria_id               bigint,
@@ -67,11 +66,19 @@ create table user_account (
 
 create table vote (
   id                        bigint auto_increment not null,
-  score                     integer,
+  criterion_id              bigint,
   type                      varchar(255),
   user_id                   bigint,
   project_id                bigint,
   constraint pk_vote primary key (id))
+;
+
+create table vote_criterion (
+  id                        bigint auto_increment not null,
+  type                      bigint,
+  name                      varchar(255),
+  description               varchar(255),
+  constraint pk_vote_criterion primary key (id))
 ;
 
 
@@ -96,6 +103,8 @@ drop table settings;
 drop table user_account;
 
 drop table vote;
+
+drop table vote_criterion;
 
 SET FOREIGN_KEY_CHECKS=1;
 
