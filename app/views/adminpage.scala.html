@@ -109,11 +109,11 @@
 
                             @users.map { user =>
                                 <li class="collection-item avatar">
-                                    @if(user.idtype != 0) {
+                                    @if(user.idtype != 3) {
                                         <input type="checkbox" name="id" id= "@user.id" value="@user.id" />
                                     }
                                 <label class="check" for="@user.id"></label>
-                                    @if(user.idtype == 0) {
+                                    @if(user.idtype == 3) {
                                         <i class="mdi-social-whatshot circle teal lighten-1 trigger"></i>
                                     } else {
                                         <i class="mdi-social-person circle teal lighten-1 trigger"></i>

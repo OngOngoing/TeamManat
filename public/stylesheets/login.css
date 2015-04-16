@@ -14,7 +14,7 @@ body {
 }
 .colorBg {
     padding: 50px 0;
-    min-height: 100%;
+    min-height: 100vh;
     overflow: hidden;
     -moz-background-size: cover;
     -o-background-size: cover;
@@ -87,7 +87,7 @@ body {
 
 
 .trigger {
-    -webkit-animation: hue 40s infinite linear;
+    -webkit-animation: hue 60s infinite linear;
 }
 
 .trigger-text {
