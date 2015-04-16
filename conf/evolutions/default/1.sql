@@ -20,9 +20,8 @@ create table criteria (
 
 create table project (
   id                        integer auto_increment not null,
-  name                      varchar(255),
-  description               varchar(255),
-  picture                   varchar(255),
+  project_name              varchar(255),
+  project_description       varchar(255),
   constraint pk_project primary key (id))
 ;
 

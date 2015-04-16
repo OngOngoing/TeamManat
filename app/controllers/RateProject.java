@@ -62,5 +62,4 @@ public class RateProject extends Controller {
         thisComment.update();
         return redirect(routes.RateProject.index(projectId));
     }
-
 }

@@ -9,20 +9,18 @@ import java.util.List;
 public class Project extends Model
 {
     @Id
-    public int id;
+    public Long id;
 
     @Required
-    public String name;
-    public String description;
-    public String picture = "img/TeamDummy.jpg";
+    public String projectName;
+    public String projectDescription;
 
     public static Project create(String name , String description)
     {
-        if(Project.find.where().eq("name", name).findUnique() == null) {
+        if(findByName(name) == null) {
             Project project = new Project();
-            project.name = name;
-            project.description = description;
-            project.picture = "img/TeamDummy.jpg";
+            project.projectName = name;
+            project.projectDescription = description;
             project.save();
             return project;
         }
@@ -35,6 +33,9 @@ public class Project extends Model
         return find.byId(projectId);
     }
 
+    public static Project findByName(String name){
+        return find.where().eq("projectName", name).findUnique();
+    }
     public static List<Project> findAll(){
         return find.all();
     }

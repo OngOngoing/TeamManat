@@ -19,7 +19,7 @@ public class AdminPage extends Controller {
 
         User thisUser = User.findByUserId(userId);
 
-        if(thisUser.idtype == 0) {
+        if(thisUser.idtype == User.ADMINISTRATOR) {
             return ok(adminpage.render(users, Project.findAll(), rates, webconfig));
         }
         else {

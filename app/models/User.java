@@ -3,12 +3,14 @@ package models;
 import javax.persistence.*;
 import javax.validation.constraints.*;
 
+import com.avaje.ebean.Expr;
 import play.data.validation.Constraints.Required;
 import play.db.ebean.*;
 import java.util.List;
 @Entity
 @Table(name = "user_account")
 public class User extends Model {
+    public final static int GUEST_USER = 1, NORMAL_USER = 2, ADMINISTRATOR = 3;
     @Id
     public Long id;
 
@@ -25,9 +27,9 @@ public class User extends Model {
     public String firstname;
     public String lastname;
     public int idtype; // 0 - Administrator : 1 - Normal Users
-    public int projectId; // -1 - None Project // Project Owner
+    public Long projectId; // -1 - None Project // Project Owner
 
-    public User(String username, String password, String fname,String lname, int type, int project){
+    public User(String username, String password, String fname,String lname, int type, Long project){
         this.firstname = fname;
         this.lastname = lname;
         this.username = username;
@@ -42,9 +44,9 @@ public class User extends Model {
         return User.find.where().eq("username", username).eq("password", password).findUnique();
     }
 
-    public static User create(String username, String password, String fname,String lname, int type, int projectId){
+    public static User create(String username, String password, String fname,String lname, int type){
         if(User.find.where().eq("username", username).findUnique() == null) {
-            User newUser = new User(username, password, fname, lname, type, projectId);
+            User newUser = new User(username, password, fname, lname, type, Long.parseLong("-1"));
             newUser.save();
             return newUser;
         }
@@ -61,5 +63,17 @@ public class User extends Model {
 
     public static List<User> findAll(){
         return find.all();
+    }
+
+    public static List<User> findByKeyword(String key){
+        List < User > listUser = find.setMaxRows(5).where().or(
+                Expr.like("firstname", "%" + key + "%"),
+                Expr.or(Expr.like("lastname", "%" + key + "%"),
+                        Expr.eq("id", key))).findList();
+        return listUser;
+    }
+    public static List<User> findByTeam(Long teamId){
+        List<User> members = find.where().eq("projectId", teamId).findList();
+        return members;
     }
 }
