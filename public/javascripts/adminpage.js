@@ -43,4 +43,33 @@ $(document).ready(function(){
             path_input.trigger('change');
         });
     });
+
+    $(".editModal").click(function(){
+        var userId = $(this).attr("userId");
+        var username = $(this).attr("username");
+        var password = $(this).attr("password");
+        var idtype = $(this).attr("idtype");
+        var projectId = $(this).attr("projectId");
+        var firstname = $(this).attr("firstname");
+        var lastname = $(this).attr("lastname");
+
+        console.log(username);
+        $("#editUserModal #username").val(username);
+        $("#editUserModal #password").val(password);
+        $("#editUserModal #firstname").val(firstname);
+        $("#editUserModal #lastname").val(lastname);
+        $("#editUserModal #projectId").val(projectId);
+
+
+        $("#editUserModal #userID").val(userId);
+        $("#editUserModal #userId").val(userId);
+
+
+
+    });
 });
+
+function editUser(id, username, password, idtype, projectId) {
+
+}
+

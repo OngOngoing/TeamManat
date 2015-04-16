@@ -44,7 +44,7 @@
                             <div class="collapsible-body">
                                 <div class="container">
                                     <div class="row">
-                                        <form class="col s12" action="@routes.AdminPage.addUser()" method="post">
+                                        <form class="col s12" action="@routes.AdminPage.editUser()" method="post">
                                             <div class="row">
                                                 <div class="input-field col s6">
                                                     <input id="firstname" name="firstname" type="text" class="validate" required>
@@ -107,7 +107,7 @@
                     <form action="@routes.AdminPage.deleteUsers()" method="post">
                         <ul class="collection">
 
-                            @users.map { user =>
+                            @users.zipWithIndex.map { case (user, index) =>
                                 <li class="collection-item avatar">
                                     @if(user.idtype != 0) {
                                         <input type="checkbox" name="id" id= "@user.id" value="@user.id" />
@@ -123,8 +123,9 @@
                                 <p>Username : @user.username Password : @user.password <br>
                                     Type : @user.idtype TeamID : @user.projectId
                                 </p>
-                                    <a href="#" class="secondary-content"><i class="mdi-editor-mode-edit trigger"></i></a>
+                                    <a userId="@user.id" username="@user.username" password="@user.password" idtype="@user.idtype" projectId="@user.projectId" firstname="@user.firstname" lastname="@user.lastname" class="editModal secondary-content mdi-editor-mode-edit trigger modal-trigger" href="#editUserModal"></a>
                                 </li>
+
                             }
 
                             <!-- FLOATING BUTTON -->
@@ -314,6 +315,72 @@
 
         </div>
 
+            <!-- EditUser Modal Structure -->
+        <div id="editUserModal" class="modal modal-fixed-footer">
+            <form class="col s12" action="@routes.AdminPage.editUser()" method="get">
+                <div class="modal-content">
+                    <h4>Edit User</h4>
+
+                    <div class="row">
+                        <div class="input-field col s12">
+                            <input hidden value="" name="id" id="userID" type="text" class="validate">
+                            <input disabled id="userId" type="text" class="validate">
+                            <label class="active" for="userId">userID</label>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="input-field col s6">
+                            <input value="" id="firstname" name="firstname" type="text" class="validate" required>
+                            <label class="active" for="firstname">First Name</label>
+                        </div>
+                        <div class="input-field col s6">
+                            <input id="lastname" name="lastname" type="text" class="validate" required>
+                            <label class="active" for="lastname">Last Name</label>
+                        </div>
+
+                    </div>
+                    <div class="row">
+                        <div class="input-field col s12">
+                            <input id="username" name="username" type="text" class="validate" required>
+                            <label class="active" for="username">Username</label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="input-field col s12">
+                            <input id="password" name="password" type="password" class="validate" required>
+                            <label class="active" for="password">Password</label>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="input-field col s12">
+                            <input name="projectId" id="projectId" type="number" class="validate" required>
+                            <label class="active" for="projectId">Project ID</label>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="input-field col s12">
+                            <input value="0" name="idtype" type="radio" id="edit_type1" />
+                            <label for="edit_type1">Type 0 (Admin)</label>
+
+                            <input class="with-gap" value="1" name="idtype" type="radio" id="edit_type2" checked/>
+                            <label for="edit_type2">Type 1 (Normal User)</label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="modal-footer">
+                    <a href="#" class="waves-effect waves-green btn-flat modal-action modal-close">Cancel</a>
+                    <button class="btn waves-effect waves-light" type="submit" name="action">Edit
+                        <i class="mdi-content-send right"></i>
+                    </button>
+                </div>
+
+            </form>
+
+        </div>
 
             <!-- FOLATING BUTTON -->
         <div class="fixed-action-btn animated bounceInUp" style="bottom : 45 px ; right : 40 px ;">

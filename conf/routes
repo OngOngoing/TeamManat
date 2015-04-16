@@ -10,6 +10,7 @@ GET         /projectlist                  controllers.ProjectList.index()
 GET         /adminpage                    controllers.AdminPage.index()
 POST        /adminpage/addUser            controllers.AdminPage.addUser()
 POST        /adminpage/deleteUsers        controllers.AdminPage.deleteUsers()
+GET       /adminpage/editUser           controllers.AdminPage.editUser()
 POST        /adminpage/addProject         controllers.AdminPage.addProject()
 POST        /adminpage/saveSetting		  controllers.AdminPage.saveSetting()
 
