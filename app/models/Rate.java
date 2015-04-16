@@ -14,26 +14,23 @@ public class Rate extends Model {
     public String type;
     public Long userId;
     public Long projectId;
-    public String comment;
     public Long criteriaId;
 
-    public static Rate create(int score , String type , Long userId , Long criteriaId , Long projectId, String comment)
+    public static Rate create(int score , Long userId , Long criteriaId , Long projectId)
     {
         Rate rate = new Rate();
         rate.score = score;
-        rate.type = type;
         rate.userId = userId;
         rate.criteriaId = criteriaId;
         rate.projectId = projectId;
-        rate.comment = comment;
         rate.save();
         return rate;
     }
 
     private static Finder<Long, Rate> find = new Finder<Long, Rate>(Long.class, Rate.class);
 
-    public static Rate findByUserIdAndProjectId(long userId, Long projectId){
-        return find.where().eq("userId", userId).eq("projectId",projectId).findUnique();
+    public static Rate findByUserIdAndProjectIdAndCriteriaId(long userId, Long projectId,Long criteriaId){
+        return find.where().eq("userId", userId).eq("projectId",projectId).eq("criteriaId", criteriaId).findUnique();
     }
 
     public static List<Rate> findAll(){
@@ -42,5 +39,9 @@ public class Rate extends Model {
 
     public static List<Rate> findListByUserId(Long userId){
         return find.where().eq("userId", userId).findList();
+    }
+
+    public static List<Rate> findListByUserIdAndProjectId(long userId, Long projectId){
+        return find.where().eq("userId", userId).eq("projectId",projectId).findList();
     }
 }

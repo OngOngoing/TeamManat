@@ -3,6 +3,14 @@
 
 # --- !Ups
 
+create table comment (
+  id                        bigint auto_increment not null,
+  user_id                   bigint,
+  project_id                bigint,
+  comment                   varchar(255),
+  constraint pk_comment primary key (id))
+;
+
 create table criteria (
   id                        bigint auto_increment not null,
   name                      varchar(255),
@@ -18,13 +26,19 @@ create table project (
   constraint pk_project primary key (id))
 ;
 
+create table project_image (
+  id                        bigint auto_increment not null,
+  project_id                bigint,
+  image                     longblob,
+  constraint pk_project_image primary key (id))
+;
+
 create table rate (
   id                        bigint auto_increment not null,
   score                     integer,
   type                      varchar(255),
   user_id                   bigint,
   project_id                bigint,
-  comment                   varchar(255),
   criteria_id               bigint,
   constraint pk_rate primary key (id))
 ;
@@ -67,9 +81,13 @@ create table vote (
 
 SET FOREIGN_KEY_CHECKS=0;
 
+drop table comment;
+
 drop table criteria;
 
 drop table project;
+
+drop table project_image;
 
 drop table rate;
 
