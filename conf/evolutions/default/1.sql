@@ -11,15 +11,8 @@ create table comment (
   constraint pk_comment primary key (id))
 ;
 
-create table criteria (
-  id                        bigint auto_increment not null,
-  name                      varchar(255),
-  description               varchar(255),
-  constraint pk_criteria primary key (id))
-;
-
 create table project (
-  id                        integer auto_increment not null,
+  id                        bigint auto_increment not null,
   project_name              varchar(255),
   project_description       varchar(255),
   constraint pk_project primary key (id))
@@ -41,6 +34,13 @@ create table rate (
   constraint pk_rate primary key (id))
 ;
 
+create table rate_criterion (
+  id                        bigint auto_increment not null,
+  name                      varchar(255),
+  description               varchar(255),
+  constraint pk_rate_criterion primary key (id))
+;
+
 create table settings (
   id                        bigint auto_increment not null,
   key_name                  varchar(255),
@@ -58,7 +58,7 @@ create table user_account (
   firstname                 varchar(255) not null,
   lastname                  varchar(255),
   idtype                    integer,
-  project_id                integer,
+  project_id                bigint,
   constraint uq_user_account_username unique (username),
   constraint pk_user_account primary key (id))
 ;
@@ -66,7 +66,6 @@ create table user_account (
 create table vote (
   id                        bigint auto_increment not null,
   criterion_id              bigint,
-  type                      varchar(255),
   user_id                   bigint,
   project_id                bigint,
   constraint pk_vote primary key (id))
@@ -74,7 +73,6 @@ create table vote (
 
 create table vote_criterion (
   id                        bigint auto_increment not null,
-  type                      bigint,
   name                      varchar(255),
   description               varchar(255),
   constraint pk_vote_criterion primary key (id))
@@ -89,13 +87,13 @@ SET FOREIGN_KEY_CHECKS=0;
 
 drop table comment;
 
-drop table criteria;
-
 drop table project;
 
 drop table project_image;
 
 drop table rate;
+
+drop table rate_criterion;
 
 drop table settings;
 

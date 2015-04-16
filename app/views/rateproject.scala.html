@@ -80,25 +80,26 @@
                                         <input id="userId" type="hidden" name="userId" value="@user.id">
                                         <input id="type" type="hidden" name="type" value="1">
                                         <input id="score" type="hidden" name="score" value="1">
-                                        @thisRate.map { rate =>
-
-                                            <div class = "row" id="rating">
-                                                @criterias.map { criteria =>
-                                                    @if(rate.criteriaId == criteria.id) {
-                                                        <input id="@rate.criteriaId" type="hidden" name="@rate.criteriaId" value="@rate.score">
-                                                        <div class = "col card-panel btn btn-large teal lighten-2 trigger">@criteria.name</div>
+                                        @criterias.map { criteria =>
+                                    
+                                        <div class = "row" id="rating">
+                                            @thisRate.map { rate =>
+                                                @if(rate.criteriaId == criteria.id ){
+                                                    <input id="@rate.criteriaId" type="hidden" name="@rate.criteriaId" value="@rate.score">
+                                                    <div class = "col card-panel btn btn-large teal lighten-2 trigger">@criteria.name</div>
+                                                    @for(index<-1 until 6){
+                                                        @if(rate.score == index){ 
+                                                            <a id="@rate.criteriaId" class="col waves-effect waves-teal btn btn-floating btn-large trigger" name="criteriaButton" score="@index" href="#!">@index</a>
+                                                        }else{
+                                                            <a id="@rate.criteriaId" class="col waves-effect waves-teal btn btn-flat btn-floating btn-large trigger" name="criteriaButton" score="@index" href="#!">@index</a>
+                                                        }
                                                     }
                                                 }
-
-                                                @for(index <- 1 until 6) {
-                                                    @if(rate.score == index) {
-                                                        <a id="@rate.criteriaId" class="col waves-effect waves-teal btn btn-floating btn-large trigger" name="criteriaButton" score="@index" href="#!">@index</a>
-                                                    } else {
-                                                        <a id="@rate.criteriaId" class="col waves-effect waves-teal btn btn-flat btn-floating btn-large trigger" name="criteriaButton" score="@index" href="#!">@index</a>
-                                                    }
-                                                }
-                                            </div>
-                                        }
+                                            }
+                                            
+                                            
+                                        </div>
+                                    }
 
                                         <div class="row">
                                             <div class="input-field col s12">
