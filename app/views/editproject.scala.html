@@ -1,5 +1,7 @@
-@(currentUser: User)(currentProject: Project)(users: List[User])
-
+@(currentUser: User)(currentProject: Project)(members: List[User])
+@num = @{
+    0
+}
 <!DOCTYPE html>
 
 <html>
@@ -37,49 +39,65 @@
                 </form>
             </div>
             <div class="card-panel grey lighten-5 z-depth-1">
-                <h4 class="trigger-text trigger pageBanner">Add Member</h4>
-                <form action="./editproject/addmember" method="post">
-                    <div class="row">
-                        <div class="input-field col s12">
-                            <select class="browser-default">
-                                <option value="" disabled selected>Choose user</option>
-                                @users.map { user =>
-                                    @if(user.projectId == -1) {
-                                        <option value="@user.id">@user.firstname @user.lastname [@user.id]</option>
-                                    }
-                                }
-                            </select>
-                        </div>
-                    </div>
-                    <button class="btn waves-effect waves-light" type="submit" name="action">Add
-                        <i class="mdi-content-send right"></i>
-                    </button>
-                </form>
-            </div>
-            <div class="card-panel grey lighten-5 z-depth-1">
                 <h4 class="trigger-text trigger pageBanner">Member List</h4>
+                @if(flash.contains("d_success")) {
+                    <div class="txt-center green-text text-darken-1"><i class="Small mdi-alert-warning"></i> @flash.get("d_success")</div>
+                }
                 <table class="hoverable">
                     <thead>
                         <tr>
-                            <th data-field="firstname">First Name</th>
-                            <th data-field="lastname">Last Name</th>
-                            <th data-field="delete">Delte</th>
+                            <th data-field="id" width="45%">First Name</th>
+                            <th data-field="name" width="45%">Last Name</th>
+                            <th data-field="price" width="10%">Delte</th>
                         </tr>
                     </thead>
                     <tbody>
-                        @users.map { user =>
-                            @if(user.projectId == currentProject.id) {
-                                <tr>
-                                    <td><code class=" language-markup">@user.firstname</code></td>
-                                    <td><code class=" language-markup">@user.lastname</code></td>
-                                    <td><code class=" language-markup"> <a class="btn-floating btn-large waves-effect waves-light red"><i class="mdi-content-clear"></i></a></code></td>
-                                </tr>
-                            }
+                        @members.map { member =>
+                            <tr>
+                                <td><code class=" language-markup">@member.firstname</code></td>
+                                <td><code class=" language-markup">@member.lastname</code></td>
+                                <td><code class=" language-markup"><a class="btn-floating waves-effect waves-light red" href="../editproject/delete/@member.id/@currentProject.id"><i class="mdi-content-clear"></i></a></code></td>
+                            </tr>
                         }
-                        <tr>
-                            <td><code class=" language-markup">Add new member</code></td>
-                            <td><code class=" language-markup"></code></td>
-                            <td><code class=" language-markup"> <a class="btn-floating btn-large waves-effect waves-light red"><i class="mdi-content-clear"></i></a></code></td>
+                        @if(members.size == 0) {
+                            <tr>
+                                <td><code class=" language-markup"><i>Member is empty.</i></code></td>
+                                <td><code class=" language-markup"></code></td>
+                                <td><code class=" language-markup"></code></td>
+                            </tr>
+                        }
+                        <tr><form action="../editproject/addmember/@currentProject.id" method="post">
+                            <td>
+                                <code class=" language-markup"><h5>Add new member</h5>
+                                    <blockquote>
+                                        Input User ID or search user by input <br />
+                                        first name / last name then select user.
+                                    </blockquote>
+                                </code>
+                            </td>
+                            <td>
+                                <code class=" language-markup">
+                                    <div class="input-field">
+                                        <input id="searchUser" type="text" class="validate" name="searchUser">
+                                        <label for="user">Keyword or User ID</label>
+                                        <div id='show-result'></div>
+                                        @if(flash.contains("error")) {
+                                            <div class="txt-center red-text text-darken-1"><i class="Small mdi-alert-warning"></i> @flash.get("error")</div>
+                                        }
+                                        @if(flash.contains("success")) {
+                                            <div class="txt-center green-text text-darken-1"><i class="Small mdi-alert-warning"></i> @flash.get("success")</div>
+                                        }
+                                    </div>
+                                </code>
+                            </td>
+                            <td>
+                                <code class=" language-markup">
+                                    <button class="btn waves-effect waves-light btn-floating green" type="submit" name="action">
+                                        <i class="mdi-content-add"></i>
+                                    </button>
+                                </code>
+                            </td>
+                        </form>
                         </tr>
                     </tbody>
                 </table>

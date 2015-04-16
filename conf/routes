@@ -2,27 +2,29 @@
 # This file defines all application routes (Higher priority routes first)
 # ~~~~
 
-GET         /                             controllers.Application.index()
-POST        /login                        controllers.Application.authenticate()
-GET         /projectlist                  controllers.ProjectList.index()
+GET         /                                    controllers.Application.index()
+POST        /login                               controllers.Application.authenticate()
+GET         /projectlist                         controllers.ProjectList.index()
 
 # Admin Page
-GET         /adminpage                    controllers.AdminPage.index()
-POST        /adminpage/addUser            controllers.AdminPage.addUser()
-POST        /adminpage/deleteUsers        controllers.AdminPage.deleteUsers()
-POST        /adminpage/addProject         controllers.AdminPage.addProject()
-POST        /adminpage/saveSetting        controllers.AdminPage.saveSetting()
+GET         /adminpage                           controllers.AdminPage.index()
+POST        /adminpage/addUser                   controllers.AdminPage.addUser()
+POST        /adminpage/deleteUsers               controllers.AdminPage.deleteUsers()
+POST        /adminpage/addProject                controllers.AdminPage.addProject()
+POST        /adminpage/saveSetting               controllers.AdminPage.saveSetting()
 
 
-GET         /logout                       controllers.Application.logout()
+GET         /logout                              controllers.Application.logout()
 
-GET         /rateproject/:id              controllers.RateProject.index(id:Long)
-POST        /rateproject                  controllers.RateProject.addRate()
-POST        /rateproject/edit             controllers.RateProject.editRate()
+GET         /rateproject/:id                     controllers.RateProject.index(id:Long)
+POST        /rateproject                         controllers.RateProject.addRate()
+POST        /rateproject/edit                    controllers.RateProject.editRate()
 
-GET         /editproject/:proId           controllers.EditProject.index(proId:Long)
-POST        /editproject/addmember        controllers.EditProject.addMember()
+GET         /editproject/:proId                  controllers.EditProject.index(proId:Long)
+POST        /editproject/addmember/:proId        controllers.EditProject.addMember(proId:Integer)
+POST        /editproject/searchuser              controllers.EditProject.searchUser()
+GET         /editproject/delete/:id/:proId       controllers.EditProject.delete(id:Long, proId:Integer)
 # Create initial data for testing.
-GET         /install                      controllers.Application.mockDatabase()
+GET         /install                             controllers.Application.mockDatabase()
 # Map static resources from the /public folder to the /assets URL path
-GET         /assets/*file                 controllers.Assets.at(path="/public", file)
+GET         /assets/*file                        controllers.Assets.at(path="/public", file)

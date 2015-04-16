@@ -3,6 +3,7 @@ package models;
 import javax.persistence.*;
 import javax.validation.constraints.*;
 
+import com.avaje.ebean.Expr;
 import play.data.validation.Constraints.Required;
 import play.db.ebean.*;
 import java.util.List;
@@ -62,5 +63,17 @@ public class User extends Model {
 
     public static List<User> findAll(){
         return find.all();
+    }
+
+    public static List<User> findByKeyword(String key){
+        List < User > listUser = find.setMaxRows(5).where().or(
+                        Expr.like("firstname", "%" + key + "%"),
+                        Expr.or(Expr.like("lastname", "%" + key + "%"),
+                        Expr.eq("id", key))).findList();
+        return listUser;
+    }
+    public static List<User> findByTeam(Long teamId){
+        List<User> members = find.where().eq("projectId", teamId).findList();
+        return members;
     }
 }
