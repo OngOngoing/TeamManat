@@ -78,11 +78,11 @@
 
                                             <div class="row">
                                                 <div class="input-field col s12">
-                                                    <input value="0" name="idtype" type="radio" id="type1" />
-                                                    <label for="type1">Type 0 (Admin)</label>
+                                                    <input value="@User.ADMINISTRATOR" name="idtype" type="radio" id="type1" />
+                                                    <label for="type1">Administrator</label>
 
-                                                    <input class="with-gap" value="1" name="idtype" type="radio" id="type2" checked/>
-                                                    <label for="type2">Type 1 (Normal User)</label>
+                                                    <input class="with-gap" value="@User.NORMAL_USER" name="idtype" type="radio" id="type2" checked/>
+                                                    <label for="type2">Normal User</label>
                                                 </div>
                                             </div>
 
@@ -184,7 +184,6 @@
                             Add Project</a>
 
                     </div>
-
 
                         <!-- SHOW ALL PROJECT -->
                     @projects.map { project =>
@@ -316,7 +315,7 @@
 
             <!-- EditUser Modal Structure -->
         <div id="editUserModal" class="modal modal-fixed-footer">
-            <form class="col s12" action="@routes.AdminPage.editUser()" method="get">
+            <form class="col s12" action="@routes.AdminPage.editUser()" method="post">
                 <div class="modal-content">
                     <h4>Edit User</h4>
 
@@ -361,11 +360,11 @@
 
                     <div class="row">
                         <div class="input-field col s12">
-                            <input value="0" name="idtype" type="radio" id="edit_type1" />
-                            <label for="edit_type1">Type 0 (Admin)</label>
+                            <input value="@User.ADMINISTRATOR" name="idtype" type="radio" id="edit_type@User.ADMINISTRATOR" />
+                            <label for="edit_type@User.ADMINISTRATOR">Administrator</label>
 
-                            <input class="with-gap" value="1" name="idtype" type="radio" id="edit_type2" checked/>
-                            <label for="edit_type2">Type 1 (Normal User)</label>
+                            <input class="with-gap" value="@User.NORMAL_USER" name="idtype" type="radio" id="edit_type@User.NORMAL_USER" />
+                            <label for="edit_type@User.NORMAL_USER">Normal User</label>
                         </div>
                     </div>
                 </div>

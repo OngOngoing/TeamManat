@@ -12,15 +12,13 @@ public class Vote extends Model {
     public long id;
     @Required
     public long criterionId;
-    public String type;
     public Long userId;
     public Long projectId;
 
-    public static Vote create(long criterionId , String type , Long userId , Long projectId)
+    public static Vote create(long criterionId , Long userId , Long projectId)
     {
         Vote vote = new Vote();
         vote.criterionId = criterionId;
-        vote.type = type;
         vote.userId = userId;
         vote.projectId = projectId;
         vote.save();

@@ -16,12 +16,18 @@ public class Comment extends Model {
 
     public static Comment create( Long userId , Long projectId, String comment)
     {
-        Comment thisComment = new Comment();
-        thisComment.userId = userId;
-        thisComment.projectId = projectId;
-        thisComment.comment = comment;
-        thisComment.save();
-        return thisComment;
+        Comment _comment = findByUserIdAndProjectId(userId, projectId);
+        if(_comment != null){
+            _comment.comment = comment;
+            _comment.update();
+        }else {
+            Comment thisComment = new Comment();
+            thisComment.userId = userId;
+            thisComment.projectId = projectId;
+            thisComment.comment = comment;
+            thisComment.save();
+        }
+        return findByUserIdAndProjectId(userId, projectId);
     }
 
     private static Finder<Long, Comment> find = new Finder<Long, Comment>(Long.class, Comment.class);

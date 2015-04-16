@@ -34,7 +34,7 @@
                                         @projects.map { project =>
                                             <p>
                                                 <input class="with-gap" value="@project.id" name="criterionId@criterion.id" type="radio" id="@criterion.id-@project.id" />
-                                                <label for="@criterion.id-@project.id">@project.name</label>
+                                                <label for="@criterion.id-@project.id">@project.projectName</label>
                                             </p>
                                         }
                                     </div>
@@ -61,13 +61,13 @@
                                                 @votes.map { vote =>
                                                     @if(vote.criterionId == criterion.id && vote.projectId == project.id) {
                                                         <input class="with-gap" value="@project.id" name="criterionId@criterion.id" type="radio" id="@criterion.id-@project.id" checked/>
-                                                        <label for="@criterion.id-@project.id">@project.name</label>
-                                                        @{selected = project.id}
+                                                        <label for="@criterion.id-@project.id">@project.projectName</label>
+                                                        @{selected = Integer.parseInt(project.id+"")}
                                                     }
                                                 }
                                                 @if(selected != project.id) {
                                                     <input class="with-gap" value="@project.id" name="criterionId@criterion.id" type="radio" id="@criterion.id-@project.id"/>
-                                                    <label for="@criterion.id-@project.id">@project.name</label>
+                                                    <label for="@criterion.id-@project.id">@project.projectName</label>
                                                 }
                                             </p>
                                         }

@@ -53,7 +53,14 @@ $(document).ready(function(){
         var firstname = $(this).attr("firstname");
         var lastname = $(this).attr("lastname");
 
-        console.log(username);
+        if(idtype == 3) {
+            $("#editUserModal #edit_type3").prop( 'checked', true );
+            $("#editUserModal #edit_type2").prop( 'checked', false );
+        }
+        if(idtype == 2) {
+            $("#editUserModal #edit_type2").prop( 'checked', true );
+            $("#editUserModal #edit_type3").prop( 'checked', false);
+        }
         $("#editUserModal #username").val(username);
         $("#editUserModal #password").val(password);
         $("#editUserModal #firstname").val(firstname);
@@ -69,7 +76,4 @@ $(document).ready(function(){
     });
 });
 
-function editUser(id, username, password, idtype, projectId) {
-
-}
 

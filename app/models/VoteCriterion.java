@@ -11,7 +11,6 @@ public class VoteCriterion extends Model {
     public Long id;
 
     @Required
-    public Long type; // 0 = Rate , 1 = Vote
     public String name;
     public String description;
 
@@ -19,9 +18,5 @@ public class VoteCriterion extends Model {
 
     public static List<VoteCriterion> findAll(){
     	return find.all();
-    }
-
-    public static List<VoteCriterion> findByType(long id){
-        return find.where().eq("type", id).findList();
     }
 }

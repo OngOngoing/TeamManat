@@ -20,11 +20,11 @@ public class VoteController extends Controller {
     public static Result index() {
         Long userId = Long.parseLong(session().get("userId"));
         List<Vote> votes = Vote.findByUserId(userId);
-        return ok(votepage.render(userId, Project.findAll(), votes, VoteCriterion.findByType(1)));
+        return ok(votepage.render(userId, Project.findAll(), votes, VoteCriterion.findAll()));
     }
 
     public static Result addVote() {
-        List<VoteCriterion> criteria = VoteCriterion.findByType(1);
+        List<VoteCriterion> criteria = VoteCriterion.findAll();
         Long userId = Long.parseLong(session().get("userId"));
 
         Map<String, String[]> map = request().body().asFormUrlEncoded();
@@ -33,7 +33,7 @@ public class VoteController extends Controller {
                 String[] selectedCriterion = map.get("criterionId" + criterion.id); // get selected topics
                 // THIS SHOULD HAS ONLY 1 RESULT
                 for(String projectId : selectedCriterion) {
-                    Vote.create(criterion.id,"0",userId,Long.parseLong(projectId));
+                    Vote.create(criterion.id,userId,Long.parseLong(projectId));
                 }
             }
         }
@@ -41,7 +41,7 @@ public class VoteController extends Controller {
     }
 
     public static Result editVote() {
-        List<VoteCriterion> criteria = VoteCriterion.findByType(1);
+        List<VoteCriterion> criteria = VoteCriterion.findAll();
         Long userId = Long.parseLong(session().get("userId"));
 
         Map<String, String[]> map = request().body().asFormUrlEncoded();
@@ -52,7 +52,7 @@ public class VoteController extends Controller {
                 for(String projectId : selectedCriterion) {
                     Vote thisVote = Vote.findByCriterionAndUserId(criterion.id,userId);
                     if (thisVote == null) {
-                        Vote.create(criterion.id, "0", userId, Long.parseLong(projectId));
+                        Vote.create(criterion.id, userId, Long.parseLong(projectId));
                     }
                     else {
                         thisVote.projectId = Long.parseLong(projectId);

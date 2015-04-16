@@ -15,6 +15,7 @@ public class RateProject extends Controller {
     @Security.Authenticated(Secured.class)
     public static Result index(Long projectId) {
         Long userId = Long.parseLong(session().get("userId"));
+        User user = User.findByUserId(userId);
         List<Rate> rates = Rate.findListByUserIdAndProjectId(userId,projectId);
         Comment comment = Comment.findByUserIdAndProjectId(userId,projectId);
         List<Settings> webconfig = Settings.findAll();
@@ -27,14 +28,14 @@ public class RateProject extends Controller {
         if(projectId > Project.findAll().size()) {
             return redirect(routes.ProjectList.index());
         }
-        return ok(rateproject.render(userId, Project.findById(projectId), rates , Criteria.findAll() , comment , setting));
+        return ok(rateproject.render(user, Project.findById(projectId), rates , RateCriterion.findAll() , comment , setting));
     }
 
     public static Result addRate(){
 		DynamicForm form = new DynamicForm().bindFromRequest();
         Long userId = Long.parseLong(session().get("userId"));
         Long projectId = Long.parseLong(form.get("projectId"));
-    	for(Criteria c : Criteria.findAll()){
+    	for(RateCriterion c : RateCriterion.findAll()){
             int score = Integer.parseInt(form.get(""+c.id));
             Long criteriaId = c.id;
             Rate rate = Rate.create(score , userId , criteriaId , projectId);
@@ -49,7 +50,7 @@ public class RateProject extends Controller {
         long projectId = Long.parseLong(form.get("projectId"));
         List<Rate> rates = Rate.findListByUserIdAndProjectId(userId,projectId);
         for(Rate r : rates){
-            for(Criteria c : Criteria.findAll()){
+            for(RateCriterion c : RateCriterion.findAll()){
                 if(r.criteriaId == c.id){
                     int score = Integer.parseInt(form.get(""+c.id));
                     r.score = score;

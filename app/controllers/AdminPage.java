@@ -58,7 +58,6 @@ public class AdminPage extends Controller {
     public static Result editUser(){
         User newuser = Form.form(User.class).bindFromRequest().get();
         User olduser = User.findByUserId(newuser.id);
-        Logger.info("WTF");
         olduser.firstname = newuser.firstname;
         olduser.lastname = newuser.lastname;
         olduser.username = newuser.username;
