@@ -92,7 +92,7 @@ public class EditProject extends Controller {
         Long proId = Long.parseLong(dynamicForm.get("projectId"));
         Project _pro = Project.findById(proId);
         if(_pro != null) {
-            List<Rate> _rates = Rate.findByProjectId(_pro.id);
+            List<Rate> _rates = Rate.findListByProjectId(_pro.id);
             for (Rate item : _rates) {
                 item.delete();
             }
