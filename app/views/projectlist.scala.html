@@ -36,7 +36,7 @@
                         <div class="col s12 m6">
                             <div class="card">
                                 <div class="card-image waves-effect waves-block waves-light">
-                                    <img class="activator" src=@routes.Assets.at("img/TeamDummy.jpg")>
+                                    <img class="activator" src="@ProjectImage.getUrlDefaultImage(project.id)">
                                 </div>
                                 <div class="card-content" style="max-height: 200px;">
                                     <span class="card-title activator grey-text text-darken-4">@project.projectName<p class="right"><a  class = " btn btn-large trigger"href="@routes.RateProject.index(project.id)" class=" trigger ">More...</a></p></span>

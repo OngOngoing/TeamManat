@@ -115,7 +115,11 @@ public class EditProject extends Controller {
         if(imgs.size() >= 10){
             return status(1);
         }
-        ProjectImage image = new ProjectImage(proId, file);
+        if(imgs.size() == 0) {
+            ProjectImage image = new ProjectImage(proId, file, ProjectImage.DEFAULT);
+        }else{
+            ProjectImage image = new ProjectImage(proId, file, ProjectImage.NORMAL);
+        }
         return ok("success!");
     }
 }

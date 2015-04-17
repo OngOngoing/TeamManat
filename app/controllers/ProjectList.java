@@ -5,7 +5,7 @@ import play.mvc.*;
 import views.html.*;
 
 import java.util.List;
-
+import java.util.ArrayList;
 public class ProjectList extends Controller {
 
     @Security.Authenticated(Secured.class)
@@ -14,7 +14,6 @@ public class ProjectList extends Controller {
         List rates = Rate.findListByUserId(userId);
         User user = User.findByUserId(userId);
         Settings setting = Settings.value("stopTime");
-
         return ok(projectlist.render(Project.findAll(),rates,user,setting));
     }
 

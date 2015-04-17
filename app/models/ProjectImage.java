@@ -14,6 +14,7 @@ import java.io.IOException;
 @Entity
 public class ProjectImage extends Model {
 
+    public final static int DEFAULT = 1, NORMAL = 2;
     @Id
     public Long Id;
     @Required
@@ -21,12 +22,13 @@ public class ProjectImage extends Model {
     @Lob
     private byte[] data;
 
+    public int imgType;
     private static Finder<Long, ProjectImage> find = new Finder<Long, ProjectImage>(Long.class, ProjectImage.class);
 
-    public ProjectImage(Long projectId, File image) {
+    public ProjectImage(Long projectId, File image, int type) {
         this.projectId = projectId;
         this.data = new byte[(int)image.length()];
-
+        this.imgType = type;
         InputStream inStream = null;
         try {
             inStream = new BufferedInputStream(new FileInputStream(image));
@@ -50,7 +52,14 @@ public class ProjectImage extends Model {
     public static List<ProjectImage> findImageOfProject(Long projectId){
         return ProjectImage.find.where().eq("projectId",projectId).findList();
     }
-
+    public static String getUrlDefaultImage(Long projectId){
+        ProjectImage img = ProjectImage.find.where().eq("projectId",projectId).eq("imgType",DEFAULT).findUnique();
+        if(img == null){
+            return "../assets/img/TeamDummy.jpg";
+        }else {
+            return "../getimg/" + img.Id;
+        }
+    }
     public static ProjectImage findById(Long id){
         return find.byId(id);
     }
