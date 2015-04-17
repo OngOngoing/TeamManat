@@ -19,6 +19,7 @@ public class RateCalculator extends Controller {
         List<Project> projects = Project.findAll();
         List<RateCriterion> criteria = RateCriterion.findAll();
         List<ArrayList<Double>> result = new ArrayList<ArrayList<Double>>();
+        List<Comment> comments = Comment.findAll();
         for(Project p : projects){
             ArrayList<Double> perProject = new ArrayList<Double>();
             double allSum = 0;
@@ -39,6 +40,6 @@ public class RateCalculator extends Controller {
             perProject.add(allSum);
             result.add(perProject);
         }
-        return ok(ratecalpage.render(projects,criteria,result));
+        return ok(ratecalpage.render(projects,criteria,comments,result));
     }
 }

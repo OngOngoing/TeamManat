@@ -57,6 +57,11 @@ public class User extends Model {
         return find.byId(userId);
     }
 
+    public static String findName(Long userId){
+        User user = find.byId(userId);
+        return user.firstname + " " + user.lastname;
+    }
+
     public static User findByUsername(String username){
         return find.where().eq("username", username).findUnique();
     }
