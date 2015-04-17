@@ -29,7 +29,7 @@
                                     <img class="activator" src=@routes.Assets.at("img/TeamDummy.jpg")>
                                     <span class="card-title">@project.projectName</span>
                                 </div>
-                            <div class="card-content">
+                                <div class="card-content">
                                 @project.projectDescription
                                 @rates.map { rate =>
                                     @if(rate.projectId == project.id){
@@ -38,22 +38,16 @@
                                  }
                             </div>
 
-                            <div class="card-action">
+                                <div class="card-action">
                                 <a href="@routes.RateProject.index(project.id)" class="collection-item trigger">@project.projectName</a>
-                             </div>
                             </div>
                             </div>
-                        }
                         </div>
-                </div>
-                   
-                
+                        }
+
             </div>
                 <!-- End of Page Content -->
         </div>
-
-
-
 
         <div class="container animated fadeInUp">
             <div class="row center">
