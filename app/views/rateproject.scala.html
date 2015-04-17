@@ -1,4 +1,4 @@
-@(user: User)(project: Project)(thisRate: List[Rate])(criterias: List[RateCriterion])(teamMember : List[User])(thisComment: Comment)(setting: Map[String, String])
+@(user: User)(project: Project)(thisRate: List[Rate])(criterias: List[RateCriterion])(images : List[ProjectImage])(teamMember : List[User])(thisComment: Comment)(setting: Map[String, String])
     @canRate = @{
         import java.util.Calendar
         import java.text.SimpleDateFormat
@@ -15,7 +15,7 @@
     <html>
         <head>
             <title>Exceed Vote</title>
-            <link rel="stylesheet" media="screen" href="@routes.Assets.at("stylesheets/materialize.min.css")">
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.96.1/css/materialize.min.css">
             <link rel="stylesheet" media="screen" href="@routes.Assets.at("stylesheets/animate.css")">
             <link rel="stylesheet" media="screen" href="@routes.Assets.at("stylesheets/rateproject.css")">
             <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
@@ -44,9 +44,16 @@
                     }
                 </div>
                 <div class="divider"></div>
-
                 <div class="section">
-                    <img class="materialboxed animated fadeIn" src=@routes.Assets.at("img/TeamDummy.jpg")>
+                    <div class="slider">
+                        <ul class="slides">
+                            @images.map{image =>
+                                <li>
+                                    <img class = "responsive" src="../getimg/@image.Id"></img>
+                                </li>
+                            }
+                        </ul>
+                    </div>
                 </div>
                 <div class="section animated fadeIn">
                     <div class="card-panel">

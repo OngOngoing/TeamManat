@@ -13,3 +13,8 @@ $(function() {
         convert = new Markdown.getSanitizingConverter().makeHtml;
     $('.projectDescription').html(convert($textarea));
 });
+
+$(document).ready(function(){
+    $('.slider').slider({full_width: true});
+    $('.materialboxed').materialbox();
+});
