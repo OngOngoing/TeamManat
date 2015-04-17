@@ -16,7 +16,7 @@ public class RateProject extends Controller {
     public static Result index(Long projectId) {
         Long userId = Long.parseLong(session().get("userId"));
         User user = User.findByUserId(userId);
-        List<Rate> rates = Rate.findListByUserIdAndProjectId(userId,projectId);
+        List<Rate> rates = Rate.findListByUserIdAndProjectId(userId, projectId);
         List<User> teamMember = User.findByTeam(projectId);
         Comment comment = Comment.findByUserIdAndProjectId(userId,projectId);
         List<Settings> webconfig = Settings.findAll();
@@ -42,6 +42,7 @@ public class RateProject extends Controller {
             Rate rate = Rate.create(score , userId , criteriaId , projectId);
         }
         Comment comment = Comment.create(userId,projectId,form.get("comment"));
+        flash("rate_success", "Rate submitted");
     	return redirect(routes.RateProject.index(projectId));
     }
 
@@ -62,6 +63,7 @@ public class RateProject extends Controller {
         Comment thisComment = Comment.findByUserIdAndProjectId(userId,projectId);
         thisComment.comment = form.get("comment");
         thisComment.update();
+        flash("edit_success", "Rate updated");
         return redirect(routes.RateProject.index(projectId));
     }
 }
