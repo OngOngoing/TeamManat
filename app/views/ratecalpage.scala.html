@@ -12,11 +12,11 @@
         <body>
             <div class="container">
                 <h1 class = "lobby-banner trigger trigger-text">Rating Result</h1>
-                    <ul class="collapsible popout" data-collapsible="accordion">
+                    <ul  >
                         @result.zipWithIndex.map{case(r,index) =>
-                            <li>
-                                <div class="collapsible-header trigger trigger-text"><i class="mdi-image-filter-drama"></i>@projects.get(index).projectName</div>
-                                <div class="collapsible-body ">
+                            <li class= "card-panel">
+                                <h5><i class="mdi-action-stars small"></i>@projects.get(index).projectName</h5>
+                                <div >
                                     <table class = "centered hoverable">
                                         <thead>
                                             <tr>
@@ -43,6 +43,9 @@
                                         <div class="collapsible-header "><i class="mdi-communication-comment"></i>Comments</div>
                                         <div class="collapsible-body ">
                                             <ul class="collapsible" data-collapsible="accordion">
+                                                @if(comments.size == 0){
+                                                    <p><I>No comment</I></p>
+                                                } else {
                                                 @comments.map{ comment =>
                                                     @if(comment.projectId == projects.get(index).id){
                                                         <li>
@@ -58,6 +61,7 @@
                                                             </div>        
                                                         </li>
                                                     }
+                                                }
                                                 }
                                             </ul>
                                         </div>
