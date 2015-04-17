@@ -252,9 +252,8 @@
                             </div>
 
                         </li>
-                    </ul>
 
-                    <ul class="collapsible" data-collapsible="accordion">
+
                         <li>
                             <div class="collapsible-header teal-text lighten-1 trigger"><i class="mdi-content-add"></i>
                                 Add Vote Criterion</div>
@@ -290,71 +289,62 @@
                             </div>
 
                         </li>
-                    </ul>
 
-                    <ul class="collapsible" data-collapsible="accordion">
+
                         <li>
                             <div class="collapsible-header teal-text lighten-1 trigger"><i class="mdi-action-list"></i>
                                 Show All Rate Criterion</div>
                             <div class="collapsible-body">
-                                <div class="container">
-                                    <div class="row ">
-                                        <form class="col s12" action="@routes.AdminPage.addRateCriterion()" method="post">
-                                            <div class="row">
-                                                <div id="rateCs" class="col s12 ">
-                                                    <ul class="collection">
-                                                    @rateCs.map { rateC =>
-                                                        <li class="collection-item avatar">
-                                                            <i class="mdi-action-description circle teal lighten-1 trigger"></i>
-                                                            <span class="title teal-text lighten-1 trigger">ID : @rateC.id</span>
-                                                            <p>Name: @rateC.name <br>
-                                                                Description: @rateC.description
-                                                            </p>
-                                                            <a href="#!" class="secondary-content"><i class="mdi-navigation-close trigger"></i></a>
-                                                        </li>
-                                                    }
-                                                    </ul>
+                                <div class="collapsible-container">
+                                    <table class="hoverable centered responsive-table" >
+                                        <thead>
+                                            <tr>
+                                                <th data-field="id">ID</th>
+                                                <th data-field="name">Name</th>
+                                                <th data-field="description">Description</th>
+                                            </tr>
+                                        </thead>
 
-                                                </div>
-                                            </div>
-                                        </form>
-                                    </div>
+                                        <tbody>
+                                            @rateCs.map { rateC =>
+                                                <tr>
+                                                    <td>@rateC.id</td>
+                                                    <td>@rateC.name</td>
+                                                    <td>@rateC.description</td>
+                                                </tr>
+                                            }
+                                        </tbody>
+                                    </table>
                                 </div>
                             </div>
 
                         </li>
-                    </ul>
 
-                    <ul class="collapsible" data-collapsible="accordion">
+                    
                         <li>
                             <div class="collapsible-header teal-text lighten-1 trigger"><i class="mdi-action-list"></i>
                                 Show All Vote Criterion</div>
                             <div class="collapsible-body">
-                                <div class="container">
-                                    <div class="row">
-                                        <form class="col s12" action="@routes.AdminPage.addVoteCriterion()" method="post">
-                                            <div class="row">
+                                <div class="collapsible-container">
+                                    <table class="hoverable centered responsive-table">
+                                        <thead>
+                                            <tr>
+                                                <th data-field="id">ID</th>
+                                                <th data-field="name">Name</th>
+                                                <th data-field="description">Description</th>
+                                            </tr>
+                                        </thead>
 
-                                                <div id="voteCs" class="col s12 ">
-                                                    <ul class="collection">
-                                                    @voteCs.map { voteC =>
-                                                        <li class="collection-item avatar">
-                                                            <i class="mdi-action-description circle teal lighten-1 trigger"></i>
-                                                            <span class="title teal-text lighten-1 trigger">ID : @voteC.id</span>
-                                                            <p>Name: @voteC.name <br>
-                                                                Description: @voteC.description
-                                                            </p>
-                                                            <a href="#!" class="secondary-content"><i class="mdi-navigation-close trigger"></i></a>
-                                                        </li>
-                                                    }
-                                                    </ul>
-
-                                                </div>
-
-                                            </div>
-
-                                        </form>
-                                    </div>
+                                        <tbody>
+                                        @voteCs.map { voteC =>
+                                            <tr>
+                                                <td>@voteC.id</td>
+                                                <td>@voteC.name</td>
+                                                <td>@voteC.description</td>
+                                            </tr>
+                                        }
+                                        </tbody>
+                                    </table>
                                 </div>
                             </div>
 
