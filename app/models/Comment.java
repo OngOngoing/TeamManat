@@ -36,6 +36,10 @@ public class Comment extends Model {
         return find.all();
     }
 
+    public static List<Comment> findListByProjectId(Long projectId){
+        return find.where().eq("projectId",projectId).findList();
+    }
+
     public static Comment findByUserIdAndProjectId(long userId, long projectId){
         return find.where().eq("userId", userId).eq("projectId",projectId).findUnique();
     }
