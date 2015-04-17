@@ -44,7 +44,7 @@
                             <div class="collapsible-body">
                                 <div class="container">
                                     <div class="row">
-                                        <form class="col s12" action="@routes.AdminPage.editUser()" method="post">
+                                        <form class="col s12" action="@routes.AdminPage.addUser()" method="post">
                                             <div class="row">
                                                 <div class="input-field col s6">
                                                     <input id="firstname" name="firstname" type="text" class="validate" required>
@@ -121,7 +121,16 @@
 
                                 <span class="title teal-text lighten-1 trigger">ID : @user.id</span>
                                 <p>Username : @user.username Password : @user.password <br>
-                                    Type : @user.idtype TeamID : @user.projectId
+                                    @if(user.idtype==0){
+                                        Type : Admin Project's name :
+                                    } else {
+                                        Type : Normal Project's name :
+                                    }
+                                    @projects.map{ project =>
+                                        @if(user.projectId == project.id){
+                                            @project.name
+                                        }
+                                    }
                                 </p>
                                     <a userId="@user.id" username="@user.username" password="@user.password" idtype="@user.idtype" projectId="@user.projectId" firstname="@user.firstname" lastname="@user.lastname" class="editModal secondary-content mdi-editor-mode-edit trigger modal-trigger" href="#editUserModal"></a>
                                 </li>
@@ -317,7 +326,7 @@
 
             <!-- EditUser Modal Structure -->
         <div id="editUserModal" class="modal modal-fixed-footer">
-            <form class="col s12" action="@routes.AdminPage.editUser()" method="get">
+            <form class="col s12" action="@routes.AdminPage.editUser()" method="post">
                 <div class="modal-content">
                     <h4>Edit User</h4>
 

@@ -43,4 +43,5 @@ public class Rate extends Model {
     public static List<Rate> findListByUserId(Long userId){
         return find.where().eq("userId", userId).findList();
     }
+
 }
