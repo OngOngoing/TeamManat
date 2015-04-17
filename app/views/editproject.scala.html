@@ -38,6 +38,12 @@
                             <button class="btn waves-effect waves-light" type="submit" name="action">Save
                                 <i class="mdi-content-send right"></i>
                             </button>
+                            @if(currentUser.idtype == User.ADMINISTRATOR) {
+                                <a class="btn waves-effect waves-light red darken-2 modal-trigger" href="#confirmDelete" >
+                                    Delete
+                                    <i class="mdi-content-clear right"></i>
+                                </a>
+                            }
                         </div>
                     </div>
             </form>
@@ -57,7 +63,7 @@
                         <tr>
                             <td><code class=" language-markup">@member.firstname</code></td>
                             <td><code class=" language-markup">@member.lastname</code></td>
-                            <td><code class=" language-markup"><a class="btn-floating waves-effect waves-light red" href="../editproject/delete/@member.id/@currentProject.id"><i class="mdi-content-clear"></i></a></code></td>
+                            <td><code class=" language-markup">@if(currentUser.id != member.id){ <a class="btn-floating waves-effect waves-light red" href="../editproject/delete/@member.id/@currentProject.id"><i class="mdi-content-clear"></i></a> } </code></td>
                         </tr>
                     }
                     @if(members.size == 0) {
@@ -112,6 +118,20 @@
             <ul>
                 <li><a class="btn-floating green " href="../logout"><i class="large mdi-action-settings-power"></i></a></li>
             </ul>
+        </div>
+            <!-- Modal Structure -->
+        <div id="confirmDelete" class="modal">
+            <div class="modal-content">
+                <h4>Are you sure you want to delete this project?</h4>
+                <p>This will delete project data, screen shot, rate/vote of this project and remove all member in this project.</p>
+            </div>
+            <div class="modal-footer">
+                <a href="#!" class=" modal-action modal-close waves-effect waves-green btn-flat">Cancel</a>
+                <form action="@routes.EditProject.deleteProject()" method="post">
+                    <input type="hidden" value="@currentProject.id" name="projectId" />
+                    <button href="@routes.EditProject.deleteProject()" class=" modal-action modal-close waves-effect waves-green btn-flat" type="submit">Delete</button>
+                </form>
+            </div>
         </div>
         <script src="http://code.jquery.com/jquery-2.1.3.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.96.1/js/materialize.min.js"></script>

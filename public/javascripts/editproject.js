@@ -1,4 +1,7 @@
 $(document).ready(function(){
+    $('.modal-trigger').leanModal({
+        dismissible: true
+    });
     $('.tooltipped').tooltip({delay: 50});
     var minlength = 1;
 

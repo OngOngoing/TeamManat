@@ -26,6 +26,10 @@ public class Project extends Model
         }
         return null;
     }
+    public static void deleteProject(Long proId){
+        Project project = findById(proId);
+        project.delete();
+    }
 
     public static Finder<Long, Project> find = new Finder<Long, Project>(Long.class, Project.class);
 

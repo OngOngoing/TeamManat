@@ -1,6 +1,7 @@
 package controllers;
 
 import models.Project;
+import models.Rate;
 import models.User;
 import play.data.DynamicForm;
 import play.mvc.*;
@@ -57,7 +58,7 @@ public class EditProject extends Controller {
         }
         return redirect(routes.EditProject.index(projectId));
     }
-    public static Result delete(Long userId, Long proId){
+    public static Result removeUser(Long userId, Long proId){
         User editUser = User.findByUserId(userId);
         if (editUser != null) {
             editUser.projectId = Long.parseLong("-1");
@@ -77,5 +78,24 @@ public class EditProject extends Controller {
         if(user.projectId == projectId)
             return true;
         return false;
+    }
+    public static Result deleteProject(){
+        DynamicForm dynamicForm = new DynamicForm().bindFromRequest();
+        Long proId = Long.parseLong(dynamicForm.get("projectId"));
+        Project _pro = Project.findById(proId);
+        if(_pro != null) {
+            List<Rate> _rates = Rate.findByProjectId(_pro.id);
+            for (Rate item : _rates) {
+                item.delete();
+            }
+            List<User> _users = User.findByTeam(_pro.id);
+            for (User item : _users) {
+                item.projectId = Long.parseLong("-1");
+                item.update();
+            }
+            _pro.delete();
+        }
+        flash("d_success", "Project is successfully deleted");
+        return redirect(routes.ProjectList.index());
     }
 }
