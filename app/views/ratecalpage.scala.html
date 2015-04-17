@@ -1,0 +1,36 @@
+@(projects :List[Project])(result: List[ArrayList[Double]])
+    <html>
+        <head>
+            <title>Exceed Vote</title>
+            <link rel="stylesheet" media="screen" href="@routes.Assets.at("stylesheets/materialize.min.css")">
+            <link rel="stylesheet" media="screen" href="@routes.Assets.at("stylesheets/animate.css")">
+            <link rel="stylesheet" media="screen" href="@routes.Assets.at("stylesheets/rateproject.css")">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+        </head>
+        <body>
+            <div class="container">
+                @projects.map{project =>
+                    <h2>@project.projectName</h2><br></br>
+                    @result.map{result =>
+                        <h3>@result</h3>
+                    }
+                    <br></br>
+
+                }
+            
+            </div>
+
+
+            <div class="fixed-action-btn animated bounceInUp" style="bottom : 45 px ; right : 40 px ;">
+                <a class="btn-floating btn-large trigger" href="..">
+                    <i class="large mdi-action-home waves-effect waves-light"></i>
+                </a>
+                <ul>
+                    <li><a class="btn-floating green " href="../logout"><i class="large mdi-action-settings-power"></i></a></li>
+                </ul>
+            </div>
+
+            <script src="http://code.jquery.com/jquery-2.1.3.min.js"></script>
+            <script src="@routes.Assets.at("javascripts/materialize.min.js")" type="text/javascript"></script>
+        </body>
+    </html>
