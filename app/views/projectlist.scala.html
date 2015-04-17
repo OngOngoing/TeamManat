@@ -11,19 +11,24 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
     </head>
     <body>
-        <nav class="teal lighten-1 trigger" id="head">
+        <nav class="teal lighten-1 trigger large" id="head">
             <div class="container">
                 <div class="nav-wrapper">
-                    @setting.keyValue
+                    <a href="./" class="brand-logo"><img class="responsive-img" style="margin-top: 7px;" src="@routes.Assets.at("img/logo.png")" width="45%" height="45%" /></a>
+                    <div class="center">
+                        Time Up : @setting.keyValue
+
                     <ul class="right">
                         <li><a id="nav-mobile" href="@routes.RateCalculator.index()">Rating Result</a></li>
                         <li><a id="nave-mobile" href="@routes.VoteController.showResult()">Voting Result</a></li>
                         <li><a id="nave-mobile" href="@routes.VoteController.index()">Let's Vote!</a></li>
-                    </ul> 
+                        <li><a id="nave-mobile" href="../logout"><i class="medium mdi-action-settings-power left"></i>Logout</a></li>
+                    </ul>
+                        </div>
                 </div>
             </div>
         </nav>
-        <div class="container animated fadeIn">
+        <div class="container animated fadeIn"  style="padding-top: 70px;">
             <!-- Page Content goes here -->
 
             <div class="row">
@@ -53,18 +58,6 @@
 
             </div>
                 <!-- End of Page Content -->
-        </div>
-
-        <div class="container animated fadeInUp">
-            <div class="row center">
-
-                <div class="col s12">
-                    <a class="waves-effect waves-light btn-large trigger" href="@routes.Application.logout()">Logout</a>
-
-                </div>
-
-            </div>
-
         </div>
 
         @if(user.idtype == User.ADMINISTRATOR ){
