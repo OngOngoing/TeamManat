@@ -1,11 +1,18 @@
 package controllers;
 
 import models.Project;
+import models.ProjectImage;
+import models.Settings;
 import models.User;
 import play.data.DynamicForm;
 import play.mvc.*;
 import views.html.editproject;
+
+import java.io.File;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
 import play.libs.Json;
 /**
  * Created by Chin on 4/15/2015.
@@ -20,7 +27,8 @@ public class EditProject extends Controller {
             return redirect(routes.ProjectList.index());
         Project project = Project.findById(projectId);
         List<User> members = User.findByTeam(projectId);
-        return ok(editproject.render(user, project, members));
+        List<ProjectImage> images = ProjectImage.findImageOfProject(projectId);
+        return ok(editproject.render(user, project, members, images));
     }
     @Security.Authenticated(Secured.class)
     public static Result addMember(Long projectId){
@@ -77,5 +85,17 @@ public class EditProject extends Controller {
         if(user.projectId == projectId)
             return true;
         return false;
+    }
+    public static Result upload(){
+        Http.MultipartFormData body = request().body().asMultipartFormData();
+        File file = body.getFile("file").getFile();
+        String pId = body.asFormUrlEncoded().get("projectId")[0];
+        Long proId = Long.parseLong(pId);
+        List<ProjectImage> imgs = ProjectImage.findImageOfProject(proId);
+        if(imgs.size() >= 10){
+            return status(1);
+        }
+        ProjectImage image = new ProjectImage(proId, file);
+        return ok("success!");
     }
 }

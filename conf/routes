@@ -7,18 +7,18 @@ POST        /login                                controllers.Application.authen
 GET         /projectlist                          controllers.ProjectList.index()
 
 # Admin Page
-GET         /adminpage                    controllers.AdminPage.index()
-POST        /adminpage/addUser            controllers.AdminPage.addUser()
-POST        /adminpage/deleteUsers        controllers.AdminPage.deleteUsers()
-POST       	/adminpage/editUser           controllers.AdminPage.editUser()
-POST        /adminpage/addProject         controllers.AdminPage.addProject()
-POST        /adminpage/saveSetting		  controllers.AdminPage.saveSetting()
+GET         /adminpage                            controllers.AdminPage.index()
+POST        /adminpage/addUser                    controllers.AdminPage.addUser()
+POST        /adminpage/deleteUsers                controllers.AdminPage.deleteUsers()
+POST        /adminpage/editUser                   controllers.AdminPage.editUser()
+POST        /adminpage/addProject                 controllers.AdminPage.addProject()
+POST        /adminpage/saveSetting                controllers.AdminPage.saveSetting()
 
 GET         /logout                               controllers.Application.logout()
 
-GET         /vote                         controllers.VoteController.index()
-POST        /vote/submit                  controllers.VoteController.addVote()
-POST        /vote/edit                    controllers.VoteController.editVote()
+GET         /vote                                 controllers.VoteController.index()
+POST        /vote/submit                          controllers.VoteController.addVote()
+POST        /vote/edit                            controllers.VoteController.editVote()
 GET         /rateproject/:id                      controllers.RateProject.index(id:Long)
 POST        /rateproject                          controllers.RateProject.addRate()
 POST        /rateproject/edit                     controllers.RateProject.editRate()
@@ -28,6 +28,10 @@ POST        /editproject/:proId                   controllers.EditProject.edit(p
 POST        /editproject/addmember/:proId         controllers.EditProject.addMember(proId:Long)
 POST        /searchuser                           controllers.EditProject.searchUser()
 GET         /editproject/delete/:id/:proId        controllers.EditProject.delete(id:Long, proId:Long)
+
+POST        /uploadimage                          controllers.EditProject.upload()
+GET         /getimgs/:proId                       controllers.Application.getImgs(proId:Long)
+GET         /getimg/:id                           controllers.Application.getImg(id:Long)
 # Create initial data for testing.
 GET         /install                              controllers.Application.mockDatabase()
 # Map static resources from the /public folder to the /assets URL path

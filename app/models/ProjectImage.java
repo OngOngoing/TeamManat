@@ -15,50 +15,43 @@ import java.io.IOException;
 public class ProjectImage extends Model {
 
     @Id
-    private Long Id;
+    public Long Id;
     @Required
-    private Long projectId;
+    public Long projectId;
     @Lob
     private byte[] data;
 
     private static Finder<Long, ProjectImage> find = new Finder<Long, ProjectImage>(Long.class, ProjectImage.class);
 
-    private ProjectImage(Long projectId, byte[] image)
-    {
-        this.projectId = projectId;
-        this.data = image;
-    }
-    public ProjectImage create(Long projectId, File image)
-    {
+    public ProjectImage(Long projectId, File image) {
         this.projectId = projectId;
         this.data = new byte[(int)image.length()];
-        
-        /* write the image data into the byte array */
+
         InputStream inStream = null;
-        try 
-        {
+        try {
             inStream = new BufferedInputStream(new FileInputStream(image));
             inStream.read(this.data);
-        } 
-        catch (IOException e) {  e.printStackTrace();} 
-        finally 
-        {
-            if (inStream != null) 
-            {
-                try 
-                {
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            if (inStream != null) {
+                try {
                     inStream.close();
-                } 
-                catch (IOException e) {  e.printStackTrace();}
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
             }
         }
-        ProjectImage img = new ProjectImage(projectId, data);
-        img.save();
-        return img;
+        this.save();
     }
-    public List<ProjectImage> findAllPicByProjectId(Long projectId)
-    {
-        return find.where().eq("projectId", projectId).findList();
+    public byte[] getData(){
+        return data;
+    }
+    public static List<ProjectImage> findImageOfProject(Long projectId){
+        return ProjectImage.find.where().eq("projectId",projectId).findList();
     }
 
+    public static ProjectImage findById(Long id){
+        return find.byId(id);
+    }
 }
