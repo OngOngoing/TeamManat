@@ -14,6 +14,14 @@ public class VoteCriterion extends Model {
     public String name;
     public String description;
 
+    public static VoteCriterion create(String name, String description) {
+        VoteCriterion criterion = new VoteCriterion();
+        criterion.name = name;
+        criterion.description = description;
+        criterion.save();
+        return criterion;
+    }
+
     public static Finder<Long, VoteCriterion> find = new Finder<Long, VoteCriterion>(Long.class, VoteCriterion.class);
 
     public static List<VoteCriterion> findAll(){

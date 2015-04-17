@@ -1,6 +1,8 @@
 package models;
 
 import javax.persistence.*;
+
+import org.apache.commons.collections.map.MultiKeyMap;
 import play.data.validation.Constraints.Required;
 import play.db.ebean.*;
 
@@ -38,4 +40,37 @@ public class Vote extends Model {
         return find.all();
     }
 
+    public static List<Vote> findVotesByCriterionId(Long criterionId) {
+        return find.where().eq("criterionId", criterionId).findList();
+    }
+
+    public static List<Vote> findVotesByCriterionIdAndProjectId(Long criterionId, Long projectId) {
+        return find.where().eq("criterionId", criterionId).eq("projectId", projectId).findList();
+    }
+
+    public static MultiKeyMap summarize() {
+        MultiKeyMap result = new MultiKeyMap();
+        List<VoteCriterion> criteria = VoteCriterion.findAll();
+        List<Project> projects = Project.findAll();
+        for(VoteCriterion criterion : criteria) {
+            for(Project project : projects) {
+                ResultBundle bundle = new ResultBundle();
+                bundle.sum = findVotesByCriterionIdAndProjectId(criterion.id,project.id).size();
+                bundle.totalVotes = findVotesByCriterionId(criterion.id).size();
+                bundle.percent = 100.0*bundle.sum/bundle.totalVotes;
+                result.put(criterion, project, bundle);
+            }
+        }
+        return result;
+    }
+
+    public static class ResultBundle {
+        public int sum;
+        public double percent;
+        public int totalVotes;
+
+
+    }
+
 }
+

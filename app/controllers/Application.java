@@ -71,6 +71,10 @@ public class Application extends Controller {
         Project.create("Project Test 1","Description of project test 1");
         Project.create("Project Test 2","Description of project test 2");
         Project.create("Project Test 3","Description of project test 3");
+
+        VoteCriterion.create("Creativity","Description of Creativity Criterion");
+        VoteCriterion.create("Performance","Description of Performance Criterion");
+
         flash("success", "A initial data for test the system was created.");
         return redirect(routes.Application.index());
     }
