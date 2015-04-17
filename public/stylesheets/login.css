@@ -12,6 +12,13 @@ body {
     background-size: cover;
     background-attachment: fixed;
 }
+.logo{
+    font-size : 100px ;
+}
+.logo-text{
+    font-size : 50px ;
+    margin-left : -0.8em ;
+}
 .colorBg {
     padding: 50px 0;
     min-height: 100vh;
@@ -82,8 +89,6 @@ body {
     text-align: center;
     color: #cccccc;
 }
-
-
 
 
 .trigger {
