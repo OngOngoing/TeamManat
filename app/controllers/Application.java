@@ -3,6 +3,7 @@ package controllers;
 import java.text.*;
 import java.util.*;
 import models.*;
+import play.libs.Json;
 import play.mvc.*;
 import play.data.*;
 
@@ -54,6 +55,14 @@ public class Application extends Controller {
         return ok(login.render(Form.form(Login.class)));
     }
 
+    public static Result getImgs(Long proId){
+        List<ProjectImage> images = ProjectImage.findImageOfProject(proId);
+        return ok(Json.toJson(images));
+    }
+    public static Result getImg(Long imgId){
+        ProjectImage image = ProjectImage.findById(imgId);
+        return ok(image.getData()).as("image");
+    }
     // MockDataBase for testing
     public static Result mockDatabase(){
         //Web App setting
