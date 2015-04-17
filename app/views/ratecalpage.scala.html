@@ -42,7 +42,7 @@
                                     <li>
                                         <div class="collapsible-header "><i class="mdi-communication-comment"></i>Comments</div>
                                         <div class="collapsible-body ">
-                                            <ul class="collapsible" data-collapsible="Expandable">
+                                            <ul class="collapsible" data-collapsible="accordion">
                                                 @comments.map{ comment =>
                                                     @if(comment.projectId == projects.get(index).id){
                                                         <li>
