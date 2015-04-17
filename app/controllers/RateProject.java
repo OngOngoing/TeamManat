@@ -25,7 +25,7 @@ public class RateProject extends Controller {
             setting.put(item.keyName, item.keyValue);
         }
 
-        if(projectId > Project.findAll().size()) {
+        if(Project.findById(projectId) == null) {
             return redirect(routes.ProjectList.index());
         }
         return ok(rateproject.render(user, Project.findById(projectId), rates , RateCriterion.findAll() , comment , setting));
