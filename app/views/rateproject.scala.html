@@ -1,4 +1,4 @@
-@(user: User)(project: Project)(thisRate: List[Rate])(criterias: List[RateCriterion])(thisComment: Comment)(setting: Map[String, String])
+@(user: User)(project: Project)(thisRate: List[Rate])(criterias: List[RateCriterion])(teamMember : List[User])(thisComment: Comment)(setting: Map[String, String])
     @canRate = @{
         import java.util.Calendar
         import java.text.SimpleDateFormat
@@ -28,7 +28,6 @@
                         <a class="waves-effect waves-light btn-large" href="@routes.EditProject.index(project.id)"><i class="mdi-image-edit left"></i>
                             EDIT</a>
                     }
-
                 </div>
                 <div class="divider"></div>
 
@@ -36,12 +35,40 @@
                     <img class="materialboxed animated fadeIn" src=@routes.Assets.at("img/TeamDummy.jpg")>
                 </div>
                 <div class="section animated fadeIn">
-                    @project.projectDescription
+                    <div class="card-panel">
+                        <i class="mdi-action-description small"></i>
+                        <span class="black-text text-darken-2">@project.projectDescription</span>
+                    </div>
+                    <ul class="collapsible popout" data-collapsible="accordion">
+                        <div class="collapsible-header m6"><i class="mdi-action-face-unlock"></i>Project Members</div>
+                            <div class="collapsible-body row s8">
+                                <table class = "centered hoverable">
+                                    <thead>
+                                        <tr>
+                                            <th data-field="cname">Firstname</th>
+                                            <th data-field="score">Lastname</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody >
+                                        @teamMember.map{ member =>
+                                            <tr>
+                                                <td >@member.firstname</td>
+                                                <td >@member.lastname</td>
+                                            </tr>
+                                        }
+                                    </tbody>
+                                </table>
+                                
+                            </div>
+                     </ul>
+                </div>
+
+
                 <div class="divider"></div>
                     @if(canRate) {
                         <div class="section animated fadeIn">
                         @if(thisRate.size == 0 && thisComment == null) {
-                            <div class="row">
+                            <div class="card-panel row">
                                 <div class="input-field col s12">
                                     <form action="/rateproject" method="post">
                                         <div class="input-field">
@@ -73,7 +100,7 @@
                             </div>
                         </div>
                     } else {
-                            <div class="row">
+                            <div class="card-panel row">
                                 <div class="input-field col s12">
                                     <form action="/rateproject/edit" method="post">
                                         <input id="projectId" type="hidden" name="projectId" value="@project.id">
@@ -81,8 +108,7 @@
                                         <input id="type" type="hidden" name="type" value="1">
                                         <input id="score" type="hidden" name="score" value="1">
                                         @criterias.map { criteria =>
-                                    
-                                        <div class = "row" id="rating">
+                                            <div class = "row" id="rating">
                                             @thisRate.map { rate =>
                                                 @if(rate.criteriaId == criteria.id ){
                                                     <input id="@rate.criteriaId" type="hidden" name="@rate.criteriaId" value="@rate.score">
@@ -96,10 +122,8 @@
                                                     }
                                                 }
                                             }
-                                            
-                                            
-                                        </div>
-                                    }
+                                            </div>
+                                        }   
 
                                         <div class="row">
                                             <div class="input-field col s12">
@@ -114,7 +138,6 @@
                                 </div>
                             </div>
                         }
-                    </div>
                 } else {
                     <div class="section animated fadeIn">
                         <div class="row">Rate time's up.</div>
