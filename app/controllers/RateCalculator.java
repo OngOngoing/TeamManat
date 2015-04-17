@@ -15,6 +15,10 @@ public class RateCalculator extends Controller {
 
     //@Security.Authenticated(Secured.class)
     public static Result index() {
+        boolean isTimeUp = Settings.isTimeUp();
+            flash("time_up","Time is already up. Sorry for the inconvenience.");
+            return redirect(routes.Application.index());
+        }
         Long userId = Long.parseLong(session().get("userId"));
         List<Project> projects = Project.findAll();
         List<RateCriterion> criteria = RateCriterion.findAll();
