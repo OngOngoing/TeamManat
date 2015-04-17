@@ -1,4 +1,4 @@
-@(user: User)(project: Project)(thisRate: List[Rate])(criterias: List[RateCriterion])(thisComment: Comment)(setting: Map[String, String])
+@(user: User)(project: Project)(thisRate: List[Rate])(criterias: List[RateCriterion])(teamMember : List[User])(thisComment: Comment)(setting: Map[String, String])
     @canRate = @{
         import java.util.Calendar
         import java.text.SimpleDateFormat
@@ -28,7 +28,6 @@
                         <a class="waves-effect waves-light btn-large" href="@routes.EditProject.index(project.id)"><i class="mdi-image-edit left"></i>
                             EDIT</a>
                     }
-
                 </div>
                 <div class="divider"></div>
 
@@ -36,12 +35,37 @@
                     <img class="materialboxed animated fadeIn" src=@routes.Assets.at("img/TeamDummy.jpg")>
                 </div>
                 <div class="section animated fadeIn">
-                    @project.projectDescription
-                <div class="divider"></div>
-                    @if(canRate) {
-                        <div class="section animated fadeIn">
-                        @if(thisRate.size == 0 && thisComment == null) {
-                            <div class="row">
+                    <div class="card-panel">
+                        <i class="mdi-action-description small"></i>
+                        <span class="black-text text-darken-2">@project.projectDescription</span>
+                    </div>
+                    <ul class="collapsible popout" data-collapsible="accordion">
+                        <div class="collapsible-header"><i class="mdi-action-face-unlock"></i>Project Members</div>
+                            <div class="collapsible-body row s8">
+                                <table class = "centered hoverable">
+                                    <thead>
+                                        <tr>
+                                            <th data-field="cname">Firstname</th>
+                                            <th data-field="score">Lastname</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody >
+                                        @teamMember.map{ member =>
+                                            <tr>
+                                                <td >@member.firstname</td>
+                                                <td >@member.lastname</td>
+                                            </tr>
+                                        }
+                                    </tbody>
+                                </table>
+                                
+                            </div>
+                     </ul>
+                </div>
+                @if(canRate) {
+                    @if(thisRate.size == 0 && thisComment == null) {
+                        <div class="card-panel ">
+                            <div class = "row">
                                 <div class="input-field col s12">
                                     <form action="/rateproject" method="post">
                                         <div class="input-field">
@@ -51,10 +75,13 @@
                                             @criterias.map { criteria =>
                                                 <input id="@criteria.id" type="hidden" name="@criteria.id" value="0">
                                                 <div class = "row" id="rating">
-                                                    <div class = "col card-panel btn btn-large teal lighten-2 trigger">@criteria.name</div>
-                                                    @for(index <- 1 until 6) {
-                                                        <a id="@criteria.id" class="col waves-effect waves-teal btn btn-flat btn-floating btn-large trigger" name="criteriaButton" score="@index" href="#!">@index</a>
-                                                    }
+                                                    <div class = "criterion-name col s12 center trigger-text trigger">@criteria.name</div>
+                                                    <div class="divider container"></div><br>
+                                                    <div class = "col s12 center">
+                                                        @for(index <- 1 until 6) {
+                                                            <a id="@criteria.id" class="waves-effect waves-teal btn btn-flat btn-floating btn-large trigger" name="criteriaButton" score="@index" href="#!">@index</a>
+                                                        }
+                                                    </div>
                                                 </div>
                                             }
                                             <div class="row">
@@ -63,63 +90,67 @@
                                                     <label for="textarea1">Comment</label>
                                                 </div>
                                             </div>
-
                                             <button type="submit" class="waves-effect waves-light btn-large trigger">
-                                                <i class="mdi-action-thumb-up right" onclick="toast ( 'Vote submitted', 4000 )"></i>
-                                                Rate</button>
-                                            </div>
+                                            <i class="mdi-action-thumb-up right" onclick="toast ( 'Vote submitted', 4000 )"></i>
+                                            Rate
+                                            </button>
+                                        </div>
                                     </form>
                                 </div>
                             </div>
                         </div>
                     } else {
+                        <div class="card-panel ">
                             <div class="row">
                                 <div class="input-field col s12">
                                     <form action="/rateproject/edit" method="post">
-                                        <input id="projectId" type="hidden" name="projectId" value="@project.id">
-                                        <input id="userId" type="hidden" name="userId" value="@user.id">
-                                        <input id="type" type="hidden" name="type" value="1">
-                                        <input id="score" type="hidden" name="score" value="1">
-                                        @criterias.map { criteria =>
-                                    
-                                        <div class = "row" id="rating">
-                                            @thisRate.map { rate =>
-                                                @if(rate.criteriaId == criteria.id ){
-                                                    <input id="@rate.criteriaId" type="hidden" name="@rate.criteriaId" value="@rate.score">
-                                                    <div class = "col card-panel btn btn-large teal lighten-2 trigger">@criteria.name</div>
-                                                    @for(index<-1 until 6){
-                                                        @if(rate.score == index){ 
-                                                            <a id="@rate.criteriaId" class="col waves-effect waves-teal btn btn-floating btn-large trigger" name="criteriaButton" score="@index" href="#!">@index</a>
-                                                        }else{
-                                                            <a id="@rate.criteriaId" class="col waves-effect waves-teal btn btn-flat btn-floating btn-large trigger" name="criteriaButton" score="@index" href="#!">@index</a>
-                                                        }
+                                            <input id="projectId" type="hidden" name="projectId" value="@project.id">
+                                            <input id="userId" type="hidden" name="userId" value="@user.id">
+                                            <input id="type" type="hidden" name="type" value="1">
+                                            <input id="score" type="hidden" name="score" value="1">
+                                            @criterias.map { criteria =>
+                                                <div class = "row" id="rating">
+                                                @thisRate.map { rate =>
+                                                    @if(rate.criteriaId == criteria.id ){
+                                                        <input id="@rate.criteriaId" type="hidden" name="@rate.criteriaId" value="@rate.score">
+                                                        <div class = "criterion-name col s12 center text-darken-2 trigger-text trigger">@criteria.name</div>
+                                                        <div class="divider container"></div><br>
+                                                        <div class="row">
+                                                            <div class="col s12 center">
+                                                                @for(index<-1 until 6){
+                                                                    @if(rate.score == index){ 
+                                                                        <a id="@rate.criteriaId" class=" waves-effect waves-teal btn btn-floating btn-large trigger" name="criteriaButton" score="@index" href="#!">@index</a>
+                                                                    }else{
+                                                                        <a id="@rate.criteriaId" class=" waves-effect waves-teal btn btn-flat btn-floating btn-large trigger" name="criteriaButton" score="@index" href="#!">@index</a>
+                                                                    }
+                                                                }
+                                                            </div>
+                                                        </div>
+
                                                     }
                                                 }
-                                            }
-                                            
-                                            
-                                        </div>
-                                    }
-
+                                                </div>
+                                            }   
                                         <div class="row">
                                             <div class="input-field col s12">
                                                 <textarea id="textarea1" class="materialize-textarea trigger" name="comment" >@thisComment.comment</textarea>
                                                 <label for="textarea1">Comment</label>
                                             </div>
                                         </div>
-
                                         <button type="submit" class="waves-effect waves-light btn-large trigger"><i class="mdi-action-thumb-up right" onclick="toast ( 'Rate updated', 4000 )"></i>
-                                            Update</button>
+                                        Update
+                                        </button>
                                     </form>
                                 </div>
                             </div>
+                        </div>
                         }
-                    </div>
                 } else {
                     <div class="section animated fadeIn">
                         <div class="row">Rate time's up.</div>
                     </div>
                 }
+
             </div>
 
             <div class="fixed-action-btn animated bounceInUp" style="bottom : 45 px ; right : 40 px ;">

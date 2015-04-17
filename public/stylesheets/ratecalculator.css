@@ -1,8 +1,8 @@
-.criterion-name {
+
+  .lobby-banner {
       display: block;
       text-align: center;
-      font-family:Roboto;
-      font-size: 2rem;
+      font-family:Roboto Light;
       line-height: 120%;
       -webkit-font-smoothing: antialiased;
       color: #26a69a;
@@ -12,25 +12,16 @@
       -webkit-animation: hue 40s infinite linear;
   }
 
-.trigger {
-    -webkit-animation: hue 40s infinite linear;
-}
+  .trigger {
+      -webkit-animation: hue 40s infinite linear;
+  }
 
-.trigger-text {
-    color: #26a69a;
-    background-image: -webkit-linear-gradient(92deg,#26a69a,#80cbc4);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-}
-
-.pageBanner {
-    font-family:Roboto Light;
-    line-height: 120%;
-    -webkit-font-smoothing: antialiased;
-}
-
-
-
+  .trigger-text {
+      color: #26a69a;
+      background-image: -webkit-linear-gradient(92deg,#26a69a,#80cbc4);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+  }
 /*-----------------------------------*\
   $ANIMATIONS
 \*-----------------------------------*/

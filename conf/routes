@@ -22,6 +22,7 @@ POST        /vote/edit                            controllers.VoteController.edi
 GET         /rateproject/:id                      controllers.RateProject.index(id:Long)
 POST        /rateproject                          controllers.RateProject.addRate()
 POST        /rateproject/edit                     controllers.RateProject.editRate()
+GET			/ratecalculator				  controllers.RateCalculator.index()
 
 GET         /editproject/:proId                   controllers.EditProject.index(proId:Long)
 POST        /editproject/:proId                   controllers.EditProject.edit(proId:Long)

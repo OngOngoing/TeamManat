@@ -17,6 +17,7 @@ public class RateProject extends Controller {
         Long userId = Long.parseLong(session().get("userId"));
         User user = User.findByUserId(userId);
         List<Rate> rates = Rate.findListByUserIdAndProjectId(userId,projectId);
+        List<User> teamMember = User.findByTeam(projectId);
         Comment comment = Comment.findByUserIdAndProjectId(userId,projectId);
         List<Settings> webconfig = Settings.findAll();
 
@@ -28,7 +29,7 @@ public class RateProject extends Controller {
         if(Project.findById(projectId) == null) {
             return redirect(routes.ProjectList.index());
         }
-        return ok(rateproject.render(user, Project.findById(projectId), rates , RateCriterion.findAll() , comment , setting));
+        return ok(rateproject.render(user, Project.findById(projectId), rates , RateCriterion.findAll() , teamMember, comment , setting));
     }
 
     public static Result addRate(){
