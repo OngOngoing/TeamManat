@@ -59,11 +59,14 @@ public class AdminPage extends Controller {
 
         for(String userId : checkedVal) {
             User user = User.findByUserId(Long.parseLong(userId));
-            List<Rate> rate = Rate.findListByUserId(Long.parseLong(userId));
+            List<Rate> rates = Rate.findListByUserId(Long.parseLong(userId));
+            List<Vote> votes = Vote.findByUserId(Long.parseLong(userId));
             user.delete();
-            for(int i=0;i<rate.size();i++)
-            {
-                rate.get(i).delete();
+            for(Vote vote : votes ) {
+                vote.delete();
+            }
+            for(Rate rate : rates ) {
+                rate.delete();
             }
         }
 
