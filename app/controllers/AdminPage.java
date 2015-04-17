@@ -49,7 +49,13 @@ public class AdminPage extends Controller {
 
         for(String userId : checkedVal) {
             User user = User.findByUserId(Long.parseLong(userId));
+            List<Rate> rate = Rate.findListByUserId(Long.parseLong(userId));
             user.delete();
+            for(int i=0;i<rate.size();i++)
+            {
+                rate.get(i).delete();
+            }
+
         }
 
         return redirect(routes.AdminPage.index()+"#users");
