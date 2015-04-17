@@ -2,7 +2,13 @@ package models;
 
 import javax.persistence.*;
 
+import play.Logger;
 import play.db.ebean.*;
+
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.List;
 
 @Entity
@@ -43,5 +49,20 @@ public class Settings extends Model{
     }
     public static Settings value(String name){
         return find.where().eq("keyName", name).findUnique();
+    }
+
+    public static boolean isTimeUp() {
+
+        Calendar calendar = Calendar.getInstance();
+        DateFormat dateFormat = new SimpleDateFormat("M-d-y HH:mm");
+
+        Settings endingTimeSetting = Settings.value("stopTime");
+        Calendar endingCalendar = Calendar.getInstance();
+        try {
+            endingCalendar.setTime(dateFormat.parse(endingTimeSetting.keyValue));
+        } catch (ParseException e) {
+            Logger.info("Cannot parse setting time to Calendar Object");
+        }
+        return calendar.compareTo(endingCalendar) > 0;
     }
 }

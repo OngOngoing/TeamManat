@@ -19,6 +19,8 @@ GET         /logout                               controllers.Application.logout
 GET         /vote                                 controllers.VoteController.index()
 POST        /vote/submit                          controllers.VoteController.addVote()
 POST        /vote/edit                            controllers.VoteController.editVote()
+GET         /vote/result                          controllers.VoteController.showResult()
+
 GET         /rateproject/:id                      controllers.RateProject.index(id:Long)
 POST        /rateproject                          controllers.RateProject.addRate()
 POST        /rateproject/edit                     controllers.RateProject.editRate()

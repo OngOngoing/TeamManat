@@ -1,0 +1,119 @@
+@(criteria: List[VoteCriterion])(projects: List[Project])(winnerSummary: Map[VoteCriterion,List[Vote.ResultBundle]],summary
+    : org.apache.commons.collections.map.MultiKeyMap)
+@import java.util
+@import models.Vote.ResultBundle
+@import java.math.BigInteger; var totalVotes = summary.get(criteria(0),projects(0)).asInstanceOf[Vote.ResultBundle].totalVotes
+
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <title>Exceed Vote</title>
+        <link rel="stylesheet" media="screen" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.96.1/css/materialize.min.css">
+        <link rel="stylesheet" media="screen" href="@routes.Assets.at("stylesheets/animate.css")">
+        <link rel="stylesheet" media="screen" href="@routes.Assets.at("stylesheets/votepage.css")">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+    </head>
+    <body>
+        <div class="container">
+            <div class="animated fadeInDown">
+                <h1 class="trigger-text trigger pageBanner center-align">Voting Result</h1>
+            </div>
+            <div class="divider"></div>
+
+            <div class="section animated fadeIn">
+
+                <ul class="collapsible" data-collapsible="accordion">
+                    <li>
+                        <div class="collapsible-header trigger-text trigger"><i class="mdi-action-grade"></i>Show Winner</div>
+                        <div class="collapsible-body">
+                            <div class="collapsible-container">
+                            <table class="hoverable centered responsive-table">
+                                <thead>
+                                    <tr>
+                                        <th class="topic-banner" data-field="project_name">Criterion</th>
+                                        <th class="topic-banner" data-field="score_percent">Winner</th>
+                                        <th class="topic-banner" data-field="score_sum">Votes</th>
+                                    </tr>
+                                </thead>
+
+                                <tbody>
+
+                                @criteria.map { criterion =>
+                                    <tr>
+                                        <td>@criterion.name</td>
+                                        <td>
+                                        @if(winnerSummary.get(criterion).size > 1) {
+                                            @winnerSummary.get(criterion).map { eachWinner =>
+                                                <div>@eachWinner.project.projectName</div>
+                                            }
+                                        } else {
+                                            @winnerSummary.get(criterion)(0).project.projectName
+                                            }
+                                        </td>
+                                        <td>@winnerSummary.get(criterion)(0).sum</td>
+                                    </tr>
+                                }
+
+                                </tbody>
+
+                            </table>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+
+                @criteria.map { criterion =>
+                    <div class="card-panel">
+
+                        <h4 class="center-align criterion-banner">@criterion.name</h4>
+                        <table class="hoverable centered responsive-table">
+                            <thead>
+                                <tr>
+                                    <th class="topic-banner" data-field="project_name">Project Name</th>
+                                    <th class="topic-banner" data-field="score_percent">Percent</th>
+                                    <th class="topic-banner" data-field="score_sum">Total Votes (@totalVotes)</th>
+                                </tr>
+                            </thead>
+
+                            <tbody>
+
+                                @projects.map { project =>
+                                    <tr>
+                                        <td>@project.projectName</td>
+                                        <td>
+                                            <div class="progress trigger">
+                                                <div class="determinate" style="width: @summary.get(criterion,project).asInstanceOf[Vote.ResultBundle].percent%"></div>
+                                            </div>
+                                            @summary.get(criterion,project).asInstanceOf[Vote.ResultBundle].percent %
+
+                                        </td>
+                                        <td>@summary.get(criterion,project).asInstanceOf[Vote.ResultBundle].sum</td>
+                                    </tr>
+                                }
+
+                            </tbody>
+
+                        </table>
+                    </div>
+                }
+
+            </div>
+
+        </div>
+
+        <div class="fixed-action-btn animated bounceInUp" style="bottom: 45px; right: 40px;">
+            <a class="btn-floating btn-large trigger" href="..">
+                <i class="large mdi-action-home waves-effect waves-light"></i>
+            </a>
+            <ul>
+                <li><a class="btn-floating green " href="../logout"><i class="large mdi-action-settings-power"></i></a></li>
+            </ul>
+        </div>
+
+        <script src="http://code.jquery.com/jquery-2.1.3.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.96.1/js/materialize.min.js"></script>
+
+
+    </body>
+</html>

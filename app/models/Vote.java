@@ -1,10 +1,12 @@
 package models;
 
 import javax.persistence.*;
+
+import org.apache.commons.collections.map.MultiKeyMap;
 import play.data.validation.Constraints.Required;
 import play.db.ebean.*;
 
-import java.util.List;
+import java.util.*;
 
 @Entity
 public class Vote extends Model {
@@ -38,4 +40,77 @@ public class Vote extends Model {
         return find.all();
     }
 
+    public static List<Vote> findVotesByCriterionId(Long criterionId) {
+        return find.where().eq("criterionId", criterionId).findList();
+    }
+
+    public static List<Vote> findVotesByCriterionIdAndProjectId(Long criterionId, Long projectId) {
+        return find.where().eq("criterionId", criterionId).eq("projectId", projectId).findList();
+    }
+
+    public static MultiKeyMap summarize() {
+        MultiKeyMap result = new MultiKeyMap();
+        List<VoteCriterion> criteria = VoteCriterion.findAll();
+        List<Project> projects = Project.findAll();
+        for(VoteCriterion criterion : criteria) {
+            for(Project project : projects) {
+                ResultBundle bundle = new ResultBundle();
+                bundle.sum = findVotesByCriterionIdAndProjectId(criterion.id,project.id).size();
+                bundle.totalVotes = findVotesByCriterionId(criterion.id).size();
+                bundle.percent = 100.0*bundle.sum/bundle.totalVotes;
+                bundle.project = project;
+                result.put(criterion, project, bundle);
+            }
+        }
+        return result;
+    }
+
+    public static HashMap<VoteCriterion,List<ResultBundle>> summarizeWithReverseOrder() {
+        HashMap<VoteCriterion, List<ResultBundle>> result = new HashMap<VoteCriterion, List<ResultBundle>>();
+        List<VoteCriterion> criteria = VoteCriterion.findAll();
+        List<Project> projects = Project.findAll();
+        for(VoteCriterion criterion : criteria) {
+            List<ResultBundle> bundleList = new ArrayList<ResultBundle>();
+            for(Project project : projects) {
+                ResultBundle bundle = new ResultBundle();
+                bundle.sum = findVotesByCriterionIdAndProjectId(criterion.id,project.id).size();
+                bundle.totalVotes = findVotesByCriterionId(criterion.id).size();
+                bundle.percent = 100.0*bundle.sum/bundle.totalVotes;
+                bundle.project = project;
+                bundleList.add(bundle);
+            }
+            Collections.sort(bundleList, Collections.reverseOrder(new Comparator() {
+                public int compare(Object o1, Object o2) {
+                    Integer sum1 = ((ResultBundle)o1).sum;
+                    Integer sum2 = ((ResultBundle)o2).sum;
+                    return sum1.compareTo(sum2);
+                }
+            }));
+            result.put(criterion, bundleList);
+        }
+        return result;
+    }
+
+    public static HashMap<VoteCriterion,List<ResultBundle>> getWinnerSummary() {
+        HashMap<VoteCriterion,List<ResultBundle>> result = summarizeWithReverseOrder();
+        List<VoteCriterion> criteria = VoteCriterion.findAll();
+        for(VoteCriterion criterion : criteria) {
+            int max = result.get(criterion).get(0).sum;
+            for(int i= result.get(criterion).size()-1; i >= 0; i-- ) {
+                if(result.get(criterion).get(i).sum < max) {
+                    result.get(criterion).remove(i);
+                }
+            }
+        }
+        return result;
+    }
+
+    public static class ResultBundle {
+        public int sum;
+        public double percent;
+        public int totalVotes;
+        public Project project;
+    }
+
 }
+
