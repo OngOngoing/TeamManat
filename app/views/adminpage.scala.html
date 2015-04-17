@@ -1,4 +1,4 @@
-@(users: List[User])(projects: List[Project])(rates: List[Rate])(configs: List[Settings])
+@(users: List[User])(projects: List[Project])(rates: List[Rate])(configs: List[Settings])(rateCs: List[RateCriterion])(voteCs: List[VoteCriterion])
 
 <!DOCTYPE html>
 
@@ -22,6 +22,7 @@
                     <li class="tab col s3"><a href="#users">Users</a></li>
                     <li class="tab col s3"><a class="active" href="#rates">Rate</a></li>
                     <li class="tab col s3"><a href="#projects">Project</a></li>
+                    <li class="tab col s3"><a href="#criterions">Criterion</a></li>
                     <li class="tab col s3"><a href="#configs">System Config</a></li>
                 </ul>
             </div>
@@ -209,9 +210,165 @@
                 </div>
             </div>
 
-
                 <!---------------\
         TAB 4
+        ---------------->
+            <div id="criterions" class="col s12 animated fadeIn">
+
+                <div class ="section">
+                    <ul class="collapsible" data-collapsible="accordion">
+                        <li>
+                            <div class="collapsible-header teal-text lighten-1 trigger"><i class="mdi-content-add"></i>
+                                Add Rate Criterion</div>
+                            <div class="collapsible-body">
+                                <div class="container">
+                                    <div class="row">
+                                        <form class="col s12" action="@routes.AdminPage.addRateCriterion()" method="post">
+                                            <div class="row">
+                                                <div class="input-field col s6">
+                                                    <i class="mdi-action-account-circle prefix"></i>
+                                                    <input id="name" name="name" type="text" class="validate" required>
+                                                    <label for="name">Name</label>
+                                                </div>
+                                                <div class="input-field col s6">
+                                                    <i class="mdi-communication-phone prefix"></i>
+                                                    <input id="description" name="description" type="text" class="validate" required>
+                                                    <label for="description">Description</label>
+                                                </div>
+                                            </div>
+
+                                            <div class="row">
+                                                <div class="input-field col s12">
+                                                    <button class="btn waves-effect waves-light" type="submit" name="action">
+                                                        Add
+                                                        <i class="mdi-content-send right"></i>
+                                                    </button>
+                                                </div>
+                                            </div>
+
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </li>
+                    </ul>
+
+                    <ul class="collapsible" data-collapsible="accordion">
+                        <li>
+                            <div class="collapsible-header teal-text lighten-1 trigger"><i class="mdi-content-add"></i>
+                                Add Vote Criterion</div>
+                            <div class="collapsible-body">
+                                <div class="container">
+                                    <div class="row">
+                                        <form class="col s12" action="@routes.AdminPage.addVoteCriterion()" method="post">
+                                            <div class="row">
+                                                <div class="input-field col s6">
+                                                    <i class="mdi-action-account-circle prefix"></i>
+                                                    <input id="name" name="name" type="text" class="validate" required>
+                                                    <label for="name">Name</label>
+                                                </div>
+                                                <div class="input-field col s6">
+                                                    <i class="mdi-communication-phone prefix"></i>
+                                                    <input id="description" name="description" type="text" class="validate" required>
+                                                    <label for="description">Description</label>
+                                                </div>
+                                            </div>
+
+                                            <div class="row">
+                                                <div class="input-field col s12">
+                                                    <button class="btn waves-effect waves-light" type="submit" name="action">
+                                                        Add
+                                                        <i class="mdi-content-send right"></i>
+                                                    </button>
+                                                </div>
+                                            </div>
+
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </li>
+                    </ul>
+
+                    <ul class="collapsible" data-collapsible="accordion">
+                        <li>
+                            <div class="collapsible-header teal-text lighten-1 trigger"><i class="mdi-action-list"></i>
+                                Show All Rate Criterion</div>
+                            <div class="collapsible-body">
+                                <div class="container">
+                                    <div class="row ">
+                                        <form class="col s12" action="@routes.AdminPage.addRateCriterion()" method="post">
+                                            <div class="row">
+                                                <div id="rateCs" class="col s12 ">
+                                                    <ul class="collection">
+                                                    @rateCs.map { rateC =>
+                                                        <li class="collection-item avatar">
+                                                            <i class="mdi-action-description circle teal lighten-1 trigger"></i>
+                                                            <span class="title teal-text lighten-1 trigger">ID : @rateC.id</span>
+                                                            <p>Name: @rateC.name <br>
+                                                                Description: @rateC.description
+                                                            </p>
+                                                            <a href="#!" class="secondary-content"><i class="mdi-navigation-close trigger"></i></a>
+                                                        </li>
+                                                    }
+                                                    </ul>
+
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </li>
+                    </ul>
+
+                    <ul class="collapsible" data-collapsible="accordion">
+                        <li>
+                            <div class="collapsible-header teal-text lighten-1 trigger"><i class="mdi-action-list"></i>
+                                Show All Vote Criterion</div>
+                            <div class="collapsible-body">
+                                <div class="container">
+                                    <div class="row">
+                                        <form class="col s12" action="@routes.AdminPage.addVoteCriterion()" method="post">
+                                            <div class="row">
+
+                                                <div id="voteCs" class="col s12 ">
+                                                    <ul class="collection">
+                                                    @voteCs.map { voteC =>
+                                                        <li class="collection-item avatar">
+                                                            <i class="mdi-action-description circle teal lighten-1 trigger"></i>
+                                                            <span class="title teal-text lighten-1 trigger">ID : @voteC.id</span>
+                                                            <p>Name: @voteC.name <br>
+                                                                Description: @voteC.description
+                                                            </p>
+                                                            <a href="#!" class="secondary-content"><i class="mdi-navigation-close trigger"></i></a>
+                                                        </li>
+                                                    }
+                                                    </ul>
+
+                                                </div>
+
+                                            </div>
+
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </li>
+                    </ul>
+
+
+                </div>
+
+            </div>
+
+
+                <!---------------\
+        TAB 5
         ---------------->
             <div id="configs" class="col s12 animated fadeIn">
                 <div class="row"></div>
