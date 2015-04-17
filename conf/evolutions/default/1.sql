@@ -21,7 +21,7 @@ create table project (
 create table project_image (
   id                        bigint auto_increment not null,
   project_id                bigint,
-  image                     longblob,
+  data                      longblob,
   constraint pk_project_image primary key (id))
 ;
 

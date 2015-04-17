@@ -31,6 +31,11 @@ POST        /searchuser                           controllers.EditProject.search
 GET         /editproject/delete/:id/:proId        controllers.EditProject.removeUser(id:Long, proId:Long)
 POST        /deleteproject                        controllers.EditProject.deleteProject()
 
+
+POST        /uploadimage                          controllers.EditProject.upload()
+GET         /getimgs/:proId                       controllers.Application.getImgs(proId:Long)
+GET         /getimg/:id                           controllers.Application.getImg(id:Long)
+
 # Create initial data for testing.
 GET         /install                              controllers.Application.mockDatabase()
 # Map static resources from the /public folder to the /assets URL path

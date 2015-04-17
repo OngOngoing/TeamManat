@@ -3,6 +3,8 @@ package models;
 import javax.persistence.*;
 import play.data.validation.Constraints.Required;
 import play.db.ebean.*;
+
+import java.io.File;
 import java.util.List;
 
 @Entity
@@ -14,6 +16,7 @@ public class Project extends Model
     @Required
     public String projectName;
     public String projectDescription;
+    public ProjectImage projectImage;
 
     public static Project create(String name , String description)
     {
