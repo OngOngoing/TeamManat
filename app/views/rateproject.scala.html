@@ -36,7 +36,7 @@
                     <img class="materialboxed animated fadeIn" src=@routes.Assets.at("img/TeamDummy.jpg")>
                 </div>
                 <div class="section animated fadeIn">
-                    @project.projectDescription
+                    @Html(project.projectDescription)
                 <div class="divider"></div>
                     @if(canRate) {
                         <div class="section animated fadeIn">

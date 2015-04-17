@@ -21,7 +21,6 @@ public class ProjectImage extends Model {
     @Lob
     private byte[] data;
 
-
     private static Finder<Long, ProjectImage> find = new Finder<Long, ProjectImage>(Long.class, ProjectImage.class);
 
     private ProjectImage(Long projectId, byte[] image)

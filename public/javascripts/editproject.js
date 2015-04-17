@@ -37,6 +37,9 @@ $(document).ready(function(){
             $("#show-result").html("");
         }
     });
+    $('#project_description').redactor({
+        imageUpload: '../uploadimage',
+    });
     $("#searchUser").focusout(function(){
         $("#show-result-ul").focusout(function(){
             $("#show-result").html("");
