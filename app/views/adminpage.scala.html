@@ -302,6 +302,7 @@
                                                 <th data-field="id">ID</th>
                                                 <th data-field="name">Name</th>
                                                 <th data-field="description">Description</th>
+                                                <th data-field="buttun"></th>
                                             </tr>
                                         </thead>
 
@@ -311,7 +312,9 @@
                                                     <td>@rateC.id</td>
                                                     <td>@rateC.name</td>
                                                     <td>@rateC.description</td>
+                                                    <td><a href="@routes.AdminPage.deleteRateCriterion(rateC.id)" class="secondary-content"><i class="mdi-navigation-close trigger"></i></a></td>
                                                 </tr>
+
                                             }
                                         </tbody>
                                     </table>
@@ -320,7 +323,7 @@
 
                         </li>
 
-                    
+
                         <li>
                             <div class="collapsible-header teal-text lighten-1 trigger"><i class="mdi-action-list"></i>
                                 Show All Vote Criterion</div>
@@ -332,6 +335,7 @@
                                                 <th data-field="id">ID</th>
                                                 <th data-field="name">Name</th>
                                                 <th data-field="description">Description</th>
+                                                <th data-field="buttun"></th>
                                             </tr>
                                         </thead>
 
@@ -341,6 +345,7 @@
                                                 <td>@voteC.id</td>
                                                 <td>@voteC.name</td>
                                                 <td>@voteC.description</td>
+                                                <td><a href="@routes.AdminPage.deleteVoteCriterion(voteC.id)" class="secondary-content"><i class="mdi-navigation-close trigger"></i></a></td>
                                             </tr>
                                         }
                                         </tbody>

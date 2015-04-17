@@ -27,4 +27,8 @@ public class VoteCriterion extends Model {
     public static List<VoteCriterion> findAll(){
     	return find.all();
     }
+
+    public static List<VoteCriterion> findById(Long userId){
+        return find.where().eq("id", userId).findList();
+    }
 }
