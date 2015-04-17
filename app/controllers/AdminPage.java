@@ -20,7 +20,7 @@ public class AdminPage extends Controller {
         User thisUser = User.findByUserId(userId);
 
         if(thisUser.idtype == User.ADMINISTRATOR) {
-            return ok(adminpage.render(users, Project.findAll(), rates, webconfig));
+            return ok(adminpage.render(users, Project.findAll(), rates, webconfig,RateCriterion.findAll(),VoteCriterion.findAll()));
         }
         else {
             return redirect(routes.ProjectList.index());
@@ -36,6 +36,16 @@ public class AdminPage extends Controller {
         Project project = Form.form(Project.class).bindFromRequest().get();
         project.save();
         return redirect(routes.AdminPage.index()+"#projects");
+    }
+    public static Result addRateCriterion(){
+        RateCriterion rateC = Form.form(RateCriterion.class).bindFromRequest().get();
+        rateC.save();
+        return redirect(routes.AdminPage.index()+"#criterions");
+    }
+    public static Result addVoteCriterion(){
+        VoteCriterion voteC = Form.form(VoteCriterion.class).bindFromRequest().get();
+        voteC.save();
+        return redirect(routes.AdminPage.index()+"#criterions");
     }
 
     public static Result deleteUsers(){

@@ -13,6 +13,8 @@ POST        /adminpage/deleteUsers                controllers.AdminPage.deleteUs
 POST        /adminpage/editUser                   controllers.AdminPage.editUser()
 POST        /adminpage/addProject                 controllers.AdminPage.addProject()
 POST        /adminpage/saveSetting                controllers.AdminPage.saveSetting()
+POST        /adminpage/addRateCriterion           controllers.AdminPage.addRateCriterion()
+POST        /adminpage/addVoteCriterion           controllers.AdminPage.addVoteCriterion()
 
 GET         /logout                               controllers.Application.logout()
 
