@@ -3,6 +3,7 @@ package models;
 import javax.persistence.*;
 
 import org.apache.commons.collections.map.MultiKeyMap;
+import play.Logger;
 import play.data.validation.Constraints.Required;
 import play.db.ebean.*;
 
@@ -57,7 +58,10 @@ public class Vote extends Model {
                 ResultBundle bundle = new ResultBundle();
                 bundle.sum = findVotesByCriterionIdAndProjectId(criterion.id,project.id).size();
                 bundle.totalVotes = findVotesByCriterionId(criterion.id).size();
-                bundle.percent = 100.0*bundle.sum/bundle.totalVotes;
+                bundle.percent = 0;
+                if(bundle.totalVotes > 0) {
+                    bundle.percent = 100.0*bundle.sum/bundle.totalVotes;
+                }
                 bundle.project = project;
                 result.put(criterion, project, bundle);
             }
