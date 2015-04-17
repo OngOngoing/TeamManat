@@ -45,12 +45,16 @@ body {
     background-image: radial-gradient(circle farthest-side at center top, #8beae3 0%, #34dbce 100%);
 }
 .login-window .wrap {
-    padding-top: 5%;
+    padding-top: 2%;
     padding-bottom: 5%;
+
 }
 .login-window .form-wrap {
     background-color: #e0f2f1;
-    padding: 50px 50px 100px 50px;
+    padding-top : 5%;
+    padding-bottom : 5%;
+    padding-left: 10%;
+    padding-right: 10%;
     position: relative;
     border-radius:0.5em;
 }
@@ -90,6 +94,12 @@ body {
     color: #cccccc;
 }
 
+.alert-success-colorized {
+    color: #26a69a;
+    background-color: #bff7ea;
+    border-color: #80cbc4;
+}
+
 
 .trigger {
     -webkit-animation: hue 60s infinite linear;
@@ -107,6 +117,7 @@ body {
     line-height: 120%;
     -webkit-font-smoothing: antialiased;
 }
+
 
 /*-----------------------------------*\
   $ANIMATIONS
