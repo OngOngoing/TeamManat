@@ -73,6 +73,15 @@ public class AdminPage extends Controller {
         return redirect(routes.AdminPage.index()+"#users");
     }
 
+    public static Result deleteRate(Long id){
+        List<Rate> rates = Rate.findById(id);
+        for(Rate rate : rates)
+        {
+            rate.delete();
+        }
+        return redirect(routes.AdminPage.index()+"#rates");
+    }
+
     public static Result deleteRateCriterion(Long id){
         List<RateCriterion> rateCs = RateCriterion.findById(id);
         for(RateCriterion rateC : rateCs)
