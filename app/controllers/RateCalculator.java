@@ -16,6 +16,7 @@ public class RateCalculator extends Controller {
     //@Security.Authenticated(Secured.class)
     public static Result index() {
         boolean isTimeUp = Settings.isTimeUp();
+        if(!isTimeUp) {
             flash("time_up","Time is already up. Sorry for the inconvenience.");
             return redirect(routes.Application.index());
         }
