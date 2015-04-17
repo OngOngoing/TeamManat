@@ -15,6 +15,8 @@ POST        /adminpage/addProject                 controllers.AdminPage.addProje
 POST        /adminpage/saveSetting                controllers.AdminPage.saveSetting()
 POST        /adminpage/addRateCriterion           controllers.AdminPage.addRateCriterion()
 POST        /adminpage/addVoteCriterion           controllers.AdminPage.addVoteCriterion()
+GET         /adminpage/deleteRateCriterion/:id    controllers.AdminPage.deleteRateCriterion(id:Long)
+GET         /adminpage/deleteVoteCriterion/:id    controllers.AdminPage.deleteVoteCriterion(id:Long)
 
 GET         /logout                               controllers.Application.logout()
 
@@ -26,7 +28,7 @@ GET         /vote/result                          controllers.VoteController.sho
 GET         /rateproject/:id                      controllers.RateProject.index(id:Long)
 POST        /rateproject                          controllers.RateProject.addRate()
 POST        /rateproject/edit                     controllers.RateProject.editRate()
-GET			/ratecalculator				  controllers.RateCalculator.index()
+GET         /ratecalculator                       controllers.RateCalculator.index()
 
 GET         /editproject/:proId                   controllers.EditProject.index(proId:Long)
 POST        /editproject/:proId                   controllers.EditProject.edit(proId:Long)

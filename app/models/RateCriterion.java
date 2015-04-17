@@ -19,4 +19,8 @@ public class RateCriterion extends Model {
     public static List<RateCriterion> findAll(){
     	return find.all();
     }
+
+    public static List<RateCriterion> findById(Long userId){
+        return find.where().eq("id", userId).findList();
+    }
 }

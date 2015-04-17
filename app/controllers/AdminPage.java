@@ -73,6 +73,25 @@ public class AdminPage extends Controller {
         return redirect(routes.AdminPage.index()+"#users");
     }
 
+    public static Result deleteRateCriterion(Long id){
+        List<RateCriterion> rateCs = RateCriterion.findById(id);
+        for(RateCriterion rateC : rateCs)
+        {
+            rateC.delete();
+        }
+        return redirect(routes.AdminPage.index()+"#criterions");
+    }
+
+    public static Result deleteVoteCriterion(Long id){
+        List<VoteCriterion> voteCs = VoteCriterion.findById(id);
+        for(VoteCriterion voteC : voteCs)
+        {
+            voteC.delete();
+        }
+        return redirect(routes.AdminPage.index()+"#criterions");
+    }
+
+
     public static Result editUser(){
         User newuser = Form.form(User.class).bindFromRequest().get();
         User olduser = User.findByUserId(newuser.id);
