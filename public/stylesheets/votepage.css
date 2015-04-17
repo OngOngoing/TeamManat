@@ -25,6 +25,14 @@
 }
 
 
+.collapsible-container {
+    padding: 1.5rem 1.0rem;
+    margin: 0 auto;
+    max-width: 1280px;
+    width: 95%;
+}
+
+
 
 .progress {
     position: relative;
