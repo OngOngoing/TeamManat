@@ -21,17 +21,34 @@
         <div class="container animated fadeIn">
             <!-- Page Content goes here -->
 
-            <ul class="collection">
-                @projects.map { project =>
-                    <a href="@routes.RateProject.index(project.id)" class="collection-item trigger">@project.projectName
-                        @rates.map { rate =>
-                            @if(rate.projectId == project.id){
+            <div class="row">
+                    @projects.map { project =>
+                        <div class="col s12 m6">
+                            <div class="card">
+                                <div class="card-image">
+                                    <img class="activator" src=@routes.Assets.at("img/TeamDummy.jpg")>
+                                    <span class="card-title">@project.projectName</span>
+                                </div>
+                            <div class="card-content">
+                                @project.projectDescription
+                                @rates.map { rate =>
+                                    @if(rate.projectId == project.id){
                                 <span class="rated badge">@rate.score</span>
-                            }
+                                    }
+                                 }
+                            </div>
+
+                            <div class="card-action">
+                                <a href="@routes.RateProject.index(project.id)" class="collection-item trigger">@project.projectName</a>
+                             </div>
+                            </div>
+                            </div>
                         }
-                    </a>
-                }
-            </ul>
+                        </div>
+                </div>
+                   
+                
+            </div>
                 <!-- End of Page Content -->
         </div>
 
