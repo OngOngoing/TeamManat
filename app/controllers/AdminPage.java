@@ -55,7 +55,6 @@ public class AdminPage extends Controller {
             {
                 rate.get(i).delete();
             }
-
         }
 
         return redirect(routes.AdminPage.index()+"#users");
