@@ -4,6 +4,7 @@ import javax.persistence.*;
 import javax.validation.constraints.*;
 
 import com.avaje.ebean.Expr;
+import play.Logger;
 import play.data.validation.Constraints.Required;
 import play.db.ebean.*;
 import java.util.List;

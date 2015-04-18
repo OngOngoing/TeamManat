@@ -3,16 +3,14 @@ package controllers;
 import models.Project;
 import models.Rate;
 import models.ProjectImage;
-import models.Settings;
 import models.User;
+import play.Logger;
 import play.data.DynamicForm;
 import play.mvc.*;
 import views.html.editproject;
 
 import java.io.File;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import play.libs.Json;
 /**
@@ -50,6 +48,7 @@ public class EditProject extends Controller {
         }
         editUser.projectId = projectId;
         editUser.update();
+        Logger.info("["+editUser.username+"] project id = "+projectId);
         flash("success", "User is added!");
         return redirect(routes.EditProject.index(projectId));
     }
@@ -62,6 +61,7 @@ public class EditProject extends Controller {
             project.projectName = name;
             project.projectDescription = description;
             project.update();
+            Logger.info("["+User.findByUserId(Long.parseLong(session("userId")+"")).username+"] edit project("+projectId+")"+project.projectName);
             flash("p_success", "Project is updated!");
         }
         return redirect(routes.EditProject.index(projectId));
@@ -70,6 +70,7 @@ public class EditProject extends Controller {
         User editUser = User.findByUserId(userId);
         if (editUser != null) {
             editUser.projectId = Long.parseLong("-1");
+            Logger.info("["+editUser.username+"] project id = -1.");
             editUser.update();
             flash("d_success", "User is successfully deleted");
         }
@@ -91,17 +92,21 @@ public class EditProject extends Controller {
         DynamicForm dynamicForm = new DynamicForm().bindFromRequest();
         Long proId = Long.parseLong(dynamicForm.get("projectId"));
         Project _pro = Project.findById(proId);
+        String name = _pro.projectName;
         if(_pro != null) {
             List<Rate> _rates = Rate.findListByProjectId(_pro.id);
             for (Rate item : _rates) {
+                Logger.info("rate ["+item.id+"] is delete. ProId:"+item.projectId+" UserId:"+item.userId);
                 item.delete();
             }
             List<User> _users = User.findByTeam(_pro.id);
             for (User item : _users) {
                 item.projectId = Long.parseLong("-1");
+                Logger.info("["+item.username+"] project id = -1.");
                 item.update();
             }
             _pro.delete();
+            Logger.info("Project ("+proId+")"+name+" is deleted");
         }
         flash("d_success", "Project is successfully deleted");
         return redirect(routes.ProjectList.index());
@@ -115,11 +120,13 @@ public class EditProject extends Controller {
         if(imgs.size() >= 10){
             return status(1);
         }
+        ProjectImage image;
         if(imgs.size() == 0) {
-            ProjectImage image = new ProjectImage(proId, file, ProjectImage.DEFAULT);
+            image = new ProjectImage(proId, file, ProjectImage.DEFAULT);
         }else{
-            ProjectImage image = new ProjectImage(proId, file, ProjectImage.NORMAL);
+            image = new ProjectImage(proId, file, ProjectImage.NORMAL);
         }
+        Logger.info(Project.findById(proId).projectName+" upload new image["+image.Id+"]");
         return ok("success!");
     }
 }
