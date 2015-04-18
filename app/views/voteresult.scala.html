@@ -28,12 +28,12 @@
                         <div class="collapsible-header trigger-text trigger"><i class="mdi-action-grade"></i>Show Winner</div>
                         <div class="collapsible-body">
                             <div class="collapsible-container">
-                            <table class="hoverable centered responsive-table">
+                            <table class="hoverable centered">
                                 <thead>
                                     <tr>
-                                        <th class="topic-banner" data-field="project_name">Criterion</th>
-                                        <th class="topic-banner" data-field="score_percent">Winner</th>
-                                        <th class="topic-banner" data-field="score_sum">Votes</th>
+                                        <th class="topic-banner flow-text" data-field="project_name">Criterion</th>
+                                        <th class="topic-banner flow-text" data-field="score_percent">Winner</th>
+                                        <th class="topic-banner flow-text" data-field="score_sum">Votes</th>
                                     </tr>
                                 </thead>
 
@@ -41,8 +41,8 @@
 
                                 @criteria.map { criterion =>
                                     <tr>
-                                        <td>@criterion.name</td>
-                                        <td>
+                                        <td class="flow-text">@criterion.name</td>
+                                        <td class="flow-text">
                                         @if(winnerSummary.get(criterion).size > 1) {
                                             @winnerSummary.get(criterion).map { eachWinner =>
                                                 <div>@eachWinner.project.projectName</div>
@@ -51,7 +51,7 @@
                                             @winnerSummary.get(criterion)(0).project.projectName
                                             }
                                         </td>
-                                        <td>@winnerSummary.get(criterion)(0).sum</td>
+                                        <td class="flow-text">@winnerSummary.get(criterion)(0).sum</td>
                                     </tr>
                                 }
 
@@ -67,12 +67,12 @@
                     <div class="card-panel">
 
                         <h4 class="center-align criterion-banner">@criterion.name</h4>
-                        <table class="hoverable centered responsive-table">
+                        <table class="hoverable centered">
                             <thead>
                                 <tr>
-                                    <th class="topic-banner" data-field="project_name">Project Name</th>
-                                    <th class="topic-banner" data-field="score_percent">Percent</th>
-                                    <th class="topic-banner" data-field="score_sum">Total Votes (@totalVotes)</th>
+                                    <th class="topic-banner flow-text" data-field="project_name">Project Name</th>
+                                    <th class="topic-banner flow-text" data-field="score_percent">Percent</th>
+                                    <th class="topic-banner flow-text" data-field="score_sum">Total Votes (@totalVotes)</th>
                                 </tr>
                             </thead>
 
@@ -80,15 +80,15 @@
 
                                 @projects.map { project =>
                                     <tr>
-                                        <td>@project.projectName</td>
-                                        <td>
+                                        <td class="flow-text">@project.projectName</td>
+                                        <td class="flow-text">
                                             <div class="progress trigger">
                                                 <div class="determinate" style="width: @summary.get(criterion,project).asInstanceOf[Vote.ResultBundle].percent%"></div>
                                             </div>
                                             @summary.get(criterion,project).asInstanceOf[Vote.ResultBundle].percent %
 
                                         </td>
-                                        <td>@summary.get(criterion,project).asInstanceOf[Vote.ResultBundle].sum</td>
+                                        <td class="flow-text">@summary.get(criterion,project).asInstanceOf[Vote.ResultBundle].sum</td>
                                     </tr>
                                 }
 
