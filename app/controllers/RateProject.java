@@ -32,7 +32,7 @@ public class RateProject extends Controller {
         }
         return ok(rateproject.render(user, Project.findById(projectId), rates , RateCriterion.findAll() ,images , teamMember, comment , setting));
     }
-
+     @Security.Authenticated(Secured.class)
     public static Result addRate(){
 		DynamicForm form = new DynamicForm().bindFromRequest();
         Long userId = Long.parseLong(session().get("userId"));
@@ -46,7 +46,7 @@ public class RateProject extends Controller {
         flash("rate_success", "Rate submitted");
     	return redirect(routes.RateProject.index(projectId));
     }
-
+     @Security.Authenticated(Secured.class)
     public static Result editRate() {
         DynamicForm form = new DynamicForm().bindFromRequest();
         Long userId = Long.parseLong(session().get("userId"));

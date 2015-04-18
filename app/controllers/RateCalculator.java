@@ -19,7 +19,6 @@ public class RateCalculator extends Controller {
         Long userId = Long.parseLong(session().get("userId"));
         User thisUser = User.findByUserId(userId);
         if(!isTimeUp && thisUser.idtype != User.ADMINISTRATOR ) {
-            flash("time_up","Time is already up. Sorry for the inconvenience.");
             return redirect(routes.Application.index());
         }
         List<Project> projects = Project.findAll();
