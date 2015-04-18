@@ -55,8 +55,11 @@ public class Rate extends Model {
         return find.where().eq("projectId",projectId).eq("criteriaId",criteriaId).findList();
     }
 
-    public static List<Rate> findById(Long userId){
-        return find.where().eq("id", userId).findList();
+    public static List<Rate> findRateByCriterionId(Long criteriaId){
+        return find.where().eq("criteriaId", criteriaId).findList();
+    }
+    public static Rate findById(Long rateId){
+        return find.byId(rateId);
     }
 
     public static Map<Long,Boolean> getRatedVoteAndProjectIdMappingByUserId(Long userId) {

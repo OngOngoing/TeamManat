@@ -37,6 +37,7 @@ public class Vote extends Model {
     public static Vote findByCriterionAndUserId(Long criterionId, Long userId) {
         return find.where().eq("criterionId", criterionId).eq("userId", userId).findUnique();
     }
+    public static Vote findById(Long voteid){return find.byId(voteid);}
     public static List<Vote> findAll(){
         return find.all();
     }
