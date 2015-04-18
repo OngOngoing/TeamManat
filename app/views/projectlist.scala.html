@@ -1,4 +1,4 @@
-@(projects: List[Project])(rates : List[Rate])(user : User)(setting : Settings)
+@(projects: List[Project])(mappedRates : Map[Long,Boolean])(user : User)(setting : Settings)
 
 <!DOCTYPE html>
 
@@ -38,17 +38,26 @@
                         <a href="@routes.RateProject.index(project.id)">
                             <div class="pane">
                                 <img src="@ProjectImage.getUrlDefaultImage(project.id)"/>
-                                <span class="card-title flow-text trigger-text trigger">@project.projectName</span>
-                                <p>
-                                    Click here to rate this project
-                                </p>
-                                <div class="bottom-content trigger trigger-text">NOT YET RATED</div>
+                                <span class="card-title flow-text">@project.projectName</span>
+                                @if(!mappedRates.get(project.id))  {
+                                    <p>
+                                        Click here to rate this project
+                                    </p>
+                                    <div class="bottom-content trigger trigger-text">NOT YET RATED</div>
+                                } else {
+                                    <p>
+                                        Click here to edit your rate
+                                    </p>
+                                    <div class="bottom-content trigger trigger-text"><i class="mdi-toggle-check-box tiny"></i> ALREADY RATED</div>
+                                }
+
                             </div>
                         </a>
                     </div>
                 </div>
             }
             </div>
+
 
             <!-- End of Page Content -->
         </div>
@@ -72,6 +81,11 @@
         @if(flash.contains("d_success")) {
             <script type="text/javascript">
             Materialize.toast('@flash.get("d_success")', 4000)
+            </script>
+        }
+        @if(flash.contains("voting_result_close")) {
+            <script type="text/javascript">
+            Materialize.toast('@flash.get("voting_result_close")', 4000)
             </script>
         }
     </body>

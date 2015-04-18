@@ -3,7 +3,10 @@ package models;
 import javax.persistence.*;
 import play.data.validation.Constraints.Required;
 import play.db.ebean.*;
+
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Entity
 public class Rate extends Model {
@@ -54,5 +57,15 @@ public class Rate extends Model {
 
     public static List<Rate> findById(Long userId){
         return find.where().eq("id", userId).findList();
+    }
+
+    public static Map<Long,Boolean> getRatedVoteAndProjectIdMappingByUserId(Long userId) {
+        HashMap<Long,Boolean> result = new HashMap<Long,Boolean>();
+        List<Project> projects = Project.findAll();
+        for(Project project : projects) {
+            Boolean isVoted = findListByUserIdAndProjectId(userId, project.id).size() > 0;
+            result.put(project.id, isVoted);
+        }
+        return result;
     }
 }

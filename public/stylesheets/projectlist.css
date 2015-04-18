@@ -49,6 +49,13 @@
     margin:0px;
 }
 
+.card-panel .pane .card-title {
+    display: block;
+    z-index: 99;
+    color: #484848;
+    font-size: 24px;
+    font-weight: 300; }
+
 .card-panel .pane img {
     position: absolute;
     width: 100px;
