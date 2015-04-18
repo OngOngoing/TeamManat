@@ -90,7 +90,6 @@ public class Application extends Controller {
     public static void mockCriteria() {
 
         VoteCriterion.create("Best Application","Best app for use at ExceedCamp.");
-        VoteCriterion.create("Best Design/UI","Best User Interface and Design");
 
         RateCriterion.create("Ease of use","how easy is to understand how to vote and actually vote? How easy is navigation? Is there clear feedback on what you have done so far?");
         RateCriterion.create("Reliability","can you smoothly login and complete voting? Does app prevent submission of invalid data?");

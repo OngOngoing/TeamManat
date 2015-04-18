@@ -83,19 +83,17 @@ public class AdminPage extends Controller {
     }
 
     public static Result deleteRateCriterion(Long id){
-        List<RateCriterion> rateCs = RateCriterion.findById(id);
-        for(RateCriterion rateC : rateCs)
-        {
-            rateC.delete();
+        RateCriterion rateCs = RateCriterion.findById(id);
+        if(rateCs != null) {
+            rateCs.delete();
         }
         return redirect(routes.AdminPage.index()+"#criterions");
     }
 
     public static Result deleteVoteCriterion(Long id){
-        List<VoteCriterion> voteCs = VoteCriterion.findById(id);
-        for(VoteCriterion voteC : voteCs)
-        {
-            voteC.delete();
+        VoteCriterion voteCs = VoteCriterion.findById(id);
+        if(voteCs != null) {
+            voteCs.delete();
         }
         return redirect(routes.AdminPage.index()+"#criterions");
     }

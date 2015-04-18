@@ -33,7 +33,7 @@ public class RateCriterion extends Model {
     	return find.all();
     }
 
-    public static List<RateCriterion> findById(Long userId){
-        return find.where().eq("id", userId).findList();
+    public static RateCriterion findById(Long id){
+        return find.byId(id);
     }
 }

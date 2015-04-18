@@ -24,11 +24,11 @@ public class VoteCriterion extends Model {
 
     public static Finder<Long, VoteCriterion> find = new Finder<Long, VoteCriterion>(Long.class, VoteCriterion.class);
 
-    public static List<VoteCriterion> findAll(){
-    	return find.all();
+    public static List<VoteCriterion> findAll() {
+        return find.all();
     }
 
-    public static List<VoteCriterion> findById(Long userId){
-        return find.where().eq("id", userId).findList();
+    public static VoteCriterion findById(Long id) {
+        return find.byId(id);
     }
 }
