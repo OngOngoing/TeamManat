@@ -20,12 +20,15 @@ public class Vote extends Model {
 
     public static Vote create(long criterionId , Long userId , Long projectId)
     {
-        Vote vote = new Vote();
-        vote.criterionId = criterionId;
-        vote.userId = userId;
-        vote.projectId = projectId;
-        vote.save();
-        return vote;
+        if(findByCriterionAndUserId(criterionId,projectId) == null) {
+            Vote vote = new Vote();
+            vote.criterionId = criterionId;
+            vote.userId = userId;
+            vote.projectId = projectId;
+            vote.save();
+            return vote;
+        }
+        return null;
     }
 
     public static Finder<Long, Vote> find = new Finder<Long, Vote>(Long.class, Vote.class);
@@ -47,6 +50,15 @@ public class Vote extends Model {
 
     public static List<Vote> findVotesByCriterionIdAndProjectId(Long criterionId, Long projectId) {
         return find.where().eq("criterionId", criterionId).eq("projectId", projectId).findList();
+    }
+
+    public static Map<VoteCriterion,Long> getVoteMappingByUserId(Long userId) {
+        Map<VoteCriterion,Long> result = new HashMap<VoteCriterion,Long>();
+        List<Vote> votes = findByUserId(userId);
+        for(Vote vote : votes) {
+            result.put(VoteCriterion.findById(vote.criterionId), vote.projectId);
+        }
+        return result;
     }
 
     public static MultiKeyMap summarize() {

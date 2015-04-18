@@ -1,4 +1,4 @@
-@(userId: Long)(projects: List[Project])(votes: List[Vote])(criteria: List[VoteCriterion])(isTimeUp: Boolean)
+@(userId: Long)(projects: List[Project])(voteMapping: Map[VoteCriterion,Long])(criteria: List[VoteCriterion])(isTimeUp: Boolean)
 @import java.math.BigInteger; var selected = 0;
 
 <!DOCTYPE html>
@@ -20,7 +20,7 @@
 
             <div class="section animated fadeIn">
                 @if(!isTimeUp) {
-                    @if(votes.size == 0) {
+                    @if(voteMapping.isEmpty) {
                         <div class="row">
                             <form action="@routes.VoteController.addVote()" method="post">
                                 @criteria.map { criterion =>
@@ -61,29 +61,16 @@
                                         <div class="row container">
                                         @projects.map { project =>
                                             <p>
-                                                @{
-                                                    selected = 0
-                                                }
-                                                @votes.map { vote =>
-                                                    @if(vote.criterionId == criterion.id && vote.projectId == project.id) {
-                                                        <input class="with-gap" value="@project.id" name="criterionId@criterion.id" type="radio" id="@criterion.id-@project.id" checked/>
-                                                        <label for="@criterion.id-@project.id">@project.projectName</label>
-                                                        @{
-                                                            selected = Integer.parseInt(project.id + "")
-                                                        }
-                                                    }
-
-                                                    @if(vote.criterionId == criterion.id && vote.projectId == -1) {
-                                                        @{selected = -1}
-                                                    }
-                                                }
-                                                @if(selected != project.id) {
+                                                @if(voteMapping.get(criterion) == project.id) {
+                                                    <input class="with-gap" value="@project.id" name="criterionId@criterion.id" type="radio" id="@criterion.id-@project.id" checked/>
+                                                    <label for="@criterion.id-@project.id">@project.projectName</label>
+                                                } else {
                                                     <input class="with-gap" value="@project.id" name="criterionId@criterion.id" type="radio" id="@criterion.id-@project.id"/>
                                                     <label for="@criterion.id-@project.id">@project.projectName</label>
                                                 }
                                             </p>
                                         }
-                                        @if(selected < 0) {
+                                        @if(voteMapping.get(criterion) == -1) {
                                             <input class="with-gap" value="-1" name="criterionId@criterion.id" type="radio" id="@criterion.id-novote" checked />
                                             <label for="@criterion.id-novote">No vote</label>
                                         } else {
@@ -95,8 +82,7 @@
                                     <div class="divider"></div>
                                 }
                                 <div class="section"></div>
-                                <button type="submit" class="waves-effect waves-light btn-large trigger"><i class="mdi-action-thumb-up right"
-                                    "></i>Edit</button>
+                                <button type="submit" class="waves-effect waves-light btn-large trigger"><i class="mdi-action-thumb-up right"></i>Edit</button>
                             </form>
                         </div>
                     }
@@ -112,30 +98,17 @@
                                     <div class="row container">
                                     @projects.map { project =>
                                         <p>
-                                            @{
-                                                selected = 0
-                                            }
-                                            @votes.map { vote =>
-                                                @if(vote.criterionId == criterion.id && vote.projectId == project.id) {
-                                                    <input disabled class="with-gap" value="@project.id" name="criterionId@criterion.id" type="radio" id="@criterion.id-@project.id" checked/>
-                                                    <label for="@criterion.id-@project.id">@project.projectName</label>
-                                                    @{
-                                                        selected = Integer.parseInt(project.id + "")
-                                                    }
-                                                }
-
-                                                @if(vote.criterionId == criterion.id && vote.projectId == -1) {
-                                                    @{selected = -1}
-                                                }
-                                            }
-                                            @if(selected != project.id) {
+                                            @if(voteMapping.get(criterion) == project.id) {
+                                                <input disabled class="with-gap" value="@project.id" name="criterionId@criterion.id" type="radio" id="@criterion.id-@project.id" checked/>
+                                                <label for="@criterion.id-@project.id">@project.projectName</label>
+                                            } else {
                                                 <input disabled class="with-gap" value="@project.id" name="criterionId@criterion.id" type="radio" id="@criterion.id-@project.id"/>
                                                 <label for="@criterion.id-@project.id">@project.projectName</label>
                                             }
                                         </p>
                                     }
 
-                                    @if(selected < 0) {
+                                    @if(voteMapping.get(criterion) == -1) {
                                         <input disabled class="with-gap" value="-1" name="criterionId@criterion.id" type="radio" id="@criterion.id-novote" checked />
                                         <label for="@criterion.id-novote">No vote</label>
                                     } else {
@@ -147,8 +120,7 @@
                                 <div class="divider"></div>
                             }
                             <div class="section"></div>
-                            <button disabled type="submit" class="waves-effect waves-light btn-large trigger"><i class="mdi-action-thumb-up right"
-                                "></i>Time is already up</button>
+                            <button disabled type="submit" class="waves-effect waves-light btn-large trigger"><i class="mdi-action-thumb-up right"></i>Time is already up</button>
                         </form>
                     </div>
                 }

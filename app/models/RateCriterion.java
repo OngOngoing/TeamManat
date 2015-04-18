@@ -22,11 +22,18 @@ public class RateCriterion extends Model {
     }
 
     public static RateCriterion create(String name, String description){
-        RateCriterion rate = new RateCriterion(name, description);
-        rate.name = name;
-        rate.description = description;
-        rate.save();
-        return rate;
+        if(findByCriterionName(name) == null) {
+            RateCriterion rate = new RateCriterion(name, description);
+            rate.name = name;
+            rate.description = description;
+            rate.save();
+            return rate;
+        }
+        return  null;
+    }
+
+    public static RateCriterion findByCriterionName(String name) {
+        return find.where().eq("name", name).findUnique();
     }
 
     public static List<RateCriterion> findAll(){
