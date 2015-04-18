@@ -20,7 +20,8 @@ public class Vote extends Model {
 
     public static Vote create(long criterionId , Long userId , Long projectId)
     {
-        if(findByCriterionAndUserId(criterionId,projectId) == null) {
+        Vote thisVote = findByCriterionAndUserId(criterionId,userId);
+        if(thisVote == null) {
             Vote vote = new Vote();
             vote.criterionId = criterionId;
             vote.userId = userId;
@@ -28,7 +29,9 @@ public class Vote extends Model {
             vote.save();
             return vote;
         }
-        return null;
+        thisVote.projectId = projectId;
+        thisVote.update();
+        return thisVote;
     }
 
     public static Finder<Long, Vote> find = new Finder<Long, Vote>(Long.class, Vote.class);

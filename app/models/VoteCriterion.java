@@ -15,14 +15,17 @@ public class VoteCriterion extends Model {
     public String description;
 
     public static VoteCriterion create(String name, String description) {
-        if(findByCriterionName(name) == null) {
+        VoteCriterion thisCriterion = findByCriterionName(name);
+        if(thisCriterion == null) {
             VoteCriterion criterion = new VoteCriterion();
             criterion.name = name;
             criterion.description = description;
             criterion.save();
             return criterion;
         }
-        return null;
+        thisCriterion.description = description;
+        thisCriterion.update();
+        return thisCriterion;
     }
 
     public static Finder<Long, VoteCriterion> find = new Finder<Long, VoteCriterion>(Long.class, VoteCriterion.class);
