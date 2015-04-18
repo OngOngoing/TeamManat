@@ -18,17 +18,25 @@
                 <div class="nav-wrapper">
                     <a class="brand-logo">
                         Project Management
-                        </a>
-                    <div class="center">
+                    </a>
+                    <div class="center hide-on-small-only hide-on-med-only">
                         <ul class="right">
-                           <li><a id="nave-mobile" href="../rateproject/@currentProject.id"><i class="medium mdi-navigation-arrow-back left"></i>Back</a></li>
-                            <li><a id="nave-mobile" href="../logout"><i class="medium mdi-action-settings-power left"></i>Logout</a></li>
+                            <li><a id="nave-mobile" href="../rateproject/@currentProject.id"><i class="medium mdi-navigation-arrow-back left"></i>
+                                Back</a></li>
+                            <li><a id="nave-mobile" href="../logout"><i class="medium mdi-action-settings-power left"></i>
+                                Logout</a></li>
                         </ul>
-                        </div>
+                    </div>
+                    <div class="center hide-on-large-only">
+                        <ul class="right">
+                            <li><a id="nave-mobile" href="../rateproject/@currentProject.id"><i class="small mdi-navigation-arrow-back"></i></a></li>
+                            <li><a id="nave-mobile" href="../logout"><i class="small mdi-action-settings-power"></i></a></li>
+                        </ul>
+                    </div>
                 </div>
             </div>
         </nav>
-        <div class="container" style="padding-top: 70px;">
+        <div class="container" style="padding-top : 70 px ;">
             <div class="card-panel grey lighten-5 z-depth-1">
                 <h4 class="trigger-text trigger pageBanner">Project Detail</h4><br />
                 <form action="../editproject/@currentProject.id" method="post">
@@ -38,22 +46,26 @@
                         <label for="projectName">Project Name</label>
                     </div>
                     <div class="input-field col s6">
-                        <div style="padding-left: 3rem; padding-top: 0.5rem;">
-                            <a onClick="$('#project_description').mdBold()" class="btn waves-effect waves-light cyan darken-3"><i class="mdi-editor-format-bold"></i></a>
-                            <a onClick="$('#project_description').mdItalic()" class="btn waves-effect waves-light cyan darken-3" ><i class="mdi-editor-format-italic"></i></a>
-                            <a onClick="$('#project_description').mdHeader({number: 1})" class="btn waves-effect waves-light cyan darken-3">H1</a>
-                            <a onClick="$('#project_description').mdHeader({number: 2})" class="btn waves-effect waves-light cyan darken-3">H2</a>
-                            <a onClick="$('#project_description').mdHeader({number: 3})" class="btn waves-effect waves-light cyan darken-3">H3</a>
-                            <a onClick="$('#project_description').mdHeader({number: 4})" class="btn waves-effect waves-light cyan darken-3">H4</a>
-                            <a onClick="$('#project_description').mdLink({default_url: prompt('Enter URL please')})" class="btn waves-effect waves-light cyan darken-3"><i class="mdi-editor-insert-link"></i></a>
-                            <!--<a onClick="$('#project_description').mdImage({default_image_url: prompt('Enter URL Please')})" class="btn waves-effect waves-light cyan darken-3"><i class="mdi-editor-insert-photo"></i></a>-->
-                            <a onClick="$('#project_description').mdQuote()" class="btn waves-effect waves-light cyan darken-3"><i class="mdi-editor-format-quote"></i></a>
-                            <a onClick="$('#project_description').mdCode()" class="btn waves-effect waves-light cyan darken-3"><i class="mdi-editor-mode-edit"></i></a>
-                            <a onClick="$('#project_description').mdNumberedList()" class="btn waves-effect waves-light cyan darken-3"><i class="mdi-editor-format-list-numbered"></i></a>
-                            <a onClick="$('#project_description').mdBulletList()" class="btn waves-effect waves-light cyan darken-3"><i class="mdi-editor-format-list-bulleted"></i></a>
+                        <div style="padding-left : 3 rem ; padding-top : 0.5 rem ;">
+                            <a onClick="$ ( '#project_description' ).mdBold ( )" class="btn waves-effect waves-light cyan darken-3"><i class="mdi-editor-format-bold"></i></a>
+                            <a onClick="$ ( '#project_description' ).mdItalic ( )" class="btn waves-effect waves-light cyan darken-3" ><i class="mdi-editor-format-italic"></i></a>
+                            <a onClick="$ ( '#project_description' ).mdHeader ( { number : 1 } )" class="btn waves-effect waves-light cyan darken-3">
+                                H1</a>
+                            <a onClick="$ ( '#project_description' ).mdHeader ( { number : 2 } )" class="btn waves-effect waves-light cyan darken-3">
+                                H2</a>
+                            <a onClick="$ ( '#project_description' ).mdHeader ( { number : 3 } )" class="btn waves-effect waves-light cyan darken-3">
+                                H3</a>
+                            <a onClick="$ ( '#project_description' ).mdHeader ( { number : 4 } )" class="btn waves-effect waves-light cyan darken-3">
+                                H4</a>
+                            <a onClick="$ ( '#project_description' ).mdLink ( { default_url : prompt ( 'Enter URL please' ) } )" class="btn waves-effect waves-light cyan darken-3"><i class="mdi-editor-insert-link"></i></a>
+                                <!--<a onClick="$('#project_description').mdImage({default_image_url: prompt('Enter URL Please')})" class="btn waves-effect waves-light cyan darken-3"><i class="mdi-editor-insert-photo"></i></a>-->
+                            <a onClick="$ ( '#project_description' ).mdQuote ( )" class="btn waves-effect waves-light cyan darken-3"><i class="mdi-editor-format-quote"></i></a>
+                            <a onClick="$ ( '#project_description' ).mdCode ( )" class="btn waves-effect waves-light cyan darken-3"><i class="mdi-editor-mode-edit"></i></a>
+                            <a onClick="$ ( '#project_description' ).mdNumberedList ( )" class="btn waves-effect waves-light cyan darken-3"><i class="mdi-editor-format-list-numbered"></i></a>
+                            <a onClick="$ ( '#project_description' ).mdBulletList ( )" class="btn waves-effect waves-light cyan darken-3"><i class="mdi-editor-format-list-bulleted"></i></a>
                         </div>
                         <i class="mdi-editor-mode-edit prefix"></i>
-                        <textarea id="project_description" placeholder="Enter project descrption..." name="description" class="materialize-textarea" length="2000" maxlength="2000" style="resize: none;overflow-y:scroll;height:190px;max-height: 190px;" required>@currentProject.projectDescription</textarea>
+                        <textarea id="project_description" placeholder="Enter project descrption..." name="description" class="materialize-textarea" length="2000" maxlength="2000" style="resize : none ; overflow-y : scroll ; height : 190 px ; max-height : 190 px ;" required>@currentProject.projectDescription</textarea>
                         <label for="project_description" class="active">Description</label>
                     </div>
                     <div class="row">
@@ -69,75 +81,77 @@
                             }
                         </div>
                     </div>
-            </form>
-        </div>
-        <div class="card-panel grey lighten-5 z-depth-1">
-            <h4 class="trigger-text trigger pageBanner">Project Screen Shot</h4>
-            <div class="upload" proId="@currentProject.id"></div>
-            <div id="process-bar">
+                </form>
             </div>
-        </div>
-        <div class="card-panel grey lighten-5 z-depth-1">
-            <h4 class="trigger-text trigger pageBanner">Member List</h4>
-            <table class="hoverable">
-                <thead>
-                    <tr>
-                        <th data-field="id" width="45%">First Name</th>
-                        <th data-field="name" width="45%">Last Name</th>
-                        <th data-field="price" width="10%">Delte</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @members.map { member =>
+            <div class="card-panel grey lighten-5 z-depth-1">
+                <h4 class="trigger-text trigger pageBanner">Project Screen Shot</h4>
+                <div class="upload" proId="@currentProject.id"></div>
+                <div id="process-bar">
+                </div>
+            </div>
+            <div class="card-panel grey lighten-5 z-depth-1">
+                <h4 class="trigger-text trigger pageBanner">Member List</h4>
+                <table class="hoverable">
+                    <thead>
                         <tr>
-                            <td><code class=" language-markup">@member.firstname</code></td>
-                            <td><code class=" language-markup">@member.lastname</code></td>
-                            <td><code class=" language-markup">@if(currentUser.id != member.id){ <a class="btn-floating waves-effect waves-light red" href="../editproject/delete/@member.id/@currentProject.id"><i class="mdi-content-clear"></i></a> } </code></td>
+                            <th data-field="id" width="45%">First Name</th>
+                            <th data-field="name" width="45%">Last Name</th>
+                            <th data-field="price" width="10%">Delte</th>
                         </tr>
-                    }
-                    @if(members.size == 0) {
-                        <tr>
-                            <td><code class=" language-markup"><i>Member is empty.</i></code></td>
-                            <td><code class=" language-markup"></code></td>
-                            <td><code class=" language-markup"></code></td>
+                    </thead>
+                    <tbody>
+                        @members.map { member =>
+                            <tr>
+                                <td><code class=" language-markup">@member.firstname</code></td>
+                                <td><code class=" language-markup">@member.lastname</code></td>
+                                <td><code class=" language-markup">@if(currentUser.id != member.id) {
+                                    <a class="btn-floating waves-effect waves-light red" href="../editproject/delete/@member.id/@currentProject.id"><i class="mdi-content-clear"></i></a>
+                                } </code></td>
+                            </tr>
+                        }
+                        @if(members.size == 0) {
+                            <tr>
+                                <td><code class=" language-markup"><i>Member is empty.</i></code></td>
+                                <td><code class=" language-markup"></code></td>
+                                <td><code class=" language-markup"></code></td>
+                            </tr>
+                        }
+                        <tr><form action="../editproject/addmember/@currentProject.id" method="post">
+                            <td>
+                                <code class=" language-markup"><h5>Add new member</h5>
+                                    <blockquote>
+                                        Input the User ID or search the user by input <br />
+                                        firstname / lastname, then select the specified user.
+                                    </blockquote>
+                                </code>
+                            </td>
+                            <td>
+                                <code class=" language-markup">
+                                    <div class="input-field">
+                                        <input id="searchUser" type="text" class="validate" name="searchUser">
+                                        <label for="user">Keyword or User ID</label>
+                                        <div id='show-result'></div>
+                                        @if(flash.contains("error")) {
+                                            <div class="txt-center red-text text-darken-1"><i class="Small mdi-alert-warning"></i> @flash.get("error")</div>
+                                        }
+                                        @if(flash.contains("success")) {
+                                            <div class="txt-center green-text text-darken-1"><i class="Small mdi-alert-warning"></i> @flash.get("success")</div>
+                                        }
+                                    </div>
+                                </code>
+                            </td>
+                            <td>
+                                <code class=" language-markup">
+                                    <button class="btn waves-effect waves-light btn-floating green" type="submit" name="action">
+                                        <i class="mdi-content-add"></i>
+                                    </button>
+                                </code>
+                            </td>
+                        </form>
                         </tr>
-                    }
-                    <tr><form action="../editproject/addmember/@currentProject.id" method="post">
-                        <td>
-                            <code class=" language-markup"><h5>Add new member</h5>
-                                <blockquote>
-                                    Input the User ID or search the user by input <br />
-                                    firstname / lastname, then select the specified user.
-                                </blockquote>
-                            </code>
-                        </td>
-                        <td>
-                            <code class=" language-markup">
-                                <div class="input-field">
-                                    <input id="searchUser" type="text" class="validate" name="searchUser">
-                                    <label for="user">Keyword or User ID</label>
-                                    <div id='show-result'></div>
-                                    @if(flash.contains("error")) {
-                                        <div class="txt-center red-text text-darken-1"><i class="Small mdi-alert-warning"></i> @flash.get("error")</div>
-                                    }
-                                    @if(flash.contains("success")) {
-                                        <div class="txt-center green-text text-darken-1"><i class="Small mdi-alert-warning"></i> @flash.get("success")</div>
-                                    }
-                                </div>
-                            </code>
-                        </td>
-                        <td>
-                            <code class=" language-markup">
-                                <button class="btn waves-effect waves-light btn-floating green" type="submit" name="action">
-                                    <i class="mdi-content-add"></i>
-                                </button>
-                            </code>
-                        </td>
-                    </form>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
+                    </tbody>
+                </table>
+            </div>
         </div>
             <!-- FOLATING BUTTON -->
         <div class="fixed-action-btn animated bounceInUp" style="bottom : 45 px ; right : 40 px ;">
@@ -158,7 +172,8 @@
                 <a href="#!" class=" modal-action modal-close waves-effect waves-green btn-flat">Cancel</a>
                 <form action="@routes.EditProject.deleteProject()" method="post">
                     <input type="hidden" value="@currentProject.id" name="projectId" />
-                    <button href="@routes.EditProject.deleteProject()" class=" modal-action modal-close waves-effect waves-green btn-flat" type="submit">Delete</button>
+                    <button href="@routes.EditProject.deleteProject()" class=" modal-action modal-close waves-effect waves-green btn-flat" type="submit">
+                        Delete</button>
                 </form>
             </div>
         </div>
@@ -170,17 +185,17 @@
         <script src="@routes.Assets.at("javascripts/upload.js")" type="text/javascript"></script>
         @if(flash.contains("p_success")) {
             <script type="text/javascript">
-            Materialize.toast('@flash.get("p_success")', 4000)
+            Materialize.toast ( ' @flash.get("p_success") ', 4000)
             </script>
         }
         @if(flash.contains("d_success")) {
             <script type="text/javascript">
-            Materialize.toast('@flash.get("d_success")', 4000)
+            Materialize.toast ( ' @flash.get("d_success") ', 4000)
             </script>
         }
         @if(flash.contains("error")) {
             <script type="text/javascript">
-            Materialize.toast('@flash.get("error")', 4000)
+            Materialize.toast ( ' @flash.get("error") ', 4000)
             </script>
         }
     </body>
