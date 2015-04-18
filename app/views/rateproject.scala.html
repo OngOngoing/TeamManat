@@ -110,9 +110,16 @@
                                                     <div class = "criterion-name col s12 center trigger-text trigger">@criteria.name</div>
                                                     <div class="divider container"></div><br>
                                                     <div class = "col s12 center">
-                                                        @for(index <- 1 until 6) {
-                                                            <a id="@criteria.id" class="waves-effect waves-teal btn btn-flat btn-floating btn-large trigger" name="criteriaButton" score="@index" href="#!">@index</a>
-                                                        }
+                                                        <div class = "hide-on-med-and-up">
+                                                            @for(index <- 1 until 6) {
+                                                                <a id="@criteria.id" class="waves-effect waves-teal btn btn-flat btn-floating trigger" name="criteriaButton" score="@index" href="#!">@index</a>
+                                                            }
+                                                        </div>
+                                                        <div class = "hide-on-small-only">
+                                                            @for(index <- 1 until 6) {
+                                                                <a id="@criteria.id" class="waves-effect waves-teal btn btn-flat btn-floating trigger btn-large" name="criteriaButton" score="@index" href="#!">@index</a>
+                                                            }
+                                                        </div>
                                                     </div>
                                                 </div>
                                             }
@@ -149,13 +156,25 @@
                                                         <div class="divider container"></div><br>
                                                         <div class="row">
                                                             <div class="col s12 center">
-                                                                @for(index<-1 until 6){
-                                                                    @if(rate.score == index){ 
-                                                                        <a id="@rate.criteriaId" class=" waves-effect waves-teal btn btn-floating btn-large trigger" name="criteriaButton" score="@index" href="#!">@index</a>
-                                                                    }else{
-                                                                        <a id="@rate.criteriaId" class=" waves-effect waves-teal btn btn-flat btn-floating btn-large trigger" name="criteriaButton" score="@index" href="#!">@index</a>
+                                                                <div class = "hide-on-med-and-up">
+                                                                    @for(index<-1 until 6){
+                                                                        @if(rate.score == index){ 
+                                                                            <a id="@rate.criteriaId" class=" waves-effect waves-teal btn btn-floating trigger" name="criteriaButton" score="@index" href="#!">@index</a>
+                                                                        }else{
+                                                                            <a id="@rate.criteriaId" class=" waves-effect waves-teal btn btn-flat btn-floating trigger" name="criteriaButton" score="@index" href="#!">@index</a>
+                                                                        }
                                                                     }
-                                                                }
+                                                                </div>
+                                                                <div class = "hide-on-small-only">
+                                                                    @for(index<-1 until 6){
+                                                                        @if(rate.score == index){ 
+                                                                            <a id="@rate.criteriaId" class=" waves-effect waves-teal btn btn-large btn-floating trigger" name="criteriaButton" score="@index" href="#!">@index</a>
+                                                                        }else{
+                                                                            <a id="@rate.criteriaId" class=" waves-effect waves-teal btn btn-large btn-flat btn-floating trigger" name="criteriaButton" score="@index" href="#!">@index</a>
+                                                                        }
+                                                                    }
+                                                                </div>
+                                                                
                                                             </div>
                                                         </div>
 
