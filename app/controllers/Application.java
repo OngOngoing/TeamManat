@@ -78,8 +78,9 @@ public class Application extends Controller {
         User.create("test1", "test1", "TestFirstname1", "TestLastName1", User.NORMAL_USER); // Add new account : username => test1 password => test1
         User.create("test2", "test2", "TestFirstname2", "TestLastName2", User.NORMAL_USER); // Add new account : username => test2 password => test2
 
-        mockProjectInDivision1();
-        mockUserInDivision2();
+        mockProjectsInDivision1();
+        mockUsersInDivision1();
+        mockUsersInDivision2();
         mockCriteria();
 
         flash("success", "A initial data for test the system was created.");
@@ -99,7 +100,7 @@ public class Application extends Controller {
 
     }
 
-    public static void mockProjectInDivision1() {
+    public static void mockProjectsInDivision1() {
         Project.create("TeamSaint4","Team Saint4's description belongs here");
         Project.create("TeamManat","TeamManat's description belongs here");
         Project.create("Team2Big2Slim","Team2Big2Slim's description belongs here");
@@ -107,7 +108,40 @@ public class Application extends Controller {
 
     }
 
-    public static void mockUserInDivision2() {
+    public static void mockUsersInDivision1() {
+        //TeamSaint4
+        User.create("5610545765", "muninthorn.t", "Muninthorn", "Thongnuc", User.NORMAL_USER);
+        User.create("5610545781", "runyasak.c", "Runyasak", "Chaengnaimuang", User.NORMAL_USER);
+        User.create("5610545706", "nara.s", "Nara", "Surawit", User.NORMAL_USER);
+        User.create("5610546788", "vasupol.c", "Vasupol", "Charmethakul", User.NORMAL_USER);
+        User.create("5610545803", "wuttipong.k", "Wuttipong", "Khemphetjetsada", User.NORMAL_USER);
+
+
+        //TeamManat
+        User.create("5610546231", "chinnaporn.s", "Chinnaporn", "Soonue", User.NORMAL_USER);
+        User.create("5610545811", "sorrawit.c", "Sorrawit", "Chancherngkit", User.NORMAL_USER);
+        User.create("5610546290", "worapon.o", "Worapon", "Olanwanitchakul", User.NORMAL_USER);
+        User.create("5610545013", "niti.p", "Niti", "Petcharatmora", User.NORMAL_USER);
+        User.create("5610546800", "supason.k", "Supason", "Kotanut", User.NORMAL_USER);
+
+
+        //Team2Big2Slim
+        User.create("5610545722", "punpikorn.r", "Punpikorn", "Rattanawirojkul", User.NORMAL_USER);
+        User.create("5610545668", "nathakorn.s", "Nathakorn", "Sukumsirichart", User.NORMAL_USER);
+        User.create("5610545731", "piyaphat.t", "Piyaphat", "Tulakoop", User.NORMAL_USER);
+        User.create("5610546711", "nabhat.y", "Nabhat", "Yuktadatta", User.NORMAL_USER);
+        User.create("5610545676", "nut.k", "Nut", "Kaewnak", User.NORMAL_USER);
+
+        //TeamFatCat
+        User.create("5610546702", "jiratchaya.i", "Jiratchaya", "Intaragumhaeng", User.NORMAL_USER);
+        User.create("5610545684", "nichamon.h", "Nichamon", "Hanidhikul", User.NORMAL_USER);
+        User.create("5610546222", "chonnipa.k", "Chonnipa", "Kittisiriprasert", User.NORMAL_USER);
+        User.create("5610546257", "natchanon.c", "Natchanon", "Charoensuk", User.NORMAL_USER);
+        User.create("5610546699", "kittipat.p", "Kittipat", "Proomdirek", User.NORMAL_USER);
+
+    }
+
+    public static void mockUsersInDivision2() {
         // TEAMGG
         User.create("b5610545757", "manatsawin.h", "Manatsawin", "Hanmongkolchai", User.NORMAL_USER);
         User.create("b5610546770", "varis.k", "Varis", "Kritpolchai", User.NORMAL_USER);
