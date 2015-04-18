@@ -76,6 +76,7 @@ public class Vote extends Model {
                 bundle.percent = 0;
                 if(bundle.totalVotes > 0) {
                     bundle.percent = 100.0*bundle.sum/bundle.totalVotes;
+                    bundle.roundedPercent = String.format("%.2f",bundle.percent);
                 }
                 bundle.project = project;
                 result.put(criterion, project, bundle);
@@ -96,6 +97,7 @@ public class Vote extends Model {
                 bundle.totalVotes = findVotesByCriterionId(criterion.id).size();
                 bundle.percent = 100.0*bundle.sum/bundle.totalVotes;
                 bundle.project = project;
+                bundle.roundedPercent = String.format("%.2f",bundle.percent);
                 bundleList.add(bundle);
             }
             Collections.sort(bundleList, Collections.reverseOrder(new Comparator() {
@@ -127,6 +129,7 @@ public class Vote extends Model {
     public static class ResultBundle {
         public int sum;
         public double percent;
+        public String roundedPercent;
         public int totalVotes;
         public Project project;
     }

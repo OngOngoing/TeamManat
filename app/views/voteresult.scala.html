@@ -83,9 +83,9 @@
                                         <td class="flow-text">@project.projectName</td>
                                         <td class="flow-text">
                                             <div class="progress trigger">
-                                                <div class="determinate" style="width: @summary.get(criterion,project).asInstanceOf[Vote.ResultBundle].percent%"></div>
+                                                <div class="determinate" style="width: @summary.get(criterion,project).asInstanceOf[Vote.ResultBundle].roundedPercent%"></div>
                                             </div>
-                                            @summary.get(criterion,project).asInstanceOf[Vote.ResultBundle].percent %
+                                            @summary.get(criterion,project).asInstanceOf[Vote.ResultBundle].roundedPercent %
 
                                         </td>
                                         <td class="flow-text">@summary.get(criterion,project).asInstanceOf[Vote.ResultBundle].sum</td>
