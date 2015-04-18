@@ -87,6 +87,14 @@
                         </div>
                     }
                 } else {
+                    <div class="section animated fadeIn">
+                        <div class="row">
+                            <h2 class="center col s12 trigger trigger-text">Time's up!</h2>
+                            <div class ="center col s12">
+                                <a href="@routes.VoteController.showResult()" class = "btn btn-large trigger"><i class="medium mdi-action-class left"></i></i>Voting Result<i class="mdi-content-send right"></i></a>
+                            </div>
+                        </div>
+                    </div>
                     <div class="row">
                         <form action="@routes.VoteController.editVote()" method="post">
                             @criteria.map { criterion =>
