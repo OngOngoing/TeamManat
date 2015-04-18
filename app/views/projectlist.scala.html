@@ -32,32 +32,25 @@
             <!-- Page Content goes here -->
 
             <div class="row">
-                    @projects.map { project =>
-                        <div class="col s12 m6">
-                            <div class="card">
-                                <div class="card-image waves-effect waves-block waves-light">
-                                    <img class="activator" src="@ProjectImage.getUrlDefaultImage(project.id)">
-                                </div>
-                                <div class="card-content" style="max-height: 200px;">
-                                    <span class="card-title activator grey-text text-darken-4">@project.projectName<p class="right"><a  class = " btn btn-large trigger"href="@routes.RateProject.index(project.id)" class=" trigger ">More...</a></p></span>
-
-                                </div>
-                                    <!--rates.map { rate =>
-                                    if(rate.projectId == project.id){
-                                <span class="rated badge">rate.score</span>
-                                    }
-                                 }
-                                 -->
-                                <div class="card-reveal">
-                                    <span class="card-title grey-text text-darken-4">@project.projectName<i class="mdi-navigation-close right"></i></span>
-                                    <p class="projectDescription" data="@project.projectDescription"></p>
-                                </div>
+            @projects.map { project =>
+                <div class="col s12">
+                    <div class="card-panel waves-effect waves-block">
+                        <a href="@routes.RateProject.index(project.id)">
+                            <div class="pane">
+                                <img src="@ProjectImage.getUrlDefaultImage(project.id)"/>
+                                <span class="card-title flow-text trigger-text trigger">@project.projectName</span>
+                                <p>
+                                    Click here to rate this project
+                                </p>
+                                <div class="bottom-content trigger trigger-text">NOT YET RATED</div>
                             </div>
-                        </div>
-                        }
-
+                        </a>
+                    </div>
+                </div>
+            }
             </div>
-                <!-- End of Page Content -->
+
+            <!-- End of Page Content -->
         </div>
 
         @if(user.idtype == User.ADMINISTRATOR ){
