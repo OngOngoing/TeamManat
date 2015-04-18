@@ -11,17 +11,19 @@
         </head>
         <body>
             <div class="container">
-                <h1 class = "lobby-banner trigger trigger-text">Rating Result</h1>
-                    <ul  >
+                <div class="animated fadeInDown">
+                    <h1 class = "lobby-banner trigger trigger-text">Rating Result</h1>
+                </div>
+                    <ul class="section animated fadeInLeft">
                         @result.zipWithIndex.map{case(r,index) =>
                             <li class= "card-panel">
-                                <h5><i class="mdi-action-stars small"></i>@projects.get(index).projectName</h5>
-                                <div >
+                                <h5 class ="trigger trigger-text"><i class="mdi-action-stars small"></i>@projects.get(index).projectName</h5>
+                                <div class="section animated fadeIn">
                                     <table class = "centered hoverable">
                                         <thead>
                                             <tr>
-                                                <th data-field="cname">CriteriaName</th>
-                                                <th data-field="score">Score</th>
+                                                <th class ="trigger trigger-text" data-field="cname">CriteriaName</th>
+                                                <th class ="trigger trigger-text" data-field="score">Score</th>
                                             </tr>
                                         </thead>
                                         <tbody >
@@ -40,7 +42,7 @@
                                     </table>
                                 <ul class="collapsible" data-collapsible="Expandable">
                                     <li>
-                                        <div class="collapsible-header "><i class="mdi-communication-comment"></i>Comments</div>
+                                        <div class="collapsible-header trigger trigger-text" ><i class="mdi-communication-comment"></i>Comments</div>
                                         <div class="collapsible-body ">
                                             <ul class="collapsible" data-collapsible="accordion">
                                                 @if(Comment.findListByProjectId(projects.get(index).id).size == 0){
