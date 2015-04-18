@@ -19,7 +19,8 @@ public class RateCalculator extends Controller {
         Long userId = Long.parseLong(session().get("userId"));
         User thisUser = User.findByUserId(userId);
         if(!isTimeUp && thisUser.idtype != User.ADMINISTRATOR ) {
-            return redirect(routes.Application.index());
+            flash("rating_result_close","Please wait until the rating session is closed. Sorry for the inconvenience.");
+            return redirect(routes.ProjectList.index());
         }
         List<Project> projects = Project.findAll();
         List<RateCriterion> criteria = RateCriterion.findAll();

@@ -96,5 +96,10 @@
             Materialize.toast('@flash.get("voting_result_close")', 4000)
             </script>
         }
+        @if(flash.contains("rating_result_close")) {
+            <script type="text/javascript">
+            Materialize.toast('@flash.get("rating_result_close")', 4000)
+            </script>
+        }
     </body>
 </html>
