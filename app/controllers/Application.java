@@ -3,10 +3,12 @@ package controllers;
 import java.text.*;
 import java.util.*;
 import models.*;
+import org.apache.commons.collections.map.HashedMap;
 import play.Logger;
 import play.libs.Json;
 import play.mvc.*;
 import play.data.*;
+import java.util.ArrayList;
 
 import views.html.*;
 
@@ -61,7 +63,15 @@ public class Application extends Controller {
 
     public static Result getImgs(Long proId){
         List<ProjectImage> images = ProjectImage.findImageOfProject(proId);
-        return ok(Json.toJson(images));
+        List<Map<String, Long>> img = new ArrayList();
+        for(ProjectImage item : images){
+            Map<String, Long> detail = new HashMap();
+            detail.put("Id", item.Id);
+            detail.put("projectId", item.projectId);
+            detail.put("imgType", Long.parseLong(item.imgType+""));
+            img.add(detail);
+        }
+        return ok(Json.toJson(img));
     }
     public static Result getImg(Long imgId){
         ProjectImage image = ProjectImage.findById(imgId);

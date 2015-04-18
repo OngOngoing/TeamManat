@@ -8,3 +8,8 @@
     padding-left: 40px;
     padding-top: 10px;
 }
+.slider .slides li .caption {
+    left:0% !important;
+    top:2% !important;
+    width:100% !important;
+}

@@ -3,7 +3,6 @@
     0
 }
 <!DOCTYPE html>
-
 <html>
     <head>
         <title>Exceed Vote</title>
@@ -95,10 +94,38 @@
                 </form>
             </div>
             <div class="card-panel grey lighten-5 z-depth-1">
-                <h4 class="trigger-text trigger pageBanner hide-on-small-only">Project Screen Shot</h4>
-                <h5 class="trigger-text trigger pageBanner hide-on-med-and-up center-align">Project Screen Shot</h5>
-                <div class="upload" proId="@currentProject.id"></div>
-                <div id="process-bar"></div>
+                <div class="row">
+                    <div class="col s12">
+                        <h4 class="trigger-text trigger pageBanner hide-on-small-only">Project Screen Shot</h4>
+                        <h5 class="trigger-text trigger pageBanner hide-on-med-and-up center-align">
+                            Project Screen Shot</h5>
+                        <div class="upload" proId="@currentProject.id"></div>
+                        <div id="process-bar"></div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="slider">
+                        <ul class="slides" id="show-slides" projectId="@currentProject.id">
+                        @images.map { img =>
+                            <li>
+                                <img src="../getimg/@img.Id">
+                                <div class="caption right-align">
+                                    @if(img.imgType != ProjectImage.DEFAULT) {
+                                        <div class="row">
+                                            <a class="waves-effect waves-light btn blue"><i class="mdi-toggle-check-box right"></i>
+                                                Default</a>
+                                        </div>
+                                    }
+                                    <div class="row">
+                                        <a class="waves-effect waves-light btn red"><i class="mdi-navigation-close right"></i>
+                                            Delete</a>
+                                    </div>
+                                </div>
+                            </li>
+                        }
+                        </ul>
+                    </div>
+                </div>
             </div>
             <div class="card-panel grey lighten-5 z-depth-1">
                 <div class="show-on-medium-and-up hide-on-small-only">
@@ -118,7 +145,10 @@
                                     <td><code class=" language-markup">@member.lastname</code></td>
                                     <td><code class=" language-markup">@if(currentUser.id != member.id) {
                                         <a class="btn-floating waves-effect waves-light red" href="../editproject/delete/@member.id/@currentProject.id"><i class="mdi-content-clear"></i></a>
-                                    } </code></td>
+                                    } else {
+                                        <div class="btn-floating waves-effect waves-light disabled"><i class="mdi-content-clear"></i></div>
+                                    }
+                                    </code></td>
                                 </tr>
                             }
                             @if(members.size == 0) {
@@ -173,8 +203,8 @@
                                             <td>
                                                 @if(currentUser.id != member.id) {
                                                     <a class="btn-floating waves-effect waves-light red" href="../editproject/delete/@member.id/@currentProject.id"><i class="mdi-content-clear"></i></a>
-                                                }else{
-                                                    <a class="btn-floating waves-effect waves-light disabled" href="#!"><i class="mdi-content-clear"></i></a>
+                                                } else {
+                                                    <div class="btn-floating waves-effect waves-light disabled"><i class="mdi-content-clear"></i></div>
                                                 }
                                             </td>
                                             <td>
@@ -250,27 +280,27 @@
         <script src="@routes.Assets.at("javascripts/upload.js")" type="text/javascript"></script>
         @if(flash.contains("p_success")) {
             <script type="text/javascript">
-            Materialize.toast ( '    @flash.get("p_success") ', 4000)
+            Materialize.toast ( '      @flash.get("p_success") ', 4000)
             </script>
         }
         @if(flash.contains("d_success")) {
             <script type="text/javascript">
-            Materialize.toast ( '    @flash.get("d_success") ', 4000)
+            Materialize.toast ( '      @flash.get("d_success") ', 4000)
             </script>
         }
         @if(flash.contains("error")) {
             <script type="text/javascript">
-            Materialize.toast ( '    @flash.get("error") ', 4000)
+            Materialize.toast ( '      @flash.get("error") ', 4000)
             </script>
         }
         @if(flash.contains("success")) {
             <script type="text/javascript">
-            Materialize.toast ( '    @flash.get("success") ', 4000)
+            Materialize.toast ( '      @flash.get("success") ', 4000)
             </script>
         }
         @if(flash.contains("error")) {
             <script type="text/javascript">
-            Materialize.toast ( '    @flash.get("error") ', 4000)
+            Materialize.toast ( '      @flash.get("error") ', 4000)
             </script>
         }
     </body>
