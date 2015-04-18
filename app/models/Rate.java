@@ -20,6 +20,7 @@ public class Rate extends Model {
 
     public static Rate create(int score , Long userId , Long criteriaId , Long projectId)
     {
+
         if(findByUserIdAndProjectIdAndCriteriaId(userId,projectId,criteriaId) == null) {
             Rate rate = new Rate();
             rate.score = score;
@@ -29,7 +30,10 @@ public class Rate extends Model {
             rate.save();
             return rate;
         }
-        return null;
+        Rate rate = findByUserIdAndProjectIdAndCriteriaId(userId,projectId,criteriaId);
+        rate.score = score;
+        rate.update();
+        return rate;
     }
 
     private static Finder<Long, Rate> find = new Finder<Long, Rate>(Long.class, Rate.class);
