@@ -36,12 +36,20 @@ public class RateCalculator extends Controller {
                     sum += r.score;
                     count++;
                 }
-                sum = sum/count;
+                if(count == 0){
+                    sum = 0;
+                }else{
+                    sum = sum/count;
+                }
                 allSum+=sum;
                 perProject.add(sum);
 
             }
-            allSum= allSum/criteria.size();
+            if(criteria.size() == 0){
+                allSum =0;
+            }else {
+                allSum= allSum/criteria.size();
+            }
             perProject.add(allSum);
             result.add(perProject);
         }

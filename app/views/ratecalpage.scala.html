@@ -32,10 +32,16 @@
                                                     <td> @if(index2 < r.size()-1){
                                                             @criteria.get(index2).name
                                                         }else{
-                                                            Total
+                                                            <p class = "trigger trigger-text"><B>Total</B></p>
                                                         }
                                                     </td>
-                                                    <td>@score</td>
+                                                    <td>
+                                                        @if(index2 == r.size()-1){
+                                                             <p class = "trigger trigger-text"><B>@score</B></p>
+                                                        }else {
+                                                            @score
+                                                        }
+                                                    </td>
                                                 </tr>                                        
                                             }      
                                         </tbody>
