@@ -16,7 +16,7 @@ public class RateCriterion extends Model {
 
     public static Finder<Long, RateCriterion> find = new Finder<Long, RateCriterion>(Long.class, RateCriterion.class);
 
-    public RateCriterion(String name, Striing description){
+    public RateCriterion(String name, String description){
         this.name = name;
         this.description = description;
     }
@@ -26,7 +26,7 @@ public class RateCriterion extends Model {
         rate.name = name;
         rate.description = description;
         rate.save();
-
+        return rate;
     }
 
     public static List<RateCriterion> findAll(){
