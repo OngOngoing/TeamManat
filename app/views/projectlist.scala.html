@@ -14,16 +14,24 @@
         <nav class="teal lighten-1 trigger large" id="head">
             <div class="container">
                 <div class="nav-wrapper">
-                    <a class="brand-logo"><img class="responsive-img" style="margin-top: 7px;" src="@routes.Assets.at("img/logo.png")" width="45%" height="45%" /></a>
+                    <a class="brand-logo hide-on-small-only"><img class="responsive-img" style="margin-top: 7px;" src="@routes.Assets.at("img/logo.png")" width="45%" height="45%" /></a>
                     <div class="center">
-                        Time Up : @setting.keyValue
-
+                    <div class="hide-on-small-only">
                     <ul class="right">
                         <li><a id="nav-mobile" href="@routes.RateCalculator.index()"><i class="medium mdi-editor-insert-chart left"></i>Rating Result</a></li>
                         <li><a id="nav-mobile" href="@routes.VoteController.showResult()"><i class="medium mdi-action-class left"></i>Voting Result</a></li>
                         <li><a id="nav-mobile" href="@routes.VoteController.index()"><i class="medium mdi-maps-rate-review left"></i>Let's Vote!</a></li>
                         <li><a id="nav-mobile" href="../logout"><i class="medium mdi-action-settings-power left"></i>Logout</a></li>
                     </ul>
+                        </div>
+                            <div class="hide-on-med-and-up">
+                                <ul class="right" style="margin-right: -40px;">
+                                    <li><a id="nav-mobile" href="@routes.RateCalculator.index()"><i class="tiny center mdi-editor-insert-chart"></i></a></li>
+                                    <li><a id="nav-mobile" href="@routes.VoteController.showResult()"><i class="tiny center mdi-action-class"></i></a></li>
+                                    <li><a id="nav-mobile" href="@routes.VoteController.index()"><i class="tiny center mdi-maps-rate-review"></i></a></li>
+                                    <li><a id="nav-mobile" href="../logout"><i class="tiny center mdi-action-settings-power"></i></a></li>
+                                </ul>
+                            </div>
                         </div>
                 </div>
             </div>

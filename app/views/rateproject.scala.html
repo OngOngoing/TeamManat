@@ -24,6 +24,7 @@
             <nav class="teal lighten-1 trigger large" id="head">
                 <div class="container">
                     <div class="nav-wrapper">
+                        <div class="hide-on-small-only">
                         <a class="brand-logo"><img class="responsive-img" style="margin-top: 7px;" src="@routes.Assets.at("img/logo.png")" width="45%" height="45%" /></a>
                         <div class="center">
                             <ul class="right">
@@ -33,14 +34,24 @@
                                 <li><a id="nav-mobile" href="../logout"><i class="medium mdi-action-settings-power left"></i>Logout</a></li>
                             </ul>
                         </div>
+                        </div>
+                        <div class="hide-on-med-and-up">
+                            <ul class="right">
+                                <li><a id="nav-mobile" href="@routes.RateCalculator.index()"><i class="tiny mdi-editor-insert-chart center"></i></a></li>
+                                <li><a id="nav-mobile" href="@routes.VoteController.showResult()"><i class="tiny mdi-action-class center"></i></a></li>
+                                <li><a id="nav-mobile" href="@routes.VoteController.index()"><i class="tiny mdi-maps-rate-review center"></i></a></li>
+                                <li><a id="nav-mobile" href="../logout"><i class="tiny mdi-action-settings-power center"></i></a></li>
+                            </ul>
+                        </div>
                     </div>
                 </div>
             </nav>
             <div class="container" style="padding-top: 75px;">
                 <div class="animated fadeInDown">
-                    <h2 class="trigger-text trigger pageBanner">@project.projectName</h2>
+                    <h2 class="trigger-text trigger pageBanner hide-on-small-only">@project.projectName</h2>
+                    <h4 class="trigger-text trigger pageBanner hide-on-med-and-up center-align">@project.projectName</h4>
                     @if(user.projectId == project.id || user.idtype == User.ADMINISTRATOR) {
-                        <a class="waves-effect waves-light btn-large" href="@routes.EditProject.index(project.id)"><i class="mdi-image-edit left"></i>
+                        <a class="waves-effect waves-light btn-large hide-on-small-only" href="@routes.EditProject.index(project.id)"><i class="mdi-image-edit left"></i>
                             EDIT</a>
                     }
                 </div>
