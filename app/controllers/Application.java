@@ -3,6 +3,7 @@ package controllers;
 import java.text.*;
 import java.util.*;
 import models.*;
+import play.Logger;
 import play.libs.Json;
 import play.mvc.*;
 import play.data.*;
@@ -36,8 +37,10 @@ public class Application extends Controller {
     public static Result authenticate() {
         Form<Login> loginForm = Form.form(Login.class).bindFromRequest();
         if (loginForm.hasErrors()) {
+            Logger.error("Login failed. : "+loginForm.globalError().message());
             return badRequest(login.render(loginForm));
         } else {
+            Logger.info("["+loginForm.get().username+"] login success.");
             session().clear();
             User currentUser = User.findByUsername(loginForm.get().username);
             session("userId", String.valueOf(currentUser.id));
@@ -46,6 +49,7 @@ public class Application extends Controller {
     }
 
     public static Result logout() {
+        Logger.info("["+User.findByUserId(Long.parseLong(session().get("userId"))).username+"]'ve been logged out.");
         session().clear();
         flash("success", "You've been logged out");
         return redirect(routes.Application.index());

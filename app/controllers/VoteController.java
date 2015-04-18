@@ -69,6 +69,7 @@ public class VoteController extends Controller {
                 // THIS SHOULD HAS ONLY 1 RESULT
                 for(String projectId : selectedCriterion) {
                     Vote.create(criterion.id,userId,Long.parseLong(projectId));
+                    Logger.info("[" + User.findByUserId(userId).username + "] vote ("+criterion.id+")"+criterion.name+", project : ("+projectId+")"+Project.findById(Long.parseLong(projectId)));
                 }
             }
         }
@@ -94,8 +95,9 @@ public class VoteController extends Controller {
                     Vote thisVote = Vote.findByCriterionAndUserId(criterion.id,userId);
                     if (thisVote == null) {
                         Vote.create(criterion.id, userId, Long.parseLong(projectId));
-                    }
-                    else {
+                        Logger.info("[" + User.findByUserId(userId).username + "] vote ("+criterion.id+")"+criterion.name+", project : ("+projectId+")"+Project.findById(Long.parseLong(projectId)).projectName);
+                    }else {
+                        Logger.info("[" + User.findByUserId(userId).username + "] edit vote ("+criterion.id+")"+criterion.name+", project : ("+projectId+")"+Project.findById(Long.parseLong(projectId)).projectName);
                         thisVote.projectId = Long.parseLong(projectId);
                         thisVote.update();
                     }
