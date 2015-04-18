@@ -19,7 +19,7 @@
                     <a class="brand-logo">
                         Project Management
                     </a>
-                    <div class="center hide-on-small-only hide-on-med-only">
+                    <div class="center hide-on-small-only">
                         <ul class="right">
                             <li><a id="nave-mobile" href="../rateproject/@currentProject.id"><i class="medium mdi-navigation-arrow-back left"></i>
                                 Back</a></li>
@@ -27,7 +27,7 @@
                                 Logout</a></li>
                         </ul>
                     </div>
-                    <div class="center hide-on-large-only">
+                    <div class="center hide-on-med-and-up">
                         <ul class="right">
                             <li><a id="nave-mobile" href="../rateproject/@currentProject.id"><i class="small mdi-navigation-arrow-back"></i></a></li>
                             <li><a id="nave-mobile" href="../logout"><i class="small mdi-action-settings-power"></i></a></li>
@@ -36,7 +36,10 @@
                 </div>
             </div>
         </nav>
-        <div class="container" style="padding-top : 70 px ;">
+        <br/>
+        <br/>
+        <br/>
+        <div class="container">
             <div class="card-panel grey lighten-5 z-depth-1">
                 <h4 class="trigger-text trigger pageBanner">Project Detail</h4><br />
                 <form action="../editproject/@currentProject.id" method="post">
@@ -46,7 +49,7 @@
                         <label for="projectName">Project Name</label>
                     </div>
                     <div class="input-field col s6">
-                        <div style="padding-left : 3 rem ; padding-top : 0.5 rem ;">
+                        <div style="padding: 0.5rem 0rem 0rem 3rem;">
                             <a onClick="$ ( '#project_description' ).mdBold ( )" class="btn waves-effect waves-light cyan darken-3"><i class="mdi-editor-format-bold"></i></a>
                             <a onClick="$ ( '#project_description' ).mdItalic ( )" class="btn waves-effect waves-light cyan darken-3" ><i class="mdi-editor-format-italic"></i></a>
                             <a onClick="$ ( '#project_description' ).mdHeader ( { number : 1 } )" class="btn waves-effect waves-light cyan darken-3">
