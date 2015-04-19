@@ -14,7 +14,7 @@
         <nav class="teal lighten-1 trigger large" id="head">
             <div class="container">
                 <div class="nav-wrapper">
-                    <a class="brand-logo hide-on-small-only"><img class="responsive-img" style="margin-top: 7px;" src="@routes.Assets.at("img/logo.png")" width="45%" height="45%" /></a>
+                    <a class="brand-logo"><span class="glyphicon glyphicon-ice-lolly-tasted logo" aria-hidden="true"></span></a>
                     <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="mdi-navigation-menu"></i></a>
                     <div class="center">
                         <ul class="right hide-on-med-and-down">
@@ -88,17 +88,17 @@
         <script src="@routes.Assets.at("javascripts/Markdown.Sanitizer.js")"></script>
         @if(flash.contains("d_success")) {
             <script type="text/javascript">
-            Materialize.toast('@flash.get("d_success")', 4000)
+            Materialize.toast('<i class="mdi-action-done green-text small"></i><span style="padding-left: 5px">@flash.get("d_success")</span>', 4000)
             </script>
         }
         @if(flash.contains("voting_result_close")) {
             <script type="text/javascript">
-            Materialize.toast('@flash.get("voting_result_close")', 4000)
+            Materialize.toast('<i class="mdi-alert-warning red-text small"></i>@flash.get("voting_result_close")</span>', 4000)
             </script>
         }
         @if(flash.contains("rating_result_close")) {
             <script type="text/javascript">
-            Materialize.toast('@flash.get("rating_result_close")', 4000)
+            Materialize.toast('<i class="mdi-alert-warning red-text small"></i>@flash.get("rating_result_close")</span>', 4000)
             </script>
         }
     </body>

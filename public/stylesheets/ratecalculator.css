@@ -35,3 +35,26 @@
         -webkit-filter: hue-rotate(-360deg);
     }
 }
+  @font-face {
+      font-family: 'Glyphicons Halflings';
+
+      src: url('../font/glyphicons-halflings-regular.eot');
+      src: url('../font/glyphicons-halflings-regular.eot?#iefix') format('embedded-opentype'), url('../font/glyphicons-halflings-regular.woff2') format('woff2'), url('../assets/font/glyphicons-halflings-regular.woff') format('woff'), url('../assets/font/glyphicons-halflings-regular.ttf') format('truetype'), url('../font/glyphicons-halflings-regular.svg#glyphicons_halflingsregular') format('svg');
+  }
+  .glyphicon {
+      position: relative;
+      top: 1px;
+      display: inline-block;
+      font-family: 'Glyphicons Halflings';
+      font-style: normal;
+      font-weight: 400;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+  }
+  .glyphicon-ice-lolly-tasted:before {
+      content: "\e232";
+  }
+  .logo{
+      vertical-align: middle;
+      font-size: 2.8rem;
+  }
