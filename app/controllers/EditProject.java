@@ -17,9 +17,9 @@ import play.libs.Json;
  * Created by Chin on 4/15/2015.
  */
 public class EditProject extends Controller {
-    private static User _user = User.findByUserId(Long.parseLong(session("userId")));
     @Security.Authenticated(Secured.class)
     public static Result index(Long projectId){
+        User _user = User.findByUserId(Long.parseLong(session("userId")));
         if(!canEditProject(_user, projectId))
             return redirect(routes.ProjectList.index());
         Project project = Project.findById(projectId);
@@ -29,8 +29,8 @@ public class EditProject extends Controller {
     }
     @Security.Authenticated(Secured.class)
     public static Result addMember(Long projectId){
-        User user = User.findByUserId(Long.parseLong(session().get("userId")));
-        if(canEditProject(_user, projectId)){
+        User _user = User.findByUserId(Long.parseLong(session("userId")));
+        if(!canEditProject(_user, projectId)){
             flash("error", "access denied.");
             return redirect(routes.Application.index());
         }
@@ -54,6 +54,7 @@ public class EditProject extends Controller {
     }
     @Security.Authenticated(Secured.class)
     public static Result edit(Long projectId){
+        User _user = User.findByUserId(Long.parseLong(session("userId")));
         if(canEditProject(_user, projectId)){
             flash("error", "access denied.");
             return redirect(routes.Application.index());
@@ -73,7 +74,8 @@ public class EditProject extends Controller {
     }
     @Security.Authenticated(Secured.class)
     public static Result removeUser(Long userId, Long proId){
-        if(canEditProject(_user, proId)){
+        User _user = User.findByUserId(Long.parseLong(session("userId")));
+        if(!canEditProject(_user, proId)){
             flash("error", "access denied.");
             return redirect(routes.Application.index());
         }
@@ -104,13 +106,14 @@ public class EditProject extends Controller {
     public static Result deleteProject(){
         DynamicForm dynamicForm = new DynamicForm().bindFromRequest();
         Long proId = Long.parseLong(dynamicForm.get("projectId"));
-        if(canEditProject(_user, proId)){
+        User _user = User.findByUserId(Long.parseLong(session("userId")));
+        if(!canEditProject(_user, proId)){
             flash("error", "access denied.");
             return redirect(routes.Application.index());
         }
         Project _pro = Project.findById(proId);
-        String name = _pro.projectName;
         if(_pro != null) {
+            String name = _pro.projectName;
             List<Rate> _rates = Rate.findListByProjectId(_pro.id);
             for (Rate item : _rates) {
                 Logger.info("rate ["+item.id+"] is delete. ProId:"+item.projectId+" UserId:"+item.userId);
@@ -130,6 +133,7 @@ public class EditProject extends Controller {
     }
     @Security.Authenticated(Secured.class)
     public static Result upload(){
+        User _user = User.findByUserId(Long.parseLong(session("userId")));
         Http.MultipartFormData body = request().body().asMultipartFormData();
         File file = body.getFile("file").getFile();
         String pId = body.asFormUrlEncoded().get("projectId")[0];
