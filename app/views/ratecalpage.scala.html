@@ -1,4 +1,4 @@
-@(projects :List[Project])(criteria : List[RateCriterion])(comments: List[Comment])(result: List[ArrayList[Double]])
+@(user : User)(projects :List[Project])(criteria : List[RateCriterion])(comments: List[Comment])(result: List[ArrayList[Double]])
 @import java.math.BigInteger; var index = 0; var index2 = 0;
 
     <html>
@@ -10,6 +10,24 @@
             <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
         </head>
         <body>
+            <nav class="teal lighten-1 trigger large" id="head">
+                <div class="container">
+                    <div class="nav-wrapper">
+                        <a class="brand-logo hide-on-small-only"><img class="responsive-img" style="margin-top: 7px;" src="@routes.Assets.at("img/logo.png")" width="45%" height="45%" /></a>
+                        <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="mdi-navigation-menu"></i></a>
+                        <div class="center">
+                            <ul class="right hide-on-med-and-down">
+                                <li><a href="@routes.VoteController.showResult()"><i class="medium mdi-action-class left"></i>Voting Result</a></li>
+                                <li><a href="../logout"><i class="medium mdi-action-settings-power left"></i>Logout</a></li>
+                            </ul>
+                            <ul class="side-nav" id="mobile-demo" style="margin-right: -40px;">
+                                <li><a href="@routes.VoteController.showResult()"><i class="medium mdi-action-class left"></i>Voting Result</a></li>
+                                <li><a href="../logout"><i class="medium mdi-action-settings-power left"></i>Logout</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </nav>
             <div class="container">
                 <div class="animated fadeInDown">
                     <h1 class = "lobby-banner trigger trigger-text">Rating Result</h1>
@@ -89,7 +107,10 @@
                     <i class="large mdi-action-home waves-effect waves-light"></i>
                 </a>
                 <ul>
-                    <li><a class="btn-floating green " href="../logout"><i class="large mdi-action-settings-power"></i></a></li>
+                    <li><a class="btn-floating red " href="../logout"><i class="large mdi-action-settings-power"></i></a></li>
+                    @if(user.idtype == User.ADMINISTRATOR){
+                        <li><a class="btn-floating yellow derken-1" href="adminpage"><i class="large mdi-action-settings waves-effect waves-light"></i></a></li>
+                    }
                 </ul>
             </div>
 

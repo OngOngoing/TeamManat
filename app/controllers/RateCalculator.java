@@ -56,6 +56,6 @@ public class RateCalculator extends Controller {
             perProject.add(allSum);
             result.add(perProject);
         }
-        return ok(ratecalpage.render(projects,criteria,comments,result));
+        return ok(ratecalpage.render(thisUser,projects,criteria,comments,result));
     }
 }
