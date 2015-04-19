@@ -46,8 +46,8 @@ public class RateProject extends Controller {
         }
         Logger.info(log);
         String thisComment = form.get("comment").trim();
-        if(thisComment != ""){
-            Comment comment = Comment.create(userId, projectId, thisComment);    
+        if(thisComment.length() <= 0){
+            Comment comment = Comment.create(userId, projectId, thisComment.trim());    
         }
         flash("rate_success", "Rate submitted");
         return redirect(routes.RateProject.index(projectId));
@@ -59,10 +59,11 @@ public class RateProject extends Controller {
         long projectId = Long.parseLong(form.get("projectId"));
         List<Rate> rates = Rate.findListByUserIdAndProjectId(userId, projectId);
         String log = "[" + User.findByUserId(userId).username + "] edit rate ("+projectId+")"+ Project.findById(projectId).projectName;
-        for (Rate r : rates) {
-            int score = Integer.parseInt(form.get("" + r.criteriaId));
-            r.score = score;
-            r.update();
+        for (RateCriterion c : RateCriterion.findAll()) {
+            int score = Integer.parseInt(form.get("" + c.id));
+            if(score != 0){
+                Rate r = Rate.create(score,userId,c.id,projectId);
+            }
         }
         Logger.info(log);
         Logger.info("[" + User.findByUserId(userId).username + "] edit comment ("+projectId+")" + Project.findById(projectId).projectName + "");
