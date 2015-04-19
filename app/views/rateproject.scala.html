@@ -49,7 +49,7 @@
                     <h2 class="trigger-text trigger pageBanner hide-on-small-only">@project.projectName</h2>
                     <h4 class="trigger-text trigger pageBanner hide-on-med-and-up center-align">@project.projectName</h4>
                     @if(user.projectId == project.id || user.idtype == User.ADMINISTRATOR) {
-                        <a class="waves-effect waves-light btn" href="@routes.EditProject.index(project.id)"><i class="mdi-image-edit left"></i>
+                        <a class="waves-effect waves-light btn-large hide-on-small-only" href="@routes.EditProject.index(project.id)"><i class="mdi-image-edit left"></i>
                             EDIT</a>
                     }
                 </div>
