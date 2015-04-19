@@ -37,9 +37,13 @@
             <!-- Page Content goes here -->
             <div class="row">
                 <div class="col s12">
-                    <div class="card-panel waves-effect waves-block" id="count-down">
+                    <div class="card-panel waves-effect waves-block hide-on-small-only" id="count-down">
                         <div class="count-down col s6 right-align" id="countdown" end-date="@setting.keyValue"></div>
                         <div class="count-down-label col s6">left <i class="mdi-device-access-alarm"></i> </div>
+                    </div>
+                    <div class="card-panel waves-effect waves-block hide-on-med-and-up" id="count-down">
+                        <div class="count-down-s col s8 right-align" id="countdown-s" end-date="@setting.keyValue"></div>
+                        <div class="count-down-label-s col s4">left <i class="mdi-device-access-alarm"></i> </div>
                     </div>
                 </div>
             @projects.map { project =>
