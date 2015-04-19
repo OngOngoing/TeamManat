@@ -1,9 +1,10 @@
 $(document).ready(function(){
+
+    var minlength = 1;
     $('.modal-trigger').leanModal({
         dismissible: true
     });
     $('.tooltipped').tooltip({delay: 50});
-    var minlength = 1;
     $('.slider').slider({full_width: true});
     $("#searchUser").keyup(function () {
         var that = this,
@@ -48,7 +49,7 @@ $(document).ready(function(){
 
     $(".upload").upload({
         action: "../uploadimage",
-        label: "Drag and drop images or click to select. MaxSize : 500Kb. Max 10 pictures",
+        label: "Drag and drop images or click to select.",
         postData: {
             'projectId' : $(".upload").attr("proId")
         },
@@ -90,14 +91,17 @@ function onFileComplete(e, file, response) {
                 html += "<li>";
                 html += "<img src='../getimg/"+data[i].Id+"'>";
                 html += "<div class='caption right-align'>";
-                if(data[i].imgType != 1){
-                    html += "<div class='row'>";
-                    html += "<a class='waves-effect waves-light btn blue'><i class='mdi-toggle-check-box right'></i>";
-                    html += "Default</a>";
-                    html += "</div>";
-                }
                 html += "<div class='row'>";
-                html += "<a class='waves-effect waves-light btn red'><i class='mdi-navigation-close right'></i>Delete</a>";
+                if(data[i].imgType != 1){
+                    html += "<a class='waves-effect waves-light btn blue' href='../setimg/"+$("#show-slides").attr("projectId")+"/"+data[i].Id+"'><i class='mdi-toggle-check-box right'></i>";
+                    html += "Set Default</a>";
+                }else{
+                    html += "<a class='waves-effect waves-light btn disabled'><i class='mdi-toggle-check-box right'></i>";
+                    html += "Default</a>";
+                }
+                html += "</div>";
+                html += "<div class='row'>";
+                html += "<a class='waves-effect waves-light btn red'  href='../delimg/"+$("#show-slides").attr("projectId")+"/"+data[i].Id+"'><i class='mdi-navigation-close right'></i>Delete</a>";
                 html += "</div>";
                 html += "</div></li>";
             }

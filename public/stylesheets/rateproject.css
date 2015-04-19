@@ -50,3 +50,7 @@
     width: 100%;
     z-index: 1000;
 }
+.slider .slides{
+    background: url('../img/no_image.png') no-repeat center;
+    background-size:  contain;
+}

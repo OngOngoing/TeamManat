@@ -4,8 +4,6 @@ import models.*;
 import play.mvc.*;
 import views.html.*;
 
-import java.util.List;
-import java.util.ArrayList;
 import java.util.Map;
 
 public class ProjectList extends Controller {

@@ -110,14 +110,17 @@
                             <li>
                                 <img src="../getimg/@img.Id">
                                 <div class="caption right-align">
-                                    @if(img.imgType != ProjectImage.DEFAULT) {
-                                        <div class="row">
-                                            <a class="waves-effect waves-light btn blue"><i class="mdi-toggle-check-box right"></i>
-                                                Default</a>
-                                        </div>
-                                    }
                                     <div class="row">
-                                        <a class="waves-effect waves-light btn red"><i class="mdi-navigation-close right"></i>
+                                    @if(img.imgType != ProjectImage.DEFAULT) {
+                                        <a class="waves-effect waves-light btn blue" href="@routes.Application.setImgDefault(img.Id,currentProject.id)"><i class="mdi-toggle-check-box right"></i>
+                                            Set Default</a>
+                                    }else{
+                                        <a class="waves-effect waves-light btn disabled"><i class="mdi-toggle-check-box right"></i>
+                                            Default</a>
+                                    }
+                                    </div>
+                                    <div class="row">
+                                        <a class="waves-effect waves-light btn red" href="@routes.Application.deleteImg(img.Id,currentProject.id)"><i class="mdi-navigation-close right"></i>
                                             Delete</a>
                                     </div>
                                 </div>
@@ -125,6 +128,11 @@
                         }
                         </ul>
                     </div>
+                    <blockquote>
+                        <strong>Default</strong> screenshot will show in Project List page only .
+                        <strong>Limit number of screenshot</strong> is 10 pictures / project.
+                        <strong>Limit size of screenshot</strong> is 500 Kb / file.
+                    </blockquote>
                 </div>
             </div>
             <div class="card-panel grey lighten-5 z-depth-1">
@@ -278,29 +286,19 @@
         <script src="@routes.Assets.at("javascripts/editproject.js")" type="text/javascript"></script>
         <script src="@routes.Assets.at("javascripts/core.js")" type="text/javascript"></script>
         <script src="@routes.Assets.at("javascripts/upload.js")" type="text/javascript"></script>
-        @if(flash.contains("p_success")) {
+        @if(flash.contains("up_success")) {
             <script type="text/javascript">
-            Materialize.toast ( '      @flash.get("p_success") ', 4000)
-            </script>
-        }
-        @if(flash.contains("d_success")) {
-            <script type="text/javascript">
-            Materialize.toast ( '      @flash.get("d_success") ', 4000)
-            </script>
-        }
-        @if(flash.contains("error")) {
-            <script type="text/javascript">
-            Materialize.toast ( '      @flash.get("error") ', 4000)
+            Materialize.toast ( '<i class="mdi-file-cloud-upload green-text small"></i><span style="padding-left: 5px">@flash.get("success") </span>', 4000)
             </script>
         }
         @if(flash.contains("success")) {
             <script type="text/javascript">
-            Materialize.toast ( '      @flash.get("success") ', 4000)
+            Materialize.toast ( '<i class="mdi-action-done green-text small"></i><span style="padding-left: 5px">@flash.get("success")</span> ', 4000)
             </script>
         }
         @if(flash.contains("error")) {
             <script type="text/javascript">
-            Materialize.toast ( '      @flash.get("error") ', 4000)
+            Materialize.toast ( '<i class="mdi-alert-warning red-text small"></i><span style="padding-left: 5px">@flash.get("error") </span>' , 4000)
             </script>
         }
     </body>

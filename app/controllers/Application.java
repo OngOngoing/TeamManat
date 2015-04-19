@@ -2,6 +2,8 @@ package controllers;
 
 import java.text.*;
 import java.util.*;
+
+import akka.routing.ResizablePoolActor;
 import models.*;
 import org.apache.commons.collections.map.HashedMap;
 import play.Logger;
@@ -76,6 +78,36 @@ public class Application extends Controller {
     public static Result getImg(Long imgId){
         ProjectImage image = ProjectImage.findById(imgId);
         return ok(image.getData()).as("image");
+    }
+
+    public static Result deleteImg(Long imgId, Long proId){
+        ProjectImage image = ProjectImage.findByIdAndProId(imgId, proId);
+        if(image != null) {
+            image.delete();
+            List<ProjectImage> imgs = ProjectImage.findImageOfProject(proId);
+            if(imgs.size() != 0){
+                imgs.get(0).imgType = ProjectImage.DEFAULT;
+                imgs.get(0).save();
+            }
+            flash("success", "Screenshot is deleted.");
+        }else {
+            flash("error", "Con't found Screenshot.");
+        }
+        return redirect(routes.EditProject.index(proId));
+    }
+    public static Result setImgDefault(Long imgId, Long proId){
+        ProjectImage oldimg = ProjectImage.getDefaultImage(proId);
+        ProjectImage newimg = ProjectImage.findById(imgId);
+        if(oldimg == null || newimg == null){
+            flash("error", "Can't found image.");
+            return redirect(routes.EditProject.index(proId));
+        }
+        oldimg.imgType = ProjectImage.NORMAL;
+        oldimg.save();
+        newimg.imgType = ProjectImage.DEFAULT;
+        newimg.save();
+        flash("success", "Project is updated.");
+        return redirect(routes.EditProject.index(proId));
     }
     // MockDataBase for testing
     public static Result mockDatabase(){
