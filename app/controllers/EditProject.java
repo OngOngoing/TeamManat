@@ -116,6 +116,11 @@ public class EditProject extends Controller {
         File file = body.getFile("file").getFile();
         String pId = body.asFormUrlEncoded().get("projectId")[0];
         Long proId = Long.parseLong(pId);
+        User _user = User.findByUserId(Long.parseLong(session("userId")));
+        if(_user.projectId != proId){
+            flash("error", "access denied.");
+            return redirect(routes.Application.index());
+        }
         List<ProjectImage> imgs = ProjectImage.findImageOfProject(proId);
         if(imgs.size() >= 10){
             return status(1);

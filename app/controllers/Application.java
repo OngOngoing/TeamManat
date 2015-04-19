@@ -3,9 +3,7 @@ package controllers;
 import java.text.*;
 import java.util.*;
 
-import akka.routing.ResizablePoolActor;
 import models.*;
-import org.apache.commons.collections.map.HashedMap;
 import play.Logger;
 import play.libs.Json;
 import play.mvc.*;
@@ -81,6 +79,11 @@ public class Application extends Controller {
     }
 
     public static Result deleteImg(Long imgId, Long proId){
+        User _user = User.findByUserId(Long.parseLong(session("userId")));
+        if(_user.projectId != proId){
+            flash("error", "access denied.");
+            return redirect(routes.Application.index());
+        }
         ProjectImage image = ProjectImage.findByIdAndProId(imgId, proId);
         if(image != null) {
             image.delete();

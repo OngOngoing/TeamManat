@@ -111,5 +111,10 @@
             Materialize.toast('<i class="mdi-alert-warning red-text small"></i>@flash.get("rating_result_close")</span>', 4000)
             </script>
         }
+        @if(flash.contains("error")) {
+            <script type="text/javascript">
+            Materialize.toast('<i class="mdi-alert-warning red-text small"></i>@flash.get("error")</span>', 4000)
+            </script>
+        }
     </body>
 </html>
