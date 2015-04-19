@@ -45,7 +45,10 @@ public class RateProject extends Controller {
             Rate rate = Rate.create(score, userId, criteriaId, projectId);
         }
         Logger.info(log);
-        Comment comment = Comment.create(userId, projectId, form.get("comment").trim());
+        String thisComment = form.get("comment").trim();
+        if(thisComment != ""){
+            Comment comment = Comment.create(userId, projectId, thisComment);    
+        }
         flash("rate_success", "Rate submitted");
         return redirect(routes.RateProject.index(projectId));
     }
