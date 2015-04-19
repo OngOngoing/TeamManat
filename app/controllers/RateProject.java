@@ -47,11 +47,13 @@ public class RateProject extends Controller {
             }
         }
         Logger.info(log);
-        String thisComment = form.get("comment").trim();
+        String thisComment = form.get("comment");
         if(thisComment.length() > 0){
-            Comment comment = Comment.create(userId, projectId, thisComment.trim());    
+            Comment comment = Comment.create(userId, projectId, thisComment);    
         }
-        flash("rate_success", "Rate submitted");
+        if(Rate.findListByUserIdAndProjectId(userId,projectId).size() > 0 || thisComment.length() > 0){
+            flash("rate_success", "Rate and Comment submitted");    
+        }
         return redirect(routes.RateProject.index(projectId));
     }
      @Security.Authenticated(Secured.class)
@@ -71,7 +73,7 @@ public class RateProject extends Controller {
         Logger.info("[" + User.findByUserId(userId).username + "] edit comment ("+projectId+")" + Project.findById(projectId).projectName + "");
         Comment thisComment = Comment.findByUserIdAndProjectId(userId, projectId);
         if(thisComment == null){
-            Comment.create(userId, projectId, form.get("comment").trim());
+            Comment.create(userId, projectId, form.get("comment"));
 
         }else{
             thisComment.comment = form.get("comment");
