@@ -21,26 +21,35 @@ public class AdminPage extends Controller {
 
         if(_user.idtype == User.ADMINISTRATOR) {
             return ok(adminpage.render(users, Project.findAll(), rates, webconfig,RateCriterion.findAll(),VoteCriterion.findAll()));
-        }
-        else {
+        } else {
             return redirect(routes.ProjectList.index());
         }
     }
 
     @Security.Authenticated(Secured.class)
     public static Result addUser(){
-        User user = Form.form(User.class).bindFromRequest().get();
-        user.save();
-        Logger.info("["+_user.username+"] add new user.("+user.id+")");
-        return redirect(routes.AdminPage.index()+"#users");
+        if(_user.idtype == User.ADMINISTRATOR) {
+            User user = Form.form(User.class).bindFromRequest().get();
+            user.save();
+            Logger.info("["+_user.username+"] add new user.("+user.id+")");
+            return redirect(routes.AdminPage.index()+"#users");
+        } else {
+            flash("voting_result_close","access denied");
+            return redirect(routes.ProjectList.index());
+        }
     }
 
     @Security.Authenticated(Secured.class)
     public static Result addProject(){
-        Project project = Form.form(Project.class).bindFromRequest().get();
-        project.save();
-        Logger.info("["+_user.username+"] add new project.("+project.id+")");
-        return redirect(routes.AdminPage.index()+"#projects");
+        if(_user.idtype == User.ADMINISTRATOR) {
+            Project project = Form.form(Project.class).bindFromRequest().get();
+            project.save();
+            Logger.info("["+_user.username+"] add new project.("+project.id+")");
+            return redirect(routes.AdminPage.index()+"#projects");
+        } else {
+            flash("voting_result_close","access denied");
+            return redirect(routes.ProjectList.index());
+        }
     }
     @Security.Authenticated(Secured.class)
     public static Result addRateCriterion(){
