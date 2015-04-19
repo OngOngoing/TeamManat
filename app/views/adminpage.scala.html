@@ -130,18 +130,6 @@
                                 </li>
 
                             }
-
-                            <!-- FLOATING BUTTON -->
-                            <!--
-                            <div class="fixed-action-btn animated bounceInUp" style="bottom: 45px; right: 4%;">
-                                <a class="btn-floating btn-large trigger" href="..">
-                                    <i class="large mdi-action-home waves-effect waves-light"></i>
-                                </a>
-                                <ul>
-                                    <li><a class="btn-floating tooltipped" data-position="left" data-delay="50" data-tooltip="Delete all checked users" type="submit" name="action"><i class="large mdi-action-settings-power"></i></a></li>
-                                </ul>
-                            </div>
-                            -->
                         </ul>
 
                         <button class="btn waves-effect waves-light trigger" type="submit" name="action">Delete
@@ -542,11 +530,11 @@
 
             <!-- FOLATING BUTTON -->
         <div class="fixed-action-btn animated bounceInUp" style="bottom : 45 px ; right : 40 px ;">
-            <a class="btn-floating btn-large trigger" href="..">
+            <a class="btn-floating btn-large trigger" href="@routes.ProjectList.index()">
                 <i class="large mdi-action-home waves-effect waves-light"></i>
             </a>
             <ul>
-                <li><a class="btn-floating green " href="../logout"><i class="large mdi-action-settings-power"></i></a></li>
+                <li><a class="btn-floating green " href="@routes.Application.logout()"><i class="large mdi-action-settings-power"></i></a></li>
             </ul>
         </div>
 

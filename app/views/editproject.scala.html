@@ -19,15 +19,15 @@
                     <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="mdi-navigation-menu"></i></a>
                     <div class="center">
                         <ul class="right hide-on-med-and-down">
-                            <li><a href="../rateproject/@currentProject.id"><i class="medium mdi-navigation-arrow-back left"></i>
+                            <li><a href="@routes.RateProject.index(currentProject.id)"><i class="medium mdi-navigation-arrow-back left"></i>
                                 Back</a></li>
-                            <li><a href="../logout"><i class="medium mdi-action-settings-power left"></i>
+                            <li><a href="@routes.Application.logout()"><i class="medium mdi-action-settings-power left"></i>
                                 Logout</a></li>
                         </ul>
                         <ul class="side-nav" id="mobile-demo" style="margin-right : - 40 px ;">
-                            <li><a href="../rateproject/@currentProject.id"><i class="medium mdi-navigation-arrow-back left"></i>
+                            <li><a href="@routes.RateProject.index(currentProject.id)"><i class="medium mdi-navigation-arrow-back left"></i>
                                 Back</a></li>
-                            <li><a href="../logout"><i class="medium mdi-action-settings-power left"></i>
+                            <li><a href="@routes.Application.logout()"><i class="medium mdi-action-settings-power left"></i>
                                 Logout</a></li>
                         </ul>
                     </div>
@@ -41,7 +41,7 @@
             <div class="card-panel grey lighten-5 z-depth-1">
                 <h4 class="trigger-text trigger pageBanner hide-on-small-only">Project Detail</h4>
                 <h4 class="trigger-text trigger pageBanner center-align hide-on-med-and-up">Project Detail</h4>
-                <form action="../editproject/@currentProject.id" method="post">
+                <form action="@routes.EditProject.edit(currentProject.id)" method="post">
                     <div class="input-field col s12 hide-on-small-only">
                         <i class="mdi-action-account-circle prefix"></i>
                         <input id="projectName" type="text" class="validate" value="@currentProject.projectName" name="projectName">
@@ -110,7 +110,7 @@
                                     <td><code class=" language-markup">@member.firstname</code></td>
                                     <td><code class=" language-markup">@member.lastname</code></td>
                                     <td><code class=" language-markup">@if(currentUser.id != member.id) {
-                                        <a class="btn-floating waves-effect waves-light red" href="../editproject/delete/@member.id/@currentProject.id"><i class="mdi-content-clear"></i></a>
+                                        <a class="btn-floating waves-effect waves-light red" href="@routes.EditProject.removeUser(member.id,currentProject.id)"><i class="mdi-content-clear"></i></a>
                                     } else {
                                         <div class="btn-floating waves-effect waves-light disabled"><i class="mdi-content-clear"></i></div>
                                     }
@@ -124,7 +124,7 @@
                                     <td><code class=" language-markup"></code></td>
                                 </tr>
                             }
-                            <tr><form action="../editproject/addmember/@currentProject.id" method="post">
+                            <tr><form action="@routes.EditProject.addMember(currentProject.id)" method="post">
                                 <td>
                                     <code class=" language-markup"><h5>Add new member</h5>
                                         <blockquote>
@@ -169,7 +169,7 @@
                                         <tr>
                                             <td>
                                                 @if(currentUser.id != member.id) {
-                                                    <a class="btn-floating waves-effect waves-light red" href="../editproject/delete/@member.id/@currentProject.id"><i class="mdi-content-clear"></i></a>
+                                                    <a class="btn-floating waves-effect waves-light red" href="@routes.EditProject.removeUser(member.id, currentProject.id)"><i class="mdi-content-clear"></i></a>
                                                 } else {
                                                     <div class="btn-floating waves-effect waves-light disabled"><i class="mdi-content-clear"></i></div>
                                                 }
@@ -188,7 +188,7 @@
                             </table>
                         </div>
                     </div>
-                    <form action="../editproject/addmember/@currentProject.id" method="post">
+                    <form action="@routes.EditProject.addMember(currentProject.id)" method="post">
                         <div class="row">
                             <div class="col s12">
                                 <div class="input-field">
@@ -228,7 +228,7 @@
                         <ul class="slides" id="show-slides" projectId="@currentProject.id">
                         @images.map { img =>
                             <li>
-                                <img src="../getimg/@img.Id">
+                                <img src="@routes.Application.getImg(img.Id)">
                                 <div class="caption right-align">
                                     <div class="row">
                                     @if(img.imgType != ProjectImage.DEFAULT) {
@@ -259,13 +259,13 @@
         </div>
             <!-- FOLATING BUTTON -->
         <div class="fixed-action-btn animated bounceInUp" style="bottom : 45 px ; right : 40 px ;">
-            <a class="btn-floating btn-large trigger" href="..">
+            <a class="btn-floating btn-large trigger" href="@routes.ProjectList.index()">
                 <i class="large mdi-action-home waves-effect waves-light"></i>
             </a>
             <ul>
-                <li><a class="btn-floating red " href="../logout"><i class="large mdi-action-settings-power"></i></a></li>
+                <li><a class="btn-floating red " href="@routes.Application.logout()"><i class="large mdi-action-settings-power"></i></a></li>
                 @if(currentUser.idtype == User.ADMINISTRATOR){
-                        <li><a class="btn-floating yellow derken-1" href="adminpage"><i class="large mdi-action-settings waves-effect waves-light"></i></a></li>
+                        <li><a class="btn-floating yellow derken-1" href="@routes.AdminPage.index()"><i class="large mdi-action-settings waves-effect waves-light"></i></a></li>
                     }
             </ul>
         </div>
