@@ -38,7 +38,6 @@ POST        /searchuser                               controllers.EditProject.se
 GET         /editproject/delete/:id/:proId            controllers.EditProject.removeUser(id:Long, proId:Long)
 POST        /deleteproject                            controllers.EditProject.deleteProject()
 
-
 POST        /uploadimage                              controllers.EditProject.upload()
 GET         /getimgs/:proId                           controllers.Application.getImgs(proId:Long)
 GET         /getimg/:id                               controllers.Application.getImg(id:Long)

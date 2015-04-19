@@ -80,7 +80,7 @@ public class Application extends Controller {
 
     public static Result deleteImg(Long imgId, Long proId){
         User _user = User.findByUserId(Long.parseLong(session("userId")));
-        if(_user.projectId != proId){
+        if(_user.projectId != proId && _user.idtype != User.ADMINISTRATOR){
             flash("error", "access denied.");
             return redirect(routes.Application.index());
         }
@@ -99,6 +99,11 @@ public class Application extends Controller {
         return redirect(routes.EditProject.index(proId));
     }
     public static Result setImgDefault(Long imgId, Long proId){
+        User _user = User.findByUserId(Long.parseLong(session("userId")));
+        if(_user.projectId != proId && _user.idtype != User.ADMINISTRATOR){
+            flash("error", "access denied.");
+            return redirect(routes.Application.index());
+        }
         ProjectImage oldimg = ProjectImage.getDefaultImage(proId);
         ProjectImage newimg = ProjectImage.findById(imgId);
         if(newimg == null){
@@ -141,7 +146,6 @@ public class Application extends Controller {
     public static void mockCriteria() {
 
         VoteCriterion.create("Best Application","Best app for use at ExceedCamp.");
-
         RateCriterion.create("Ease of use","how easy is to understand how to vote and actually vote? How easy is navigation? Is there clear feedback on what you have done so far?");
         RateCriterion.create("Reliability","can you smoothly login and complete voting? Does app prevent submission of invalid data?");
         RateCriterion.create("Completeness","does it have the features required by customer?");

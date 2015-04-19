@@ -17,23 +17,23 @@ import play.libs.Json;
  * Created by Chin on 4/15/2015.
  */
 public class EditProject extends Controller {
+    private static User _user = User.findByUserId(Long.parseLong(session("userId")));
     @Security.Authenticated(Secured.class)
     public static Result index(Long projectId){
-        User user = User.findByUserId(Long.parseLong(session().get("userId")));
-        if(user == null)
-            return redirect(routes.ProjectList.index());
-        if(!canEditProject(user, projectId))
+        if(!canEditProject(_user, projectId))
             return redirect(routes.ProjectList.index());
         Project project = Project.findById(projectId);
         List<User> members = User.findByTeam(projectId);
         List<ProjectImage> images = ProjectImage.findImageOfProject(projectId);
-        return ok(editproject.render(user, project, members, images));
+        return ok(editproject.render(_user, project, members, images));
     }
     @Security.Authenticated(Secured.class)
     public static Result addMember(Long projectId){
         User user = User.findByUserId(Long.parseLong(session().get("userId")));
-        if(user.idtype != User.ADMINISTRATOR)
-            return redirect(routes.ProjectList.index());
+        if(canEditProject(_user, projectId)){
+            flash("error", "access denied.");
+            return redirect(routes.Application.index());
+        }
         DynamicForm dynamicForm = new DynamicForm().bindFromRequest();
         String input = dynamicForm.get("user-id");
         if(!input.matches("[0-9]+")){
@@ -52,7 +52,12 @@ public class EditProject extends Controller {
         flash("success", "User is added!");
         return redirect(routes.EditProject.index(projectId));
     }
+    @Security.Authenticated(Secured.class)
     public static Result edit(Long projectId){
+        if(canEditProject(_user, projectId)){
+            flash("error", "access denied.");
+            return redirect(routes.Application.index());
+        }
         Project project = Project.findById(projectId);
         if(project != null){
             DynamicForm dynamicForm = new DynamicForm().bindFromRequest();
@@ -66,7 +71,12 @@ public class EditProject extends Controller {
         }
         return redirect(routes.EditProject.index(projectId));
     }
+    @Security.Authenticated(Secured.class)
     public static Result removeUser(Long userId, Long proId){
+        if(canEditProject(_user, proId)){
+            flash("error", "access denied.");
+            return redirect(routes.Application.index());
+        }
         User editUser = User.findByUserId(userId);
         if (editUser != null) {
             editUser.projectId = Long.parseLong("-1");
@@ -76,11 +86,13 @@ public class EditProject extends Controller {
         }
         return redirect(routes.EditProject.index(proId));
     }
+    @Security.Authenticated(Secured.class)
     public static Result searchUser(){
         DynamicForm dynamicForm = new DynamicForm().bindFromRequest();
         List<User> userList = User.findByKeyword(dynamicForm.get("search_keyword"));
         return ok(Json.toJson(userList));
     }
+    @Security.Authenticated(Secured.class)
     public static boolean canEditProject(User user, Long projectId){
         if(user.idtype == User.ADMINISTRATOR)
             return true;
@@ -88,9 +100,14 @@ public class EditProject extends Controller {
             return true;
         return false;
     }
+    @Security.Authenticated(Secured.class)
     public static Result deleteProject(){
         DynamicForm dynamicForm = new DynamicForm().bindFromRequest();
         Long proId = Long.parseLong(dynamicForm.get("projectId"));
+        if(canEditProject(_user, proId)){
+            flash("error", "access denied.");
+            return redirect(routes.Application.index());
+        }
         Project _pro = Project.findById(proId);
         String name = _pro.projectName;
         if(_pro != null) {
@@ -111,13 +128,13 @@ public class EditProject extends Controller {
         flash("d_success", "Project is successfully deleted");
         return redirect(routes.ProjectList.index());
     }
+    @Security.Authenticated(Secured.class)
     public static Result upload(){
         Http.MultipartFormData body = request().body().asMultipartFormData();
         File file = body.getFile("file").getFile();
         String pId = body.asFormUrlEncoded().get("projectId")[0];
         Long proId = Long.parseLong(pId);
-        User _user = User.findByUserId(Long.parseLong(session("userId")));
-        if(_user.projectId != proId){
+        if(_user.projectId != proId && _user.idtype != User.ADMINISTRATOR){
             flash("error", "access denied.");
             return redirect(routes.Application.index());
         }
