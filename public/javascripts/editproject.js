@@ -1,44 +1,43 @@
 $(document).ready(function(){
 
-    var minlength = 1;
     $('.modal-trigger').leanModal({
         dismissible: true
     });
     $('.tooltipped').tooltip({delay: 50});
     $('.slider').slider({full_width: true});
-    $("#searchUser").keyup(function () {
-        var that = this,
-            value = $(this).val();
 
-        if (value.length >= minlength ) {
+    //search user
+
+    $( "#searchUser" ).autocomplete({
+        source: function(request, response) {
             $.ajax({
                 type: "POST",
                 url: "../searchuser",
-                data: {
-                    'search_keyword' : value
-                },
                 dataType: "text",
-                success: function(msg){
-                    if (value==$(that).val()) {
-                        var search = JSON.parse(msg);
-                        var htmlTxt = "";
-                        htmlTxt += "<ul id='show-result-ul' class='dropdown-content select-dropdown active' style='display: block; opacity: 1;'>";
-                        for (var i = 0; i < search.length; i++) {
-                            htmlTxt += "<li><a href='#' id='found-name' class='found-name' userid='"+search[i].id+"'>"+search[i].firstname+" "+search[i].lastname+"</a></li>";
-                        }
-                        htmlTxt += "</ul>";
-                        $("#show-result").html(htmlTxt);
-                        $(".found-name").each(function() {
-                            $(this).click(function(){
-                                $("#searchUser").val($(this).attr("userid"));
-                                $("#show-result").html("");
-                            });
-                        });
-                    }
+                data: {
+                    'search_keyword' : request.term
+                },
+                success: function( data ) {
+                    var search = JSON.parse(data);
+                    response($.map(search, function (item) {
+                        var results = item.firstname + " " + item.lastname;
+                        return {
+                            value: item.id,
+                            label: results
+                        };
+                    }));
                 }
             });
-        }else{
-            $("#show-result").html("");
+        },
+        minLength: 1,
+        select: function( event, ui ) {
+            $( "#searchUser" ).val( ui.item.label );
+            $( "#user-id").val( ui.item.value);
+            return false;
+        },
+        focus: function( event, ui ) {
+            $( "#searchUser" ).val( ui.item.label );
+            return false;
         }
     });
     $("#searchUser").focusout(function(){
@@ -69,13 +68,13 @@ function onComplete(e) {
 }
 
 function onFileStart(e, file) {
-    var html = "<div class='progress' id='process-"+file.index+"'><div class='determinate-"+file.index+"'></div></div></li>"
+    var html = "<div class='progress' id='process-"+file.index+"'><div class='determinate' id='determinate-"+file.index+"'></div></div></li>"
     $('#process-bar').append(html);
-    $('#determinate-'+file.index).attr("width",0);
+    $('#determinate-'+file.index).css('width','0%');
 }
 
 function onFileProgress(e, file, percent) {
-    $('#determinate-'+file.index).attr("width",percent);
+    $('#determinate-'+file.index).css('width',percent+'%');
 }
 
 function onFileComplete(e, file, response) {

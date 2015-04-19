@@ -17,3 +17,12 @@
     background: url('../img/no_image.png') no-repeat center;
     background-size:  contain;
 }
+.add-css{
+    font-size: 1.2rem;
+    color: #26a69a !important;
+    display: block;
+    padding: 1rem 1rem;
+}
+.ui-state-focus{
+    background-color: #f2f2f2;
+}

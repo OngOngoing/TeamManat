@@ -35,7 +35,7 @@ public class EditProject extends Controller {
         if(user.idtype != User.ADMINISTRATOR)
             return redirect(routes.ProjectList.index());
         DynamicForm dynamicForm = new DynamicForm().bindFromRequest();
-        String input = dynamicForm.get("searchUser");
+        String input = dynamicForm.get("user-id");
         if(!input.matches("[0-9]+")){
             flash("error", "Please input User ID only!");
             return redirect(routes.EditProject.index(projectId));
