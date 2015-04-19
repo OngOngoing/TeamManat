@@ -41,10 +41,8 @@ public class RateProject extends Controller {
         String log = "[" + User.findByUserId(userId).username + "] rate ("+projectId+")"+ Project.findById(projectId).projectName;
         for (RateCriterion c : RateCriterion.findAll()) {
             int score = Integer.parseInt(form.get("" + c.id));
-            if(score != -1){
-                Long criteriaId = c.id;
-                Rate rate = Rate.create(score, userId, criteriaId, projectId);
-            }
+            Long criteriaId = c.id;
+            Rate rate = Rate.create(score, userId, criteriaId, projectId);
         }
         Logger.info(log);
         String thisComment = form.get("comment").trim();
@@ -63,15 +61,12 @@ public class RateProject extends Controller {
         String log = "[" + User.findByUserId(userId).username + "] edit rate ("+projectId+")"+ Project.findById(projectId).projectName;
         for(RateCriterion c : criteria){
             Rate r = Rate.findByUserIdAndProjectIdAndCriteriaId(userId,projectId,c.id);
-            Long criteriaId = c.id;
-            int score = Integer.parseInt(form.get("" + criteriaId));
-
+            int score = Integer.parseInt(form.get("" + c.id));
             if(r != null) {
                 r.score = score;
                 r.update();
             }else{
-                
-                r = Rate.create(score,userId,projectId,criteriaId);
+                Rate.create(score,userId,projectId,c.id);
             }
         }    
         

@@ -106,8 +106,9 @@
                                         <div class="input-field">
                                             <input id="projectId" type="hidden" name="projectId" value="@project.id">
                                             <input id="userId" type="hidden" name="userId" value="@user.id">
+                                            <input id="type" type="hidden" name="type" value="1">
                                             @criterias.map { criteria =>
-                                                <input id="@criteria.id" type="hidden" name="@criteria.id" value="-1">
+                                                <input id="@criteria.id" type="hidden" name="@criteria.id" value="0">
                                                 <div class = "row" id="rating">
                                                     <div class = "criterion-name col s12 center trigger-text trigger">@criteria.name</div>
                                                     <div class="divider container"></div><br>
@@ -147,6 +148,8 @@
                                     <form action="/rateproject/edit" method="post">
                                             <input id="projectId" type="hidden" name="projectId" value="@project.id">
                                             <input id="userId" type="hidden" name="userId" value="@user.id">
+                                            <input id="type" type="hidden" name="type" value="1">
+                                            <input id="score" type="hidden" name="score" value="1">
                                             @criterias.map { criteria =>
                                                 <div class = "row" id="rating">
                                                 @(isRate = false)
@@ -183,7 +186,7 @@
                                                     }
                                                 }
                                                 @if(isRate == false){
-                                                    <input id="@criteria.id" type="hidden" name="@criteria.id" value="-1">
+                                                    <input id="@criteria.id" type="hidden" name="@criteria.id" value="0">
                                                     <div class = "row" id="rating">
                                                         <div class = "criterion-name col s12 center trigger-text trigger">@criteria.name</div>
                                                         <div class="divider container"></div><br>
