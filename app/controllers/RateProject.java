@@ -42,11 +42,13 @@ public class RateProject extends Controller {
         for (RateCriterion c : RateCriterion.findAll()) {
             int score = Integer.parseInt(form.get("" + c.id));
             Long criteriaId = c.id;
-            Rate rate = Rate.create(score, userId, criteriaId, projectId);
+            if(score != 0){
+                Rate rate = Rate.create(score, userId, criteriaId, projectId);
+            }
         }
         Logger.info(log);
         String thisComment = form.get("comment").trim();
-        if(thisComment.length() <= 0){
+        if(thisComment.length() > 0){
             Comment comment = Comment.create(userId, projectId, thisComment.trim());    
         }
         flash("rate_success", "Rate submitted");
