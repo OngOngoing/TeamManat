@@ -98,12 +98,14 @@ public class Application extends Controller {
     public static Result setImgDefault(Long imgId, Long proId){
         ProjectImage oldimg = ProjectImage.getDefaultImage(proId);
         ProjectImage newimg = ProjectImage.findById(imgId);
-        if(oldimg == null || newimg == null){
+        if(newimg == null){
             flash("error", "Can't found image.");
             return redirect(routes.EditProject.index(proId));
         }
-        oldimg.imgType = ProjectImage.NORMAL;
-        oldimg.save();
+        if(oldimg != null) {
+            oldimg.imgType = ProjectImage.NORMAL;
+            oldimg.save();
+        }
         newimg.imgType = ProjectImage.DEFAULT;
         newimg.save();
         flash("success", "Project is updated.");
