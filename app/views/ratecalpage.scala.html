@@ -1,5 +1,7 @@
-@(user : User)(projects :List[Project])(criteria : List[RateCriterion])(comments: List[Comment])(result: List[ArrayList[Double]])
-@import java.math.BigInteger; var index = 0; var index2 = 0;
+@(user: User)(projects: List[Project])(criteria: List[RateCriterion])(comments: List[Comment])(result: List[ArrayList[Double]])
+    @import java.math.BigInteger;
+    var index = 0;
+    var index2 = 0;
 
     <html>
         <head>
@@ -13,16 +15,24 @@
             <nav class="teal lighten-1 trigger large" id="head">
                 <div class="container">
                     <div class="nav-wrapper">
-                        <a class="brand-logo hide-on-small-only"><img class="responsive-img" style="margin-top: 7px;" src="@routes.Assets.at("img/logo.png")" width="45%" height="45%" /></a>
+                        <a class="brand-logo hide-on-small-only"><img class="responsive-img" style="margin-top : 7 px ;" src="@routes.Assets.at("img/logo.png")" width="45%" height="45%" /></a>
                         <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="mdi-navigation-menu"></i></a>
                         <div class="center">
                             <ul class="right hide-on-med-and-down">
-                                <li><a href="@routes.VoteController.showResult()"><i class="medium mdi-action-class left"></i>Voting Result</a></li>
-                                <li><a href="@routes.Application.logout()"><i class="medium mdi-action-settings-power left"></i>Logout</a></li>
+                                <li><a href="@routes.VoteController.showResult()"><i class="medium mdi-action-class left"></i>
+                                    Voting Result</a>
+                                </li>
+                                <li><a href="@routes.Application.logout()"><i class="medium mdi-action-settings-power left"></i>
+                                    Logout</a>
+                                </li>
                             </ul>
-                            <ul class="side-nav" id="mobile-demo" style="margin-right: -40px;">
-                                <li><a href="@routes.VoteController.showResult()"><i class="medium mdi-action-class left"></i>Voting Result</a></li>
-                                <li><a href="@routes.Application.logout()"><i class="medium mdi-action-settings-power left"></i>Logout</a></li>
+                            <ul class="side-nav" id="mobile-demo" style="margin-right : - 40 px ;">
+                                <li><a href="@routes.VoteController.showResult()"><i class="medium mdi-action-class left"></i>
+                                    Voting Result</a>
+                                </li>
+                                <li><a href="@routes.Application.logout()"><i class="medium mdi-action-settings-power left"></i>
+                                    Logout</a>
+                                </li>
                             </ul>
                         </div>
                     </div>
@@ -32,73 +42,73 @@
                 <div class="animated fadeInDown">
                     <h1 class = "lobby-banner trigger trigger-text">Rating Result</h1>
                 </div>
-                    <ul class="section animated fadeInLeft">
-                        @result.zipWithIndex.map{case(r,index) =>
-                            <li class= "card-panel">
-                                <h5 class ="trigger trigger-text"><i class="mdi-action-stars small"></i>@projects.get(index).projectName</h5>
-                                <div class="section animated fadeIn">
-                                    <table class = "centered hoverable">
-                                        <thead>
-                                            <tr>
-                                                <th class ="trigger trigger-text" data-field="cname">CriteriaName</th>
-                                                <th class ="trigger trigger-text" data-field="score">Score</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody >
-                                            @r.zipWithIndex.map{case(score,index2) =>
-                                                <tr>
-                                                    <td> @if(index2 < r.size()-1){
-                                                            @criteria.get(index2).name
-                                                        }else{
-                                                            <p class = "trigger trigger-text"><B>Total</B></p>
-                                                        }
-                                                    </td>
-                                                    <td>
-                                                        @if(index2 == r.size()-1){
-                                                             <p class = "trigger trigger-text"><B>@score</B></p>
-                                                        }else {
-                                                            @score
-                                                        }
-                                                    </td>
-                                                </tr>                                        
-                                            }      
-                                        </tbody>
-                                    </table>
-                                <ul class="collapsible" data-collapsible="Expandable">
-                                    <li>
-                                        <div class="collapsible-header trigger trigger-text" ><i class="mdi-communication-comment"></i>Comments</div>
-                                        <div class="collapsible-body ">
-                                            <ul class="collapsible" data-collapsible="accordion">
-                                                @if(Comment.findListByProjectId(projects.get(index).id).size == 0){
-                                                    <p><I>No comment</I></p>
-                                                } else {
-                                                @comments.map{ comment =>
-                                                    @if(comment.projectId == projects.get(index).id){
-                                                        <li>
-                                                            <div class="collapsible-header "><i class="mdi-action-face-unlock"></i>@User.findName(comment.userId) </div>
-                                                            <div class="collapsible-body ">
-                                                                <div class = "row">
-                                                                    <div class = "col s12 center  ">
-                                                                        <p class="" >@comment.comment</p>
-                                                                    </div>
-
-                                                                </div>
-                                                                <div class ="divider "></div>
-                                                            </div>        
-                                                        </li>
-                                                    }
-                                                }
-                                                }
-                                            </ul>
-                                        </div>
-                                    </li>
-                                </ul>
+                <ul class="section animated fadeInLeft">
+                @result.zipWithIndex.map { case (r, index) =>
+                <li class= "card-panel">
+                    <h5 class ="trigger trigger-text"><i class="mdi-action-stars small"></i> @projects.get(index).projectName</h5>
+                    <div class="section animated fadeIn">
+                        <table class = "centered hoverable">
+                            <thead>
+                                <tr>
+                                    <th class ="trigger trigger-text" data-field="cname">CriteriaName</th>
+                                    <th class ="trigger trigger-text" data-field="score">Score</th>
+                                </tr>
+                            </thead>
+                            <tbody >
+                            @r.zipWithIndex.map { case (score, index2) =>
+                            <tr>
+                                <td> @if(index2 < r.size() - 1) {
+                                    @criteria.get(index2).name
+                                } else {
+                                    <p class = "trigger trigger-text"><B>Total</B></p>
+                                }
+                                </td>
+                                <td>
+                                @if(index2 == r.size() - 1) {
+                                    <p class = "trigger trigger-text"><B>@score</B></p>
+                                } else {
+                                    @score
+                                }
+                            </td>
+                            </tr>
+                            }
+                            </tbody>
+                        </table>
+                        <ul class="collapsible" data-collapsible="Expandable">
+                            <li>
+                                <div class="collapsible-header trigger trigger-text" ><i class="mdi-communication-comment"></i>
+                                    Comments</div>
+                                <div class="collapsible-body ">
+                                    <ul class="collapsible" data-collapsible="accordion">
+                                    @if(Comment.findListByProjectId(projects.get(index).id).size == 0) {
+                                        <p><I>No comment</I></p>
+                                    } else {
+                                        @comments.map { comment =>
+                                            @if(comment.projectId == projects.get(index).id) {
+                                                <li>
+                                                    <div class="collapsible-header "><i class="mdi-action-face-unlock"></i>@User.findName(comment.userId) </div>
+                                                    <div class="collapsible-body ">
+                                                        <div class = "row">
+                                                            <div class = "col s12 center">
+                                                                <p class="" >@comment.comment</p>
+                                                            </div>
+                                                        </div>
+                                                        <div class ="divider "></div>
+                                                    </div>
+                                                </li>
+                                            }
+                                        }
+                                    }
+                                    </ul>
+                                </div>
                             </li>
-
-                        }
-                    </ul>
+                        </ul>
+                    </div>
+                </li>
+                }
+                </ul>
                 <br>
-            
+
             </div>
 
 
@@ -108,7 +118,7 @@
                 </a>
                 <ul>
                     <li><a class="btn-floating red " href="@routes.Application.logout()"><i class="large mdi-action-settings-power"></i></a></li>
-                    @if(user.idtype == User.ADMINISTRATOR){
+                    @if(user.idtype == User.ADMINISTRATOR) {
                         <li><a class="btn-floating yellow derken-1" href="@routes.AdminPage.index()"><i class="large mdi-action-settings waves-effect waves-light"></i></a></li>
                     }
                 </ul>
