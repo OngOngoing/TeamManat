@@ -57,9 +57,11 @@
                     <div class="slider">
                         <ul class="slides">
                             @images.map{image =>
-                                <li>
-                                    <img class = "responsive" src="../getimg/@image.Id"></img>
-                                </li>
+                                @if(image.imgType != ProjectImage.DEFAULT) {
+                                    <li>
+                                        <img class = "responsive" src="../getimg/@image.Id"></img>
+                                    </li>
+                                }
                             }
                         </ul>
                     </div>

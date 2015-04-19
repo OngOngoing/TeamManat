@@ -62,7 +62,7 @@ public class EditProject extends Controller {
             project.projectDescription = description;
             project.update();
             Logger.info("["+User.findByUserId(Long.parseLong(session("userId")+"")).username+"] edit project("+projectId+")"+project.projectName);
-            flash("p_success", "Project is updated!");
+            flash("success", "Project is updated!");
         }
         return redirect(routes.EditProject.index(projectId));
     }
@@ -72,7 +72,7 @@ public class EditProject extends Controller {
             editUser.projectId = Long.parseLong("-1");
             Logger.info("["+editUser.username+"] project id = -1.");
             editUser.update();
-            flash("d_success", "User is successfully deleted");
+            flash("success", "User is successfully deleted");
         }
         return redirect(routes.EditProject.index(proId));
     }
@@ -108,7 +108,7 @@ public class EditProject extends Controller {
             _pro.delete();
             Logger.info("Project ("+proId+")"+name+" is deleted");
         }
-        flash("d_success", "Project is successfully deleted");
+        flash("success", "Project is successfully deleted");
         return redirect(routes.ProjectList.index());
     }
     public static Result upload(){

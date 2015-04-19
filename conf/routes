@@ -42,7 +42,8 @@ POST        /deleteproject                            controllers.EditProject.de
 POST        /uploadimage                              controllers.EditProject.upload()
 GET         /getimgs/:proId                           controllers.Application.getImgs(proId:Long)
 GET         /getimg/:id                               controllers.Application.getImg(id:Long)
-
+GET         /delimg/:proId/:id                        controllers.Application.deleteImg(id:Long, proId:Long)
+GET         /setimg/:proId/:id                        controllers.Application.setImgDefault(id:Long, proId:Long)
 # Create initial data for testing.
 GET         /install                                  controllers.Application.mockDatabase()
 # Map static resources from the /public folder to the /assets URL path

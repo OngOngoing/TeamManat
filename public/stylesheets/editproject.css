@@ -4,3 +4,16 @@
     width: 100%;
     z-index: 1000;
 }
+.toolbar{
+    padding-left: 40px;
+    padding-top: 10px;
+}
+.slider .slides li .caption {
+    left:0% !important;
+    top:2% !important;
+    width:100% !important;
+}
+.slider .slides{
+    background: url('../img/no_image.png') no-repeat center;
+    background-size:  contain;
+}

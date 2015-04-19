@@ -1,10 +1,11 @@
 $(document).ready(function(){
+
+    var minlength = 1;
     $('.modal-trigger').leanModal({
         dismissible: true
     });
     $('.tooltipped').tooltip({delay: 50});
-    var minlength = 1;
-
+    $('.slider').slider({full_width: true});
     $("#searchUser").keyup(function () {
         var that = this,
             value = $(this).val();
@@ -48,7 +49,7 @@ $(document).ready(function(){
 
     $(".upload").upload({
         action: "../uploadimage",
-        label: "Drag and drop images or click to select. MaxSize : 500Kb. Max 10 pictures",
+        label: "Drag and drop images or click to select.",
         postData: {
             'projectId' : $(".upload").attr("proId")
         },
@@ -79,6 +80,36 @@ function onFileProgress(e, file, percent) {
 
 function onFileComplete(e, file, response) {
     Materialize.toast("<i class='mdi-file-cloud-upload green-text small'></i><span style='padding-left: 5px'>upload successful.</span>", 4000);
+    $.ajax({
+        type: "get",
+        url: "../getimgs/" + $("#show-slides").attr("projectId"),
+        dataType: "text",
+        success: function (msg) {
+            var data = JSON.parse(msg);
+            var html = "";
+            for(var i=data.length-1;i>=0;i--){
+                html += "<li>";
+                html += "<img src='../getimg/"+data[i].Id+"'>";
+                html += "<div class='caption right-align'>";
+                html += "<div class='row'>";
+                if(data[i].imgType != 1){
+                    html += "<a class='waves-effect waves-light btn blue' href='../setimg/"+$("#show-slides").attr("projectId")+"/"+data[i].Id+"'><i class='mdi-toggle-check-box right'></i>";
+                    html += "Set Default</a>";
+                }else{
+                    html += "<a class='waves-effect waves-light btn disabled'><i class='mdi-toggle-check-box right'></i>";
+                    html += "Default</a>";
+                }
+                html += "</div>";
+                html += "<div class='row'>";
+                html += "<a class='waves-effect waves-light btn red'  href='../delimg/"+$("#show-slides").attr("projectId")+"/"+data[i].Id+"'><i class='mdi-navigation-close right'></i>Delete</a>";
+                html += "</div>";
+                html += "</div></li>";
+            }
+            $('#show-slides').html(html);
+            $('.indicators').replaceWith("");
+            $('.slider').slider({full_width: true});
+        }
+    });
     $('#process-'+file.index).remove();
 }
 

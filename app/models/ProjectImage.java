@@ -55,12 +55,17 @@ public class ProjectImage extends Model {
     public static String getUrlDefaultImage(Long projectId){
         ProjectImage img = ProjectImage.find.where().eq("projectId",projectId).eq("imgType",DEFAULT).findUnique();
         if(img == null){
-            return "../assets/img/TeamDummy.jpg";
+            return "../assets/img/no_image_s.png";
         }else {
             return "../getimg/" + img.Id;
         }
     }
+    public static ProjectImage getDefaultImage(Long projectId){
+        ProjectImage img = ProjectImage.find.where().eq("projectId",projectId).eq("imgType",DEFAULT).findUnique();
+        return img;
+    }
     public static ProjectImage findById(Long id){
         return find.byId(id);
     }
+    public static ProjectImage findByIdAndProId(Long id, Long proid){ return find.where().eq("Id",id).eq("projectId",proid).findUnique();}
 }
