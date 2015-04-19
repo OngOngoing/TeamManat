@@ -208,10 +208,14 @@
                                             }   
                                         <div class="row">
                                             <div class="input-field col s12">
-                                                <textarea id="textarea1" class="materialize-textarea trigger" name="comment" >@if(thisComment != null){
-                                                    @thisComment.comment
-                                                }</textarea>
-                                                <label for="textarea1">Comment</label>
+                                                @if(thisComment != null){
+                                                    <textarea id="textarea1" class="materialize-textarea trigger" name="comment" >@thisComment.comment</textarea>
+                                                    <label for="textarea1">Comment</label>
+                                                }else {
+                                                    <textarea id="textarea1" class="materialize-textarea trigger" name="comment" ></textarea>
+                                                    <label for="textarea1">Comment</label>
+                                                }
+                                                
                                             </div>
                                         </div>
                                         <button type="submit" class="waves-effect waves-light btn-large trigger"><i class="mdi-action-thumb-up right"></i>

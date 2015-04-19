@@ -45,7 +45,7 @@ public class RateProject extends Controller {
             Rate rate = Rate.create(score, userId, criteriaId, projectId);
         }
         Logger.info(log);
-        Comment comment = Comment.create(userId, projectId, form.get("comment"));
+        Comment comment = Comment.create(userId, projectId, form.get("comment").trim());
         flash("rate_success", "Rate submitted");
         return redirect(routes.RateProject.index(projectId));
     }
@@ -65,7 +65,7 @@ public class RateProject extends Controller {
         Logger.info("[" + User.findByUserId(userId).username + "] edit comment ("+projectId+")" + Project.findById(projectId).projectName + "");
         Comment thisComment = Comment.findByUserIdAndProjectId(userId, projectId);
         if(thisComment == null){
-            Comment.create(userId, projectId, form.get("comment"));
+            Comment.create(userId, projectId, form.get("comment").trim());
 
         }else{
             thisComment.comment = form.get("comment");
