@@ -43,6 +43,7 @@ public class RateCalculator extends Controller {
                     sum = sum/count;
                 }
                 allSum+=sum;
+                sum = Math.round(sum*100)/100;
                 perProject.add(sum);
 
             }
@@ -51,6 +52,7 @@ public class RateCalculator extends Controller {
             }else {
                 allSum= allSum/criteria.size();
             }
+            allSum = Math.round(allSum*100)/100;            
             perProject.add(allSum);
             result.add(perProject);
         }

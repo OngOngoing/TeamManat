@@ -64,8 +64,13 @@ public class RateProject extends Controller {
         Logger.info(log);
         Logger.info("[" + User.findByUserId(userId).username + "] edit comment ("+projectId+")" + Project.findById(projectId).projectName + "");
         Comment thisComment = Comment.findByUserIdAndProjectId(userId, projectId);
-        thisComment.comment = form.get("comment");
-        thisComment.update();
+        if(thisComment == null){
+            Comment.create(userId, projectId, form.get("comment"));
+
+        }else{
+            thisComment.comment = form.get("comment");
+            thisComment.update();
+        }
         flash("edit_success", "Rate updated");
         return redirect(routes.RateProject.index(projectId));
     }
