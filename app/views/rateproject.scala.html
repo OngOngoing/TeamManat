@@ -1,4 +1,5 @@
 @(user: User)(project: Project)(thisRate: List[Rate])(criterias: List[RateCriterion])(images : List[ProjectImage])(teamMember : List[User])(thisComment: Comment)(setting: Map[String, String])
+@import java.math.BigInteger; var isRate = false;
     @canRate = @{
         import java.util.Calendar
         import java.text.SimpleDateFormat
@@ -151,8 +152,10 @@
                                             <input id="score" type="hidden" name="score" value="1">
                                             @criterias.map { criteria =>
                                                 <div class = "row" id="rating">
+                                                @(isRate = false)
                                                 @thisRate.map { rate =>
                                                     @if(rate.criteriaId == criteria.id ){
+                                                        @(isRate = true)
                                                         <input id="@rate.criteriaId" type="hidden" name="@rate.criteriaId" value="@rate.score">
                                                         <div class = "criterion-name col s12 center text-darken-2 trigger-text trigger">@criteria.name</div>
                                                         <div class="divider container"></div><br>
@@ -182,11 +185,32 @@
 
                                                     }
                                                 }
+                                                @if(isRate == false){
+                                                    <input id="@criteria.id" type="hidden" name="@criteria.id" value="0">
+                                                    <div class = "row" id="rating">
+                                                        <div class = "criterion-name col s12 center trigger-text trigger">@criteria.name</div>
+                                                        <div class="divider container"></div><br>
+                                                        <div class = "col s12 center">
+                                                            <div class = "hide-on-med-and-up">
+                                                                @for(index <- 1 until 6) {
+                                                                    <a id="@criteria.id" class="waves-effect waves-teal btn btn-flat btn-floating trigger" name="criteriaButton" score="@index" href="#!">@index</a>
+                                                                }
+                                                            </div>
+                                                            <div class = "hide-on-small-only">
+                                                                @for(index <- 1 until 6) {
+                                                                    <a id="@criteria.id" class="waves-effect waves-teal btn btn-flat btn-floating trigger btn-large" name="criteriaButton" score="@index" href="#!">@index</a>
+                                                                }
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                }
                                                 </div>
                                             }   
                                         <div class="row">
                                             <div class="input-field col s12">
-                                                <textarea id="textarea1" class="materialize-textarea trigger" name="comment" >@thisComment.comment</textarea>
+                                                <textarea id="textarea1" class="materialize-textarea trigger" name="comment" >@if(thisComment != null){
+                                                    @thisComment.comment
+                                                }</textarea>
                                                 <label for="textarea1">Comment</label>
                                             </div>
                                         </div>
