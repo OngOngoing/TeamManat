@@ -53,17 +53,27 @@ public class AdminPage extends Controller {
     }
     @Security.Authenticated(Secured.class)
     public static Result addRateCriterion(){
-        RateCriterion rateC = Form.form(RateCriterion.class).bindFromRequest().get();
-        rateC.save();
-        Logger.info("[" + _user.username + "] add new Rate Criterion.(" + rateC.id + ")");
-        return redirect(routes.AdminPage.index()+"#criterions");
+        if(_user.idtype == User.ADMINISTRATOR) {
+            RateCriterion rateC = Form.form(RateCriterion.class).bindFromRequest().get();
+            rateC.save();
+            Logger.info("[" + _user.username + "] add new Rate Criterion.(" + rateC.id + ")");
+            return redirect(routes.AdminPage.index()+"#criterions");
+        } else {
+            flash("voting_result_close","access denied");
+            return redirect(routes.ProjectList.index());
+        }
     }
     @Security.Authenticated(Secured.class)
     public static Result addVoteCriterion(){
-        VoteCriterion voteC = Form.form(VoteCriterion.class).bindFromRequest().get();
-        voteC.save();
-        Logger.info("[" + _user.username + "] add new Vote Criterion.(" + voteC.id + ")");
-        return redirect(routes.AdminPage.index()+"#criterions");
+        if(_user.idtype == User.ADMINISTRATOR) {
+            VoteCriterion voteC = Form.form(VoteCriterion.class).bindFromRequest().get();
+            voteC.save();
+            Logger.info("[" + _user.username + "] add new Vote Criterion.(" + voteC.id + ")");
+            return redirect(routes.AdminPage.index()+"#criterions");
+        } else {
+            flash("voting_result_close","access denied");
+            return redirect(routes.ProjectList.index());
+        }
     }
     @Security.Authenticated(Secured.class)
     public static Result deleteUsers(){
@@ -160,5 +170,4 @@ public class AdminPage extends Controller {
         }
         return redirect(routes.AdminPage.index()+"#configs");
     }
-
 }
