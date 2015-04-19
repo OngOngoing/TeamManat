@@ -57,20 +57,13 @@ public class RateProject extends Controller {
         DynamicForm form = new DynamicForm().bindFromRequest();
         Long userId = Long.parseLong(session().get("userId"));
         long projectId = Long.parseLong(form.get("projectId"));
-        List<RateCriterion> criteria = RateCriterion.findAll();
+        List<Rate> rates = Rate.findListByUserIdAndProjectId(userId, projectId);
         String log = "[" + User.findByUserId(userId).username + "] edit rate ("+projectId+")"+ Project.findById(projectId).projectName;
-        for(RateCriterion c : criteria){
-            Rate r = Rate.findByUserIdAndProjectIdAndCriteriaId(userId,projectId,c.id);
-            int score = Integer.parseInt(form.get("" + c.id));
-            if(r != null) {
-                r.score = score;
-                r.update();
-            }else{
-                Rate.create(score,userId,projectId,c.id);
-            }
-        }    
-        
-        
+        for (Rate r : rates) {
+            int score = Integer.parseInt(form.get("" + r.criteriaId));
+            r.score = score;
+            r.update();
+        }
         Logger.info(log);
         Logger.info("[" + User.findByUserId(userId).username + "] edit comment ("+projectId+")" + Project.findById(projectId).projectName + "");
         Comment thisComment = Comment.findByUserIdAndProjectId(userId, projectId);
