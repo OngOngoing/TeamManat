@@ -24,13 +24,14 @@ public class VoteController extends Controller {
     @Security.Authenticated(Secured.class)
     public static Result index() {
         Long userId = Long.parseLong(session().get("userId"));
+        User thisUser = User.findByUserId(userId);
         Map<VoteCriterion,Long> voteMapping = Vote.getVoteMappingByUserId(userId);
         boolean isTimeUp = Settings.isTimeUp();
 
         if(isTimeUp) {
             flash("time_up","Time is already up. Sorry for the inconvenience.");
         }
-        return ok(votepage.render(userId, Project.findAll(), voteMapping, VoteCriterion.findAll(),isTimeUp));
+        return ok(votepage.render(thisUser, userId, Project.findAll(), voteMapping, VoteCriterion.findAll(),isTimeUp));
     }
 
     @Security.Authenticated(Secured.class)
