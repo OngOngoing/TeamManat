@@ -43,6 +43,7 @@ public class RateCalculator extends Controller {
                     sum = sum/count;
                 }
                 allSum+=sum;
+                perProject.add(String.format("%.1f",sum));
 
             }
             if(criteria.size() == 0){
