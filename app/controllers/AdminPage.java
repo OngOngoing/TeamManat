@@ -6,7 +6,11 @@ import play.Logger;
 import play.data.*;
 import play.mvc.*;
 import views.html.adminpage;
-
+import views.html.admin_user;
+import views.html.admin_rate;
+import views.html.admin_project;
+import views.html.admin_criteria;
+import views.html.admin_systemconfig;
 import java.util.*;
 
 public class AdminPage extends Controller {
@@ -19,6 +23,46 @@ public class AdminPage extends Controller {
         List<User> users = User.findAll();
         List<Settings> webconfig = Settings.findAll();
         return ok(adminpage.render(users, Project.findAll(), rates, webconfig,RateCriterion.findAll(),VoteCriterion.findAll()));
+    }
+    public static Result user(){
+        User _user = User.findByUserId(Long.parseLong(session("userId")));
+        Logger.info("["+_user.username+"] user admin page.");
+        List<User> users = User.findAll();
+        List<Project> projects = Project.findAll();
+        List<Settings> webconfig = Settings.findAll();
+        return ok(admin_user.render(_user,users,projects));
+    }
+    public static Result rate(){
+        User _user = User.findByUserId(Long.parseLong(session("userId")));
+        Logger.info("["+_user.username+"] user admin page.");
+        List<User> users = User.findAll();
+        List<Rate> rates = Rate.findAll();
+        List<Settings> webconfig = Settings.findAll();
+        return ok(admin_rate.render(_user,users,rates));
+    }
+    public static Result project(){
+        User _user = User.findByUserId(Long.parseLong(session("userId")));
+        Logger.info("["+_user.username+"] user admin page.");
+        List<User> users = User.findAll();
+        List<Project> projects = Project.findAll();
+        List<Settings> webconfig = Settings.findAll();
+        return ok(admin_project.render(_user,users,projects));
+    }
+    public static Result criteria(){
+        User _user = User.findByUserId(Long.parseLong(session("userId")));
+        Logger.info("["+_user.username+"] user admin page.");
+        List<RateCriterion> rateCriteria = RateCriterion.findAll();
+        List<VoteCriterion> voteCriteria = VoteCriterion.findAll();
+        List<Settings> webconfig = Settings.findAll();
+        return ok(admin_criteria.render(_user, rateCriteria, voteCriteria));
+    }
+    public static Result systemConfig(){
+        User _user = User.findByUserId(Long.parseLong(session("userId")));
+        Logger.info("["+_user.username+"] user admin page.");
+        List<RateCriterion> rateCriteria = RateCriterion.findAll();
+        List<VoteCriterion> voteCriteria = VoteCriterion.findAll();
+        List<Settings> webconfig = Settings.findAll();
+        return ok(admin_systemconfig.render(_user, webconfig));
     }
 
     @Security.Authenticated(AdminSecured.class)

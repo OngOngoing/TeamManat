@@ -150,6 +150,7 @@
 
         <script src="http://code.jquery.com/jquery-2.1.3.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.96.1/js/materialize.min.js"></script>
+        <script type="text/javascript" src="@routes.Assets.at("javascripts/init.js")"></script>
         @if(flash.contains("vote_success")) {
             <script type="text/javascript">
             Materialize.toast('@flash.get("vote_success")', 4000)
