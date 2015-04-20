@@ -39,7 +39,7 @@ public class EditProject extends Controller {
         DynamicForm dynamicForm = new DynamicForm().bindFromRequest();
         String input = dynamicForm.get("user-id");
         if(!input.matches("[0-9]+")){
-            flash("error", "Please input User ID only!");
+            flash("error", "Please select some user!");
             return redirect(routes.EditProject.index(projectId));
         }
         Long userId = Long.parseLong(input);
