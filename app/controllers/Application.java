@@ -46,6 +46,7 @@ public class Application extends Controller {
             session().clear();
             User currentUser = User.findByUsername(loginForm.get().username);
             session("userId", String.valueOf(currentUser.id));
+            session("projectOwnerId", String.valueOf(currentUser.projectId));
             return redirect(routes.ProjectList.index());
         }
     }

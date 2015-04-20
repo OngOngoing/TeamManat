@@ -46,7 +46,7 @@ public class VoteController extends Controller {
             HashMap<VoteCriterion, List<Vote.ResultBundle>> winnerSummary = Vote.getWinnerSummary();
             return ok(voteresult.render(thisUser, criteria, projects, winnerSummary, result ));
         }
-        flash("voting_result_close","Please wait until the voting session is closed. Sorry for the inconvenience.");
+        flash("error","Please wait until the voting session is closed. Sorry for the inconvenience.");
         return redirect(routes.ProjectList.index());
     }
 

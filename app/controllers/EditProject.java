@@ -20,8 +20,10 @@ public class EditProject extends Controller {
     @Security.Authenticated(Secured.class)
     public static Result index(Long projectId){
         User _user = User.findByUserId(Long.parseLong(session("userId")));
-        if(!canEditProject(_user, projectId))
+        if(!canEditProject(_user, projectId)) {
+            flash("error", "Access Denied.");
             return redirect(routes.ProjectList.index());
+        }
         Project project = Project.findById(projectId);
         List<User> members = User.findByTeam(projectId);
         List<ProjectImage> images = ProjectImage.findImageOfProject(projectId);
@@ -31,7 +33,7 @@ public class EditProject extends Controller {
     public static Result addMember(Long projectId){
         User _user = User.findByUserId(Long.parseLong(session("userId")));
         if(!canEditProject(_user, projectId)){
-            flash("error", "access denied.");
+            flash("error", "Access Denied.");
             return redirect(routes.Application.index());
         }
         DynamicForm dynamicForm = new DynamicForm().bindFromRequest();
@@ -55,8 +57,8 @@ public class EditProject extends Controller {
     @Security.Authenticated(Secured.class)
     public static Result edit(Long projectId){
         User _user = User.findByUserId(Long.parseLong(session("userId")));
-        if(canEditProject(_user, projectId)){
-            flash("error", "access denied.");
+        if(!canEditProject(_user, projectId)){
+            flash("error", "Access Denied.");
             return redirect(routes.Application.index());
         }
         Project project = Project.findById(projectId);
@@ -76,7 +78,7 @@ public class EditProject extends Controller {
     public static Result removeUser(Long userId, Long proId){
         User _user = User.findByUserId(Long.parseLong(session("userId")));
         if(!canEditProject(_user, proId)){
-            flash("error", "access denied.");
+            flash("error", "Access Denied.");
             return redirect(routes.Application.index());
         }
         User editUser = User.findByUserId(userId);
