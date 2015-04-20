@@ -123,24 +123,26 @@ public class Application extends Controller {
     // MockDataBase for testing
     public static Result mockDatabase(){
         //Web App setting
-        Calendar calendar = Calendar.getInstance();
-        SimpleDateFormat dateFormat = new SimpleDateFormat("M-d-y HH:mm");
-        Settings.create("startTime", dateFormat.format(calendar.getTime()), Settings.TYPE_DATE, "Date for starting vote.");
+        if(User.findByUsername("admin") == null) {
+            Calendar calendar = Calendar.getInstance();
+            SimpleDateFormat dateFormat = new SimpleDateFormat("M-d-y HH:mm");
+            Settings.create("startTime", dateFormat.format(calendar.getTime()), Settings.TYPE_DATE, "Date for starting vote.");
 
-        calendar.set(Calendar.HOUR, calendar.get(Calendar.HOUR) + 1);
-        Settings.create("stopTime", dateFormat.format(calendar.getTime()), Settings.TYPE_DATE, "Date for stopping vote.");
-        Settings.create("siteType", "1", Settings.TYPE_INTEGER, "1 for vote, 2 for rate.");
-        //Mock user and project
-        User.create("admin", "admin", "Admin's Firstname", "Admin's Lastname", User.ADMINISTRATOR);
-        User.create("test1", "test1", "TestFirstname1", "TestLastName1", User.NORMAL_USER); // Add new account : username => test1 password => test1
-        User.create("test2", "test2", "TestFirstname2", "TestLastName2", User.NORMAL_USER); // Add new account : username => test2 password => test2
+            calendar.set(Calendar.HOUR, calendar.get(Calendar.HOUR) + 1);
+            Settings.create("stopTime", dateFormat.format(calendar.getTime()), Settings.TYPE_DATE, "Date for stopping vote.");
+            Settings.create("siteType", "1", Settings.TYPE_INTEGER, "1 for vote, 2 for rate.");
+            //Mock user and project
+            User.create("admin", "admin", "Admin's Firstname", "Admin's Lastname", User.ADMINISTRATOR);
+            User.create("test1", "test1", "TestFirstname1", "TestLastName1", User.NORMAL_USER); // Add new account : username => test1 password => test1
+            User.create("test2", "test2", "TestFirstname2", "TestLastName2", User.NORMAL_USER); // Add new account : username => test2 password => test2
 
-        mockProjectsInDivision1();
-        mockUsersInDivision1();
-        mockUsersInDivision2();
-        mockCriteria();
+            mockProjectsInDivision1();
+            mockUsersInDivision1();
+            mockUsersInDivision2();
+            mockCriteria();
 
-        flash("success", "A initial data for test the system was created.");
+            flash("success", "A initial data for test the system was created.");
+        }
         return redirect(routes.Application.index());
     }
 

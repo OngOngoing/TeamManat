@@ -4,7 +4,7 @@ import javax.persistence.*;
 import javax.validation.constraints.*;
 
 import com.avaje.ebean.Expr;
-import play.Logger;
+import org.mindrot.jbcrypt.BCrypt;
 import play.data.validation.Constraints.Required;
 import play.db.ebean.*;
 import java.util.List;
@@ -34,7 +34,7 @@ public class User extends Model {
         this.firstname = fname;
         this.lastname = lname;
         this.username = username;
-        this.password = password;
+        this.password =  BCrypt.hashpw(password, BCrypt.gensalt());
         this.idtype = type;
         this.projectId = project;
     }
@@ -42,7 +42,10 @@ public class User extends Model {
     private static Finder<Long, User> find = new Finder<Long, User>(Long.class, User.class);
 
     public static User authenticate(String username, String password){
-        return User.find.where().eq("username", username).eq("password", password).findUnique();
+        User _login = User.find.where().eq("username", username).findUnique();
+        if(BCrypt.checkpw(password, _login.password))
+            return _login;
+        return null;
     }
 
     public static User create(String username, String password, String fname,String lname, int type){

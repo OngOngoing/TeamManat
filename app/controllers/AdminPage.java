@@ -1,6 +1,7 @@
 package controllers;
 
 import models.*;
+import org.mindrot.jbcrypt.BCrypt;
 import play.Logger;
 import play.data.*;
 import play.mvc.*;
@@ -128,7 +129,7 @@ public class AdminPage extends Controller {
         olduser.firstname = newuser.firstname;
         olduser.lastname = newuser.lastname;
         olduser.username = newuser.username;
-        olduser.password = newuser.password;
+        olduser.password = BCrypt.hashpw(newuser.password, BCrypt.gensalt());
         olduser.idtype = newuser.idtype;
         olduser.projectId = newuser.projectId;
         olduser.update();

@@ -114,7 +114,7 @@
                                     }
 
                                 <span class="title teal-text lighten-1 trigger">ID : @user.id</span>
-                                <p>Username : @user.username Password : @user.password <br>
+                                <p>Username : @user.username <br>
                                     @if(user.idtype==0){
                                         Type : Admin Project's name :
                                     } else {
@@ -126,7 +126,7 @@
                                         }
                                     }
                                 </p>
-                                    <a userId="@user.id" username="@user.username" password="@user.password" idtype="@user.idtype" projectId="@user.projectId" firstname="@user.firstname" lastname="@user.lastname" class="editModal secondary-content mdi-editor-mode-edit trigger modal-trigger" href="#editUserModal"></a>
+                                    <a userId="@user.id" username="@user.username" password="" idtype="@user.idtype" projectId="@user.projectId" firstname="@user.firstname" lastname="@user.lastname" class="editModal secondary-content mdi-editor-mode-edit trigger modal-trigger" href="#editUserModal"></a>
                                 </li>
 
                             }
