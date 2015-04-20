@@ -27,7 +27,6 @@ public class VoteController extends Controller {
         User thisUser = User.findByUserId(userId);
         Map<VoteCriterion,Long> voteMapping = Vote.getVoteMappingByUserId(userId);
         boolean isTimeUp = Settings.isTimeUp();
-
         if(isTimeUp) {
             flash("time_up","Time is already up. Sorry for the inconvenience.");
         }
@@ -39,7 +38,6 @@ public class VoteController extends Controller {
         Long userId = Long.parseLong(session().get("userId"));
         User thisUser = User.findByUserId(userId);
         if(thisUser.idtype == User.ADMINISTRATOR || Settings.isTimeUp()) {
-            List<Vote> votes = Vote.findAll();
             List<VoteCriterion> criteria = VoteCriterion.findAll();
             List<Project> projects = Project.findAll();
             MultiKeyMap result = Vote.summarize();
@@ -53,12 +51,10 @@ public class VoteController extends Controller {
     public static Result addVote() {
         List<VoteCriterion> criteria = VoteCriterion.findAll();
         Long userId = Long.parseLong(session().get("userId"));
-
         if(Settings.isTimeUp()) {
             flash("time_up","Time is already up. Sorry for the inconvenience.");
             return redirect(routes.VoteController.index());
         }
-
         Map<String, String[]> map = request().body().asFormUrlEncoded();
         if(map.isEmpty()){
             flash("vote_empty", "Please vote at least 1 criterion");

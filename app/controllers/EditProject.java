@@ -4,6 +4,7 @@ import models.Project;
 import models.Rate;
 import models.ProjectImage;
 import models.User;
+import org.apache.commons.collections.map.HashedMap;
 import play.Logger;
 import play.data.DynamicForm;
 import play.mvc.*;
@@ -13,6 +14,9 @@ import java.io.File;
 import java.util.List;
 
 import play.libs.Json;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.ArrayList;
 /**
  * Created by Chin on 4/15/2015.
  */
@@ -94,9 +98,17 @@ public class EditProject extends Controller {
     public static Result searchUser(){
         DynamicForm dynamicForm = new DynamicForm().bindFromRequest();
         List<User> userList = User.findByKeyword(dynamicForm.get("search_keyword"));
-        return ok(Json.toJson(userList));
+        List<Map<String, String>> user_data = new ArrayList();
+        for(User item : userList){
+            Map<String, String> i = new HashedMap();
+            i.put("lastname", item.lastname);
+            i.put("firstname", item.firstname);
+            i.put("id", item.id.toString());
+            user_data.add(i);
+        }
+        return ok(Json.toJson(user_data));
     }
-    @Security.Authenticated(Secured.class)
+
     public static boolean canEditProject(User user, Long projectId){
         if(user.idtype == User.ADMINISTRATOR)
             return true;
@@ -104,15 +116,12 @@ public class EditProject extends Controller {
             return true;
         return false;
     }
-    @Security.Authenticated(Secured.class)
+    @Security.Authenticated(AdminSecured.class)
     public static Result deleteProject(){
         DynamicForm dynamicForm = new DynamicForm().bindFromRequest();
         Long proId = Long.parseLong(dynamicForm.get("projectId"));
         User _user = User.findByUserId(Long.parseLong(session("userId")));
-        if(!canEditProject(_user, proId)){
-            flash("error", "access denied.");
-            return redirect(routes.Application.index());
-        }
+        Logger.info("["+_user.username+"] delete project:"+proId);
         Project _pro = Project.findById(proId);
         if(_pro != null) {
             String name = _pro.projectName;

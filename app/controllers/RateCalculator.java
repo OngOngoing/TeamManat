@@ -1,14 +1,11 @@
 package controllers;
 
 import models.*;
-import play.data.*;
 import play.mvc.*;
 import views.html.ratecalpage;
 
-import java.util.HashMap;
 import java.util.List;
 import java.util.ArrayList;
-import java.util.Map;
 
 
 public class RateCalculator extends Controller {

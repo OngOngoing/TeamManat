@@ -29,7 +29,6 @@ public class AdminPage extends Controller {
         Logger.info("["+_user.username+"] user admin page.");
         List<User> users = User.findAll();
         List<Project> projects = Project.findAll();
-        List<Settings> webconfig = Settings.findAll();
         return ok(admin_user.render(_user,users,projects));
     }
     public static Result rate(){
@@ -37,7 +36,6 @@ public class AdminPage extends Controller {
         Logger.info("["+_user.username+"] user admin page.");
         List<User> users = User.findAll();
         List<Rate> rates = Rate.findAll();
-        List<Settings> webconfig = Settings.findAll();
         return ok(admin_rate.render(_user,users,rates));
     }
     public static Result project(){
@@ -45,7 +43,6 @@ public class AdminPage extends Controller {
         Logger.info("["+_user.username+"] user admin page.");
         List<User> users = User.findAll();
         List<Project> projects = Project.findAll();
-        List<Settings> webconfig = Settings.findAll();
         return ok(admin_project.render(_user,users,projects));
     }
     public static Result criteria(){
@@ -53,14 +50,11 @@ public class AdminPage extends Controller {
         Logger.info("["+_user.username+"] user admin page.");
         List<RateCriterion> rateCriteria = RateCriterion.findAll();
         List<VoteCriterion> voteCriteria = VoteCriterion.findAll();
-        List<Settings> webconfig = Settings.findAll();
         return ok(admin_criteria.render(_user, rateCriteria, voteCriteria));
     }
     public static Result systemConfig(){
         User _user = User.findByUserId(Long.parseLong(session("userId")));
         Logger.info("["+_user.username+"] user admin page.");
-        List<RateCriterion> rateCriteria = RateCriterion.findAll();
-        List<VoteCriterion> voteCriteria = VoteCriterion.findAll();
         List<Settings> webconfig = Settings.findAll();
         return ok(admin_systemconfig.render(_user, webconfig));
     }
