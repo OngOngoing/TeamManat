@@ -54,12 +54,14 @@ public class Settings extends Model{
     public static boolean isTimeUp() {
 
         Calendar calendar = Calendar.getInstance(TimeZone.getTimeZone("Asia/Bangkok"));
+        calendar.setTimeZone(TimeZone.getTimeZone("Asia/Bangkok"));
         DateFormat dateFormat = new SimpleDateFormat("M-d-y HH:mm");
 
         Settings endingTimeSetting = Settings.value("stopTime");
         Calendar endingCalendar = Calendar.getInstance(TimeZone.getTimeZone("Asia/Bangkok"));
         try {
             endingCalendar.setTime(dateFormat.parse(endingTimeSetting.keyValue));
+            endingCalendar.setTimeZone(TimeZone.getTimeZone("Asia/Bangkok"));
         } catch (ParseException e) {
             Logger.info("Cannot parse setting time to Calendar Object");
         }
