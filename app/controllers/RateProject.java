@@ -73,18 +73,20 @@ public class RateProject extends Controller {
         String log = "[" + User.findByUserId(userId).username + "] edit rate ("+projectId+")"+ Project.findById(projectId).projectName;
         for (RateCriterion c : RateCriterion.findAll()) {
             int score = Integer.parseInt(form.get("" + c.id));
-            if(score != 0){
+            if(score >= 0){
                 Rate r = Rate.create(score,userId,c.id,projectId);
             }
         }
         Logger.info(log);
         Logger.info("[" + User.findByUserId(userId).username + "] edit comment ("+projectId+")" + Project.findById(projectId).projectName + "");
         Comment thisComment = Comment.findByUserIdAndProjectId(userId, projectId);
+        String getComment = form.get("comment");
         if(thisComment == null){
-            Comment.create(userId, projectId, form.get("comment"));
+            if(getComment.length() > 0)
+            Comment.create(userId, projectId, getComment);
 
         }else{
-            thisComment.comment = form.get("comment");
+            thisComment.comment = getComment;
             thisComment.update();
         }
         flash("edit_success", "Rate updated");

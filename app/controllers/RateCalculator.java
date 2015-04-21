@@ -40,7 +40,7 @@ public class RateCalculator extends Controller {
                     sum = sum/count;
                 }
                 allSum+=sum;
-                perProject.add(String.format("%.1f",sum));
+                perProject.add(String.format("%.2f",sum));
 
             }
             if(criteria.size() == 0){
@@ -48,7 +48,7 @@ public class RateCalculator extends Controller {
             }else {
                 allSum= allSum/criteria.size();
             }           
-            perProject.add(String.format("%.1f",allSum));
+            perProject.add(String.format("%.2f",allSum));
             result.add(perProject);
         }
         response().setHeader("Cache-Control","no-cache");

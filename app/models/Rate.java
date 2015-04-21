@@ -31,9 +31,15 @@ public class Rate extends Model {
             return rate;
         }
         Rate rate = findByUserIdAndProjectIdAndCriteriaId(userId,projectId,criteriaId);
-        rate.score = score;
-        rate.update();
+        if(score == 0){
+            rate.delete();
+            return null;
+        }else{
+            rate.score = score;
+            rate.update();    
+        }
         return rate;
+        
     }
 
     private static Finder<Long, Rate> find = new Finder<Long, Rate>(Long.class, Rate.class);
