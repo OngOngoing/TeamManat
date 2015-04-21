@@ -63,6 +63,7 @@ public class Settings extends Model{
         } catch (ParseException e) {
             Logger.info("Cannot parse setting time to Calendar Object");
         }
+        Logger.info("Start Time : "+calendar.getTime()+", End Time : "+endingCalendar.getTime());
         return calendar.compareTo(endingCalendar) > 0;
     }
 }
