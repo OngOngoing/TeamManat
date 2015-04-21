@@ -49,27 +49,32 @@
                 </div>
             @projects.map { project =>
                 <div class="col s12">
-                    <div class="card-panel waves-effect waves-block">
+                    <div class="card-app hoverable waves-effect waves-block z-depth-1">
                         <a href="@routes.RateProject.index(project.id)">
-                            <div class="pane">
-                                <img src="@ProjectImage.getUrlDefaultImage(project.id)"/>
-                                <span class="card-title flow-text">@project.projectName</span>
-                                @if(!mappedRates.get(project.id))  {
-                                    <p>
-                                        Click here to rate this project
-                                    </p>
-                                    <div class="bottom-content trigger trigger-text">NOT YET RATED</div>
-                                } else {
-                                    <p>
-                                        Click here to edit your rate
-                                    </p>
-                                    <div class="bottom-content trigger trigger-text"><i class="mdi-toggle-check-box tiny"></i> ALREADY RATED</div>
-                                }
+                            <div class="row">
+                                <div class="col s4 m2">
+                                    <div class="image-container">
+                                        <div class="square">
+                                            <img src="@ProjectImage.getUrlDefaultImage(project.id)" alt="" class="crop">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col s8 m10">
+                                    <p class="app-banner">@project.projectName</p>
+                                    @if(!mappedRates.get(project.id)) {
+                                        <p class="secondary-text">click here to rate this project</p>
+                                        <div class="info">NOT YET RATED</div>
+                                    } else {
+                                        <p class="secondary-text">click here to edit your rate</p>
+                                        <div class="info">ALREADY RATED</div>
+                                    }
+                                </div>
 
                             </div>
                         </a>
                     </div>
                 </div>
+
             }
             </div>
 
