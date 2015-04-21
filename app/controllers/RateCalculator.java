@@ -6,6 +6,7 @@ import views.html.ratecalpage;
 
 import java.util.List;
 import java.util.ArrayList;
+import java.util.Collections;
 
 
 public class RateCalculator extends Controller {
@@ -54,4 +55,43 @@ public class RateCalculator extends Controller {
         response().setHeader("Cache-Control","no-cache");
         return ok(ratecalpage.render(thisUser,projects,criteria,comments,result));
     }
+    /*public static Result rateSortByCriteria() {
+        boolean isTimeUp = Settings.isTimeUp();
+        Long userId = Long.parseLong(session().get("userId"));
+        User thisUser = User.findByUserId(userId);
+        if(!isTimeUp && thisUser.idtype != User.ADMINISTRATOR ) {
+            flash("error","Please wait until the rating session is closed. Sorry for the inconvenience.");
+            return redirect(routes.ProjectList.index());
+        }
+        List<RateCriterion> criteria = RateCriterion.findAll();
+        List<Project> projects = Project.findAll();
+        Map<String, String> i = new HashedMap();
+        for(RateCriterion c : criteria){
+            List<Double> score  = new ArrayList<Double>();
+            for(Project p : projects){
+                double sum = 0;
+                int count = 0;
+                Rate rates = Rate.findListByProjectIdAndCriteriaId(p.id,c.id);
+                for(Rate r : rates){
+                    sum = += r.score;
+                    count++;
+                }
+                if(count == 0){
+                    sum = 0;
+                }else{
+                    sum = sum/count;
+                }
+                score.put(sum);
+            }
+            Collections.sort(score);
+            Collections.sort(score);
+            for(double s : score ){
+                i.put("Score" , String.format("%.2f",s));
+                i.put("Project", Project.findByProjectIdAndProjectIdAndCriteriaId)
+            }
+        }
+        
+        response().setHeader("Cache-Control","no-cache");
+        return ok(ratecalpage.render(criteria,result));
+    }*/
 }

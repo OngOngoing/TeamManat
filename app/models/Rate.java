@@ -24,6 +24,9 @@ public class Rate extends Model {
             return null;
         }
         if(findByUserIdAndProjectIdAndCriteriaId(userId,projectId,criteriaId) == null) {
+            if(score == 0){
+                return null;
+            }
             Rate rate = new Rate();
             rate.score = score;
             rate.userId = userId;
