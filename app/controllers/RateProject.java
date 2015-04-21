@@ -38,6 +38,10 @@ public class RateProject extends Controller {
 		DynamicForm form = new DynamicForm().bindFromRequest();
         Long userId = Long.parseLong(session().get("userId"));
         Long projectId = Long.parseLong(form.get("projectId"));
+        if(Settings.isTimeUp()) {
+            flash("error","Time is already up.");
+            return redirect(routes.RateProject.index(projectId));
+        }
         String log = "[" + User.findByUserId(userId).username + "] rate ("+projectId+")"+ Project.findById(projectId).projectName;
         for (RateCriterion c : RateCriterion.findAll()) {
             int score = Integer.parseInt(form.get("" + c.id));
@@ -61,6 +65,10 @@ public class RateProject extends Controller {
         DynamicForm form = new DynamicForm().bindFromRequest();
         Long userId = Long.parseLong(session().get("userId"));
         long projectId = Long.parseLong(form.get("projectId"));
+        if(Settings.isTimeUp()) {
+            flash("error","Time is already up.");
+            return redirect(routes.RateProject.index(projectId));
+        }
         List<Rate> rates = Rate.findListByUserIdAndProjectId(userId, projectId);
         String log = "[" + User.findByUserId(userId).username + "] edit rate ("+projectId+")"+ Project.findById(projectId).projectName;
         for (RateCriterion c : RateCriterion.findAll()) {
