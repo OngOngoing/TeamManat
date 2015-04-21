@@ -116,11 +116,11 @@
 
                                 @users.zipWithIndex.map { case (user, index) =>
                                     <li class="collection-item avatar">
-                                        @if(user.idtype != 3) {
+                                        @if(user.idtype != User.ADMINISTRATOR) {
                                             <input type="checkbox" name="id" id= "@user.id" value="@user.id" />
                                         }
                                     <label class="check" for="@user.id"></label>
-                                        @if(user.idtype == 3) {
+                                        @if(user.idtype == User.ADMINISTRATOR) {
                                             <i class="mdi-social-whatshot circle teal lighten-1 trigger"></i>
                                         } else {
                                             <i class="mdi-social-person circle teal lighten-1 trigger"></i>
@@ -128,7 +128,7 @@
 
                                     <span class="title teal-text lighten-1 trigger">ID : @user.id</span>
                                     <p>Username : @user.username <br>
-                                        @if(user.idtype==0){
+                                        @if(user.idtype == User.ADMINISTRATOR){
                                             Type : Admin Project's name :
                                         } else {
                                             Type : Normal Project's name :

@@ -16,7 +16,7 @@ public class ProjectList extends Controller {
         Long userId = Long.parseLong(session().get("userId"));
         User user = User.findByUserId(userId);
         Settings setting = Settings.value("stopTime");
-        Map<Long,Boolean> mappedRate = Rate.getRatedVoteAndProjectIdMappingByUserId(userId);
+        Map<Long,Integer> mappedRate = Rate.getRateAndProjectIdMappingByUserId(userId);
         SimpleDateFormat dateFormat = new SimpleDateFormat("M-d-y HH:mm");
         Calendar calendar = Calendar.getInstance();
         String date = setting.keyValue;
@@ -34,7 +34,7 @@ public class ProjectList extends Controller {
             e.printStackTrace();
         }
         response().setHeader("Cache-Control","no-cache");
-        return ok(projectlist.render(Project.findAll(),mappedRate,user,_time));
+        return ok(projectlist.render(Project.findAll(),RateCriterion.findAll(),mappedRate,user,_time));
     }
 
 }

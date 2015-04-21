@@ -80,12 +80,12 @@ public class Rate extends Model {
         return find.byId(rateId);
     }
 
-    public static Map<Long,Boolean> getRatedVoteAndProjectIdMappingByUserId(Long userId) {
-        HashMap<Long,Boolean> result = new HashMap<Long,Boolean>();
+    public static Map<Long,Integer> getRateAndProjectIdMappingByUserId(Long userId) {
+        HashMap<Long,Integer> result = new HashMap<Long,Integer>();
         List<Project> projects = Project.findAll();
         for(Project project : projects) {
-            Boolean isVoted = findListByUserIdAndProjectId(userId, project.id).size() > 0;
-            result.put(project.id, isVoted);
+            int countRate = findListByUserIdAndProjectId(userId, project.id).size();
+            result.put(project.id, countRate);
         }
         return result;
     }
