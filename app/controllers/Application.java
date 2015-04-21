@@ -124,7 +124,7 @@ public class Application extends Controller {
     public static Result mockDatabase(){
         //Web App setting
         if(User.findByUsername("admin") == null) {
-            Calendar calendar = Calendar.getInstance();
+            Calendar calendar = Calendar.getInstance(TimeZone.getTimeZone("Asia/Bangkok"));
             SimpleDateFormat dateFormat = new SimpleDateFormat("M-d-y HH:mm");
             Settings.create("startTime", dateFormat.format(calendar.getTime()), Settings.TYPE_DATE, "Date for starting vote.");
 

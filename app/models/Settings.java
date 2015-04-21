@@ -10,7 +10,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.List;
-
+import java.util.TimeZone;
 @Entity
 public class Settings extends Model{
 
@@ -53,11 +53,11 @@ public class Settings extends Model{
 
     public static boolean isTimeUp() {
 
-        Calendar calendar = Calendar.getInstance();
+        Calendar calendar = Calendar.getInstance(TimeZone.getTimeZone("Asia/Bangkok"));
         DateFormat dateFormat = new SimpleDateFormat("M-d-y HH:mm");
 
         Settings endingTimeSetting = Settings.value("stopTime");
-        Calendar endingCalendar = Calendar.getInstance();
+        Calendar endingCalendar = Calendar.getInstance(TimeZone.getTimeZone("Asia/Bangkok"));
         try {
             endingCalendar.setTime(dateFormat.parse(endingTimeSetting.keyValue));
         } catch (ParseException e) {
