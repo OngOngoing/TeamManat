@@ -31,6 +31,7 @@ public class EditProject extends Controller {
         Project project = Project.findById(projectId);
         List<User> members = User.findByTeam(projectId);
         List<ProjectImage> images = ProjectImage.findImageOfProject(projectId);
+        response().setHeader("Cache-Control","no-cache");
         return ok(editproject.render(_user, project, members, images));
     }
     @Security.Authenticated(Secured.class)
@@ -56,6 +57,7 @@ public class EditProject extends Controller {
         editUser.update();
         Logger.info("["+editUser.username+"] project id = "+projectId);
         flash("success", "User is added!");
+        response().setHeader("Cache-Control","no-cache");
         return redirect(routes.EditProject.index(projectId));
     }
     @Security.Authenticated(Secured.class)
@@ -76,6 +78,7 @@ public class EditProject extends Controller {
             Logger.info("["+User.findByUserId(Long.parseLong(session("userId")+"")).username+"] edit project("+projectId+")"+project.projectName);
             flash("success", "Project is updated!");
         }
+        response().setHeader("Cache-Control","no-cache");
         return redirect(routes.EditProject.index(projectId));
     }
     @Security.Authenticated(Secured.class)
@@ -92,6 +95,7 @@ public class EditProject extends Controller {
             editUser.update();
             flash("success", "User is successfully deleted");
         }
+        response().setHeader("Cache-Control","no-cache");
         return redirect(routes.EditProject.index(proId));
     }
     @Security.Authenticated(Secured.class)

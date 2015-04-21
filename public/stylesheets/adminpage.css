@@ -226,10 +226,10 @@
 .glyphicon-ice-lolly-tasted:before {
     content: "\e232";
 }
-.logo{
+.logo {
     vertical-align: middle;
     font-size: 2.8rem;
-
+}
 /*-----------------------------------*\
   $ANIMATIONS
 \*-----------------------------------*/
@@ -242,4 +242,27 @@
     to {
         -webkit-filter: hue-rotate(-360deg);
     }
+}
+
+.promo i {
+    color: #ee6e73;
+    font-size: 7rem;
+    display: block;
+}
+.promo-example {
+    overflow: hidden;
+}
+.promo {
+    width: 100%;
+}
+.promo-caption {
+    font-size: 1.7rem;
+    font-weight: 500;
+    margin-top: 5px;
+    margin-bottom: 0;
+}
+p {
+    color: rgba(0, 0, 0, 0.71);
+    padding: 0;
+    -webkit-font-smoothing: antialiased;
 }

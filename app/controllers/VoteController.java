@@ -30,6 +30,7 @@ public class VoteController extends Controller {
         if(isTimeUp) {
             flash("time_up","Time is already up. Sorry for the inconvenience.");
         }
+        response().setHeader("Cache-Control","no-cache");
         return ok(votepage.render(thisUser, userId, Project.findAll(), voteMapping, VoteCriterion.findAll(),isTimeUp));
     }
 
@@ -45,9 +46,10 @@ public class VoteController extends Controller {
             return ok(voteresult.render(thisUser, criteria, projects, winnerSummary, result ));
         }
         flash("error","Please wait until the voting session is closed. Sorry for the inconvenience.");
+        response().setHeader("Cache-Control","no-cache");
         return redirect(routes.ProjectList.index());
     }
-
+    @Security.Authenticated(Secured.class)
     public static Result addVote() {
         List<VoteCriterion> criteria = VoteCriterion.findAll();
         Long userId = Long.parseLong(session().get("userId"));
@@ -71,9 +73,10 @@ public class VoteController extends Controller {
             }
         }
         flash("vote_success", "Vote submitted");
+        response().setHeader("Cache-Control","no-cache");
         return redirect(routes.VoteController.index());
     }
-
+    @Security.Authenticated(Secured.class)
     public static Result editVote() {
         List<VoteCriterion> criteria = VoteCriterion.findAll();
         Long userId = Long.parseLong(session().get("userId"));
@@ -102,6 +105,7 @@ public class VoteController extends Controller {
             }
         }
         flash("edit_success", "Vote updated");
+        response().setHeader("Cache-Control","no-cache");
         return redirect(routes.VoteController.index());
     }
 

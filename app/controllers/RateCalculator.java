@@ -51,6 +51,7 @@ public class RateCalculator extends Controller {
             perProject.add(String.format("%.1f",allSum));
             result.add(perProject);
         }
+        response().setHeader("Cache-Control","no-cache");
         return ok(ratecalpage.render(thisUser,projects,criteria,comments,result));
     }
 }

@@ -80,6 +80,7 @@ public class RateProject extends Controller {
             thisComment.update();
         }
         flash("edit_success", "Rate updated");
+        response().setHeader("Cache-Control","no-cache");
         return redirect(routes.RateProject.index(projectId));
     }
 }

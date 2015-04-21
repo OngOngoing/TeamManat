@@ -13,55 +13,83 @@
     </head>
     <body>
         <nav class="teal lighten-1 trigger large" id="head">
-                <div class="container">
-                    <div class="nav-wrapper">
-                        <a class="brand-logo"><span class="glyphicon glyphicon-ice-lolly-tasted logo" aria-hidden="true"></span></a>
-                        <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="mdi-navigation-menu"></i></a>
-                        <div class="center">
-                            <ul class="right hide-on-med-and-down">
-                                <li><a href="@routes.AdminPage.user()"><i class="medium mdi-action-account-box right"></i>User</a>
-                                </li>
-                                <li><a href="@routes.AdminPage.rate()"><i class="medium mdi-action-grade right"></i>Rate</a>
-                                </li>
-                                <li><a href="@routes.AdminPage.project()"><i class="medium mdi-action-class right"></i>Project</a>
-                                </li>
-                                <li><a href="@routes.AdminPage.criteria()"><i class="medium mdi-action-note-add right"></i>Criteria</a>
-                                </li>
-                                <li><a href="@routes.AdminPage.systemConfig()"><i class="medium mdi-action-settings right"></i>System Config</a>
-                                </li>
-                            </ul>
-                            <ul class="side-nav" id="mobile-demo" style="margin-right : - 40 px ;">
-                                <li><a href="@routes.AdminPage.user()"><i class="medium mdi-action-account-box right"></i>User</a>
-                                </li>
-                                <li><a href="@routes.AdminPage.rate()"><i class="medium mdi-action-grade right"></i>Rate</a>
-                                </li>
-                                <li><a href="@routes.AdminPage.project()"><i class="medium mdi-action-class right"></i>Project</a>
-                                </li>
-                                <li><a href="@routes.AdminPage.criteria()"><i class="medium mdi-action-note-add right"></i>Criteria</a>
-                                </li>
-                                <li><a href="@routes.AdminPage.systemConfig()"><i class="medium mdi-action-settings right"></i>System Config</a>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </nav>
-            <div class ="container padding-nav">
-                <div class="row">
-                    <h2 class="col s12 animate fadeIn center trigger trigger-text"> Welcome Admin</h2>
-                    <div id="admin" class="col s12 animated fadeIn">
-                        <a class= "btn btn-large trigger" href="@routes.AdminPage.user()">User</a>
-                        <a class="btn btn-large trigger" href="@routes.AdminPage.rate()">Rate</a>
-                        <a class="btn btn-large trigger" href="@routes.AdminPage.project()">Project</a>
-                        <a class="btn btn-large trigger" href="@routes.AdminPage.criteria()">criteria</a>
-                        <a class="btn btn-large trigger" href="@routes.AdminPage.systemConfig()">System Config</a>
+            <div class="container">
+                <div class="nav-wrapper">
+                    <a class="brand-logo"><span class="glyphicon glyphicon-ice-lolly-tasted logo" aria-hidden="true"></span></a>
+                    <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="mdi-navigation-menu"></i></a>
+                    <div class="center">
+                        <ul class="right hide-on-med-and-down">
+                            <li><a href="@routes.AdminPage.index()"><i class="medium mdi-action-home left"></i>Admin</a>
+                            </li>
+                            <li><a href="@routes.AdminPage.user()"><i class="medium mdi-action-account-box left"></i>
+                                User</a>
+                            </li>
+                            <li><a href="@routes.AdminPage.rate()"><i class="medium mdi-action-grade left"></i>Rate</a>
+                            </li>
+                            <li><a href="@routes.AdminPage.project()"><i class="medium mdi-action-class left"></i>
+                                Project</a>
+                            </li>
+                            <li><a href="@routes.AdminPage.criteria()"><i class="medium mdi-action-note-add left"></i>
+                                Criteria</a>
+                            </li>
+                            <li><a href="@routes.AdminPage.systemConfig()"><i class="medium mdi-action-settings left"></i>
+                                System Config</a>
+                            </li>
+                        </ul>
+                        <ul class="side-nav" id="mobile-demo" style="margin-right : - 40 px ;">
+                            <li><a href="@routes.AdminPage.index()"><i class="medium mdi-action-home left"></i>Admin</a>
+                            </li>
+                            <li><a href="@routes.AdminPage.user()"><i class="medium mdi-action-account-box left"></i>
+                                User</a>
+                            </li>
+                            <li><a href="@routes.AdminPage.rate()"><i class="medium mdi-action-grade left"></i>Rate</a>
+                            </li>
+                            <li><a href="@routes.AdminPage.project()"><i class="medium mdi-action-class left"></i>
+                                Project</a>
+                            </li>
+                            <li><a href="@routes.AdminPage.criteria()"><i class="medium mdi-action-note-add left"></i>
+                                Criteria</a>
+                            </li>
+                            <li><a href="@routes.AdminPage.systemConfig()"><i class="medium mdi-action-settings left"></i>
+                                System Config</a>
+                            </li>
+                        </ul>
                     </div>
                 </div>
             </div>
-
-        <div class="container hide-on-med-and-up">
-            <div class="valign-wrapper">
-                <span class="valign red-text darken-1 center-align"><i class="mdi-alert-error large"></i><br /> Admin page are not available for mobile device.</span>
+        </nav>
+        <div class ="container padding-nav">
+            <div class="row">
+                <h2 class="col s12 animate fadeIn center trigger trigger-text">Welcome To Admin Panel</h2>
+            </div>
+            <div class="row">
+                <div class="col s12 m4">
+                    <a class="waves-effect waves-yellow">
+                        <div class="center promo promo-example">
+                            <i class="mdi-action-account-box"></i>
+                            <p class="promo-caption">User</p>
+                            <p class="light center">You can edit user, delete user or add new user from this page. Or even, you can look about the user detail.</p>
+                        </div>
+                    </a>
+                </div>
+                <div class="col s12 m4">
+                    <a class="waves-effect waves-yellow">
+                        <div class="center promo promo-example">
+                            <i class="mdi-action-grade"></i>
+                            <p class="promo-caption">Rate</p>
+                            <p class="light center">Show to rate detail of all user. And, you can delete rate from this page.</p>
+                        </div>
+                    </a>
+                </div>
+                <div class="col s12 m4">
+                    <a class="waves-effect waves-yellow">
+                        <div class="center promo promo-example">
+                            <i class="mdi-action-class"></i>
+                            <p class="promo-caption">Project</p>
+                            <p class="light center">Administrator can view all project, add the new project or access to edit project page from this menu.</p>
+                        </div>
+                    </a>
+                </div>
             </div>
         </div>
 

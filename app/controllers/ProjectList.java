@@ -14,6 +14,7 @@ public class ProjectList extends Controller {
         User user = User.findByUserId(userId);
         Settings setting = Settings.value("stopTime");
         Map<Long,Boolean> mappedRate = Rate.getRatedVoteAndProjectIdMappingByUserId(userId);
+        response().setHeader("Cache-Control","no-cache");
         return ok(projectlist.render(Project.findAll(),mappedRate,user,setting));
     }
 
