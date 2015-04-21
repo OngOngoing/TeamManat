@@ -46,7 +46,7 @@ public class RateProject extends Controller {
         for (RateCriterion c : RateCriterion.findAll()) {
             int score = Integer.parseInt(form.get("" + c.id));
             Long criteriaId = c.id;
-            if(score != 0){
+            if(score > 0 && score < 6){
                 Rate rate = Rate.create(score, userId, criteriaId, projectId);
             }
         }
@@ -73,7 +73,7 @@ public class RateProject extends Controller {
         String log = "[" + User.findByUserId(userId).username + "] edit rate ("+projectId+")"+ Project.findById(projectId).projectName;
         for (RateCriterion c : RateCriterion.findAll()) {
             int score = Integer.parseInt(form.get("" + c.id));
-            if(score >= 0){
+            if(score >= 0 && score < 6){
                 Rate r = Rate.create(score,userId,c.id,projectId);
             }
         }

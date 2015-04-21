@@ -19,8 +19,10 @@ public class Rate extends Model {
     public Long criteriaId;
 
     public static Rate create(int score , Long userId , Long criteriaId , Long projectId)
-    {
-
+    {   
+        if(score <0 || score > 5){
+            return null;
+        }
         if(findByUserIdAndProjectIdAndCriteriaId(userId,projectId,criteriaId) == null) {
             Rate rate = new Rate();
             rate.score = score;
@@ -31,7 +33,7 @@ public class Rate extends Model {
             return rate;
         }
         Rate rate = findByUserIdAndProjectIdAndCriteriaId(userId,projectId,criteriaId);
-        if(score == 0){
+        if(score == 0 ){
             rate.delete();
             return null;
         }else{
