@@ -24,13 +24,14 @@ public class AdminPage extends Controller {
         response().setHeader("Cache-Control","no-cache");
         return ok(adminpage.render(users, Project.findAll(), rates, webconfig,RateCriterion.findAll(),VoteCriterion.findAll()));
     }
-    public static Result user(){
+    public static Result user(int page){
         User _user = User.findByUserId(Long.parseLong(session("userId")));
         Logger.info("["+_user.username+"] user admin page.");
-        List<User> users = User.findAll();
+        List<User> users = User.findAllByPage(page);
         List<Project> projects = Project.findAll();
+        int num_page= User.totalPage();
         response().setHeader("Cache-Control","no-cache");
-        return ok(admin_user.render(_user,users,projects));
+        return ok(admin_user.render(_user,users,num_page,page,projects));
     }
     public static Result rate(){
         User _user = User.findByUserId(Long.parseLong(session("userId")));
@@ -179,7 +180,9 @@ public class AdminPage extends Controller {
         olduser.firstname = newuser.firstname;
         olduser.lastname = newuser.lastname;
         olduser.username = newuser.username;
-        olduser.password = BCrypt.hashpw(newuser.password, BCrypt.gensalt());
+        if(!newuser.password.equals("")) {
+            olduser.password = BCrypt.hashpw(newuser.password, BCrypt.gensalt());
+        }
         olduser.idtype = newuser.idtype;
         olduser.projectId = newuser.projectId;
         olduser.update();
@@ -194,7 +197,7 @@ public class AdminPage extends Controller {
         for(Settings item : settings){
             Settings.update(item.keyName, dynamicForm.get(item.keyName));
         }
-        response().setHeader("Cache-Control","no-cache");
+        response().setHeader("Cache-Control", "no-cache");
         return redirect(routes.AdminPage.index()+"#configs");
     }
 }

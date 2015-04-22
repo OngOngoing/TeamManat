@@ -74,6 +74,13 @@ public class User extends Model {
         return find.all();
     }
 
+    public static List<User> findAllByPage(int page){
+        return find.where().findPagingList(10).getPage(--page).getList();
+    }
+
+    public static int totalPage(){
+        return  find.where().findPagingList(10).getTotalPageCount();
+    }
     public static List<User> findByKeyword(String key){
         List < User > listUser = find.setMaxRows(5).where().or(
                 Expr.like("firstname", "%" + key + "%"),

@@ -114,7 +114,7 @@
     margin: 0px;
     border-bottom: 1px solid #e0e0e0; }
     .collection .collection-item.avatar {
-      height: 100px;
+      height: auto;
       padding-left: 100px;
       position: relative; }
       .collection .collection-item.avatar .circle {
@@ -192,8 +192,20 @@
     cursor: pointer;
     opacity: 0;
     filter: alpha(opacity=0); }
-
-
+.pagination li{
+    font-size: 1.2rem;
+    float: left;
+    width: 30px;
+    margin: 0 10px;
+    border-radius: 2px;
+    text-align: center;
+}
+.pagination a{
+    line-height: 2rem;
+}
+.pagination li i{
+    line-height: 2rem;
+}
 .collapsible-container {
     padding: 1.5rem 1.0rem;
     margin: 0 auto;

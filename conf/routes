@@ -8,11 +8,11 @@ GET         /projectlist                              controllers.ProjectList.in
 
 # Admin Page
 GET         /adminpage                                controllers.AdminPage.index()
-GET 		/adminpage/users 						  controllers.AdminPage.user()
-GET 		/adminpage/rates 						  controllers.AdminPage.rate()
-GET 		/adminpage/projects 					  controllers.AdminPage.project()
-GET 		/adminpage/criteria 					  controllers.AdminPage.criteria()
-GET 		/adminpage/systemConfig 				  controllers.AdminPage.systemConfig()
+GET         /adminpage/users/:page                    controllers.AdminPage.user(page:Integer)
+GET         /adminpage/rates                          controllers.AdminPage.rate()
+GET         /adminpage/projects                       controllers.AdminPage.project()
+GET         /adminpage/criteria                       controllers.AdminPage.criteria()
+GET         /adminpage/systemConfig                   controllers.AdminPage.systemConfig()
 POST        /adminpage/addUser                        controllers.AdminPage.addUser()
 POST        /adminpage/deleteUsers                    controllers.AdminPage.deleteUsers()
 POST        /adminpage/editUser                       controllers.AdminPage.editUser()
