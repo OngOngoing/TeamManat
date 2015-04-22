@@ -20,7 +20,7 @@
                                 </li>
                                 <li><a href="@routes.AdminPage.user()"><i class="medium mdi-action-account-box left"></i>User</a>
                                 </li>
-                                <li><a href="@routes.AdminPage.rate()"><i class="medium mdi-action-grade left"></i>Rate</a>
+                                <li><a href="@routes.AdminPage.score()"><i class="medium mdi-action-grade left"></i>Score</a>
                                 </li>
                                 <li><a href="@routes.AdminPage.project()"><i class="medium mdi-action-class left"></i>Project</a>
                                 </li>
@@ -34,7 +34,7 @@
                                 </li>
                                 <li><a href="@routes.AdminPage.user()"><i class="medium mdi-action-account-box left"></i>User</a>
                                 </li>
-                                <li><a href="@routes.AdminPage.rate()"><i class="medium mdi-action-grade left"></i>Rate</a>
+                                <li><a href="@routes.AdminPage.score()"><i class="medium mdi-action-grade left"></i>Score</a>
                                 </li>
                                 <li><a href="@routes.AdminPage.project()"><i class="medium mdi-action-class left"></i>Project</a>
                                 </li>
@@ -49,19 +49,39 @@
             </nav>
             <div class="container padding-nav">
                 <!-- User -->
-                <h2 class = "trigger trigger-text">Rate</h2>
-                <ul class="collection">
-                    @rates.map { rate =>
-                        <li class="collection-item avatar">
-                            <i class="mdi-action-description circle teal lighten-1 trigger"></i>
-                            <span class="title teal-text lighten-1 trigger">Rate ID : @rate.id</span>
-                            <p>UserId @rate.userId rate ProjectId @rate.projectId <br>
-                                score = @rate.score
-                            </p>
-                            <a href="@routes.AdminPage.deleteRate(rate.id)" class="secondary-content"><i class="mdi-navigation-close trigger"></i></a>
-                        </li>
-                    }
-                </ul>
+                <nav>
+                    <div class="nav-wrapper">
+                        <a href="#" class="brand-logo right">Score</a>
+                        <ul id="nav-mobile" class="left hide-on-med-and-down">
+                            <li><a href="@routes.AdminPage.rate()">Rates</a></li>
+                            <li><a href="@routes.AdminPage.vote()">Votes</a></li>
+                        </ul>
+                    </div>
+                    <table class="hoverable centered responsive-table" >
+                        <thead>
+                            <tr>
+                                <th data-field="id">ID</th>
+                                <th data-field="criteria">Criteria</th>
+                                <th data-field="projectId">Project</th>
+                                <th data-field="score">Score</th>
+                                <th data-field="button"></th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                        @rates.map { rate =>
+                            <tr>
+                                <td>@User.findByUserId(rate.userId).username (ID:@rate.userId)</td>
+                                <td>@RateCriterion.findById(rate.criteriaId).name</td>
+                                <td>@Project.findById(rate.projectId).projectName</td>
+                                <td>@rate.score</td>
+                                <td><a href="@routes.AdminPage.deleteRate(rate.id)" class="secondary-content"><i class="mdi-navigation-close trigger"></i></a></td>
+                            </tr>
+
+                        }
+                        </tbody>
+                    </table>
+                </nav>
             </div>
 
 

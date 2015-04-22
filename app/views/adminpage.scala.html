@@ -1,4 +1,4 @@
-@(users: List[User])(projects: List[Project])(rates: List[Rate])(configs: List[Settings])(rateCs: List[RateCriterion])(voteCs: List[VoteCriterion])
+@(users: List[User])(projects: List[Project])(rates: List[Rate])(votes: List[Vote])(configs: List[Settings])(rateCs: List[RateCriterion])(voteCs: List[VoteCriterion])
 
 <!DOCTYPE html>
 
@@ -25,7 +25,8 @@
                             <li><a href="@routes.AdminPage.user()"><i class="medium mdi-action-account-box left"></i>
                                 User</a>
                             </li>
-                            <li><a href="@routes.AdminPage.rate()"><i class="medium mdi-action-grade left"></i>Rate</a>
+                            <li><a href="@routes.AdminPage.score()"><i class="medium mdi-action-grade left"></i>
+                                Score</a>
                             </li>
                             <li><a href="@routes.AdminPage.project()"><i class="medium mdi-action-class left"></i>
                                 Project</a>
@@ -43,7 +44,8 @@
                             <li><a href="@routes.AdminPage.user()"><i class="medium mdi-action-account-box left"></i>
                                 User</a>
                             </li>
-                            <li><a href="@routes.AdminPage.rate()"><i class="medium mdi-action-grade left"></i>Rate</a>
+                            <li><a href="@routes.AdminPage.score()"><i class="medium mdi-action-grade left"></i>
+                                Score</a>
                             </li>
                             <li><a href="@routes.AdminPage.project()"><i class="medium mdi-action-class left"></i>
                                 Project</a>

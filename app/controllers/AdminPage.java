@@ -5,12 +5,8 @@ import org.mindrot.jbcrypt.BCrypt;
 import play.Logger;
 import play.data.*;
 import play.mvc.*;
-import views.html.adminpage;
-import views.html.admin_user;
-import views.html.admin_rate;
-import views.html.admin_project;
-import views.html.admin_criteria;
-import views.html.admin_systemconfig;
+import views.html.*;
+
 import java.util.*;
 
 public class AdminPage extends Controller {
@@ -22,7 +18,7 @@ public class AdminPage extends Controller {
         List<User> users = User.findAll();
         List<Settings> webconfig = Settings.findAll();
         response().setHeader("Cache-Control","no-cache");
-        return ok(adminpage.render(users, Project.findAll(), rates, webconfig,RateCriterion.findAll(),VoteCriterion.findAll()));
+        return ok(adminpage.render(users, Project.findAll(), rates,Vote.findAll(), webconfig,RateCriterion.findAll(),VoteCriterion.findAll()));
     }
     public static Result user(){
         User _user = User.findByUserId(Long.parseLong(session("userId")));
@@ -32,6 +28,13 @@ public class AdminPage extends Controller {
         response().setHeader("Cache-Control","no-cache");
         return ok(admin_user.render(_user,users,projects));
     }
+    public static Result score(){
+        User _user = User.findByUserId(Long.parseLong(session("userId")));
+        Logger.info("["+_user.username+"] user admin page.");
+        List<User> users = User.findAll();
+        response().setHeader("Cache-Control","no-cache");
+        return ok(admin_score.render(_user,users));
+    }
     public static Result rate(){
         User _user = User.findByUserId(Long.parseLong(session("userId")));
         Logger.info("["+_user.username+"] user admin page.");
@@ -39,6 +42,15 @@ public class AdminPage extends Controller {
         List<Rate> rates = Rate.findAll();
         response().setHeader("Cache-Control","no-cache");
         return ok(admin_rate.render(_user,users,rates));
+    }
+    public static Result vote(){
+        User _user = User.findByUserId(Long.parseLong(session("userId")));
+        Logger.info("["+_user.username+"] user admin page.");
+        List<User> users = User.findAll();
+        List<Vote> votes = Vote.findAll();
+        List<VoteCriterion> voteCs = VoteCriterion.findAll();
+        response().setHeader("Cache-Control","no-cache");
+        return ok(admin_vote.render(_user, users, votes,voteCs));
     }
     public static Result project(){
         User _user = User.findByUserId(Long.parseLong(session("userId")));
@@ -137,6 +149,15 @@ public class AdminPage extends Controller {
         rate.delete();
         response().setHeader("Cache-Control","no-cache");
         return redirect(routes.AdminPage.index()+"#rates");
+    }
+    @Security.Authenticated(AdminSecured.class)
+    public static Result deleteVote(Long id){
+        User _user = User.findByUserId(Long.parseLong(session("userId")));
+        Vote vote = Vote.findById(id);
+        Logger.info("[" + _user.username + "] delete rate.(" + vote.id + ")("+vote.projectId+")");
+        vote.delete();
+        response().setHeader("Cache-Control","no-cache");
+        return redirect(routes.AdminPage.index()+"#votes");
     }
     @Security.Authenticated(AdminSecured.class)
     public static Result deleteRateCriterion(Long id){
