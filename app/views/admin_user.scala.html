@@ -52,66 +52,76 @@
                 <div id="users" class="col s12 animated fadeIn">
                     <div class ="section">
                         <ul class="collapsible" data-collapsible="accordion">
-                            <li>
-                                <div class="collapsible-header teal-text lighten-1 trigger"><i class="mdi-social-person-add"></i>
-                                    Add User</div>
-                                <div class="collapsible-body">
-                                    <div class="container">
-                                        <div class="row">
-                                            <form class="col s12" action="@routes.AdminPage.addUser()" method="post">
-                                                <div class="row">
-                                                    <div class="input-field col s6">
-                                                        <input id="firstname" name="firstname" type="text" class="validate" required>
-                                                        <label for="firstname">First Name</label>
-                                                    </div>
-                                                    <div class="input-field col s6">
-                                                        <input id="lastname" name="lastname" type="text" class="validate" required>
-                                                        <label for="lastname">Last Name</label>
-                                                    </div>
-
+                        <li>
+                            <div class="collapsible-header teal-text lighten-1 trigger"><i class="mdi-social-person-add"></i>
+                                Add User</div>
+                            <div class="collapsible-body">
+                                <div class="container">
+                                    <div class="row">
+                                        <form class="col s12" action="@routes.AdminPage.addUser()" method="post">
+                                            <div class="row">
+                                                <div class="input-field col s6">
+                                                    <input id="firstname" name="firstname" type="text" class="validate" required>
+                                                    <label for="firstname">First Name</label>
                                                 </div>
-                                                <div class="row">
-                                                    <div class="input-field col s12">
-                                                        <input id="username" name="username" type="text" class="validate" required>
-                                                        <label for="username">Username</label>
-                                                    </div>
+                                                <div class="input-field col s6">
+                                                    <input id="lastname" name="lastname" type="text" class="validate" required>
+                                                    <label for="lastname">Last Name</label>
                                                 </div>
-                                                <div class="row">
-                                                    <div class="input-field col s12">
-                                                        <input id="password" name="password" type="password" class="validate" required>
-                                                        <label for="password">Password</label>
-                                                    </div>
+                                                <input id="projectId" name="projectId" type="hidden" value="-1" />
+                                            </div>
+                                            <div class="row">
+                                                <div class="input-field col s12">
+                                                    <input id="username" name="username" type="text" class="validate" required>
+                                                    <label for="username">Username</label>
                                                 </div>
-
-                                                <div class="row">
-                                                    <div class="input-field col s12">
-                                                        <input value="@User.ADMINISTRATOR" name="idtype" type="radio" id="type1" />
-                                                        <label for="type1">Administrator</label>
-
-                                                        <input class="with-gap" value="@User.NORMAL_USER" name="idtype" type="radio" id="type2" checked/>
-                                                        <label for="type2">Normal User</label>
-                                                    </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="input-field col s12">
+                                                    <input id="password" name="password" type="password" class="validate" required>
+                                                    <label for="password">Password</label>
                                                 </div>
+                                            </div>
 
-                                                <div class="row">
-                                                    <div class="input-field col s12">
-                                                        <button class="btn waves-effect waves-light" type="submit" name="action">
+                                            <div class="row">
+                                                <div class="input-field col s12">
+                                                    <input value="@User.ADMINISTRATOR" name="idtype" type="radio" id="type1" />
+                                                    <label for="type1">Administrator</label>
+
+                                                    <input class="with-gap" value="@User.NORMAL_USER" name="idtype" type="radio" id="type2" checked/>
+                                                    <label for="type2">Normal User</label>
+                                                </div>
+                                            </div>
+
+                                            <div class="row">
+                                                <div class="input-field col s12">
+                                                    <button class="btn waves-effect waves-light" type="submit" name="action">
                                                             Add
-                                                            <i class="mdi-content-send right"></i>
-                                                        </button>
-                                                    </div>
+                                                        <i class="mdi-content-send right"></i>
+                                                    </button>
                                                 </div>
-                                            </form>
-                                        </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                        <ul class="collapsible-for-search active" data-collapsible="accordion">
+                            <li>
+                                <div class="collapsible-header-for-search teal-text lighten-1 trigger" style="cursor: default;">
+                                    <div class="col s12 search-admin" style="margin-top:0px;">
+                                        <i class="mdi-action-search small"></i>
+                                        <input placeholder="Search User" class="input-search-admin" name="search_keyword" id="search-user" type="text" style="background-color: transparent;" autocomplete="false">
                                     </div>
                                 </div>
                             </li>
                         </ul>
                         <form action="@routes.AdminPage.deleteUsers()" method="post">
-                            <ul class="collection">
-                                <li class="collection-item center">
+                            <ul class="collection" id="user-collection">
+                                <li class="collection-item">
                                     <div class="row" style="margin-bottom: 0px;">
-                                        <div class="col s10">
+                                        <div class="col s12">
                                             <ul class="pagination">
                                                 @for(i <- 1 until totalPage+1){
                                                     @if(i == 1) {
@@ -137,17 +147,12 @@
 
                                             </ul>
                                         </div>
-                                        <div class="col s2 right-align">
-                                            <button class="btn waves-effect waves-light trigger" type="submit" name="action">Delete
-                                                <i class="mdi-action-delete right"></i>
-                                            </button>
-                                        </div>
                                     </div>
                                 </li>
                                 @users.zipWithIndex.map { case (user, index) =>
                                     <li class="collection-item avatar">
                                         <div class="row">
-                                        <div class="col s6">
+                                        <div class="col s12">
                                             @if(user.idtype != User.ADMINISTRATOR) {
                                                 <input type="checkbox" name="id" id= "@user.id" value="@user.id" />
                                             }
@@ -175,13 +180,19 @@
                                                     }
                                                 </p>
                                         </div>
-                                        <div class="col s6">asdsad
-                                        </div>
-                                        <a userId="@user.id" username="@user.username" password="" idtype="@user.idtype" projectId="@user.projectId" firstname="@user.firstname" lastname="@user.lastname" class="editModal secondary-content mdi-editor-mode-edit trigger modal-trigger" href="#editUserModal"></a>
+                                        <a userId="@user.id" username="@user.username" password="" idtype="@user.idtype" projectId="@user.projectId" firstname="@user.firstname" lastname="@user.lastname" class="editModal secondary-content trigger modal-trigger" href="#editUserModal">
+                                            <i class="mdi-editor-mode-edit small"></i>
+                                        </a>
+                                        <a id="rate-user" userId="@user.id" style="position: absolute; top: 45px; right: 16px; cursor: hand;">
+                                            <i class="mdi-maps-rate-review small trigger" ></i>
+                                        </a>
                                 </div>
                                 </li>
                                 }
                             </ul>
+                            <button class="btn waves-effect waves-light trigger" type="submit" name="action">Delete
+                                <i class="mdi-action-delete right"></i>
+                            </button>
                         </form>
                     </div>
                 </div>
@@ -196,7 +207,6 @@
                                     <label class="active" for="userId">userID</label>
                                 </div>
                             </div>
-
                             <div class="row">
                                 <div class="input-field col s6">
                                     <input value="" id="firstname" name="firstname" type="text" placeholder="Firstname" class="validate" required>
@@ -244,8 +254,6 @@
                 </div>
             </div>
 
-
-
             <div class="fixed-action-btn animated bounceInUp" style="bottom : 45 px ; right : 40 px ;">
                 <a class="btn-floating btn-large trigger " href="@routes.AdminPage.index()"><i class="large mdi-action-settings waves-effect waves-light"></i></a>
                 <ul>
@@ -262,7 +270,6 @@
 
             <script src="http://code.jquery.com/jquery-2.1.3.min.js"></script>
             <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.96.1/js/materialize.min.js"></script>
-            
             <script type="text/javascript" src="@routes.Assets.at("javascripts/jquery.datetimepicker.js")"></script>
             <script type="text/javascript" src="@routes.Assets.at("javascripts/adminpage.js")"></script>
             <script src="@routes.Assets.at("javascripts/init.js")" type="text/javascript"></script>

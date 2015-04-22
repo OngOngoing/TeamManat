@@ -1,9 +1,11 @@
 package controllers;
 
 import models.*;
+import org.apache.commons.collections.map.HashedMap;
 import org.mindrot.jbcrypt.BCrypt;
 import play.Logger;
 import play.data.*;
+import play.libs.Json;
 import play.mvc.*;
 import views.html.adminpage;
 import views.html.admin_user;
@@ -41,6 +43,30 @@ public class AdminPage extends Controller {
         response().setHeader("Cache-Control","no-cache");
         return ok(admin_rate.render(_user,users,rates));
     }
+
+    @Security.Authenticated(AdminSecured.class)
+    public static Result searchUser(){
+        DynamicForm dynamicForm = new DynamicForm().bindFromRequest();
+        List<User> userList = User.findByKeyword(dynamicForm.get("search_keyword"));
+        List<Map<String, String>> user_data = new ArrayList();
+        for(User item : userList){
+            Map<String, String> i = new HashedMap();
+            if(item.projectId == -1){
+                i.put("project", "None");
+            }else{
+                i.put("project", Project.findById(item.projectId).projectName);
+            }
+            i.put("projectId", item.projectId.toString());
+            i.put("userType", (item.idtype == User.ADMINISTRATOR) ? "Administrator" : "Normal" );
+            i.put("userIdType", String.valueOf(item.idtype));
+            i.put("username", item.username);
+            i.put("lastname", item.lastname);
+            i.put("firstname", item.firstname);
+            i.put("userid", item.id.toString());
+            user_data.add(i);
+        }
+        return ok(Json.toJson(user_data));
+    }
     public static Result project(){
         User _user = User.findByUserId(Long.parseLong(session("userId")));
         Logger.info("["+_user.username+"] user admin page.");
@@ -72,7 +98,7 @@ public class AdminPage extends Controller {
         user.save();
         Logger.info("["+_user.username+"] add new user.("+user.id+")");
         response().setHeader("Cache-Control","no-cache");
-        return redirect(routes.AdminPage.index()+"#users");
+        return redirect(routes.AdminPage.user(1));
     }
 
     @Security.Authenticated(AdminSecured.class)
@@ -109,7 +135,7 @@ public class AdminPage extends Controller {
         String[] checkedVal = map.get("id"); // get selected topics
 
         if(checkedVal == null) {
-            return redirect(routes.AdminPage.index()+"#users");
+            return redirect(routes.AdminPage.user(1));
         }
 
         for(String userId : checkedVal) {
@@ -128,7 +154,7 @@ public class AdminPage extends Controller {
             }
         }
         response().setHeader("Cache-Control","no-cache");
-        return redirect(routes.AdminPage.index()+"#users");
+        return redirect(routes.AdminPage.user(1));
     }
     @Security.Authenticated(AdminSecured.class)
     public static Result deleteRate(Long id){
