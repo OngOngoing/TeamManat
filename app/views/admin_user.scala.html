@@ -164,10 +164,11 @@
                                             }
                                                 <label class="check" for="@user.id"></label>
                                             @if(user.idtype == User.ADMINISTRATOR) {
-                                                <i class="mdi-social-whatshot circle teal lighten-1 trigger"></i>
+                                                <i class="mdi-social-whatshot circle teal lighten-1 trigger hide-on-small-only"></i>
                                             } else {
-                                                <i class="mdi-social-person circle teal lighten-1 trigger"></i>
+                                                <i class="mdi-social-person circle teal lighten-1 trigger hide-on-small-only"></i>
                                             }
+                                            <div class="hide-on-small-only">
                                                 <span class="title teal-text lighten-1 trigger">ID : @user.id</span>
                                                 <p>
                                                     <strong>Username</strong> : @user.username <br />
@@ -185,6 +186,26 @@
                                                         <strong>Owner Project</strong> : None
                                                     }
                                                 </p>
+                                            </div>
+                                        <div class="hide-on-med-and-up" style="margin-left: -65px">
+                                            <span class="title teal-text lighten-1 trigger">ID : @user.id</span>
+                                            <p>
+                                                <strong>Username</strong> : @user.username <br />
+                                                <strong>Firstname</strong> : @user.firstname <br /><strong>Lastname</strong> : @user.lastname<br />
+                                                <strong>User Type</strong> :
+                                                @if(user.idtype == User.ADMINISTRATOR){
+                                                    Administrator
+                                                } else {
+                                                    Normal
+                                                }
+                                                <br />
+                                                @if(user.projectId != -1 ){
+                                                    <strong>Owner Project</strong> : @Project.findById(user.projectId).projectName
+                                                }else{
+                                                    <strong>Owner Project</strong> : None
+                                                }
+                                            </p>
+                                        </div>
                                         </div>
                                         <a userId="@user.id" username="@user.username" password="" idtype="@user.idtype" projectId="@user.projectId" firstname="@user.firstname" lastname="@user.lastname" class="editModal secondary-content trigger modal-trigger" style="z-index: 100;" href="#editUserModal">
                                             <i class="mdi-editor-mode-edit small"></i>
