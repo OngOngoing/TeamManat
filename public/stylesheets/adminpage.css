@@ -239,6 +239,12 @@
     position: absolute;
     padding-left: 1rem;
 }
+#rate-user{
+    position: absolute;
+    padding-top: 45px;
+    right: 16px;
+    cursor: hand;
+}
 #head{
     position: fixed;
     top: 0;
@@ -303,4 +309,16 @@ p {
     color: rgba(0, 0, 0, 0.71);
     padding: 0;
     -webkit-font-smoothing: antialiased;
+}
+.criterion-banner {
+    display: block;
+    text-align: center;
+    font-family:Roboto Light;
+    line-height: 120%;
+    -webkit-font-smoothing: antialiased;
+    color: #26a69a;
+    background-image: -webkit-linear-gradient(92deg,#26a69a,#80cbc4);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    -webkit-animation: hue 40s infinite linear;
 }

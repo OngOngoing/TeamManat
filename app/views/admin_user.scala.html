@@ -180,11 +180,11 @@
                                                     }
                                                 </p>
                                         </div>
-                                        <a userId="@user.id" username="@user.username" password="" idtype="@user.idtype" projectId="@user.projectId" firstname="@user.firstname" lastname="@user.lastname" class="editModal secondary-content trigger modal-trigger" href="#editUserModal">
+                                        <a userId="@user.id" username="@user.username" password="" idtype="@user.idtype" projectId="@user.projectId" firstname="@user.firstname" lastname="@user.lastname" class="editModal secondary-content trigger modal-trigger" style="z-index: 100;" href="#editUserModal">
                                             <i class="mdi-editor-mode-edit small"></i>
                                         </a>
-                                        <a id="rate-user" userId="@user.id" style="position: absolute; top: 45px; right: 16px; cursor: hand;">
-                                            <i class="mdi-maps-rate-review small trigger" ></i>
+                                        <a id="rate-user" href="#rate-user-m" userId="@user.id" class="rate-user modal-trigger waves-effect waves-light">
+                                            <i class="mdi-maps-rate-review small trigger"></i>
                                         </a>
                                 </div>
                                 </li>
@@ -194,6 +194,13 @@
                                 <i class="mdi-action-delete right"></i>
                             </button>
                         </form>
+                    </div>
+                </div>
+                <div id="rate-user-m" class="modal modal-fixed-footer">
+                    <div class="modal-content">
+                        <div class="row" id="data-rate">
+
+                        </div>
                     </div>
                 </div>
                 <div id="editUserModal" class="modal modal-fixed-footer">

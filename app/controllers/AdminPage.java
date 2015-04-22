@@ -1,12 +1,12 @@
 package controllers;
 
 import models.*;
-import org.apache.commons.collections.map.HashedMap;
 import org.mindrot.jbcrypt.BCrypt;
 import play.Logger;
 import play.data.*;
 import play.libs.Json;
 import play.mvc.*;
+import java.util.HashMap;
 import views.html.adminpage;
 import views.html.admin_user;
 import views.html.admin_rate;
@@ -43,6 +43,41 @@ public class AdminPage extends Controller {
         response().setHeader("Cache-Control","no-cache");
         return ok(admin_rate.render(_user,users,rates));
     }
+    @Security.Authenticated(AdminSecured.class)
+    public static Result ratebyuserid(){
+        DynamicForm dynamicForm = new DynamicForm().bindFromRequest();
+        String id = dynamicForm.get("user_id");
+        Long _id;
+        try {
+            _id = Long.parseLong(id);
+        }catch (Exception e){
+            return ok();
+        }
+        List<Map> rate_data = new ArrayList();
+        List<Project> projects = Project.findAll();
+        List<RateCriterion> criterions = RateCriterion.findAll();
+        for(Project item : projects){
+            Map _rate = new HashMap();
+            _rate.put("projectName", item.projectName);
+            List rates = new ArrayList();
+            for(RateCriterion _item : criterions) {
+                Map<String, String> _r = new HashMap();
+                Rate rate = Rate.findByUserIdAndProjectIdAndCriteriaId(_id, item.id, _item.id);
+                String value;
+                if(rate == null){
+                    value = "0";
+                }else{
+                    value = String.valueOf(rate.score);
+                }
+                _r.put("name", _item.name);
+                _r.put("value", value);
+                rates.add(_r);
+            }
+            _rate.put("criteria", rates);
+            rate_data.add(_rate);
+        }
+        return ok(Json.toJson(rate_data));
+    }
 
     @Security.Authenticated(AdminSecured.class)
     public static Result searchUser(){
@@ -50,7 +85,7 @@ public class AdminPage extends Controller {
         List<User> userList = User.findByKeyword(dynamicForm.get("search_keyword"));
         List<Map<String, String>> user_data = new ArrayList();
         for(User item : userList){
-            Map<String, String> i = new HashedMap();
+            Map<String, String> i = new HashMap();
             if(item.projectId == -1){
                 i.put("project", "None");
             }else{

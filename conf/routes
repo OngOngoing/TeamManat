@@ -24,6 +24,7 @@ GET         /adminpage/deleteRate/:id                 controllers.AdminPage.dele
 GET         /adminpage/deleteRateCriterion/:id        controllers.AdminPage.deleteRateCriterion(id:Long)
 GET         /adminpage/deleteVoteCriterion/:id        controllers.AdminPage.deleteVoteCriterion(id:Long)
 POST        /adminpage/searchuser                     controllers.AdminPage.searchUser()
+POST        /adminpage/searchrate                     controllers.AdminPage.ratebyuserid()
 
 GET         /logout                                   controllers.Application.logout()
 
