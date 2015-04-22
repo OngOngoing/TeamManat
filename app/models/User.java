@@ -86,7 +86,8 @@ public class User extends Model {
         List < User > listUser = find.setMaxRows(5).where().or(
                 Expr.like("firstname", "%" + key + "%"),
                 Expr.or(Expr.like("lastname", "%" + key + "%"),
-                        Expr.eq("id", key))).findList();
+                        Expr.or(Expr.like("username", "%" + key + "%"),
+                                Expr.eq("id", key)))).findList();
         return listUser;
     }
     public static List<User> findByTeam(Long teamId){
