@@ -107,12 +107,12 @@
         <script src="@routes.Assets.at("javascripts/Markdown.Sanitizer.js")"></script>
         @if(flash.contains("d_success")) {
             <script type="text/javascript">
-            Materialize.toast('<i class="mdi-action-done green-text small"></i><span style="padding-left: 5px">@flash.get("d_success")</span>', 4000)
+            Materialize.toast('<i class="mdi-action-done green-text small"></i><span style="padding-left: 5px">@flash.get("d_success")', 4000)
             </script>
         }
         @if(flash.contains("error")) {
             <script type="text/javascript">
-            Materialize.toast('<i class="mdi-alert-warning red-text small"></i>@flash.get("error")</span>', 4000)
+            Materialize.toast('<i class="mdi-alert-warning red-text small"></i>@flash.get("error")', 4000)
             </script>
         }
     </body>

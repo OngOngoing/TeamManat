@@ -160,6 +160,7 @@ public class AdminPage extends Controller {
         User user = User.create(username, password, firstname,lastname,Integer.parseInt(idType));
         Logger.info("["+_user.username+"] add new user.("+user.id+")");
         response().setHeader("Cache-Control","no-cache");
+        flash("user_add_success","User added");
         return redirect(routes.AdminPage.user(1));
     }
 
@@ -170,6 +171,7 @@ public class AdminPage extends Controller {
         project.save();
         Logger.info("["+_user.username+"] add new project.("+project.id+")");
         response().setHeader("Cache-Control","no-cache");
+        flash("project_add_success","Project added");
         return redirect(routes.AdminPage.project());
     }
     @Security.Authenticated(AdminSecured.class)
@@ -179,6 +181,7 @@ public class AdminPage extends Controller {
         rateC.save();
         Logger.info("[" + _user.username + "] add new Rate Criterion.(" + rateC.id + ")");
         response().setHeader("Cache-Control","no-cache");
+        flash("rate_criterion_add_success","Rating criterion added");
         return redirect(routes.AdminPage.criteria());
     }
     @Security.Authenticated(AdminSecured.class)
@@ -188,6 +191,7 @@ public class AdminPage extends Controller {
         voteC.save();
         Logger.info("[" + _user.username + "] add new Vote Criterion.(" + voteC.id + ")");
         response().setHeader("Cache-Control","no-cache");
+        flash("vote_criterion_add_success","Voting criterion added");
         return redirect(routes.AdminPage.criteria());
     }
     @Security.Authenticated(AdminSecured.class)
@@ -199,13 +203,14 @@ public class AdminPage extends Controller {
         if(checkedVal == null) {
             return redirect(routes.AdminPage.user(1));
         }
-
+        int count=0;
         for(String userId : checkedVal) {
             User user = User.findByUserId(Long.parseLong(userId));
             List<Rate> rates = Rate.findListByUserId(Long.parseLong(userId));
             List<Vote> votes = Vote.findByUserId(Long.parseLong(userId));
             Logger.info("[" + _user.username + "] delete user.(" + user.id + ")"+user.username);
             user.delete();
+            count++;
             for(Vote vote : votes ) {
                 Logger.info("[" + _user.username + "] delete rate.(" + vote.id + ")("+vote.projectId+")");
                 vote.delete();
@@ -215,6 +220,7 @@ public class AdminPage extends Controller {
                 rate.delete();
             }
         }
+        flash("user_delete_success",count+ " Users deleted");
         response().setHeader("Cache-Control","no-cache");
         return redirect(routes.AdminPage.user(1));
     }
@@ -224,6 +230,7 @@ public class AdminPage extends Controller {
         Rate rate = Rate.findById(id);
         Logger.info("[" + _user.username + "] delete rate.(" + rate.id + ")("+rate.projectId+")");
         rate.delete();
+        flash("rate_delete_success","Rate deleted");
         response().setHeader("Cache-Control","no-cache");
         return redirect(routes.AdminPage.rate());
     }
@@ -233,6 +240,7 @@ public class AdminPage extends Controller {
         Vote vote = Vote.findById(id);
         Logger.info("[" + _user.username + "] delete rate.(" + vote.id + ")("+vote.projectId+")");
         vote.delete();
+        flash("vote_delete_success","Vote deleted");
         response().setHeader("Cache-Control","no-cache");
         return redirect(routes.AdminPage.vote());
     }
@@ -259,6 +267,7 @@ public class AdminPage extends Controller {
             Logger.info("[" + _user.username + "] delete rate criterion.(" + rateCs.id + ")("+rateCs.name+")");
             rateCs.delete();
         }
+        flash("rate_criterion_delete_success","Rating criterion deleted");
         response().setHeader("Cache-Control","no-cache");
         return redirect(routes.AdminPage.criteria());
     }
@@ -275,6 +284,7 @@ public class AdminPage extends Controller {
             Logger.info("[" + _user.username + "] delete rate criterion.(" + voteCs.id + ")("+voteCs.name+")");
             voteCs.delete();
         }
+        flash("vote_criterion_delete_success","Voting criterion deleted");
         response().setHeader("Cache-Control","no-cache");
         return redirect(routes.AdminPage.criteria());
     }
@@ -291,9 +301,9 @@ public class AdminPage extends Controller {
             olduser.password = BCrypt.hashpw(newuser.password, BCrypt.gensalt());
         }
         olduser.idtype = newuser.idtype;
-        olduser.projectId = newuser.projectId;
         olduser.update();
         Logger.info("[" + _user.username + "] edite user.("+olduser.id+")"+olduser.username);
+        flash("user_edit_success","User edited");
         response().setHeader("Cache-Control","no-cache");
         return redirect(routes.AdminPage.user(1));
     }
@@ -304,6 +314,7 @@ public class AdminPage extends Controller {
         for(Settings item : settings){
             Settings.update(item.keyName, dynamicForm.get(item.keyName));
         }
+        flash("setting_save_success","Settings saved");
         response().setHeader("Cache-Control", "no-cache");
         return redirect(routes.AdminPage.systemConfig());
     }
