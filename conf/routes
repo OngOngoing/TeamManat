@@ -8,11 +8,12 @@ GET         /projectlist                              controllers.ProjectList.in
 
 # Admin Page
 GET         /adminpage                                controllers.AdminPage.index()
-GET 		/adminpage/users 						  controllers.AdminPage.user()
-GET 		/adminpage/rates 						  controllers.AdminPage.rate()
-GET 		/adminpage/projects 					  controllers.AdminPage.project()
-GET 		/adminpage/criteria 					  controllers.AdminPage.criteria()
-GET 		/adminpage/systemConfig 				  controllers.AdminPage.systemConfig()
+GET         /adminpage/users                          controllers.AdminPage.user()
+GET         /adminpage/rates                          controllers.AdminPage.rate()
+GET         /adminpage/votes                          controllers.AdminPage.vote()
+GET         /adminpage/projects                       controllers.AdminPage.project()
+GET         /adminpage/criteria                       controllers.AdminPage.criteria()
+GET         /adminpage/systemConfig                   controllers.AdminPage.systemConfig()
 POST        /adminpage/addUser                        controllers.AdminPage.addUser()
 POST        /adminpage/deleteUsers                    controllers.AdminPage.deleteUsers()
 POST        /adminpage/editUser                       controllers.AdminPage.editUser()
@@ -21,6 +22,7 @@ POST        /adminpage/saveSetting                    controllers.AdminPage.save
 POST        /adminpage/addRateCriterion               controllers.AdminPage.addRateCriterion()
 POST        /adminpage/addVoteCriterion               controllers.AdminPage.addVoteCriterion()
 GET         /adminpage/deleteRate/:id                 controllers.AdminPage.deleteRate(id:Long)
+GET         /adminpage/deleteVote/:id                 controllers.AdminPage.deleteVote(id:Long)
 GET         /adminpage/deleteRateCriterion/:id        controllers.AdminPage.deleteRateCriterion(id:Long)
 GET         /adminpage/deleteVoteCriterion/:id        controllers.AdminPage.deleteVoteCriterion(id:Long)
 
