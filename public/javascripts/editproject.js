@@ -48,7 +48,7 @@ $(document).ready(function(){
 
     $(".upload").upload({
         action: "../uploadimage",
-        label: "Drag and drop images or click to select.",
+        label: "Drag and drop images or click to select.<br/> Best Size (width: 600px, height: 450px)",
         postData: {
             'projectId' : $(".upload").attr("proId")
         },
@@ -88,7 +88,7 @@ function onFileComplete(e, file, response) {
             var html = "";
             for(var i=data.length-1;i>=0;i--){
                 html += "<li>";
-                html += "<img src='../getimg/"+data[i].Id+"'>";
+                html += "<img src='../getimg/"+data[i].Id+"' style='background-size: auto 450px;background-position-y: 0;background-repeat: no-repeat;' >";
                 html += "<div class='caption right-align'>";
                 html += "<div class='row'>";
                 if(data[i].imgType != 1){
@@ -106,7 +106,9 @@ function onFileComplete(e, file, response) {
             }
             $('#show-slides').html(html);
             $('.indicators').replaceWith("");
-            $('.slider').slider({full_width: true});
+            $('.slider').slider({
+                full_width: true
+            });
         }
     });
     $('#process-'+file.index).remove();

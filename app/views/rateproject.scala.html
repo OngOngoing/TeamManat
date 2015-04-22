@@ -57,11 +57,11 @@
                 <div class="divider"></div>
                 <div class="section">
                     <div class="slider">
-                        <ul class="slides">
+                        <ul class="slides" style="height: 450px;">
                             @images.map{image =>
                                 @if(image.imgType != ProjectImage.DEFAULT) {
                                     <li>
-                                        <img class = "responsive" src="@routes.Application.getImg(image.Id)" />
+                                        <img class = "responsive" src="@routes.Application.getImg(image.Id)" style="background-size: auto 450px;background-position-y: 0;background-repeat: no-repeat;" />
                                     </li>
                                 }
                             }
