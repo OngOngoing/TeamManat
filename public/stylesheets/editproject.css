@@ -11,6 +11,11 @@
     padding-left: 40px;
     padding-top: 10px;
 }
+.toolbar-s{
+    padding-left: 0px;
+    padding-top: 10px;
+    text-align: center;
+}
 .slider .slides li .caption {
     left:0% !important;
     top:2% !important;
@@ -55,4 +60,7 @@
 }
 .slider{
     height:490px;
+}
+.btn-markdown{
+    padding: 0 0.75rem;
 }

@@ -51,27 +51,44 @@
                     </div>
                     <div class="input-field col s12 hide-on-small-only">
                         <div class="toolbar">
-                            <a onClick="$ ( '#project_description' ).mdBold ( )" class="btn waves-effect waves-light cyan darken-3"><i class="mdi-editor-format-bold"></i></a>
-                            <a onClick="$ ( '#project_description' ).mdItalic ( )" class="btn waves-effect waves-light cyan darken-3" ><i class="mdi-editor-format-italic"></i></a>
-                            <a onClick="$ ( '#project_description' ).mdHeader ( { number : 1 } )" class="btn waves-effect waves-light cyan darken-3">
+                            <a onClick="$ ( '#project_description' ).mdBold ( )" class="btn-flat waves-effect waves-yellow btn-markdown"><i class="mdi-editor-format-bold"></i></a>
+                            <a onClick="$ ( '#project_description' ).mdItalic ( )" class="btn-flat waves-effect waves-light btn-markdown" ><i class="mdi-editor-format-italic"></i></a>
+                            <a onClick="$ ( '#project_description' ).mdHeader ( { number : 1 } )" class="btn-flat waves-effect waves-light btn-markdown">
                                 H1</a>
-                            <a onClick="$ ( '#project_description' ).mdHeader ( { number : 2 } )" class="btn waves-effect waves-light cyan darken-3">
+                            <a onClick="$ ( '#project_description' ).mdHeader ( { number : 2 } )" class="btn-flat waves-effect waves-light btn-markdown">
                                 H2</a>
-                            <a onClick="$ ( '#project_description' ).mdHeader ( { number : 3 } )" class="btn waves-effect waves-light cyan darken-3">
+                            <a onClick="$ ( '#project_description' ).mdHeader ( { number : 3 } )" class="btn-flat waves-effect waves-light btn-markdown">
                                 H3</a>
-                            <a onClick="$ ( '#project_description' ).mdHeader ( { number : 4 } )" class="btn waves-effect waves-light cyan darken-3">
+                            <a onClick="$ ( '#project_description' ).mdHeader ( { number : 4 } )" class="btn-flat waves-effect waves-light btn-markdown">
                                 H4</a>
-                            <a onClick="$ ( '#project_description' ).mdLink ( { default_url : prompt ( 'Enter URL please' ) } )" class="btn waves-effect waves-light cyan darken-3"><i class="mdi-editor-insert-link"></i></a>
-                            <a onClick="$ ( '#project_description' ).mdQuote ( )" class="btn waves-effect waves-light cyan darken-3"><i class="mdi-editor-format-quote"></i></a>
-                            <a onClick="$ ( '#project_description' ).mdCode ( )" class="btn waves-effect waves-light cyan darken-3"><i class="mdi-editor-mode-edit"></i></a>
-                            <a onClick="$ ( '#project_description' ).mdNumberedList ( )" class="btn waves-effect waves-light cyan darken-3"><i class="mdi-editor-format-list-numbered"></i></a>
-                            <a onClick="$ ( '#project_description' ).mdBulletList ( )" class="btn waves-effect waves-light cyan darken-3"><i class="mdi-editor-format-list-bulleted"></i></a>
+                            <a onClick="$ ( '#project_description' ).mdLink ( { default_url : prompt ( 'Enter URL please' ) } )" class="btn-flat waves-effect waves-light btn-markdown"><i class="mdi-editor-insert-link"></i></a>
+                            <a onClick="$ ( '#project_description' ).mdQuote ( )" class="btn-flat waves-effect waves-light btn-markdown"><i class="mdi-editor-format-quote"></i></a>
+                            <a onClick="$ ( '#project_description' ).mdCode ( )" class="btn-flat waves-effect waves-light btn-markdown"><i class="mdi-editor-mode-edit"></i></a>
+                            <a onClick="$ ( '#project_description' ).mdNumberedList ( )" class="btn-flat waves-effect waves-light btn-markdown"><i class="mdi-editor-format-list-numbered"></i></a>
+                            <a onClick="$ ( '#project_description' ).mdBulletList ( )" class="btn-flat waves-effect waves-light btn-markdown"><i class="mdi-editor-format-list-bulleted"></i></a>
                         </div>
                         <i class="mdi-editor-mode-edit prefix hide-on-small-only"></i>
                         <textarea id="project_description" placeholder="Enter project descrption..." name="description" class="materialize-textarea" length="2000" maxlength="2000" style="resize : none ; overflow-y : scroll ; height : 190 px ; max-height : 190 px ;" required>@currentProject.projectDescription</textarea>
                         <label for="project_description">Description</label>
                     </div>
                     <div class="input-field col s12 hide-on-med-and-up">
+                        <div class="toolbar-s">
+                            <a onClick="$ ( '#project_description' ).mdBold ( )" class="btn-flat waves-effect waves-yellow btn-markdown"><i class="mdi-editor-format-bold"></i></a>
+                            <a onClick="$ ( '#project_description' ).mdItalic ( )" class="btn-flat waves-effect waves-light btn-markdown" ><i class="mdi-editor-format-italic"></i></a>
+                            <a onClick="$ ( '#project_description' ).mdHeader ( { number : 1 } )" class="btn-flat waves-effect waves-light btn-markdown">
+                                H1</a>
+                            <a onClick="$ ( '#project_description' ).mdHeader ( { number : 2 } )" class="btn-flat waves-effect waves-light btn-markdown">
+                                H2</a>
+                            <a onClick="$ ( '#project_description' ).mdHeader ( { number : 3 } )" class="btn-flat waves-effect waves-light btn-markdown">
+                                H3</a>
+                            <a onClick="$ ( '#project_description' ).mdHeader ( { number : 4 } )" class="btn-flat waves-effect waves-light btn-markdown">
+                                H4</a>
+                            <a onClick="$ ( '#project_description' ).mdLink ( { default_url : prompt ( 'Enter URL please' ) } )" class="btn-flat waves-effect waves-light btn-markdown"><i class="mdi-editor-insert-link"></i></a>
+                            <a onClick="$ ( '#project_description' ).mdQuote ( )" class="btn-flat waves-effect waves-light btn-markdown"><i class="mdi-editor-format-quote"></i></a>
+                            <a onClick="$ ( '#project_description' ).mdCode ( )" class="btn-flat waves-effect waves-light btn-markdown"><i class="mdi-editor-mode-edit"></i></a>
+                            <a onClick="$ ( '#project_description' ).mdNumberedList ( )" class="btn-flat waves-effect waves-light btn-markdown"><i class="mdi-editor-format-list-numbered"></i></a>
+                            <a onClick="$ ( '#project_description' ).mdBulletList ( )" class="btn-flat waves-effect waves-light btn-markdown"><i class="mdi-editor-format-list-bulleted"></i></a>
+                        </div>
                         <textarea id="project_description" placeholder="Enter project descrption..." name="description" class="materialize-textarea" length="2000" maxlength="2000" style="resize : none ; overflow-y : scroll ; height : 190 px ; max-height : 190 px ;" required>@currentProject.projectDescription</textarea>
                         <label for="project_description">Description</label>
                     </div>
