@@ -64,14 +64,14 @@
                             <div class="collapsible-body">
                                 <div class="container">
                                     <div class="row">
-                                        <form class="col s12" action="@routes.AdminPage.addRateCriterion()" method="post">
+                                        <form action="@routes.AdminPage.addRateCriterion()" method="post">
                                             <div class="row">
-                                                <div class="input-field col s6">
+                                                <div class="input-field col s12 m6">
                                                     <i class="mdi-action-account-circle prefix"></i>
                                                     <input id="name" name="name" type="text" class="validate" required>
                                                     <label for="name">Name</label>
                                                 </div>
-                                                <div class="input-field col s6">
+                                                <div class="input-field col s12 m6">
                                                     <i class="mdi-editor-border-color prefix"></i>
                                                     <input id="description" name="description" type="text" class="validate" required>
                                                     <label for="description">Description</label>
@@ -101,14 +101,14 @@
                             <div class="collapsible-body">
                                 <div class="container">
                                     <div class="row">
-                                        <form class="col s12" action="@routes.AdminPage.addVoteCriterion()" method="post">
+                                        <form action="@routes.AdminPage.addVoteCriterion()" method="post">
                                             <div class="row">
-                                                <div class="input-field col s6">
+                                                <div class="input-field col s12 m6">
                                                     <i class="mdi-action-account-circle prefix"></i>
                                                     <input id="name" name="name" type="text" class="validate" required>
                                                     <label for="name">Name</label>
                                                 </div>
-                                                <div class="input-field col s6">
+                                                <div class="input-field col s12 m6">
                                                     <i class="mdi-editor-border-color prefix"></i>
                                                     <input id="description" name="description" type="text" class="validate" required>
                                                     <label for="description">Description</label>
@@ -142,7 +142,7 @@
                                             <tr>
                                                 <th data-field="id">ID</th>
                                                 <th data-field="name">Name</th>
-                                                <th data-field="description">Description</th>
+                                                <th data-field="description" class="hide-on-small-only">Description</th>
                                                 <th data-field="buttun"></th>
                                             </tr>
                                         </thead>
@@ -152,7 +152,7 @@
                                                 <tr>
                                                     <td>@rateC.id</td>
                                                     <td>@rateC.name</td>
-                                                    <td>@rateC.description</td>
+                                                    <td class="hide-on-small-only">@rateC.description</td>
                                                     <td><a href="@routes.AdminPage.deleteRateCriterion(rateC.id)" class="secondary-content"><i class="mdi-navigation-close trigger"></i></a></td>
                                                 </tr>
 
@@ -175,7 +175,7 @@
                                             <tr>
                                                 <th data-field="id">ID</th>
                                                 <th data-field="name">Name</th>
-                                                <th data-field="description">Description</th>
+                                                <th data-field="description" class="hide-on-small-only">Description</th>
                                                 <th data-field="buttun"></th>
                                             </tr>
                                         </thead>
@@ -185,7 +185,7 @@
                                             <tr>
                                                 <td>@voteC.id</td>
                                                 <td>@voteC.name</td>
-                                                <td>@voteC.description</td>
+                                                <td class="hide-on-small-only">@voteC.description</td>
                                                 <td><a href="@routes.AdminPage.deleteVoteCriterion(voteC.id)" class="secondary-content"><i class="mdi-navigation-close trigger"></i></a></td>
                                             </tr>
                                         }
