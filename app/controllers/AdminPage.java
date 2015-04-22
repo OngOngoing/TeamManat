@@ -8,6 +8,7 @@ import play.mvc.*;
 import views.html.adminpage;
 import views.html.admin_user;
 import views.html.admin_rate;
+import views.html.admin_comment;
 import views.html.admin_project;
 import views.html.admin_criteria;
 import views.html.admin_systemconfig;
@@ -39,6 +40,16 @@ public class AdminPage extends Controller {
         List<Rate> rates = Rate.findAll();
         response().setHeader("Cache-Control","no-cache");
         return ok(admin_rate.render(_user,users,rates));
+    }
+    public static Result comment()
+    {
+        User _user = User.findByUserId(Long.parseLong(session("userId")));
+        Logger.info("["+_user.username+"] user admin page.");
+
+        List<Comment> comments = Comment.findAll();
+        response().setHeader("Cache-Control","no-cache");
+        return ok(admin_comment.render(_user,comments));
+
     }
     public static Result project(){
         User _user = User.findByUserId(Long.parseLong(session("userId")));
@@ -137,6 +148,16 @@ public class AdminPage extends Controller {
         rate.delete();
         response().setHeader("Cache-Control","no-cache");
         return redirect(routes.AdminPage.index()+"#rates");
+    }
+    @Security.Authenticated(AdminSecured.class)
+    public static Result deleteComment(Long userId , Long projectId){
+        User _user = User.findByUserId(Long.parseLong(session("userId")));
+        Comment comment = Comment.findByUserIdAndProjectId(userId,projectId);
+        Logger.info("[" + _user.username + "] delete comment.(" + comment.id + ")("+comment.projectId+")");
+        comment.delete();
+        response().setHeader("Cache-Control","no-cache");
+        return redirect(routes.AdminPage.index()+"#comments");
+
     }
     @Security.Authenticated(AdminSecured.class)
     public static Result deleteRateCriterion(Long id){

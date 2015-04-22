@@ -1,0 +1,10 @@
+                    @rates.map { rate =>
+                        <li class="collection-item avatar">
+                            <i class="mdi-action-description circle teal lighten-1 trigger"></i>
+                            <span class="title teal-text lighten-1 trigger">Rate ID : @rate.id</span>
+                            <p>UserId @rate.userId rate ProjectId @rate.projectId <br>
+                                score = @rate.score
+                            </p>
+                            <a href="@routes.AdminPage.deleteRate(rate.id)" class="secondary-content"><i class="mdi-navigation-close trigger"></i></a>
+                        </li>
+                    }
