@@ -1,4 +1,4 @@
-@(user :User)(users :List[User])(rates :List[Rate])
+@(user :User)(users :List[User])(rates :List[Rate])(totalPage:Integer)(currentPage : Integer)
     <html>
         <head>
             <title>Exceed Vote</title>
@@ -56,6 +56,29 @@
             <div class="container padding-nav animated fadeIn">
                 <!-- User -->
                 <h2 class = "center-align trigger trigger-text">Rating Management</h2>
+                <ul class="pagination">
+                @for(i <- 1 until totalPage+1){
+                    @if(i == 1) {
+                        @if(currentPage == 1) {
+                            <li class="disabled"><a><i class="mdi-navigation-chevron-left" style="padding-top: 10px;"></i></a></li>
+                        } else {
+                            <li class="waves-effect"><a href="@routes.AdminPage.rate(currentPage-1)"><i class="mdi-navigation-chevron-left" style="padding-top: 10px;"></i></a></li>
+                        }
+                    }
+                    @if(i == currentPage){
+                        <li class="active"><a href="@routes.AdminPage.rate(i)">@i</a></li>
+                    }else{
+                        <li class="waves-effect"><a href="@routes.AdminPage.rate(i)">@i</a></li>
+                    }
+                    @if(i == totalPage) {
+                        @if(currentPage == totalPage){
+                            <li class="disabled"><a><i class="mdi-navigation-chevron-right"></i></a></li>
+                        }else{
+                            <li class="waves-effect"><a href="@routes.AdminPage.rate(currentPage+1)"><i class="mdi-navigation-chevron-right"></i></a></li>
+                        }
+                    }
+                }
+                </ul>
                 <table class="hoverable centered " >
                     <thead>
                         <tr>
@@ -76,7 +99,15 @@
                             <td>@rate.score</td>
                             <td><a href="@routes.AdminPage.deleteRate(rate.id)" class="secondary-content"><i class="mdi-navigation-close trigger"></i></a></td>
                         </tr>
-
+                    }
+                    @if(rates.size==0){
+                        <tr>
+                            <td></td>
+                            <td><i>No One Rate.</i></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
                     }
                     </tbody>
                 </table>

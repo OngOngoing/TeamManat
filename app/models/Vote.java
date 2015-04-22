@@ -54,7 +54,9 @@ public class Vote extends Model {
     public static List<Vote> findByProjectId(Long projectId){
         return find.where().eq("projectId", projectId).findList();
     }
-
+    public static int totalPage(){
+        return find.where().findPagingList(5).getTotalPageCount();
+    }
     public static List<Vote> findVotesByCriterionIdAndProjectId(Long criterionId, Long projectId) {
         return find.where().eq("criterionId", criterionId).eq("projectId", projectId).findList();
     }
@@ -67,7 +69,9 @@ public class Vote extends Model {
         }
         return result;
     }
-
+    public static List<Vote> findAllByPage(int page){
+        return find.where().findPagingList(5).getPage(--page).getList();
+    }
     public static MultiKeyMap summarize() {
         MultiKeyMap result = new MultiKeyMap();
         List<VoteCriterion> criteria = VoteCriterion.findAll();

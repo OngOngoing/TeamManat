@@ -10,11 +10,10 @@ GET         /projectlist                              controllers.ProjectList.in
 GET         /adminpage                                controllers.AdminPage.index()
 
 
-GET         /adminpage/rates                          controllers.AdminPage.rate()
-GET         /adminpage/votes                          controllers.AdminPage.vote()
-GET         /adminpage/scores                         controllers.AdminPage.score()
+GET         /adminpage/rates/:page                    controllers.AdminPage.rate(page:Integer)
+GET         /adminpage/votes/:page                    controllers.AdminPage.vote(page:Integer)
+GET         /adminpage/scores/                        controllers.AdminPage.score()
 GET         /adminpage/users/:page                    controllers.AdminPage.user(page:Integer)
-GET         /adminpage/rates                          controllers.AdminPage.rate()
 GET 		/adminpage/comment 						  controllers.AdminPage.comment()
 GET         /adminpage/projects                       controllers.AdminPage.project()
 GET         /adminpage/criteria                       controllers.AdminPage.criteria()

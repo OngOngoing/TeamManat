@@ -33,19 +33,20 @@ public class AdminPage extends Controller {
         User _user = User.findByUserId(Long.parseLong(session("userId")));
         Logger.info("["+_user.username+"] user admin page.");
         List<User> users = User.findAll();
-        response().setHeader("Cache-Control","no-cache");
+        response().setHeader("Cache-Control", "no-cache");
         return ok(admin_score.render(_user,users));
     }
-    public static Result rate(){
+    public static Result rate(int page){
         User _user = User.findByUserId(Long.parseLong(session("userId")));
         Logger.info("["+_user.username+"] user admin page.");
         List<User> users = User.findAll();
-        List<Rate> rates = Rate.findAll();
+        List<Rate> rates = Rate.findAllByPage(page);
+        int num_page= Rate.totalPage();
         response().setHeader("Cache-Control","no-cache");
-        return ok(admin_rate.render(_user, users, rates));
+        return ok(admin_rate.render(_user, users, rates, num_page, page));
     }
 
-    public static Result vote() {
+    public static Result vote(int page) {
         User _user = User.findByUserId(Long.parseLong(session("userId")));
         Logger.info("[" + _user.username + "] user admin page.");
         List<User> users = User.findAll();
@@ -159,8 +160,8 @@ public class AdminPage extends Controller {
         String idType = dynamicForm.get("idtype");
         User user = User.create(username, password, firstname,lastname,Integer.parseInt(idType));
         Logger.info("["+_user.username+"] add new user.("+user.id+")");
-        response().setHeader("Cache-Control","no-cache");
-        flash("user_add_success","User added");
+        response().setHeader("Cache-Control", "no-cache");
+        flash("user_add_success", "User added");
         return redirect(routes.AdminPage.user(1));
     }
 
@@ -169,9 +170,9 @@ public class AdminPage extends Controller {
         User _user = User.findByUserId(Long.parseLong(session("userId")));
         Project project = Form.form(Project.class).bindFromRequest().get();
         project.save();
-        Logger.info("["+_user.username+"] add new project.("+project.id+")");
-        response().setHeader("Cache-Control","no-cache");
-        flash("project_add_success","Project added");
+        Logger.info("[" + _user.username + "] add new project.(" + project.id+")");
+        response().setHeader("Cache-Control", "no-cache");
+        flash("project_add_success", "Project added");
         return redirect(routes.AdminPage.project());
     }
     @Security.Authenticated(AdminSecured.class)
@@ -180,8 +181,8 @@ public class AdminPage extends Controller {
         RateCriterion rateC = Form.form(RateCriterion.class).bindFromRequest().get();
         rateC.save();
         Logger.info("[" + _user.username + "] add new Rate Criterion.(" + rateC.id + ")");
-        response().setHeader("Cache-Control","no-cache");
-        flash("rate_criterion_add_success","Rating criterion added");
+        response().setHeader("Cache-Control", "no-cache");
+        flash("rate_criterion_add_success", "Rating criterion added");
         return redirect(routes.AdminPage.criteria());
     }
     @Security.Authenticated(AdminSecured.class)
@@ -190,8 +191,8 @@ public class AdminPage extends Controller {
         VoteCriterion voteC = Form.form(VoteCriterion.class).bindFromRequest().get();
         voteC.save();
         Logger.info("[" + _user.username + "] add new Vote Criterion.(" + voteC.id + ")");
-        response().setHeader("Cache-Control","no-cache");
-        flash("vote_criterion_add_success","Voting criterion added");
+        response().setHeader("Cache-Control", "no-cache");
+        flash("vote_criterion_add_success", "Voting criterion added");
         return redirect(routes.AdminPage.criteria());
     }
     @Security.Authenticated(AdminSecured.class)
@@ -230,9 +231,9 @@ public class AdminPage extends Controller {
         Rate rate = Rate.findById(id);
         Logger.info("[" + _user.username + "] delete rate.(" + rate.id + ")("+rate.projectId+")");
         rate.delete();
-        flash("rate_delete_success","Rate deleted");
+        flash("rate_delete_success", "Rate deleted");
         response().setHeader("Cache-Control","no-cache");
-        return redirect(routes.AdminPage.rate());
+        return redirect(routes.AdminPage.rate(1));
     }
     @Security.Authenticated(AdminSecured.class)
     public static Result deleteVote(Long id){
@@ -240,9 +241,9 @@ public class AdminPage extends Controller {
         Vote vote = Vote.findById(id);
         Logger.info("[" + _user.username + "] delete rate.(" + vote.id + ")("+vote.projectId+")");
         vote.delete();
-        flash("vote_delete_success","Vote deleted");
+        flash("vote_delete_success", "Vote deleted");
         response().setHeader("Cache-Control","no-cache");
-        return redirect(routes.AdminPage.vote());
+        return redirect(routes.AdminPage.vote(1));
     }
     @Security.Authenticated(AdminSecured.class)
     public static Result deleteComment(Long userId , Long projectId){
@@ -251,7 +252,7 @@ public class AdminPage extends Controller {
         Logger.info("[" + _user.username + "] delete comment.(" + comment.id + ")("+comment.projectId+")");
         comment.delete();
         response().setHeader("Cache-Control","no-cache");
-        return redirect(routes.AdminPage.index()+"#comments");
+        return redirect(routes.AdminPage.comment());
 
     }
     @Security.Authenticated(AdminSecured.class)
@@ -302,8 +303,8 @@ public class AdminPage extends Controller {
         }
         olduser.idtype = newuser.idtype;
         olduser.update();
-        Logger.info("[" + _user.username + "] edite user.("+olduser.id+")"+olduser.username);
-        flash("user_edit_success","User edited");
+        Logger.info("[" + _user.username + "] edite user.(" + olduser.id + ")" + olduser.username);
+        flash("user_edit_success", "User edited");
         response().setHeader("Cache-Control","no-cache");
         return redirect(routes.AdminPage.user(1));
     }

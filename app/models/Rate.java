@@ -64,7 +64,12 @@ public class Rate extends Model {
     public static List<Rate> findListByUserIdAndProjectId(long userId, Long projectId){
         return find.where().eq("userId", userId).eq("projectId",projectId).findList();
     }
-
+    public static List<Rate> findAllByPage(int page){
+        return find.where().findPagingList(5).getPage(--page).getList();
+    }
+    public static int totalPage(){
+        return find.where().findPagingList(5).getTotalPageCount();
+    }
     public static List<Rate> findListByProjectId(long projectId){
         return find.where().eq("projectId",projectId).findList();
     }

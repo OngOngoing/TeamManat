@@ -61,8 +61,10 @@
                             <a href="@routes.AdminPage.deleteComment(comment.userId , comment.projectId)" class="secondary-content"><i class="mdi-navigation-close trigger"></i></a>
                         </li>
                     }
-
                 </ul>
+                @if(comments.size==0){
+                    <i>No One comment.</i>
+                }
             </div>
 
 
