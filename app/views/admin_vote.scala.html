@@ -73,7 +73,7 @@
                                             <td>@User.findByUserId(vote.userId).username (ID:@vote.userId)</td>
                                             <td>@VoteCriterion.findById(vote.criterionId).name</td>
                                             <td>@Project.findById(vote.projectId).projectName</td>
-                                            <td><a href="@routes.AdminPage.deleteVote(vote.id)" class="secondary-content"><i class="mdi-navigation-close trigger"></i></a></td>
+                                            <td><a href="#confirmDelete" vote-id="@vote.id" class="delete-vote secondary-content modal-trigger"><i class="mdi-navigation-close trigger"></i></a></td>
                                         </tr>
                                     }
                             }
@@ -88,6 +88,17 @@
                             </tbody>
                         </table>
                 }
+            </div>
+            <div id="confirmDelete" class="modal" >
+                <div class="modal-content">
+                    <h4>Are you sure you want to delete vote?</h4>
+                    <p>If you lose this vote, the result can be wrong. Are you sure to do this?</p>
+                </div>
+                <div class="modal-footer">
+                    <a href="#!" class=" modal-action modal-close waves-effect waves-green btn-flat">Cancel</a>
+                    <a id="confirm-vote" href="./adminpage/deleteVote/" class=" modal-action modal-close waves-effect waves-green btn-flat" type="submit" name="action">
+                        Delete</a>
+                </div>
             </div>
             <div class="fixed-action-btn animated bounceInUp" style="bottom : 45 px ; right : 40 px ;">
                 <a class="btn-floating btn-large trigger " href="@routes.AdminPage.index()"><i class="large mdi-action-settings waves-effect waves-light"></i></a>

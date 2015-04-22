@@ -1,6 +1,18 @@
 $(document).ready(function () {
     var _text = $('#user-collection').html();
     $('.modal-trigger').leanModal();
+    $('.delete-rate').each(function(){
+        $(this).click(function(){
+            var id = $(this).attr("rate-id");
+            $('#confirm-rate').attr('href', '../deleteRate/'+id);
+        });
+    });
+    $('.delete-vote').each(function(){
+        $(this).click(function(){
+            var id = $(this).attr("vote-id");
+            $('#confirm-vote').attr('href', '../deleteVote/'+id);
+        });
+    });
     $('.rate-user').each(function () {
         var that = $(this);
         $(this).click(function () {

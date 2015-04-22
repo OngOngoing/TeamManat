@@ -46,7 +46,7 @@ public class AdminPage extends Controller {
         return ok(admin_rate.render(_user, users, rates, num_page, page));
     }
 
-    public static Result vote(int page) {
+    public static Result vote() {
         User _user = User.findByUserId(Long.parseLong(session("userId")));
         Logger.info("[" + _user.username + "] user admin page.");
         List<User> users = User.findAll();
@@ -243,7 +243,7 @@ public class AdminPage extends Controller {
         vote.delete();
         flash("vote_delete_success", "Vote deleted");
         response().setHeader("Cache-Control","no-cache");
-        return redirect(routes.AdminPage.vote(1));
+        return redirect(routes.AdminPage.vote());
     }
     @Security.Authenticated(AdminSecured.class)
     public static Result deleteComment(Long userId , Long projectId){

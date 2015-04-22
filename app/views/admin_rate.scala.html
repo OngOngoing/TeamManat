@@ -97,7 +97,7 @@
                             <td>@RateCriterion.findById(rate.criteriaId).name</td>
                             <td>@Project.findById(rate.projectId).projectName</td>
                             <td>@rate.score</td>
-                            <td><a href="@routes.AdminPage.deleteRate(rate.id)" class="secondary-content"><i class="mdi-navigation-close trigger"></i></a></td>
+                            <td><a rate-id="@rate.id" href="#confirmDelete" class="delete-rate secondary-content modal-trigger"><i class="mdi-navigation-close trigger"></i></a></td>
                         </tr>
                     }
                     @if(rates.size==0){
@@ -112,9 +112,17 @@
                     </tbody>
                 </table>
             </div>
-
-
-
+            <div id="confirmDelete" class="modal" >
+                <div class="modal-content">
+                    <h4>Are you sure you want to delete rate?</h4>
+                    <p>If you lose this rate, the result can be wrong. Are you sure to do this?</p>
+                </div>
+                <div class="modal-footer">
+                    <a href="#!" class=" modal-action modal-close waves-effect waves-green btn-flat">Cancel</a>
+                    <a id="confirm-rate" href="./adminpage/deleteRate/" class=" modal-action modal-close waves-effect waves-green btn-flat" type="submit" name="action">
+                        Delete</a>
+                </div>
+            </div>
             <div class="fixed-action-btn animated bounceInUp" style="bottom : 45 px ; right : 40 px ;">
                 <a class="btn-floating btn-large trigger " href="@routes.AdminPage.index()"><i class="large mdi-action-settings waves-effect waves-light"></i></a>
                 <ul>

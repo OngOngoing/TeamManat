@@ -11,7 +11,7 @@ GET         /adminpage                                controllers.AdminPage.inde
 
 
 GET         /adminpage/rates/:page                    controllers.AdminPage.rate(page:Integer)
-GET         /adminpage/votes/:page                    controllers.AdminPage.vote(page:Integer)
+GET         /adminpage/votes/                         controllers.AdminPage.vote()
 GET         /adminpage/scores/                        controllers.AdminPage.score()
 GET         /adminpage/users/:page                    controllers.AdminPage.user(page:Integer)
 GET 		/adminpage/comment 						  controllers.AdminPage.comment()
