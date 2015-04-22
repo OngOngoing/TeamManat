@@ -91,7 +91,7 @@
                     </div>
                 </form>
             </div>
-            <div class="card-panel grey lighten-5 z-depth-1">
+            <div class="card-panel grey lighten-5 z-depth-1"id="member">
                 <div class="show-on-medium-and-up hide-on-small-only">
                     <h4 class="trigger-text trigger pageBanner">Member List</h4>
                     <table class="hoverable">
@@ -122,7 +122,7 @@
                                     <td><code class=" language-markup"></code></td>
                                 </tr>
                             }
-                            <tr><form action="@routes.EditProject.addMember(currentProject.id, history)" method="post">
+                            <tr><form action="@routes.EditProject.addMember(currentProject.id, history)#member" method="post">
                                 <td>
                                     <code class=" language-markup"><h5>Add new member</h5>
                                         <blockquote>
@@ -221,7 +221,7 @@
                         <div id="process-bar"></div>
                     </div>
                 </div>
-                <div class="row">
+                <div class="row" id="upload">
                     <div class="slider">
                         <ul class="slides" id="show-slides" projectId="@currentProject.id" history="@history">
                         @images.map { img =>
@@ -230,7 +230,7 @@
                                 <div class="caption right-align">
                                     <div class="row">
                                     @if(img.imgType != ProjectImage.DEFAULT) {
-                                        <a class="waves-effect waves-light btn blue" href="@routes.Application.setImgDefault(img.Id,currentProject.id,history)"><i class="mdi-toggle-check-box right"></i>
+                                        <a class="waves-effect waves-light btn blue" href="@routes.Application.setImgDefault(img.Id,currentProject.id,history)#upload"><i class="mdi-toggle-check-box right"></i>
                                             Set Default</a>
                                     }else{
                                         <a class="waves-effect waves-light btn disabled"><i class="mdi-toggle-check-box right"></i>
@@ -238,7 +238,7 @@
                                     }
                                     </div>
                                     <div class="row">
-                                        <a class="waves-effect waves-light btn red" href="@routes.Application.deleteImg(img.Id,currentProject.id,history)"><i class="mdi-navigation-close right"></i>
+                                        <a class="waves-effect waves-light btn red" href="@routes.Application.deleteImg(img.Id,currentProject.id,history)#upload"><i class="mdi-navigation-close right"></i>
                                             Delete</a>
                                     </div>
                                 </div>
