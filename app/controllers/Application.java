@@ -79,7 +79,7 @@ public class Application extends Controller {
         return ok(image.getData()).as("image");
     }
 
-    public static Result deleteImg(Long imgId, Long proId){
+    public static Result deleteImg(Long imgId, Long proId, String h){
         User _user = User.findByUserId(Long.parseLong(session("userId")));
         if(_user.projectId != proId && _user.idtype != User.ADMINISTRATOR){
             flash("error", "access denied.");
@@ -97,9 +97,9 @@ public class Application extends Controller {
         }else {
             flash("error", "Con't found Screenshot.");
         }
-        return redirect(routes.EditProject.index(proId));
+        return redirect(routes.EditProject.index(proId, h));
     }
-    public static Result setImgDefault(Long imgId, Long proId){
+    public static Result setImgDefault(Long imgId, Long proId,String h){
         User _user = User.findByUserId(Long.parseLong(session("userId")));
         if(_user.projectId != proId && _user.idtype != User.ADMINISTRATOR){
             flash("error", "access denied.");
@@ -109,7 +109,7 @@ public class Application extends Controller {
         ProjectImage newimg = ProjectImage.findById(imgId);
         if(newimg == null){
             flash("error", "Can't found image.");
-            return redirect(routes.EditProject.index(proId));
+            return redirect(routes.EditProject.index(proId, h));
         }
         if(oldimg != null) {
             oldimg.imgType = ProjectImage.NORMAL;
@@ -118,7 +118,7 @@ public class Application extends Controller {
         newimg.imgType = ProjectImage.DEFAULT;
         newimg.save();
         flash("success", "Project is updated.");
-        return redirect(routes.EditProject.index(proId));
+        return redirect(routes.EditProject.index(proId, h));
     }
     // MockDataBase for testing
     public static Result mockDatabase(){

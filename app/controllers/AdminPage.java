@@ -13,7 +13,6 @@ public class AdminPage extends Controller {
 
     @Security.Authenticated(AdminSecured.class)
     public static Result index() {
-        User _user = User.findByUserId(Long.parseLong(session("userId")));
         List<Rate> rates = Rate.findAll();
         List<User> users = User.findAll();
         List<Settings> webconfig = Settings.findAll();
@@ -155,7 +154,7 @@ public class AdminPage extends Controller {
         project.save();
         Logger.info("["+_user.username+"] add new project.("+project.id+")");
         response().setHeader("Cache-Control","no-cache");
-        return redirect(routes.AdminPage.index()+"#projects");
+        return redirect(routes.AdminPage.project());
     }
     @Security.Authenticated(AdminSecured.class)
     public static Result addRateCriterion(){
@@ -164,7 +163,7 @@ public class AdminPage extends Controller {
         rateC.save();
         Logger.info("[" + _user.username + "] add new Rate Criterion.(" + rateC.id + ")");
         response().setHeader("Cache-Control","no-cache");
-        return redirect(routes.AdminPage.index()+"#criterions");
+        return redirect(routes.AdminPage.criteria());
     }
     @Security.Authenticated(AdminSecured.class)
     public static Result addVoteCriterion(){
@@ -173,7 +172,7 @@ public class AdminPage extends Controller {
         voteC.save();
         Logger.info("[" + _user.username + "] add new Vote Criterion.(" + voteC.id + ")");
         response().setHeader("Cache-Control","no-cache");
-        return redirect(routes.AdminPage.index()+"#criterions");
+        return redirect(routes.AdminPage.criteria());
     }
     @Security.Authenticated(AdminSecured.class)
     public static Result deleteUsers(){
@@ -210,7 +209,7 @@ public class AdminPage extends Controller {
         Logger.info("[" + _user.username + "] delete rate.(" + rate.id + ")("+rate.projectId+")");
         rate.delete();
         response().setHeader("Cache-Control","no-cache");
-        return redirect(routes.AdminPage.index()+"#rates");
+        return redirect(routes.AdminPage.rate());
     }
     @Security.Authenticated(AdminSecured.class)
     public static Result deleteVote(Long id){
@@ -219,7 +218,7 @@ public class AdminPage extends Controller {
         Logger.info("[" + _user.username + "] delete rate.(" + vote.id + ")("+vote.projectId+")");
         vote.delete();
         response().setHeader("Cache-Control","no-cache");
-        return redirect(routes.AdminPage.index()+"#votes");
+        return redirect(routes.AdminPage.vote());
     }
     @Security.Authenticated(AdminSecured.class)
     public static Result deleteRateCriterion(Long id){
@@ -235,7 +234,7 @@ public class AdminPage extends Controller {
             rateCs.delete();
         }
         response().setHeader("Cache-Control","no-cache");
-        return redirect(routes.AdminPage.index()+"#criterions");
+        return redirect(routes.AdminPage.criteria());
     }
     @Security.Authenticated(AdminSecured.class)
     public static Result deleteVoteCriterion(Long id){
@@ -251,7 +250,7 @@ public class AdminPage extends Controller {
             voteCs.delete();
         }
         response().setHeader("Cache-Control","no-cache");
-        return redirect(routes.AdminPage.index()+"#criterions");
+        return redirect(routes.AdminPage.criteria());
     }
 
     @Security.Authenticated(AdminSecured.class)
@@ -270,7 +269,7 @@ public class AdminPage extends Controller {
         olduser.update();
         Logger.info("[" + _user.username + "] edite user.("+olduser.id+")"+olduser.username);
         response().setHeader("Cache-Control","no-cache");
-        return redirect(routes.AdminPage.index()+"#users");
+        return redirect(routes.AdminPage.user(1));
     }
     @Security.Authenticated(AdminSecured.class)
     public static Result saveSetting(){
@@ -280,6 +279,6 @@ public class AdminPage extends Controller {
             Settings.update(item.keyName, dynamicForm.get(item.keyName));
         }
         response().setHeader("Cache-Control", "no-cache");
-        return redirect(routes.AdminPage.index()+"#configs");
+        return redirect(routes.AdminPage.systemConfig());
     }
 }

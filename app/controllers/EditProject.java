@@ -18,7 +18,7 @@ import java.util.ArrayList;
  */
 public class EditProject extends Controller {
     @Security.Authenticated(Secured.class)
-    public static Result index(Long projectId){
+    public static Result index(Long projectId, String h){
         User _user = User.findByUserId(Long.parseLong(session("userId")));
         if(!canEditProject(_user, projectId)) {
             flash("error", "Access Denied.");
@@ -28,10 +28,10 @@ public class EditProject extends Controller {
         List<User> members = User.findByTeam(projectId);
         List<ProjectImage> images = ProjectImage.findImageOfProject(projectId);
         response().setHeader("Cache-Control","no-cache");
-        return ok(editproject.render(_user, project, members, images));
+        return ok(editproject.render(_user, project, members, images, h));
     }
     @Security.Authenticated(Secured.class)
-    public static Result addMember(Long projectId){
+    public static Result addMember(Long projectId, String h){
         User _user = User.findByUserId(Long.parseLong(session("userId")));
         if(!canEditProject(_user, projectId)){
             flash("error", "Access Denied.");
@@ -41,23 +41,23 @@ public class EditProject extends Controller {
         String input = dynamicForm.get("user-id");
         if(!input.matches("[0-9]+")){
             flash("error", "Please select some user!");
-            return redirect(routes.EditProject.index(projectId));
+            return redirect(routes.EditProject.index(projectId, h));
         }
         Long userId = Long.parseLong(input);
         User editUser = User.findByUserId(userId);
         if(editUser == null){
             flash("error", "User not found");
-            return redirect(routes.EditProject.index(projectId));
+            return redirect(routes.EditProject.index(projectId, h));
         }
         editUser.projectId = projectId;
         editUser.update();
         Logger.info("["+editUser.username+"] project id = "+projectId);
         flash("success", "User is added!");
         response().setHeader("Cache-Control","no-cache");
-        return redirect(routes.EditProject.index(projectId));
+        return redirect(routes.EditProject.index(projectId, h));
     }
     @Security.Authenticated(Secured.class)
-    public static Result edit(Long projectId){
+    public static Result edit(Long projectId, String h){
         User _user = User.findByUserId(Long.parseLong(session("userId")));
         if(!canEditProject(_user, projectId)){
             flash("error", "Access Denied.");
@@ -75,10 +75,10 @@ public class EditProject extends Controller {
             flash("success", "Project is updated!");
         }
         response().setHeader("Cache-Control","no-cache");
-        return redirect(routes.EditProject.index(projectId));
+        return redirect(routes.EditProject.index(projectId ,h));
     }
     @Security.Authenticated(Secured.class)
-    public static Result removeUser(Long userId, Long proId){
+    public static Result removeUser(Long userId, Long proId ,String h){
         User _user = User.findByUserId(Long.parseLong(session("userId")));
         if(!canEditProject(_user, proId)){
             flash("error", "Access Denied.");
@@ -92,7 +92,7 @@ public class EditProject extends Controller {
             flash("success", "User is successfully deleted");
         }
         response().setHeader("Cache-Control","no-cache");
-        return redirect(routes.EditProject.index(proId));
+        return redirect(routes.EditProject.index(proId, h));
     }
     @Security.Authenticated(Secured.class)
     public static Result searchUser(){

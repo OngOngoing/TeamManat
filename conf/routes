@@ -44,18 +44,18 @@ POST        /rateproject/edit                         controllers.RateProject.ed
 GET         /ratecalculator                           controllers.RateCalculator.index()
 GET 		/ratecalculator/bycriteria				  controllers.RateCalculator.rateSortByCriteria()
 
-GET         /editproject/:proId                       controllers.EditProject.index(proId:Long)
-POST        /editproject/:proId                       controllers.EditProject.edit(proId:Long)
-POST        /editproject/addmember/:proId             controllers.EditProject.addMember(proId:Long)
+GET         /editproject/:proId                       controllers.EditProject.index(proId:Long, h:String)
+POST        /editproject/:proId                       controllers.EditProject.edit(proId:Long, h:String)
+POST        /editproject/addmember/:proId             controllers.EditProject.addMember(proId:Long, h:String)
 POST        /searchuser                               controllers.EditProject.searchUser()
-GET         /editproject/delete/:id/:proId            controllers.EditProject.removeUser(id:Long, proId:Long)
+GET         /editproject/delete/:id/:proId            controllers.EditProject.removeUser(id:Long, proId:Long, h:String)
 POST        /deleteproject                            controllers.EditProject.deleteProject()
 
 POST        /uploadimage                              controllers.EditProject.upload()
 GET         /getimgs/:proId                           controllers.Application.getImgs(proId:Long)
 GET         /getimg/:id                               controllers.Application.getImg(id:Long)
-GET         /delimg/:proId/:id                        controllers.Application.deleteImg(id:Long, proId:Long)
-GET         /setimg/:proId/:id                        controllers.Application.setImgDefault(id:Long, proId:Long)
+GET         /delimg/:proId/:id                        controllers.Application.deleteImg(id:Long, proId:Long,h :String)
+GET         /setimg/:proId/:id                        controllers.Application.setImgDefault(id:Long, proId:Long,h :String)
 # Create initial data for testing.
 GET         /install                                  controllers.Application.mockDatabase()
 # Map static resources from the /public folder to the /assets URL path

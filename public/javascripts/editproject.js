@@ -86,13 +86,14 @@ function onFileComplete(e, file, response) {
         success: function (msg) {
             var data = JSON.parse(msg);
             var html = "";
+            var history = $("#show-slides").attr("history");
             for(var i=data.length-1;i>=0;i--){
                 html += "<li>";
                 html += "<img src='../getimg/"+data[i].Id+"' style='background-size: auto 450px;background-position-y: 0;background-repeat: no-repeat;' >";
                 html += "<div class='caption right-align'>";
                 html += "<div class='row'>";
                 if(data[i].imgType != 1){
-                    html += "<a class='waves-effect waves-light btn blue' href='../setimg/"+$("#show-slides").attr("projectId")+"/"+data[i].Id+"'><i class='mdi-toggle-check-box right'></i>";
+                    html += "<a class='waves-effect waves-light btn blue' href='../setimg/"+$("#show-slides").attr("projectId")+"/"+data[i].Id+"?h="+history+"#upload'><i class='mdi-toggle-check-box right'></i>";
                     html += "Set Default</a>";
                 }else{
                     html += "<a class='waves-effect waves-light btn disabled'><i class='mdi-toggle-check-box right'></i>";
@@ -100,7 +101,7 @@ function onFileComplete(e, file, response) {
                 }
                 html += "</div>";
                 html += "<div class='row'>";
-                html += "<a class='waves-effect waves-light btn red'  href='../delimg/"+$("#show-slides").attr("projectId")+"/"+data[i].Id+"'><i class='mdi-navigation-close right'></i>Delete</a>";
+                html += "<a class='waves-effect waves-light btn red'  href='../delimg/"+$("#show-slides").attr("projectId")+"/"+data[i].Id+"?h="+history+"#upload'><i class='mdi-navigation-close right'></i>Delete</a>";
                 html += "</div>";
                 html += "</div></li>";
             }
