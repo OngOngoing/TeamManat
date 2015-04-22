@@ -51,6 +51,9 @@ public class Vote extends Model {
     public static List<Vote> findVotesByCriterionId(Long criterionId) {
         return find.where().eq("criterionId", criterionId).findList();
     }
+    public static List<Vote> findByProjectId(Long projectId){
+        return find.where().eq("projectId", projectId).findList();
+    }
 
     public static List<Vote> findVotesByCriterionIdAndProjectId(Long criterionId, Long projectId) {
         return find.where().eq("criterionId", criterionId).eq("projectId", projectId).findList();

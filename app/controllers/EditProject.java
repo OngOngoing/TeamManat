@@ -1,9 +1,6 @@
 package controllers;
 
-import models.Project;
-import models.Rate;
-import models.ProjectImage;
-import models.User;
+import models.*;
 import org.apache.commons.collections.map.HashedMap;
 import play.Logger;
 import play.data.DynamicForm;
@@ -131,6 +128,16 @@ public class EditProject extends Controller {
             List<Rate> _rates = Rate.findListByProjectId(_pro.id);
             for (Rate item : _rates) {
                 Logger.info("rate ["+item.id+"] is delete. ProId:"+item.projectId+" UserId:"+item.userId);
+                item.delete();
+            }
+            List<Vote> _votes = Vote.findByProjectId(_pro.id);
+            for (Vote item : _votes) {
+                Logger.info("vote ["+item.id+"] is delete. ProId:"+item.projectId+" UserId:"+item.userId);
+                item.delete();
+            }
+            List<Comment> _comments = Comment.findListByProjectId(_pro.id);
+            for (Comment item : _comments) {
+                Logger.info("comment ["+item.id+"] is delete. ProId:"+item.projectId+" UserId:"+item.userId);
                 item.delete();
             }
             List<User> _users = User.findByTeam(_pro.id);
