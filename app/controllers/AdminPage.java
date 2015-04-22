@@ -6,17 +6,8 @@ import play.Logger;
 import play.data.*;
 import play.libs.Json;
 import play.mvc.*;
-<<<<<<< HEAD
+
 import views.html.*;
-=======
-import views.html.adminpage;
-import views.html.admin_user;
-import views.html.admin_rate;
-import views.html.admin_comment;
-import views.html.admin_project;
-import views.html.admin_criteria;
-import views.html.admin_systemconfig;
->>>>>>> origin/comment
 import java.util.*;
 
 public class AdminPage extends Controller {
