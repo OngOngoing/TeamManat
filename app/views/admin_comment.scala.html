@@ -1,4 +1,4 @@
-@(user :User)(users :List[User])(rates :List[Rate])
+@(user :User)(comments :List[Comment])
     <html>
         <head>
             <title>Exceed Vote</title>
@@ -18,9 +18,12 @@
                             <ul class="right hide-on-med-and-down">
                                 <li><a href="@routes.AdminPage.index()"><i class="medium mdi-action-home left"></i>Admin</a>
                                 </li>
-                                <li><a href="@routes.AdminPage.user(1)"><i class="medium mdi-action-account-box left"></i>User</a>
+                                <li><a href="@routes.AdminPage.user()"><i class="medium mdi-action-account-box left"></i>
+                                    User</a>
                                 </li>
-                                <li><a href="@routes.AdminPage.score()"><i class="medium mdi-action-grade left"></i>Score</a>
+                                <li><a href="@routes.AdminPage.comment()"><i class="medium mdi-action-speaker-notes left"></i>Comment</a>
+                                </li>
+                                <li><a href="@routes.AdminPage.rate()"><i class="medium mdi-action-grade left"></i>Rate</a>
                                 </li>
                                 <li><a href="@routes.AdminPage.project()"><i class="medium mdi-action-class left"></i>
                                     Project</a>
@@ -35,9 +38,12 @@
                             <ul class="side-nav" id="mobile-demo" style="margin-right : - 40 px ;">
                                 <li><a href="@routes.AdminPage.index()"><i class="medium mdi-action-home left"></i>Admin</a>
                                 </li>
-                                <li><a href="@routes.AdminPage.user(1)"><i class="medium mdi-action-account-box left"></i>User</a>
+                                <li><a href="@routes.AdminPage.user()"><i class="medium mdi-action-account-box left"></i>
+                                    User</a>
                                 </li>
-                                <li><a href="@routes.AdminPage.score()"><i class="medium mdi-action-grade left"></i>Score</a>
+                                <li><a href="@routes.AdminPage.comment()"><i class="medium mdi-action-speaker-notes left"></i>Comment</a>
+                                </li>
+                                <li><a href="@routes.AdminPage.rate()"><i class="medium mdi-action-grade left"></i>Rate</a>
                                 </li>
                                 <li><a href="@routes.AdminPage.project()"><i class="medium mdi-action-class left"></i>
                                     Project</a>
@@ -53,33 +59,22 @@
                     </div>
                 </div>
             </nav>
-            <div class="container padding-nav animated fadeIn">
+            <div class="container padding-nav">
                 <!-- User -->
-                <h2 class = "center-align trigger trigger-text">Rating Management</h2>
-                <table class="hoverable centered " >
-                    <thead>
-                        <tr>
-                            <th data-field="id">ID</th>
-                            <th data-field="criteria">Criteria</th>
-                            <th data-field="projectId">Project</th>
-                            <th data-field="score">Score</th>
-                            <th data-field="button"></th>
-                        </tr>
-                    </thead>
-
-                    <tbody>
-                    @rates.map { rate =>
-                        <tr>
-                            <td>@User.findByUserId(rate.userId).username (ID:@rate.userId)</td>
-                            <td>@RateCriterion.findById(rate.criteriaId).name</td>
-                            <td>@Project.findById(rate.projectId).projectName</td>
-                            <td>@rate.score</td>
-                            <td><a href="@routes.AdminPage.deleteRate(rate.id)" class="secondary-content"><i class="mdi-navigation-close trigger"></i></a></td>
-                        </tr>
-
+                <h2 class = "trigger trigger-text">Comment</h2>
+                <ul class="collection">
+                    @comments.map { comment =>
+                        <li class="collection-item avatar">
+                            <i class="mdi-action-description circle teal lighten-1 trigger"></i>
+                            <span class="title teal-text lighten-1 trigger">Comment ID : @comment.id</span>
+                            <p>UserId @comment.userId Comment ProjectId @comment.projectId <br>
+                                @comment.comment
+                            </p>
+                            <a href="@routes.AdminPage.deleteComment(comment.userId , comment.projectId)" class="secondary-content"><i class="mdi-navigation-close trigger"></i></a>
+                        </li>
                     }
-                    </tbody>
-                </table>
+
+                </ul>
             </div>
 
 
