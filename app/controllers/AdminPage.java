@@ -151,8 +151,13 @@ public class AdminPage extends Controller {
     @Security.Authenticated(AdminSecured.class)
     public static Result addUser(){
         User _user = User.findByUserId(Long.parseLong(session("userId")));
-        User user = Form.form(User.class).bindFromRequest().get();
-        user.save();
+        DynamicForm dynamicForm = new DynamicForm().bindFromRequest();
+        String firstname = dynamicForm.get("firstname");
+        String lastname = dynamicForm.get("lastname");
+        String username = dynamicForm.get("username");
+        String password = dynamicForm.get("password");
+        String idType = dynamicForm.get("idtype");
+        User user = User.create(username, password, firstname,lastname,Integer.parseInt(idType));
         Logger.info("["+_user.username+"] add new user.("+user.id+")");
         response().setHeader("Cache-Control","no-cache");
         return redirect(routes.AdminPage.user(1));
@@ -234,7 +239,7 @@ public class AdminPage extends Controller {
     @Security.Authenticated(AdminSecured.class)
     public static Result deleteComment(Long userId , Long projectId){
         User _user = User.findByUserId(Long.parseLong(session("userId")));
-        Comment comment = Comment.findByUserIdAndProjectId(userId,projectId);
+        Comment comment = Comment.findByUserIdAndProjectId(userId, projectId);
         Logger.info("[" + _user.username + "] delete comment.(" + comment.id + ")("+comment.projectId+")");
         comment.delete();
         response().setHeader("Cache-Control","no-cache");
