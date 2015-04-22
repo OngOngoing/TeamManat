@@ -223,10 +223,10 @@
                 </div>
                 <div class="row">
                     <div class="slider">
-                        <ul class="slides" id="show-slides" projectId="@currentProject.id">
+                        <ul class="slides" id="show-slides" projectId="@currentProject.id" >
                         @images.map { img =>
                             <li>
-                                <img src="@routes.Application.getImg(img.Id)">
+                                <img src="@routes.Application.getImg(img.Id)" style="background-size: auto 450px;background-position-y: 0;background-repeat: no-repeat;">
                                 <div class="caption right-align">
                                     <div class="row">
                                     @if(img.imgType != ProjectImage.DEFAULT) {

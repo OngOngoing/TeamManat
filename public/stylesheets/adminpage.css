@@ -254,7 +254,7 @@
     margin: 0px;
     border-bottom: 1px solid #e0e0e0; }
     .collection .collection-item.avatar {
-      height: 100px;
+      height: auto;
       padding-left: 100px;
       position: relative; }
       .collection .collection-item.avatar .circle {
@@ -332,15 +332,59 @@
     cursor: pointer;
     opacity: 0;
     filter: alpha(opacity=0); }
-
-
+.pagination li{
+    font-size: 1.2rem;
+    float: left;
+    width: 30px;
+    margin: 0 10px;
+    border-radius: 2px;
+    text-align: center;
+}
+.pagination a{
+    line-height: 2rem;
+}
+.pagination li i{
+    line-height: 2rem;
+}
 .collapsible-container {
     padding: 1.5rem 1.0rem;
     margin: 0 auto;
     max-width: 1280px;
     width: 95%;
 }
-
+.collapsible-header-for-search {
+    -webkit-box-shadow: 0 2px 5px 0 rgba(0,0,0,0.16),0 2px 10px 0 rgba(0,0,0,0.12);
+    -moz-box-shadow: 0 2px 5px 0 rgba(0,0,0,0.16),0 2px 10px 0 rgba(0,0,0,0.12);
+    box-shadow: 0 2px 5px 0 rgba(0,0,0,0.16),0 2px 10px 0 rgba(0,0,0,0.12);
+    display: block;
+    height: 3rem;
+    line-height: 3rem;
+    padding: 0;
+    background-color: #fff;
+    border-bottom: 1px solid #ddd;
+}
+.collapsible-for-search {
+    border-top: 1px solid #ddd;
+    border-right: 1px solid #ddd;
+    border-left: 1px solid #ddd;
+    margin: 0.5rem 0 1rem 0;
+}
+.search-admin input{
+    padding-left: 4rem;
+    width: calc(100% - 4rem);
+    background: transparent;
+    border: 0px;
+ }
+.search-admin i{
+    position: absolute;
+    padding-left: 1rem;
+}
+#rate-user{
+    position: absolute;
+    padding-top: 45px;
+    right: 16px;
+    cursor: hand;
+}
 #head{
     position: fixed;
     top: 0;
@@ -405,4 +449,16 @@ p {
     color: rgba(0, 0, 0, 0.71);
     padding: 0;
     -webkit-font-smoothing: antialiased;
+}
+.criterion-banner {
+    display: block;
+    text-align: center;
+    font-family:Roboto Light;
+    line-height: 120%;
+    -webkit-font-smoothing: antialiased;
+    color: #26a69a;
+    background-image: -webkit-linear-gradient(92deg,#26a69a,#80cbc4);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    -webkit-animation: hue 40s infinite linear;
 }

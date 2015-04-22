@@ -4,9 +4,9 @@ import models.*;
 import org.mindrot.jbcrypt.BCrypt;
 import play.Logger;
 import play.data.*;
+import play.libs.Json;
 import play.mvc.*;
 import views.html.*;
-
 import java.util.*;
 
 public class AdminPage extends Controller {
@@ -20,13 +20,14 @@ public class AdminPage extends Controller {
         response().setHeader("Cache-Control","no-cache");
         return ok(adminpage.render(users, Project.findAll(), rates,Vote.findAll(), webconfig,RateCriterion.findAll(),VoteCriterion.findAll()));
     }
-    public static Result user(){
+    public static Result user(int page){
         User _user = User.findByUserId(Long.parseLong(session("userId")));
         Logger.info("["+_user.username+"] user admin page.");
-        List<User> users = User.findAll();
+        List<User> users = User.findAllByPage(page);
         List<Project> projects = Project.findAll();
+        int num_page= User.totalPage();
         response().setHeader("Cache-Control","no-cache");
-        return ok(admin_user.render(_user,users,projects));
+        return ok(admin_user.render(_user,users,num_page,page,projects));
     }
     public static Result score(){
         User _user = User.findByUserId(Long.parseLong(session("userId")));
@@ -43,6 +44,7 @@ public class AdminPage extends Controller {
         response().setHeader("Cache-Control","no-cache");
         return ok(admin_rate.render(_user,users,rates));
     }
+
     public static Result vote(){
         User _user = User.findByUserId(Long.parseLong(session("userId")));
         Logger.info("["+_user.username+"] user admin page.");
@@ -51,6 +53,65 @@ public class AdminPage extends Controller {
         List<VoteCriterion> voteCs = VoteCriterion.findAll();
         response().setHeader("Cache-Control","no-cache");
         return ok(admin_vote.render(_user, users, votes,voteCs));
+
+    @Security.Authenticated(AdminSecured.class)
+    public static Result ratebyuserid(){
+        DynamicForm dynamicForm = new DynamicForm().bindFromRequest();
+        String id = dynamicForm.get("user_id");
+        Long _id;
+        try {
+            _id = Long.parseLong(id);
+        }catch (Exception e){
+            return ok();
+        }
+        List<Map> rate_data = new ArrayList();
+        List<Project> projects = Project.findAll();
+        List<RateCriterion> criterions = RateCriterion.findAll();
+        for(Project item : projects){
+            Map _rate = new HashMap();
+            _rate.put("projectName", item.projectName);
+            List rates = new ArrayList();
+            for(RateCriterion _item : criterions) {
+                Map<String, String> _r = new HashMap();
+                Rate rate = Rate.findByUserIdAndProjectIdAndCriteriaId(_id, item.id, _item.id);
+                String value;
+                if(rate == null){
+                    value = "0";
+                }else{
+                    value = String.valueOf(rate.score);
+                }
+                _r.put("name", _item.name);
+                _r.put("value", value);
+                rates.add(_r);
+            }
+            _rate.put("criteria", rates);
+            rate_data.add(_rate);
+        }
+        return ok(Json.toJson(rate_data));
+    }
+
+    @Security.Authenticated(AdminSecured.class)
+    public static Result searchUser(){
+        DynamicForm dynamicForm = new DynamicForm().bindFromRequest();
+        List<User> userList = User.findByKeyword(dynamicForm.get("search_keyword"));
+        List<Map<String, String>> user_data = new ArrayList();
+        for(User item : userList){
+            Map<String, String> i = new HashMap();
+            if(item.projectId == -1){
+                i.put("project", "None");
+            }else{
+                i.put("project", Project.findById(item.projectId).projectName);
+            }
+            i.put("projectId", item.projectId.toString());
+            i.put("userType", (item.idtype == User.ADMINISTRATOR) ? "Administrator" : "Normal" );
+            i.put("userIdType", String.valueOf(item.idtype));
+            i.put("username", item.username);
+            i.put("lastname", item.lastname);
+            i.put("firstname", item.firstname);
+            i.put("userid", item.id.toString());
+            user_data.add(i);
+        }
+        return ok(Json.toJson(user_data));
     }
     public static Result project(){
         User _user = User.findByUserId(Long.parseLong(session("userId")));
@@ -83,7 +144,7 @@ public class AdminPage extends Controller {
         user.save();
         Logger.info("["+_user.username+"] add new user.("+user.id+")");
         response().setHeader("Cache-Control","no-cache");
-        return redirect(routes.AdminPage.index()+"#users");
+        return redirect(routes.AdminPage.user(1));
     }
 
     @Security.Authenticated(AdminSecured.class)
@@ -120,7 +181,7 @@ public class AdminPage extends Controller {
         String[] checkedVal = map.get("id"); // get selected topics
 
         if(checkedVal == null) {
-            return redirect(routes.AdminPage.index()+"#users");
+            return redirect(routes.AdminPage.user(1));
         }
 
         for(String userId : checkedVal) {
@@ -139,7 +200,7 @@ public class AdminPage extends Controller {
             }
         }
         response().setHeader("Cache-Control","no-cache");
-        return redirect(routes.AdminPage.index()+"#users");
+        return redirect(routes.AdminPage.user(1));
     }
     @Security.Authenticated(AdminSecured.class)
     public static Result deleteRate(Long id){
@@ -200,7 +261,9 @@ public class AdminPage extends Controller {
         olduser.firstname = newuser.firstname;
         olduser.lastname = newuser.lastname;
         olduser.username = newuser.username;
-        olduser.password = BCrypt.hashpw(newuser.password, BCrypt.gensalt());
+        if(!newuser.password.equals("")) {
+            olduser.password = BCrypt.hashpw(newuser.password, BCrypt.gensalt());
+        }
         olduser.idtype = newuser.idtype;
         olduser.projectId = newuser.projectId;
         olduser.update();
@@ -215,7 +278,7 @@ public class AdminPage extends Controller {
         for(Settings item : settings){
             Settings.update(item.keyName, dynamicForm.get(item.keyName));
         }
-        response().setHeader("Cache-Control","no-cache");
+        response().setHeader("Cache-Control", "no-cache");
         return redirect(routes.AdminPage.index()+"#configs");
     }
 }

@@ -63,10 +63,8 @@ public class Settings extends Model{
             endingCalendar.setTime(dateFormat.parse(endingTimeSetting.keyValue));
             endingCalendar.setTimeZone(TimeZone.getTimeZone("Asia/Bangkok"));
         } catch (ParseException e) {
-            Logger.info("Cannot parse setting time to Calendar Object");
+            Logger.error("Cannot parse setting time to Calendar Object");
         }
-        Logger.info(calendar.getTimeZone()+"//"+endingCalendar.getTimeZone());
-        Logger.info("Start Time : "+calendar.getTime()+", End Time : "+endingCalendar.getTime());
         return calendar.compareTo(endingCalendar) > 0;
     }
 }
