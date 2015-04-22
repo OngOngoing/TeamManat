@@ -42,17 +42,18 @@ public class AdminPage extends Controller {
         List<User> users = User.findAll();
         List<Rate> rates = Rate.findAll();
         response().setHeader("Cache-Control","no-cache");
-        return ok(admin_rate.render(_user,users,rates));
+        return ok(admin_rate.render(_user, users, rates));
     }
 
-    public static Result vote(){
+    public static Result vote() {
         User _user = User.findByUserId(Long.parseLong(session("userId")));
-        Logger.info("["+_user.username+"] user admin page.");
+        Logger.info("[" + _user.username + "] user admin page.");
         List<User> users = User.findAll();
         List<Vote> votes = Vote.findAll();
         List<VoteCriterion> voteCs = VoteCriterion.findAll();
-        response().setHeader("Cache-Control","no-cache");
-        return ok(admin_vote.render(_user, users, votes,voteCs));
+        response().setHeader("Cache-Control", "no-cache");
+        return ok(admin_vote.render(_user, users, votes, voteCs));
+    }
 
     @Security.Authenticated(AdminSecured.class)
     public static Result ratebyuserid(){
