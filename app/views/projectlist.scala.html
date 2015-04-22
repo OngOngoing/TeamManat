@@ -64,16 +64,16 @@
                                 <div class="col s8 m10">
                                     <p class="app-banner">@project.projectName</p>
                                     @if(mappedRates.get(project.id) == 0) {
-                                        <p class="secondary-text">click here to rate this project</p>
+                                        <p class="secondary-text hide-on-med-and-down">click here to rate this project</p>
                                         <div class="info">NOT YET RATED</div>
                                     } @if(criteriaLeft == 1) {
-                                        <p class="secondary-text">click here to update your rate</p>
+                                        <p class="secondary-text hide-on-med-and-down">click here to update your rate</p>
                                         <div class="info">1 CRITERION LEFT</div>
                                     } @if(criteriaLeft > 1 && criteriaLeft < ratingCriteria.size) {
-                                        <p class="secondary-text">click here to update your rate</p>
+                                        <p class="secondary-text hide-on-med-and-down">click here to update your rate</p>
                                         <div class="info">@criteriaLeft CRITERIA LEFT</div>
                                     } @if(criteriaLeft == 0) {
-                                        <p class="secondary-text">click here to edit your rate</p>
+                                        <p class="secondary-text hide-on-med-and-down">click here to edit your rate</p>
                                         <div class="info">COMPLETED</div>
                                     }
                                 </div>

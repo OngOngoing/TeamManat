@@ -41,9 +41,9 @@ public class VoteController extends Controller {
         if(thisUser.idtype == User.ADMINISTRATOR || Settings.isTimeUp()) {
             List<VoteCriterion> criteria = VoteCriterion.findAll();
             List<Project> projects = Project.findAll();
-            MultiKeyMap result = Vote.summarize();
+            HashMap<VoteCriterion, List<Vote.ResultBundle>> orderedSummary = Vote.summarizeWithReverseOrder();
             HashMap<VoteCriterion, List<Vote.ResultBundle>> winnerSummary = Vote.getWinnerSummary();
-            return ok(voteresult.render(thisUser, criteria, projects, winnerSummary, result ));
+            return ok(voteresult.render(thisUser, criteria, projects, winnerSummary, orderedSummary ));
         }
         flash("error","Please wait until the voting session is closed. Sorry for the inconvenience.");
         response().setHeader("Cache-Control","no-cache");
@@ -93,11 +93,22 @@ public class VoteController extends Controller {
                 // THIS SHOULD HAS ONLY 1 RESULT
                 for(String projectId : selectedCriterion) {
                     Vote thisVote = Vote.findByCriterionAndUserId(criterion.id,userId);
+                    Project project = Project.findById(Long.parseLong(projectId));
                     if (thisVote == null) {
                         Vote.create(criterion.id, userId, Long.parseLong(projectId));
-                        Logger.info("[" + User.findByUserId(userId).username + "] vote ("+criterion.id+")"+criterion.name+", project : ("+projectId+")"+Project.findById(Long.parseLong(projectId)).projectName);
+                        if(project != null) {
+                            Logger.info("[" + User.findByUserId(userId).username + "] vote (" + criterion.id + ")" + criterion.name + ", project : (" + projectId + ")" + project.projectName);
+                        }
+                        else {
+                            Logger.info("[" + User.findByUserId(userId).username + "] vote (" + criterion.id + ")" + criterion.name + ", project : (" + projectId + ")" + "NoVote");
+                        }
                     }else {
-                        Logger.info("[" + User.findByUserId(userId).username + "] edit vote ("+criterion.id+")"+criterion.name+", project : ("+projectId+")"+Project.findById(Long.parseLong(projectId)).projectName);
+                        if(project != null) {
+                            Logger.info("[" + User.findByUserId(userId).username + "] edit vote (" + criterion.id + ")" + criterion.name + ", project : (" + projectId + ")" + project.projectName);
+                        }
+                        else {
+                            Logger.info("[" + User.findByUserId(userId).username + "] edit vote (" + criterion.id + ")" + criterion.name + ", project : (" + projectId + ")" + "NoVote");
+                        }
                         thisVote.projectId = Long.parseLong(projectId);
                         thisVote.update();
                     }

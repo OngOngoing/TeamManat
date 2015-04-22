@@ -77,8 +77,8 @@ public class Vote extends Model {
                 bundle.percent = 0;
                 if(bundle.totalVotes > 0) {
                     bundle.percent = 100.0*bundle.sum/bundle.totalVotes;
-                    bundle.roundedPercent = String.format("%.2f",bundle.percent);
                 }
+                bundle.roundedPercent = String.format("%.2f",bundle.percent);
                 bundle.project = project;
                 result.put(criterion, project, bundle);
             }
@@ -94,10 +94,13 @@ public class Vote extends Model {
             List<ResultBundle> bundleList = new ArrayList<ResultBundle>();
             for(Project project : projects) {
                 ResultBundle bundle = new ResultBundle();
-                bundle.sum = findVotesByCriterionIdAndProjectId(criterion.id,project.id).size();
+                bundle.sum = findVotesByCriterionIdAndProjectId(criterion.id, project.id).size();
                 bundle.totalVotes = findVotesByCriterionId(criterion.id).size();
-                bundle.percent = 100.0*bundle.sum/bundle.totalVotes;
                 bundle.project = project;
+                bundle.percent = 0;
+                if(bundle.totalVotes > 0) {
+                    bundle.percent = 100.0*bundle.sum/bundle.totalVotes;
+                }
                 bundle.roundedPercent = String.format("%.2f",bundle.percent);
                 bundleList.add(bundle);
             }

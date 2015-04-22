@@ -1,8 +1,7 @@
-@(user: User)(criteria: List[VoteCriterion])(projects: List[Project])(winnerSummary: Map[VoteCriterion,List[Vote.ResultBundle]],summary
-    : org.apache.commons.collections.map.MultiKeyMap)
+@(user: User)(criteria: List[VoteCriterion])(projects: List[Project])(winnerSummary: Map[VoteCriterion,List[Vote.ResultBundle]])(orderedSummary: Map[VoteCriterion,List[Vote.ResultBundle]])
 @import java.util
 @import models.Vote.ResultBundle
-@import java.math.BigInteger; var totalVotes = summary.get(criteria(0),projects(0)).asInstanceOf[Vote.ResultBundle].totalVotes
+@import java.math.BigInteger; var totalVotes = orderedSummary.get(criteria(0)).get(0).asInstanceOf[Vote.ResultBundle].totalVotes
 
 <!DOCTYPE html>
 
@@ -83,6 +82,7 @@
                 </ul>
 
                 @criteria.map { criterion =>
+                    @{totalVotes = orderedSummary.get(criterion).get(0).asInstanceOf[Vote.ResultBundle].totalVotes}
                     <div class="card-panel">
 
                         <h4 class="center-align criterion-banner">@criterion.name</h4>
@@ -97,17 +97,17 @@
 
                             <tbody>
 
-                                @projects.map { project =>
+                                @orderedSummary.get(criterion).map { orderedBundle =>
                                     <tr>
-                                        <td class="flow-text">@project.projectName</td>
+                                        <td class="flow-text">@orderedBundle.asInstanceOf[Vote.ResultBundle].project.projectName</td>
                                         <td class="flow-text">
                                             <div class="progress trigger">
-                                                <div class="determinate" style="width: @summary.get(criterion,project).asInstanceOf[Vote.ResultBundle].roundedPercent%"></div>
+                                                <div class="determinate" style="width: @orderedBundle.asInstanceOf[Vote.ResultBundle].roundedPercent%"></div>
                                             </div>
-                                            @summary.get(criterion,project).asInstanceOf[Vote.ResultBundle].roundedPercent %
+                                            @orderedBundle.asInstanceOf[Vote.ResultBundle].roundedPercent %
 
                                         </td>
-                                        <td class="flow-text">@summary.get(criterion,project).asInstanceOf[Vote.ResultBundle].sum</td>
+                                        <td class="flow-text">@orderedBundle.asInstanceOf[Vote.ResultBundle].sum</td>
                                     </tr>
                                 }
 
