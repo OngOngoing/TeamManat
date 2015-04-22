@@ -7,6 +7,146 @@
  */
 
 /* For Mobile Auto-Image Size*/
+.content-hoverable {
+    background-color: #fff;
+    -webkit-transition: background-color .3s ease-in-out;
+    -moz-transition: background-color .3s ease-in-out;
+    -o-transition: background-color .3s ease-in-out;
+    -ms-transition: background-color .3s ease-in-out;
+    transition: background-color .3s ease-in-out; }
+
+.content-hoverable:hover {
+    background-color: #f2f2f2; }
+
+
+.card-app {
+    padding: 2.5%;
+    margin: 0.5rem 0 1rem 0;
+    -webkit-border-radius: 2px;
+    -moz-border-radius: 2px;
+    border-radius: 2px;
+    background-clip: padding-box;
+    background-color: #fff;
+}
+
+.card-app .row {
+    margin-bottom:0;
+}
+
+.card-app span .card-title {
+    color: #484848;
+
+}
+
+.card-app:hover {
+    background-color: #e4e4e4;
+}
+
+
+.square {
+    margin-top: 100%;
+}
+
+.card-app .image-container {
+    overflow: hidden;
+    border-radius: 6%;
+    position: relative;
+    margin-left: 0%;
+}
+
+
+
+.card-app:hover .image-container {
+    border-r-width: 0;
+    border-color:rgba(0,0,0,0.5);
+}
+
+.crop {
+    position: absolute;
+    left: -100%;
+    right: -100%;
+    top: -100%;
+    bottom: -100%;
+    margin: auto;
+    width: auto;
+    height: auto;
+    border-radius: 10%;
+
+
+}
+
+.card-app .image-container img {
+    height:100%;
+    width:auto;
+
+    overflow: hidden;
+    box-shadow: 10px 10px 5px #f5f5f5;
+
+    display: inline-block;
+    vertical-align: middle;
+    background-clip: padding-box;
+
+
+}
+
+.card-app:hover .image-container img {
+
+    opacity: 1.0;
+    transition: opacity .25s ease-in-out;
+    -moz-transition: opacity .25s ease-in-out;
+    -webkit-transition: opacity .25s ease-in-out;
+}
+
+
+
+.app-banner {
+    display: block;
+    font-family:Roboto Light;
+    font-size:2.7rem;
+    word-wrap: break-word;
+    line-height: 20%;
+    -webkit-font-smoothing: antialiased;
+
+    -webkit-transition: all 0.25s ease-in;
+    -moz-transition: all 0.25s ease-in;
+    -o-transition: all 0.25s ease-in;
+
+
+    color: #484848;  }
+@media only screen and (max-width: 600px) {
+    .app-banner {
+        font-size: 1.5rem;
+    }
+}
+
+
+.card-app:hover .app-banner {
+    color: #353535;
+    text-shadow: 0 0 5px #fff,
+    0 0 10px #fff,
+    0 0 15px #fff,
+    0 0 20px #fff;
+}
+
+.card-app .secondary-text{
+    color: #929292;
+    fint-size:1rem;
+    line-height:30%;
+}
+.card-app .info {
+    font-size:1.2rem;
+
+    bottom:10%;
+    right:5%;
+    position:absolute;  }
+@media only screen and (max-width: 600px) {
+    .card-app .info {
+        font-size: 0.9rem;
+    }
+}
+
+
+
   span.badge.rated {
     font-weight: 300;
     font-size: 0.8rem;

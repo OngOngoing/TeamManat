@@ -47,43 +47,37 @@
                     </div>
                 </div>
             </nav>
-            <div class="container padding-nav">
-                <!-- User -->
-                <nav>
-                    <div class="nav-wrapper">
-                        <a href="#" class="brand-logo right">Score</a>
-                        <ul id="nav-mobile" class="left hide-on-med-and-down">
-                            <li><a href="@routes.AdminPage.rate()">Rates</a></li>
-                            <li><a href="@routes.AdminPage.vote()">Votes</a></li>
-                        </ul>
-                    </div>
-                    @voteCs.map { voteC =>
-                        <h2 class="col s12 animate fadeIn center trigger trigger-text">@voteC.name</h2>
-                                    <table class="hoverable centered responsive-table" >
-                                        <thead>
-                                            <tr>
-                                                <th data-field="id">ID</th>
-                                                <th data-field="criteria">Criteria</th>
-                                                <th data-field="projectId">Project</th>
-                                                <th data-field="button"></th>
-                                            </tr>
-                                        </thead>
+            <div class="container padding-nav animated fadeIn">
 
-                                        <tbody>
-                                        @votes.map { vote =>
-                                                @if(vote.criterionId == voteC.id) {
-                                                    <tr>
-                                                        <td>@User.findByUserId(vote.userId).username (ID:@vote.userId)</td>
-                                                        <td>@VoteCriterion.findById(vote.criterionId).name</td>
-                                                        <td>@Project.findById(vote.projectId).projectName</td>
-                                                        <td><a href="@routes.AdminPage.deleteVote(vote.id)" class="secondary-content"><i class="mdi-navigation-close trigger"></i></a></td>
-                                                    </tr>
-                                                }
-                                        }
-                                        </tbody>
-                                    </table>
-                    }
-                </nav>
+                <h5 class = "center-align trigger trigger-text"><i class="mdi-editor-insert-chart"></i>Voting Management</h5>
+                <div class="divider"></div>
+
+                @voteCs.map { voteC =>
+                    <h3 class="col s12 animate fadeIn center trigger trigger-text">@voteC.name</h3>
+                        <table class="hoverable centered responsive-table" >
+                            <thead>
+                                <tr>
+                                    <th data-field="id">ID</th>
+                                    <th data-field="criteria">Criteria</th>
+                                    <th data-field="projectId">Project</th>
+                                    <th data-field="button"></th>
+                                </tr>
+                            </thead>
+
+                            <tbody>
+                            @votes.map { vote =>
+                                    @if(vote.criterionId == voteC.id) {
+                                        <tr>
+                                            <td>@User.findByUserId(vote.userId).username (ID:@vote.userId)</td>
+                                            <td>@VoteCriterion.findById(vote.criterionId).name</td>
+                                            <td>@Project.findById(vote.projectId).projectName</td>
+                                            <td><a href="@routes.AdminPage.deleteVote(vote.id)" class="secondary-content"><i class="mdi-navigation-close trigger"></i></a></td>
+                                        </tr>
+                                    }
+                            }
+                            </tbody>
+                        </table>
+                }
             </div>
 
 

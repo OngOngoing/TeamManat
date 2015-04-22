@@ -47,84 +47,88 @@
                     </div>
                 </div>
             </nav>
-            <div class="container padding-nav">
+            <div class="container padding-nav animated fadeIn">
                 <!-- User -->
-                <h2 class = "trigger trigger-text">Project</h2>
+                <h2 class = "center-align trigger trigger-text ">Project Management</h2>
                 <div class ="section">
 
-                        <!-- Modal Trigger -->
+                    <!-- Modal Trigger -->
                     <div class="row center">
                         <a class="waves-effect waves-light btn-large modal-trigger trigger" id="addProjectButton" href="#addProjectModal"><i class="mdi-content-add right"></i>
                             Add Project</a>
 
                     </div>
 
-                        <!-- SHOW ALL PROJECT -->
+                    <!-- SHOW ALL PROJECT -->
+
                     <div class="row">
                         @projects.map { project =>
-                            <div class="col s12 m6">
-                                <div class="card">
-                                    <div class="card-image waves-effect waves-block waves-light">
-                                        <img class="activator responsive-img" src="@ProjectImage.getUrlDefaultImage(project.id)"/>
+                            <div class="col s12">
+                                <a href="@routes.EditProject.index(project.id)">
+                                    <div class="card-app hoverable waves-effect waves-block z-depth-1">
+                                        <div class="row">
+                                            <div class="col s4 m2">
+                                                <div class="image-container">
+                                                    <div class="square">
+                                                        <img src="@ProjectImage.getUrlDefaultImage(project.id)" alt="" class="crop">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col s8 m10">
+                                                <p class="app-banner">@project.projectName</p>
+                                                <div class="info">ID : @project.id</div>
+                                            </div>
+                                        </div>
                                     </div>
-                                    <div class="card-content">
-                                        <span class="card-title activator grey-text text-darken-4">@project.projectName <i class="mdi-navigation-more-vert right"></i></span>
-                                        <p><a href="@routes.EditProject.index(project.id)">Edit this project</a></p>
-                                    </div>
-                                    <div class="card-reveal">
-                                        <span class="card-title grey-text text-darken-4">
-                                            [ID : @project.id] @project.projectName<i class="mdi-navigation-close right"></i></span>
-                                        <p>@project.projectDescription</p>
-                                    </div>
-                                </div>
+                                </a>
                             </div>
                         }
                     </div>
                 </div>
-                <div id="addProjectModal" class="modal modal-fixed-footer">
-                    <form class="col s12" action="@routes.AdminPage.addProject()" method="post">
-                        <div class="modal-content">
-                            <h4>Add Project</h4>
-
-                            <div class="row">
-                                <div class="input-field col s12">
-                                    <i class="mdi-action-account-circle prefix"></i>
-                                    <input id="icon_prefix" name="projectName" type="text" class="validate" required>
-                                    <label for="icon_prefix">Project Name</label>
-                                </div>
-                            </div>
-
-                            <div class="row">
-                                <div class="file-field input-field">
-                                    <input class="file-path validate" type="text"/>
-                                    <div class="btn">
-                                        <span>Upload</span>
-                                        <input type="file" />
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="row">
-                                <div class="input-field col s12">
-                                    <i class="mdi-editor-mode-edit prefix"></i>
-                                    <textarea id="project_description" name="projectDescription" class="materialize-textarea" required></textarea>
-                                    <label for="project_description">Description</label>
-                                </div>
-                            </div>
-
-                        </div>
-                        <div class="modal-footer">
-                            <a href="#" class="waves-effect waves-green btn-flat modal-action modal-close">Cancel</a>
-                            <button class="btn waves-effect waves-light" type="submit" name="action">Add
-                                <i class="mdi-content-send right"></i>
-                            </button>
-                        </div>
-                    </form>
-
-                </div>
-
             </div>
 
+
+            <div id="addProjectModal" class="modal modal-fixed-footer">
+                <form class="col s12" action="@routes.AdminPage.addProject()" method="post">
+                    <div class="modal-content">
+                        <h4>Add Project</h4>
+
+                        <div class="row">
+                            <div class="input-field col s12">
+                                <i class="mdi-action-account-circle prefix"></i>
+                                <input id="icon_prefix" name="projectName" type="text" class="validate" required>
+                                <label for="icon_prefix">Project Name</label>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="file-field input-field">
+                                <input class="file-path validate" type="text"/>
+                                <div class="btn">
+                                    <span>Upload</span>
+                                    <input type="file" />
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="input-field col s12">
+                                <i class="mdi-editor-mode-edit prefix"></i>
+                                <textarea id="project_description" name="projectDescription" class="materialize-textarea" required></textarea>
+                                <label for="project_description">Description</label>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="modal-footer">
+                        <a href="#" class="waves-effect waves-green btn-flat modal-action modal-close">Cancel</a>
+                        <button class="btn waves-effect waves-light" type="submit" name="action">Add
+                            <i class="mdi-content-send right"></i>
+                        </button>
+                    </div>
+                </form>
+
+            </div>
 
 
             <div class="fixed-action-btn animated bounceInUp" style="bottom : 45 px ; right : 40 px ;">

@@ -47,19 +47,30 @@
                     </div>
                 </div>
             </nav>
-            <div class="container padding-nav">
-                <!-- User -->
-                <nav>
-                    <div class="nav-wrapper trigger">
-                        <a href="#" class="brand-logo right ">Score</a>
-                        <ul id="nav-mobile" class="left hide-on-med-and-down ">
-                            <li><a href="@routes.AdminPage.rate()">Rates</a></li>
-                            <li><a href="@routes.AdminPage.vote()">Votes</a></li>
-                        </ul>
-                    </div>
-                </nav>
-            </div>
+            <div class="container animated fadeIn padding-nav">
+                <!-- NAVIGATOR -->
 
+                <div class="row">
+                    <div class="col s12 m6">
+                        <a href="@routes.AdminPage.rate()" class="waves-effect waves-block content-hoverable">
+                            <div class="center promo promo-example">
+                                <i class="trigger-text trigger mdi-action-grade"></i>
+                                <p class="promo-caption">Rate</p>
+                                <p class="light center">Show rating detail of all users and projects. You can also be able to delete the rate in this page.</p>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="col s12 m6">
+                        <a href="@routes.AdminPage.vote()" class="waves-effect waves-block content-hoverable">
+                            <div class="center promo promo-example">
+                                <i class="trigger-text trigger mdi-editor-insert-chart"></i>
+                                <p class="promo-caption">Vote</p>
+                                <p class="light center">Show voting detail of all users, criteria and projects. You can also be able to delete the vote in this page.</p>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
 
 
             <div class="fixed-action-btn animated bounceInUp" style="bottom : 45 px ; right : 40 px ;">

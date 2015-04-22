@@ -47,41 +47,33 @@
                     </div>
                 </div>
             </nav>
-            <div class="container padding-nav">
+            <div class="container padding-nav animated fadeIn">
                 <!-- User -->
-                <nav>
-                    <div class="nav-wrapper">
-                        <a href="#" class="brand-logo right">Score</a>
-                        <ul id="nav-mobile" class="left hide-on-med-and-down">
-                            <li><a href="@routes.AdminPage.rate()">Rates</a></li>
-                            <li><a href="@routes.AdminPage.vote()">Votes</a></li>
-                        </ul>
-                    </div>
-                    <table class="hoverable centered responsive-table" >
-                        <thead>
-                            <tr>
-                                <th data-field="id">ID</th>
-                                <th data-field="criteria">Criteria</th>
-                                <th data-field="projectId">Project</th>
-                                <th data-field="score">Score</th>
-                                <th data-field="button"></th>
-                            </tr>
-                        </thead>
+                <h2 class = "center-align trigger trigger-text">Rating Management</h2>
+                <table class="hoverable centered responsive-table" >
+                    <thead>
+                        <tr>
+                            <th data-field="id">ID</th>
+                            <th data-field="criteria">Criteria</th>
+                            <th data-field="projectId">Project</th>
+                            <th data-field="score">Score</th>
+                            <th data-field="button"></th>
+                        </tr>
+                    </thead>
 
-                        <tbody>
-                        @rates.map { rate =>
-                            <tr>
-                                <td>@User.findByUserId(rate.userId).username (ID:@rate.userId)</td>
-                                <td>@RateCriterion.findById(rate.criteriaId).name</td>
-                                <td>@Project.findById(rate.projectId).projectName</td>
-                                <td>@rate.score</td>
-                                <td><a href="@routes.AdminPage.deleteRate(rate.id)" class="secondary-content"><i class="mdi-navigation-close trigger"></i></a></td>
-                            </tr>
+                    <tbody>
+                    @rates.map { rate =>
+                        <tr>
+                            <td>@User.findByUserId(rate.userId).username (ID:@rate.userId)</td>
+                            <td>@RateCriterion.findById(rate.criteriaId).name</td>
+                            <td>@Project.findById(rate.projectId).projectName</td>
+                            <td>@rate.score</td>
+                            <td><a href="@routes.AdminPage.deleteRate(rate.id)" class="secondary-content"><i class="mdi-navigation-close trigger"></i></a></td>
+                        </tr>
 
-                        }
-                        </tbody>
-                    </table>
-                </nav>
+                    }
+                    </tbody>
+                </table>
             </div>
 
 
