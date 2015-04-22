@@ -1,4 +1,4 @@
-@(user :User)(users :List[User])(votes :List[Vote])
+@(user :User)(users :List[User])(votes :List[Vote])(voteCs :List[VoteCriterion])
     <html>
         <head>
             <title>Exceed Vote</title>
@@ -57,17 +57,32 @@
                             <li><a href="@routes.AdminPage.vote()">Votes</a></li>
                         </ul>
                     </div>
-                    <ul class="collection">
-                    @votes.map { vote =>
-                        <li class="collection-item avatar">
-                            <i class="mdi-action-description circle teal lighten-1 trigger"></i>
-                            <span class="title teal-text lighten-1 trigger">Vote ID : @vote.id</span>
-                            <p>UserId @vote.userId vote ProjectId @vote.projectId <br>
-                            </p>
-                            <a href="@routes.AdminPage.deleteVote(vote.id)" class="secondary-content"><i class="mdi-navigation-close trigger"></i></a>
-                        </li>
+                    @voteCs.map { voteC =>
+                        <h2 class="col s12 animate fadeIn center trigger trigger-text">@voteC.name</h2>
+                                    <table class="hoverable centered responsive-table" >
+                                        <thead>
+                                            <tr>
+                                                <th data-field="id">ID</th>
+                                                <th data-field="criteria">Criteria</th>
+                                                <th data-field="projectId">Project</th>
+                                                <th data-field="button"></th>
+                                            </tr>
+                                        </thead>
+
+                                        <tbody>
+                                        @votes.map { vote =>
+                                                @if(vote.criterionId == voteC.id) {
+                                                    <tr>
+                                                        <td>@User.findByUserId(vote.userId).username (ID:@vote.userId)</td>
+                                                        <td>@RateCriterion.findById(vote.criterionId).name</td>
+                                                        <td>@Project.findById(vote.projectId).projectName</td>
+                                                        <td><a href="@routes.AdminPage.deleteVote(vote.id)" class="secondary-content"><i class="mdi-navigation-close trigger"></i></a></td>
+                                                    </tr>
+                                                }
+                                        }
+                                        </tbody>
+                                    </table>
                     }
-                    </ul>
                 </nav>
             </div>
 

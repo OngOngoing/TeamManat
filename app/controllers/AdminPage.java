@@ -48,8 +48,9 @@ public class AdminPage extends Controller {
         Logger.info("["+_user.username+"] user admin page.");
         List<User> users = User.findAll();
         List<Vote> votes = Vote.findAll();
+        List<VoteCriterion> voteCs = VoteCriterion.findAll();
         response().setHeader("Cache-Control","no-cache");
-        return ok(admin_vote.render(_user, users, votes));
+        return ok(admin_vote.render(_user, users, votes,voteCs));
     }
     public static Result project(){
         User _user = User.findByUserId(Long.parseLong(session("userId")));

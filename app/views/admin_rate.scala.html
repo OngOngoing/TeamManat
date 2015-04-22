@@ -57,18 +57,30 @@
                             <li><a href="@routes.AdminPage.vote()">Votes</a></li>
                         </ul>
                     </div>
-                    <ul class="collection">
-                    @rates.map { rate =>
-                        <li class="collection-item avatar">
-                            <i class="mdi-action-description circle teal lighten-1 trigger"></i>
-                            <span class="title teal-text lighten-1 trigger">Rate ID : @rate.id</span>
-                            <p>UserId @rate.userId rate ProjectId @rate.projectId <br>
-                                score = @rate.score
-                            </p>
-                            <a href="@routes.AdminPage.deleteRate(rate.id)" class="secondary-content"><i class="mdi-navigation-close trigger"></i></a>
-                        </li>
-                    }
-                    </ul>
+                    <table class="hoverable centered responsive-table" >
+                        <thead>
+                            <tr>
+                                <th data-field="id">ID</th>
+                                <th data-field="criteria">Criteria</th>
+                                <th data-field="projectId">Project</th>
+                                <th data-field="score">Score</th>
+                                <th data-field="button"></th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                        @rates.map { rate =>
+                            <tr>
+                                <td>@User.findByUserId(rate.userId).username (ID:@rate.userId)</td>
+                                <td>@RateCriterion.findById(rate.criteriaId).name</td>
+                                <td>@Project.findById(rate.projectId).projectName</td>
+                                <td>@rate.score</td>
+                                <td><a href="@routes.AdminPage.deleteRate(rate.id)" class="secondary-content"><i class="mdi-navigation-close trigger"></i></a></td>
+                            </tr>
+
+                        }
+                        </tbody>
+                    </table>
                 </nav>
             </div>
 
