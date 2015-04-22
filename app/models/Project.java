@@ -37,6 +37,13 @@ public class Project extends Model
     public static Finder<Long, Project> find = new Finder<Long, Project>(Long.class, Project.class);
 
     public static Project findById(Long projectId){
+        if(projectId == -1) {
+            Project dummyProject = new Project();
+            dummyProject.id = projectId;
+            dummyProject.projectName = "No Vote";
+            dummyProject.projectDescription = "";
+            return dummyProject;
+        }
         return find.byId(projectId);
     }
 

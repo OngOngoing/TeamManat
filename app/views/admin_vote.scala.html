@@ -74,7 +74,7 @@
                                                 @if(vote.criterionId == voteC.id) {
                                                     <tr>
                                                         <td>@User.findByUserId(vote.userId).username (ID:@vote.userId)</td>
-                                                        <td>@RateCriterion.findById(vote.criterionId).name</td>
+                                                        <td>@VoteCriterion.findById(vote.criterionId).name</td>
                                                         <td>@Project.findById(vote.projectId).projectName</td>
                                                         <td><a href="@routes.AdminPage.deleteVote(vote.id)" class="secondary-content"><i class="mdi-navigation-close trigger"></i></a></td>
                                                     </tr>

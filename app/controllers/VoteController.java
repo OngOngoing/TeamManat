@@ -68,7 +68,7 @@ public class VoteController extends Controller {
                 // THIS SHOULD HAS ONLY 1 RESULT
                 for(String projectId : selectedCriterion) {
                     Vote.create(criterion.id,userId,Long.parseLong(projectId));
-                    Logger.info("[" + User.findByUserId(userId).username + "] vote ("+criterion.id+")"+criterion.name+", project : ("+projectId+")"+Project.findById(Long.parseLong(projectId)));
+                    Logger.info("[" + User.findByUserId(userId).username + "] vote ("+criterion.id+")"+criterion.name+", project : ("+projectId+")"+Project.findById(Long.parseLong(projectId)).projectName);
                 }
             }
         }
@@ -92,23 +92,12 @@ public class VoteController extends Controller {
                 String[] selectedCriterion = map.get("criterionId" + criterion.id); // get selected topics
                 // THIS SHOULD HAS ONLY 1 RESULT
                 for(String projectId : selectedCriterion) {
-                    Vote thisVote = Vote.findByCriterionAndUserId(criterion.id,userId);
-                    Project project = Project.findById(Long.parseLong(projectId));
+                    Vote thisVote = Vote.findByCriterionAndUserId(criterion.id, userId);
                     if (thisVote == null) {
                         Vote.create(criterion.id, userId, Long.parseLong(projectId));
-                        if(project != null) {
-                            Logger.info("[" + User.findByUserId(userId).username + "] vote (" + criterion.id + ")" + criterion.name + ", project : (" + projectId + ")" + project.projectName);
-                        }
-                        else {
-                            Logger.info("[" + User.findByUserId(userId).username + "] vote (" + criterion.id + ")" + criterion.name + ", project : (" + projectId + ")" + "NoVote");
-                        }
+                        Logger.info("[" + User.findByUserId(userId).username + "] vote (" + criterion.id + ")" + criterion.name + ", project : (" + projectId + ")" + Project.findById(Long.parseLong(projectId)).projectName);
                     }else {
-                        if(project != null) {
-                            Logger.info("[" + User.findByUserId(userId).username + "] edit vote (" + criterion.id + ")" + criterion.name + ", project : (" + projectId + ")" + project.projectName);
-                        }
-                        else {
-                            Logger.info("[" + User.findByUserId(userId).username + "] edit vote (" + criterion.id + ")" + criterion.name + ", project : (" + projectId + ")" + "NoVote");
-                        }
+                        Logger.info("[" + User.findByUserId(userId).username + "] edit vote (" + criterion.id + ")" + criterion.name + ", project : (" + projectId + ")" + Project.findById(Long.parseLong(projectId)).projectName);
                         thisVote.projectId = Long.parseLong(projectId);
                         thisVote.update();
                     }
