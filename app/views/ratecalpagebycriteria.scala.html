@@ -1,4 +1,4 @@
-@(user: User)(projects: List[Project])(criteria: List[RateCriterion])(comments: List[Comment])(result: List[ArrayList[String]])
+@(user: User)(criteria :List[RateCriterion])(result : List[List[Map[String, String]]])
     @import java.math.BigInteger; var index = 0; var index2 = 0;
     <html>
         <head>
@@ -44,73 +44,41 @@
                         <a class = "btn btn-large trigger " href="@routes.RateCalculator.index()">Project</a>
                     </div>
                 </div>
-                <ul class="section animated fadeIn">
-                @result.zipWithIndex.map { case (r, index) =>
-                <li class= "card-panel">
-                    <h5 class ="trigger trigger-text"><i class="mdi-action-stars small"></i> @projects.get(index).projectName</h5>
-                    <div class="section animated fadeIn">
-                        <table class = "centered hoverable">
-                            <thead>
-                                <tr>
-                                    <th class ="trigger trigger-text" data-field="cname">CriteriaName</th>
-                                    <th class ="trigger trigger-text" data-field="score">Score</th>
-                                </tr>
-                            </thead>
-                            <tbody >
-                            @r.zipWithIndex.map { case (score, index2) =>
-                            <tr>
-                                <td> @if(index2 < r.size() - 1) {
-                                    @criteria.get(index2).name
-                                } else {
-                                    <p class = "trigger trigger-text"><B>Total</B></p>
-                                }
-                                </td>
-                                <td>
-                                @if(index2 == r.size() - 1) {
-                                    <p class = "trigger trigger-text"><B>@score</B></p>
-                                } else {
-                                    @score
-                                }
-                            </td>
-                            </tr>
-                            }
-                            </tbody>
-                        </table>
-                        <ul class="collapsible" data-collapsible="Expandable">
-                            <li>
-                                <div class="collapsible-header trigger trigger-text" ><i class="mdi-communication-comment"></i>
-                                    Comments</div>
-                                <div class="collapsible-body ">
-                                    <ul class="collapsible" data-collapsible="accordion">
-                                    @if(Comment.findListByProjectId(projects.get(index).id).size == 0) {
-                                        <p><I>No comment</I></p>
-                                    } else {
-                                        @comments.map { comment =>
-                                            @if(comment.projectId == projects.get(index).id) {
-                                                <li>
-                                                    <div class="collapsible-header "><i class="mdi-action-face-unlock"></i>@User.findName(comment.userId) </div>
-                                                    <div class="collapsible-body ">
-                                                        <div class = "row">
-                                                            <div class = "col s12 center">
-                                                                <p class="" >@comment.comment</p>
-                                                            </div>
-                                                        </div>
-                                                        <div class ="divider "></div>
-                                                    </div>
-                                                </li>
-                                            }
-                                        }
+                    <ul class="section animated fadeIn">
+                        @result.zipWithIndex.map { case (r, index) =>
+                            <li class ="card-panel">
+                                <h4 class = "trigger trigger-text"><i class="mdi-action-receipt"></i>@criteria.get(index).name</h4>
+                                <div class ="row">
+                                    <table class = "centered hoverable">
+                                        <thead>
+                                            <tr>
+                                                <th class ="trigger trigger-text" data-field="cname">Project Name</th>
+                                                <th class ="trigger trigger-text" data-field="score">Score</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody >
+                                    @r.zipWithIndex.map{case (score, index2) =>
+                                            <tr>
+                                                <td>
+                                                    @if(index2 == 0){
+                                                       <p><i class = "amber-text small mdi-action-grade"></i>@score.get("projectName")</p>
+                                                    }else {
+                                                    <p>@score.get("projectName")</p>
+                                                }
+                                                    
+                                                </td>
+                                                <td>
+                                                    <p>@score.get("score")</p>
+                                                </td>
+                                            </tr>
+                                        
                                     }
-                                    </ul>
+                                        </tbody>
+                                    </table>
                                 </div>
                             </li>
-                        </ul>
-                    </div>
-                </li>
-                }
-                </ul>
-                <br>
-
+                        }
+                    </ul>
             </div>
 
 

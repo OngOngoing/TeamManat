@@ -38,6 +38,7 @@ GET         /rateproject/:id                          controllers.RateProject.in
 POST        /rateproject                              controllers.RateProject.addRate()
 POST        /rateproject/edit                         controllers.RateProject.editRate()
 GET         /ratecalculator                           controllers.RateCalculator.index()
+GET 		/ratecalculator/bycriteria				  controllers.RateCalculator.rateSortByCriteria()
 
 GET         /editproject/:proId                       controllers.EditProject.index(proId:Long)
 POST        /editproject/:proId                       controllers.EditProject.edit(proId:Long)
