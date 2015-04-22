@@ -1,4 +1,4 @@
-@(form: Form[Application.Login])
+@(username:String)
 
 <!DOCTYPE html>
 
@@ -26,7 +26,7 @@
                         <div class="row">
                             <form action="./login" method="post">
                                 <div class="form-group">
-                                    <input name="username" type="text" class="form-control" placeholder="Username" value="@form("username").value">
+                                    <input name="username" type="text" class="form-control" placeholder="Username" value="@username">
                                     <input name="password" type="password" class="form-control" placeholder="Password">
                                 </div>
                                 <div class="row">
@@ -39,12 +39,12 @@
                             </form>
                         </div>
                         <div class="row" style="padding-top: 20px;">
-                            @if(form.hasGlobalErrors) {
+                            @if(flash.contains("error")) {
                                 <div class="row">
                                     <div class="alert alert-danger" role="alert">
                                         <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
                                         <span class="sr-only">Error:</span>
-                                        @form.globalError.message
+                                        @flash.get("error")
                                     </div>
                                 </div>
                             }

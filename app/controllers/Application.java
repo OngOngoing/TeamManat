@@ -19,36 +19,26 @@ public class Application extends Controller {
         if(user != null) {
             return redirect(routes.ProjectList.index());
         }else{
-            return ok(login.render(Form.form(Login.class)));
-        }
-    }
-
-    public static class Login {
-
-        public String username;
-        public String password;
-
-        public String validate() {
-            if(User.authenticate(username, password) == null) {
-                return "Invalid user or password";
-            }
-            return null;
+            return ok(login.render(""));
         }
     }
 
     public static Result authenticate() {
-        Form<Login> loginForm = Form.form(Login.class).bindFromRequest();
-        if (loginForm.hasErrors()) {
-            Logger.error("Login failed. : "+loginForm.globalError().message());
-            return badRequest(login.render(loginForm));
-        } else {
-            Logger.info("["+loginForm.get().username+"] login success.");
-            session().clear();
-            User currentUser = User.findByUsername(loginForm.get().username);
-            session("userId", String.valueOf(currentUser.id));
-            session("projectOwnerId", String.valueOf(currentUser.projectId));
-            return redirect(routes.ProjectList.index());
+        DynamicForm dynamicForm = new DynamicForm().bindFromRequest();
+        String username = dynamicForm.get("username");
+        String password = dynamicForm.get("password");
+        User user = User.authenticate(username, password);
+        if (user == null) {
+            Logger.error("Login failed : cannot found user.");
+            flash("error", "Username and password are incorrect.");
+            return badRequest(login.render(username));
         }
+        Logger.info("["+username+"] login success.");
+        session().clear();
+        User currentUser = User.findByUsername(username);
+        session("userId", String.valueOf(currentUser.id));
+        session("projectOwnerId", String.valueOf(currentUser.projectId));
+        return redirect(routes.ProjectList.index());
     }
 
     public static Result logout() {
@@ -59,7 +49,7 @@ public class Application extends Controller {
     }
 
     public static Result login(){
-        return ok(login.render(Form.form(Login.class)));
+        return ok(login.render(""));
     }
 
     public static Result getImgs(Long proId){
