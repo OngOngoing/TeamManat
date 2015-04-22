@@ -28,6 +28,13 @@ public class AdminPage extends Controller {
         response().setHeader("Cache-Control","no-cache");
         return ok(admin_user.render(_user,users,projects));
     }
+    public static Result score(){
+        User _user = User.findByUserId(Long.parseLong(session("userId")));
+        Logger.info("["+_user.username+"] user admin page.");
+        List<User> users = User.findAll();
+        response().setHeader("Cache-Control","no-cache");
+        return ok(admin_score.render(_user,users));
+    }
     public static Result rate(){
         User _user = User.findByUserId(Long.parseLong(session("userId")));
         Logger.info("["+_user.username+"] user admin page.");

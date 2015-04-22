@@ -20,9 +20,7 @@
                                 </li>
                                 <li><a href="@routes.AdminPage.user()"><i class="medium mdi-action-account-box left"></i>User</a>
                                 </li>
-                                <li><a href="@routes.AdminPage.rate()"><i class="medium mdi-action-grade left"></i>Rate</a>
-                                </li>
-                                <li><a href="@routes.AdminPage.vote()"><i class="medium mdi-action-stars left"></i>Vote</a>
+                                <li><a href="@routes.AdminPage.score()"><i class="medium mdi-action-grade left"></i>Score</a>
                                 </li>
                                 <li><a href="@routes.AdminPage.project()"><i class="medium mdi-action-class left"></i>Project</a>
                                 </li>
@@ -36,9 +34,7 @@
                                 </li>
                                 <li><a href="@routes.AdminPage.user()"><i class="medium mdi-action-account-box left"></i>User</a>
                                 </li>
-                                <li><a href="@routes.AdminPage.rate()"><i class="medium mdi-action-grade left"></i>Rate</a>
-                                </li>
-                                <li><a href="@routes.AdminPage.vote()"><i class="medium mdi-action-stars left"></i>Vote</a>
+                                <li><a href="@routes.AdminPage.score()"><i class="medium mdi-action-grade left"></i>Score</a>
                                 </li>
                                 <li><a href="@routes.AdminPage.project()"><i class="medium mdi-action-class left"></i>Project</a>
                                 </li>
@@ -53,8 +49,15 @@
             </nav>
             <div class="container padding-nav">
                 <!-- User -->
-                <h2 class = "trigger trigger-text">Rate</h2>
-                <ul class="collection">
+                <nav>
+                    <div class="nav-wrapper">
+                        <a href="#" class="brand-logo right">Score</a>
+                        <ul id="nav-mobile" class="left hide-on-med-and-down">
+                            <li><a href="@routes.AdminPage.rate()">Rates</a></li>
+                            <li><a href="@routes.AdminPage.vote()">Votes</a></li>
+                        </ul>
+                    </div>
+                    <ul class="collection">
                     @rates.map { rate =>
                         <li class="collection-item avatar">
                             <i class="mdi-action-description circle teal lighten-1 trigger"></i>
@@ -65,7 +68,8 @@
                             <a href="@routes.AdminPage.deleteRate(rate.id)" class="secondary-content"><i class="mdi-navigation-close trigger"></i></a>
                         </li>
                     }
-                </ul>
+                    </ul>
+                </nav>
             </div>
 
 

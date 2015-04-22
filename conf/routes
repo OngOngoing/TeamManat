@@ -11,6 +11,7 @@ GET         /adminpage                                controllers.AdminPage.inde
 GET         /adminpage/users                          controllers.AdminPage.user()
 GET         /adminpage/rates                          controllers.AdminPage.rate()
 GET         /adminpage/votes                          controllers.AdminPage.vote()
+GET         /adminpage/scores                         controllers.AdminPage.score()
 GET         /adminpage/projects                       controllers.AdminPage.project()
 GET         /adminpage/criteria                       controllers.AdminPage.criteria()
 GET         /adminpage/systemConfig                   controllers.AdminPage.systemConfig()
