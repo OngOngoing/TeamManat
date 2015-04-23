@@ -23,6 +23,9 @@
     src:url("../font/roboto/Roboto-Bold.woff2") format("woff2"),url("../font/roboto/Roboto-Bold.woff") format("woff"),url("../font/roboto/Roboto-Bold.ttf") format("truetype");
     font-weight:700;
 }
+body{
+    overflow-y: scroll;
+}
 .padding-nav {
   padding-top: 70px;
 }
