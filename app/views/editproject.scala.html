@@ -1,4 +1,4 @@
-@(currentUser: User)(currentProject: Project)(members: List[User])(images: List[ProjectImage])(history: String)
+@(currentUser: User)(currentProject: Project)(members: List[User])(images: List[Image])(history: String)
 @num = @{
     0
 }
@@ -39,14 +39,14 @@
             <div class="card-panel grey lighten-5 z-depth-1">
                 <h4 class="trigger-text trigger pageBanner hide-on-small-only">Project Detail</h4>
                 <h4 class="trigger-text trigger pageBanner center-align hide-on-med-and-up">Project Detail</h4>
-                <form action="@routes.EditProject.edit(currentProject.id, history)" method="post">
+                <form action="@routes.EditProject.edit(currentProject.getId, history)" method="post">
                     <div class="input-field col s12 hide-on-small-only">
                         <i class="mdi-action-account-circle prefix"></i>
-                        <input id="projectName" type="text" class="validate" value="@currentProject.projectName" name="projectName">
+                        <input id="projectName" type="text" class="validate" value="@currentProject.getProjectName" name="projectName">
                         <label for="projectName">Project Name</label>
                     </div>
                     <div class="input-field col s12 hide-on-med-and-up">
-                        <input id="projectName" type="text" class="validate" value="@currentProject.projectName" name="projectName">
+                        <input id="projectName" type="text" class="validate" value="@currentProject.getProjectName" name="projectName">
                         <label for="projectName">Project Name</label>
                     </div>
                     <div class="input-field col s12 hide-on-small-only">
@@ -68,7 +68,7 @@
                             <a onClick="$ ( '#project_description' ).mdBulletList ( )" class="btn-flat waves-effect waves-light btn-markdown"><i class="mdi-editor-format-list-bulleted"></i></a>
                         </div>
                         <i class="mdi-editor-mode-edit prefix hide-on-small-only"></i>
-                        <textarea id="project_description" placeholder="Enter project descrption..." name="description" class="materialize-textarea" length="2000" maxlength="2000" style="resize : none ; overflow-y : scroll ; height : 190 px ; max-height : 190 px ;" required>@currentProject.projectDescription</textarea>
+                        <textarea id="project_description" placeholder="Enter project descrption..." name="description" class="materialize-textarea" length="2000" maxlength="2000" style="resize : none ; overflow-y : scroll ; height : 190 px ; max-height : 190 px ;" required>@currentProject.getProjectDescription</textarea>
                         <label for="project_description">Description</label>
                     </div>
                     <div class="input-field col s12 hide-on-med-and-up">
@@ -89,7 +89,7 @@
                             <a onClick="$ ( '#project_description-s' ).mdNumberedList ( )" class="btn-flat waves-effect waves-light btn-markdown"><i class="mdi-editor-format-list-numbered"></i></a>
                             <a onClick="$ ( '#project_description-s' ).mdBulletList ( )" class="btn-flat waves-effect waves-light btn-markdown"><i class="mdi-editor-format-list-bulleted"></i></a>
                         </div>
-                        <textarea id="project_description-s" placeholder="Enter project descrption..." name="description" class="materialize-textarea" length="2000" maxlength="2000" style="resize : none ; overflow-y : scroll ; height : 190 px ; max-height : 190 px ;" required>@currentProject.projectDescription</textarea>
+                        <textarea id="project_description-s" placeholder="Enter project descrption..." name="description" class="materialize-textarea" length="2000" maxlength="2000" style="resize : none ; overflow-y : scroll ; height : 190 px ; max-height : 190 px ;" required>@currentProject.getProjectDescription</textarea>
                         <label for="project_description-s">Description</label>
                     </div>
                     <div class="row">
@@ -98,7 +98,7 @@
                                 <i class="mdi-content-send right"></i>
                             </button>
                             <h5 class="hide-on-med-and-up"></h5>
-                            @if(currentUser.idtype == User.ADMINISTRATOR) {
+                            @if(currentUser.getIdtype == User.ADMINISTRATOR) {
                                 <a class="btn waves-effect waves-light red darken-2 modal-trigger" href="#confirmDelete" >
                                     Delete
                                     <i class="mdi-content-clear right"></i>
@@ -122,10 +122,10 @@
                         <tbody>
                             @members.map { member =>
                                 <tr>
-                                    <td><code class=" language-markup">@member.firstname</code></td>
-                                    <td><code class=" language-markup">@member.lastname</code></td>
-                                    <td><code class=" language-markup">@if(currentUser.id != member.id) {
-                                        <a class="btn-floating waves-effect waves-light red" href="@routes.EditProject.removeUser(member.id,currentProject.id, history)"><i class="mdi-content-clear"></i></a>
+                                    <td><code class=" language-markup">@member.getFirstname</code></td>
+                                    <td><code class=" language-markup">@member.getLastname</code></td>
+                                    <td><code class=" language-markup">@if(currentUser.getId !=  member.getId) {
+                                        <a class="btn-floating waves-effect waves-light red" href="@routes.EditProject.removeUser(member.getId,currentProject.getId, history)"><i class="mdi-content-clear"></i></a>
                                     } else {
                                         <div class="btn-floating waves-effect waves-light disabled"><i class="mdi-content-clear"></i></div>
                                     }
@@ -139,7 +139,7 @@
                                     <td><code class=" language-markup"></code></td>
                                 </tr>
                             }
-                            <tr><form action="@routes.EditProject.addMember(currentProject.id, history)#member" method="post">
+                            <tr><form action="@routes.EditProject.addMember(currentProject.getId, history)#member" method="post">
                                 <td>
                                     <code class=" language-markup"><h5>Add new member</h5>
                                         <blockquote>
@@ -183,14 +183,14 @@
                                     @members.map { member =>
                                         <tr>
                                             <td>
-                                                @if(currentUser.id != member.id) {
-                                                    <a class="btn-floating waves-effect waves-light red" href="@routes.EditProject.removeUser(member.id, currentProject.id, history)"><i class="mdi-content-clear"></i></a>
+                                                @if(currentUser.getId != member.getId) {
+                                                    <a class="btn-floating waves-effect waves-light red" href="@routes.EditProject.removeUser(member.getId, currentProject.getId, history)"><i class="mdi-content-clear"></i></a>
                                                 } else {
                                                     <div class="btn-floating waves-effect waves-light disabled"><i class="mdi-content-clear"></i></div>
                                                 }
                                             </td>
                                             <td>
-                                                @member.firstname <br/> @member.lastname
+                                                @member.getFirstname <br/> @member.getLastname
                                             </td>
                                         </tr>
                                     }
@@ -203,7 +203,7 @@
                             </table>
                         </div>
                     </div>
-                    <form action="@routes.EditProject.addMember(currentProject.id , history)" method="post">
+                    <form action="@routes.EditProject.addMember(currentProject.getId , history)" method="post">
                         <div class="row">
                             <div class="col s12">
                                 <div class="input-field">
@@ -234,20 +234,20 @@
                         <h4 class="trigger-text trigger pageBanner hide-on-small-only">Project Screen Shot</h4>
                         <h5 class="trigger-text trigger pageBanner hide-on-med-and-up center-align">
                             Project Screen Shot</h5>
-                        <div class="upload" proId="@currentProject.id" ></div>
+                        <div class="upload" proId="@currentProject.getId" ></div>
                         <div id="process-bar"></div>
                     </div>
                 </div>
                 <div class="row" id="upload">
                     <div class="slider">
-                        <ul class="slides" id="show-slides" projectId="@currentProject.id" history="@history">
+                        <ul class="slides" id="show-slides" projectId="@currentProject.getId" history="@history">
                         @images.map { img =>
                             <li>
-                                <img src="@routes.Application.getImg(img.Id)" style="background-size: auto 450px;background-position-y: 0;background-repeat: no-repeat;">
+                                <img src="@routes.Application.getImg(img.getId)" style="background-size: auto 450px;background-position-y: 0;background-repeat: no-repeat;">
                                 <div class="caption right-align">
                                     <div class="row">
-                                    @if(img.imgType != ProjectImage.DEFAULT) {
-                                        <a class="waves-effect waves-light btn blue" href="@routes.Application.setImgDefault(img.Id,currentProject.id,history)#upload"><i class="mdi-toggle-check-box right"></i>
+                                    @if(img.getImgType != Image.DEFAULT) {
+                                        <a class="waves-effect waves-light btn blue" href="@routes.Application.setImgDefault(img.getId,currentProject.getId,history)#upload"><i class="mdi-toggle-check-box right"></i>
                                             Set Default</a>
                                     }else{
                                         <a class="waves-effect waves-light btn disabled"><i class="mdi-toggle-check-box right"></i>
@@ -255,7 +255,7 @@
                                     }
                                     </div>
                                     <div class="row">
-                                        <a class="waves-effect waves-light btn red" href="@routes.Application.deleteImg(img.Id,currentProject.id,history)#upload"><i class="mdi-navigation-close right"></i>
+                                        <a class="waves-effect waves-light btn red" href="@routes.Application.deleteImg(img.getId,currentProject.getId,history)#upload"><i class="mdi-navigation-close right"></i>
                                             Delete</a>
                                     </div>
                                 </div>
@@ -279,7 +279,7 @@
             </a>
             <ul>
                 <li><a class="btn-floating red " href="@routes.Application.logout()"><i class="large mdi-action-settings-power"></i></a></li>
-                @if(currentUser.idtype == User.ADMINISTRATOR){
+                @if(currentUser.getIdtype == User.ADMINISTRATOR){
                         <li><a class="btn-floating yellow derken-1" href="@routes.AdminPage.index()"><i class="large mdi-action-settings waves-effect waves-light"></i></a></li>
                     }
             </ul>
@@ -293,7 +293,7 @@
             <div class="modal-footer">
                 <a href="#!" class=" modal-action modal-close waves-effect waves-green btn-flat">Cancel</a>
                 <form action="@routes.EditProject.deleteProject()" method="post">
-                    <input type="hidden" value="@currentProject.id" name="projectId" />
+                    <input type="hidden" value="@currentProject.getId" name="projectId" />
                     <button href="@routes.EditProject.deleteProject()" class=" modal-action modal-close waves-effect waves-green btn-flat" type="submit">
                         Delete</button>
                 </form>

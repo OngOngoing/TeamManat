@@ -11,19 +11,26 @@ create table comment (
   constraint pk_comment primary key (id))
 ;
 
+create table groups (
+  id                        bigint auto_increment not null,
+  user_id                   bigint,
+  project_id                bigint,
+  constraint pk_groups primary key (id))
+;
+
+create table image (
+  id                        bigint auto_increment not null,
+  project_id                bigint,
+  data                      longblob,
+  img_type                  integer,
+  constraint pk_image primary key (id))
+;
+
 create table project (
   id                        bigint auto_increment not null,
   project_name              varchar(255),
   project_description       varchar(255),
   constraint pk_project primary key (id))
-;
-
-create table project_image (
-  id                        bigint auto_increment not null,
-  project_id                bigint,
-  data                      longblob,
-  img_type                  integer,
-  constraint pk_project_image primary key (id))
 ;
 
 create table rate (
@@ -42,32 +49,31 @@ create table rate_criterion (
   constraint pk_rate_criterion primary key (id))
 ;
 
-create table settings (
+create table setting (
   id                        bigint auto_increment not null,
   key_name                  varchar(255),
   key_value                 varchar(255),
   id_type                   integer,
   description               varchar(255),
-  constraint uq_settings_key_name unique (key_name),
-  constraint pk_settings primary key (id))
+  constraint uq_setting_key_name unique (key_name),
+  constraint pk_setting primary key (id))
 ;
 
 create table user_account (
   id                        bigint auto_increment not null,
-  username                  varchar(255),
+  username                  varchar(255) not null,
   password                  varchar(255) not null,
   firstname                 varchar(255) not null,
   lastname                  varchar(255),
   idtype                    integer,
-  project_id                bigint,
   constraint uq_user_account_username unique (username),
   constraint pk_user_account primary key (id))
 ;
 
 create table vote (
   id                        bigint auto_increment not null,
-  criterion_id              bigint,
   user_id                   bigint,
+  criteria_id               bigint,
   project_id                bigint,
   constraint pk_vote primary key (id))
 ;
@@ -79,6 +85,28 @@ create table vote_criterion (
   constraint pk_vote_criterion primary key (id))
 ;
 
+alter table comment add constraint fk_comment_user_1 foreign key (user_id) references user_account (id) on delete restrict on update restrict;
+create index ix_comment_user_1 on comment (user_id);
+alter table comment add constraint fk_comment_project_2 foreign key (project_id) references project (id) on delete restrict on update restrict;
+create index ix_comment_project_2 on comment (project_id);
+alter table groups add constraint fk_groups_user_3 foreign key (user_id) references user_account (id) on delete restrict on update restrict;
+create index ix_groups_user_3 on groups (user_id);
+alter table groups add constraint fk_groups_project_4 foreign key (project_id) references project (id) on delete restrict on update restrict;
+create index ix_groups_project_4 on groups (project_id);
+alter table image add constraint fk_image_project_5 foreign key (project_id) references project (id) on delete restrict on update restrict;
+create index ix_image_project_5 on image (project_id);
+alter table rate add constraint fk_rate_user_6 foreign key (user_id) references user_account (id) on delete restrict on update restrict;
+create index ix_rate_user_6 on rate (user_id);
+alter table rate add constraint fk_rate_project_7 foreign key (project_id) references project (id) on delete restrict on update restrict;
+create index ix_rate_project_7 on rate (project_id);
+alter table rate add constraint fk_rate_criterion_8 foreign key (criteria_id) references rate_criterion (id) on delete restrict on update restrict;
+create index ix_rate_criterion_8 on rate (criteria_id);
+alter table vote add constraint fk_vote_user_9 foreign key (user_id) references user_account (id) on delete restrict on update restrict;
+create index ix_vote_user_9 on vote (user_id);
+alter table vote add constraint fk_vote_criterion_10 foreign key (criteria_id) references vote_criterion (id) on delete restrict on update restrict;
+create index ix_vote_criterion_10 on vote (criteria_id);
+alter table vote add constraint fk_vote_project_11 foreign key (project_id) references project (id) on delete restrict on update restrict;
+create index ix_vote_project_11 on vote (project_id);
 
 
 
@@ -88,15 +116,17 @@ SET FOREIGN_KEY_CHECKS=0;
 
 drop table comment;
 
-drop table project;
+drop table groups;
 
-drop table project_image;
+drop table image;
+
+drop table project;
 
 drop table rate;
 
 drop table rate_criterion;
 
-drop table settings;
+drop table setting;
 
 drop table user_account;
 

@@ -8,39 +8,78 @@ import java.util.List;
 @Entity
 public class Comment extends Model {
     @Id
-    public long id;
-    @Required
-    public Long userId;
-    public Long projectId;
-    public String comment;
+    private long id;
 
-    public static Comment create( Long userId , Long projectId, String comment)
-    {
-        Comment _comment = findByUserIdAndProjectId(userId, projectId);
+    @Required
+    @ManyToOne
+    @JoinColumn(name = "user_id", referencedColumnName = "id")
+    private User user;
+
+    @Required
+    @ManyToOne
+    @JoinColumn(name = "project_id", referencedColumnName = "id")
+    private Project project;
+
+    private String comment;
+
+    private static Finder<Long, Comment> find = new Finder<Long, Comment>(Long.class, Comment.class);
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public Project getProject() {
+        return project;
+    }
+
+    public void setProject(Project project) {
+        this.project = project;
+    }
+
+    public String getComment() {
+        return comment;
+    }
+
+    public void setComment(String comment) {
+        this.comment = comment;
+    }
+
+    public static Comment create(User user, Project project, String comment) {
+        Comment _comment = findByUserAndProject(user, project);
         if(_comment != null){
             _comment.comment = comment;
             _comment.update();
-        }else {
-            Comment thisComment = new Comment();
-            thisComment.userId = userId;
-            thisComment.projectId = projectId;
-            thisComment.comment = comment;
-            thisComment.save();
+            return _comment;
         }
-        return findByUserIdAndProjectId(userId, projectId);
+        Comment thisComment = new Comment();
+        thisComment.user = user;
+        thisComment.project = project;
+        thisComment.comment = comment;
+        thisComment.save();
+        return thisComment;
     }
-
-    private static Finder<Long, Comment> find = new Finder<Long, Comment>(Long.class, Comment.class);
 
     public static List<Comment> findAll(){
         return find.all();
     }
 
-    public static List<Comment> findListByProjectId(Long projectId){
-        return find.where().eq("projectId",projectId).findList();
+    public static List<Comment> findListByProject(Project project){
+        return find.where().eq("project",project).findList();
     }
 
-    public static Comment findByUserIdAndProjectId(long userId, long projectId){
-        return find.where().eq("userId", userId).eq("projectId",projectId).findUnique();
+    public static Comment findByUserAndProject(User user, Project project){
+        return find.where().eq("user", user).eq("project",project).findUnique();
     }
 }

@@ -59,14 +59,14 @@
 
                                 @criteria.map { criterion =>
                                     <tr>
-                                        <td class="flow-text">@criterion.name</td>
+                                        <td class="flow-text">@criterion.getName</td>
                                         <td class="flow-text">
                                         @if(winnerSummary.get(criterion).size > 1) {
                                             @winnerSummary.get(criterion).map { eachWinner =>
-                                                <div>@eachWinner.project.projectName</div>
+                                                <div>@eachWinner.project.getProjectName</div>
                                             }
                                         } else {
-                                            @winnerSummary.get(criterion)(0).project.projectName
+                                            @winnerSummary.get(criterion)(0).project.getProjectName
                                             }
                                         </td>
                                         <td class="flow-text">@winnerSummary.get(criterion)(0).sum</td>
@@ -85,7 +85,7 @@
                     @{totalVotes = orderedSummary.get(criterion).get(0).asInstanceOf[Vote.ResultBundle].totalVotes}
                     <div class="card-panel">
 
-                        <h4 class="center-align criterion-banner">@criterion.name</h4>
+                        <h4 class="center-align criterion-banner">@criterion.getName</h4>
                         <table class="hoverable centered">
                             <thead>
                                 <tr>
@@ -99,7 +99,7 @@
 
                                 @orderedSummary.get(criterion).map { orderedBundle =>
                                     <tr>
-                                        <td class="flow-text">@orderedBundle.asInstanceOf[Vote.ResultBundle].project.projectName</td>
+                                        <td class="flow-text">@orderedBundle.asInstanceOf[Vote.ResultBundle].project.getProjectName</td>
                                         <td class="flow-text">
                                             <div class="progress trigger">
                                                 <div class="determinate" style="width: @orderedBundle.asInstanceOf[Vote.ResultBundle].roundedPercent%"></div>
@@ -127,7 +127,7 @@
             </a>
             <ul>
                 <li><a class="btn-floating red " href="@routes.Application.logout()"><i class="large mdi-action-settings-power"></i></a></li>
-                @if(user.idtype == User.ADMINISTRATOR){
+                @if(user.getIdtype == User.ADMINISTRATOR){
                     <li><a class="btn-floating yellow derken-1" href="@routes.AdminPage.index()"><i class="large mdi-action-settings waves-effect waves-light"></i></a></li>
                 }
             </ul>

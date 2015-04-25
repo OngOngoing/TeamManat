@@ -1,4 +1,4 @@
-@(user :User)(configs: List[Settings])
+@(user :User)(configs: List[Setting])
     <html>
         <head>
             <title>Exceed Vote</title>
@@ -10,7 +10,7 @@
             <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
         </head>
         <body>
-           <nav class="teal lighten-1 trigger large" id="head">
+            <nav class="teal lighten-1 trigger large" id="head">
                 <div class="container">
                     <div class="nav-wrapper">
                         <a class="brand-logo"><span class="glyphicon glyphicon-ice-lolly-tasted logo" aria-hidden="true"></span></a>
@@ -58,7 +58,6 @@
                 <!-- User -->
                 <h2 class = "center-align trigger trigger-text">System Configuration</h2>
                 <div class ="section">
-
                         <!-- Modal Trigger -->
                     <div class="row collection">
                         @helper.form(action = routes.AdminPage.saveSetting()) {
@@ -67,28 +66,28 @@
                                     <div class="col s12">
                                         <div class="row">
                                             <div class="input-field col s6" style="text-align : center">
-                                                <input id="keyName" type="text" class="validate" value="@config.keyName">
+                                                <input id="keyName" type="text" class="validate" value="@config.getKeyName">
                                                 <label for="keyname">Key Name</label>
                                             </div>
-                                            @if(config.idType == Settings.TYPE_DATE) {
+                                            @if(config.getIdType == Setting.TYPE_DATE) {
                                                 <div class="input-field col s6" style="text-align : center">
-                                                    <input id="keyName" type="text" class="validate datePicker" value="@config.keyValue" name="@config.keyName">
+                                                    <input id="keyName" type="text" class="validate datePicker" value="@config.getKeyValue" name="@config.getKeyName">
                                                     <label for="keyName">Key Value</label>
                                                 </div>
-                                            }
-                                            @if(config.idType == Settings.TYPE_INTEGER) {
+                                             }
+                                            @if(config.getIdType == Setting.TYPE_INTEGER) {
                                                 <div class="input-field col s6" style="text-align : center">
-                                                    <input id="keyValue" type="text" class="validate" value="@config.keyValue" name="@config.keyName">
+                                                    <input id="keyValue" type="text" class="validate" value="@config.getKeyValue" name="@config.getKeyName">
                                                     <label for="keyValue">Key Value</label>
                                                 </div>
                                             }
-                                            @if(config.idType == Settings.TYPE_STRING) {
+                                            @if(config.getIdType == Setting.TYPE_STRING) {
                                                 <div class="input-field col s6" style="text-align : center">
-                                                    <input id="keyValue" type="text" class="validate" value="@config.keyValue" name="@config.keyName">
+                                                    <input id="keyValue" type="text" class="validate" value="@config.getKeyValue" name="@config.getKeyName">
                                                     <label for="keyValue">Key Value</label>
                                                 </div>
                                             }
-                                            @if(config.idType == Settings.TYPE_BOOLEAN) {
+                                            @if(config.getIdType == Setting.TYPE_BOOLEAN) {
                                                 <div class="switch col s6" style="text-align : center">
                                                     <label>
                                                         Off
@@ -100,7 +99,7 @@
                                                 </div>
                                             }
                                         </div>
-                                        <div class="row" style="text-align : right">@config.description</div>
+                                        <div class="row" style="text-align : right">@config.getDescription</div>
                                     </div>
                                 </div>
                             }
@@ -114,10 +113,7 @@
                         </div>
                         }
                     </div>
-                </div>
             </div>
-
-
 
             <div class="fixed-action-btn animated bounceInUp" style="bottom : 45 px ; right : 40 px ;">
                 <a class="btn-floating btn-large trigger " href="@routes.AdminPage.index()"><i class="large mdi-action-settings waves-effect waves-light"></i></a>

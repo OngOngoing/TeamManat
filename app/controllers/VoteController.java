@@ -1,7 +1,6 @@
 package controllers;
 
 import models.*;
-import org.apache.commons.collections.map.MultiKeyMap;
 import play.Logger;
 import play.mvc.Controller;
 import play.mvc.Result;
@@ -9,10 +8,6 @@ import play.mvc.Security;
 import views.html.votepage;
 import views.html.voteresult;
 
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -25,8 +20,8 @@ public class VoteController extends Controller {
     public static Result index() {
         Long userId = Long.parseLong(session().get("userId"));
         User thisUser = User.findByUserId(userId);
-        Map<VoteCriterion,Long> voteMapping = Vote.getVoteMappingByUserId(userId);
-        boolean isTimeUp = Settings.isTimeUp();
+        Map<VoteCriterion,Long> voteMapping = Vote.getVoteMappingByUser(thisUser);
+        boolean isTimeUp = Setting.isTimeUp();
         if(isTimeUp) {
             flash("time_up","Time is already up. Sorry for the inconvenience.");
         }
@@ -38,7 +33,7 @@ public class VoteController extends Controller {
     public static Result showResult() {
         Long userId = Long.parseLong(session().get("userId"));
         User thisUser = User.findByUserId(userId);
-        if(thisUser.idtype == User.ADMINISTRATOR || Settings.isTimeUp()) {
+        if(thisUser.getIdtype() == User.ADMINISTRATOR || Setting.isTimeUp()) {
             List<VoteCriterion> criteria = VoteCriterion.findAll();
             List<Project> projects = Project.findAll();
             HashMap<VoteCriterion, List<Vote.ResultBundle>> orderedSummary = Vote.summarizeWithReverseOrder();
@@ -53,7 +48,8 @@ public class VoteController extends Controller {
     public static Result addVote() {
         List<VoteCriterion> criteria = VoteCriterion.findAll();
         Long userId = Long.parseLong(session().get("userId"));
-        if(Settings.isTimeUp()) {
+        User user = User.findByUserId(userId);
+        if(Setting.isTimeUp()) {
             flash("time_up","Time is already up. Sorry for the inconvenience.");
             return redirect(routes.VoteController.index());
         }
@@ -63,12 +59,17 @@ public class VoteController extends Controller {
             return redirect(routes.VoteController.index());
         }
         for(VoteCriterion criterion : criteria) {
-            if(map.get("criterionId"+criterion.id) != null) {
-                String[] selectedCriterion = map.get("criterionId" + criterion.id); // get selected topics
+            if(map.get("criterionId"+criterion.getId()) != null) {
+                String[] selectedCriterion = map.get("criterionId" + criterion.getId()); // get selected topics
                 // THIS SHOULD HAS ONLY 1 RESULT
                 for(String projectId : selectedCriterion) {
-                    Vote.create(criterion.id,userId,Long.parseLong(projectId));
-                    Logger.info("[" + User.findByUserId(userId).username + "] vote ("+criterion.id+")"+criterion.name+", project : ("+projectId+")"+Project.findById(Long.parseLong(projectId)).projectName);
+                    Project project = Project.findById(Long.parseLong(projectId));
+                    Vote.create(criterion, user, project);
+                    if (project == null) {
+                        Logger.info("[" + User.findByUserId(userId).getUsername() + "] vote (" + criterion.getId() + ")" + criterion.getName() + ", no vote");
+                    }else{
+                        Logger.info("[" + User.findByUserId(userId).getUsername() + "] vote (" + criterion.getId() + ")" + criterion.getName() + ", project : (" + projectId + ")" + project.getProjectName());
+                    }
                 }
             }
         }
@@ -80,25 +81,30 @@ public class VoteController extends Controller {
     public static Result editVote() {
         List<VoteCriterion> criteria = VoteCriterion.findAll();
         Long userId = Long.parseLong(session().get("userId"));
-
-        if(Settings.isTimeUp()) {
+        User user = User.findByUserId(userId);
+        if(Setting.isTimeUp()) {
             flash("time_up","Time is already up. Sorry for the inconvenience.");
             return redirect(routes.VoteController.index());
         }
 
         Map<String, String[]> map = request().body().asFormUrlEncoded();
         for(VoteCriterion criterion : criteria) {
-            if(map.get("criterionId"+criterion.id) != null) {
-                String[] selectedCriterion = map.get("criterionId" + criterion.id); // get selected topics
+            if(map.get("criterionId"+criterion.getId()) != null) {
+                String[] selectedCriterion = map.get("criterionId" + criterion.getId()); // get selected topics
                 // THIS SHOULD HAS ONLY 1 RESULT
                 for(String projectId : selectedCriterion) {
-                    Vote thisVote = Vote.findByCriterionAndUserId(criterion.id, userId);
+                    Vote thisVote = Vote.findByCriterionAndUser(criterion, user);
+                    Project project =Project.findById(Long.parseLong(projectId));
                     if (thisVote == null) {
-                        Vote.create(criterion.id, userId, Long.parseLong(projectId));
-                        Logger.info("[" + User.findByUserId(userId).username + "] vote (" + criterion.id + ")" + criterion.name + ", project : (" + projectId + ")" + Project.findById(Long.parseLong(projectId)).projectName);
+                        Vote.create(criterion, user, project);
+                        Logger.info("[" + user.getUsername() + "] vote (" + criterion.getId() + ")" + criterion.getName() + ", project : (" + projectId + ")" + project.getProjectName());
                     }else {
-                        Logger.info("[" + User.findByUserId(userId).username + "] edit vote (" + criterion.id + ")" + criterion.name + ", project : (" + projectId + ")" + Project.findById(Long.parseLong(projectId)).projectName);
-                        thisVote.projectId = Long.parseLong(projectId);
+                        if(project == null){
+                            Logger.info("[" + User.findByUserId(userId).getUsername() + "] edit vote (" + criterion.getId() + ")" + criterion.getName() + ", to no vote");
+                        }else {
+                            Logger.info("[" + User.findByUserId(userId).getUsername() + "] edit vote (" + criterion.getId() + ")" + criterion.getName() + ", project : (" + projectId + ")" + project.getProjectName());
+                        }
+                        thisVote.setProject(project);
                         thisVote.update();
                     }
                 }
@@ -108,7 +114,4 @@ public class VoteController extends Controller {
         response().setHeader("Cache-Control","no-cache");
         return redirect(routes.VoteController.index());
     }
-
-
-
 }

@@ -13,7 +13,7 @@ public class AdminSecured extends Security.Authenticator {
         User currentUser = User.findByUserId(userId);
         if(currentUser == null)
             return null;
-        if(currentUser.idtype != User.ADMINISTRATOR)
+        if(currentUser.getIdtype() != User.ADMINISTRATOR)
             return null;
         return ctx.session().get("userId");
     }

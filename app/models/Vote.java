@@ -12,66 +12,116 @@ import java.util.*;
 @Entity
 public class Vote extends Model {
     @Id
-    public long id;
-    @Required
-    public long criterionId;
-    public Long userId;
-    public Long projectId;
+    private long id;
 
-    public static Vote create(long criterionId , Long userId , Long projectId)
-    {
-        Vote thisVote = findByCriterionAndUserId(criterionId,userId);
+    @ManyToOne
+    @JoinColumn(name = "user_id", referencedColumnName = "id")
+    private User user;
+
+    @ManyToOne
+    @JoinColumn(name = "criteria_id", referencedColumnName = "id")
+    private VoteCriterion criterion;
+
+    @ManyToOne
+    @JoinColumn(name = "project_id", referencedColumnName = "id")
+    private Project project;
+
+    private static Finder<Long, Vote> find = new Finder<Long, Vote>(Long.class, Vote.class);
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public VoteCriterion getCriterion() {
+        return criterion;
+    }
+
+    public void setCriterion(VoteCriterion criterion) {
+        this.criterion = criterion;
+    }
+
+    public Project getProject() {
+        return project;
+    }
+
+    public void setProject(Project project) {
+        this.project = project;
+    }
+
+    public static Vote create(VoteCriterion criterion, User user, Project project) {
+        Vote thisVote = findByCriterionAndUser(criterion, user);
         if(thisVote == null) {
             Vote vote = new Vote();
-            vote.criterionId = criterionId;
-            vote.userId = userId;
-            vote.projectId = projectId;
+            vote.criterion = criterion;
+            vote.user = user;
+            vote.project = project;
             vote.save();
             return vote;
         }
-        thisVote.projectId = projectId;
+        thisVote.project = project;
         thisVote.update();
         return thisVote;
     }
 
-    public static Finder<Long, Vote> find = new Finder<Long, Vote>(Long.class, Vote.class);
-
-    public static List<Vote> findByUserId(long userId){
-        return find.where().eq("userId", userId).findList();
+    public static List<Vote> findByUser(User user){
+        return find.where().eq("user", user).findList();
     }
 
-    public static Vote findByCriterionAndUserId(Long criterionId, Long userId) {
-        return find.where().eq("criterionId", criterionId).eq("userId", userId).findUnique();
+    public static Vote findByCriterionAndUser(VoteCriterion criterion, User user) {
+        return find.where().eq("criterion", criterion).eq("user", user).findUnique();
     }
-    public static Vote findById(Long voteid){return find.byId(voteid);}
+
+    public static Vote findById(Long voteId){return find.byId(voteId);}
+
     public static List<Vote> findAll(){
         return find.all();
     }
 
-    public static List<Vote> findVotesByCriterionId(Long criterionId) {
-        return find.where().eq("criterionId", criterionId).findList();
+    public static List<Vote> findVotesByCriterion(VoteCriterion criterion) {
+        return find.where().eq("criterion", criterion).findList();
     }
-    public static List<Vote> findByProjectId(Long projectId){
-        return find.where().eq("projectId", projectId).findList();
+
+    public static List<Vote> findByProject(Project project){
+        return find.where().eq("project", project).findList();
     }
+
     public static int totalPage(){
         return find.where().findPagingList(5).getTotalPageCount();
     }
-    public static List<Vote> findVotesByCriterionIdAndProjectId(Long criterionId, Long projectId) {
-        return find.where().eq("criterionId", criterionId).eq("projectId", projectId).findList();
+
+    public static List<Vote> findVotesByCriterionAndProject(VoteCriterion criterion, Project project) {
+        return find.where().eq("criterion", criterion).eq("project", project).findList();
     }
 
-    public static Map<VoteCriterion,Long> getVoteMappingByUserId(Long userId) {
+    public static Map<VoteCriterion,Long> getVoteMappingByUser(User user) {
         Map<VoteCriterion,Long> result = new HashMap<VoteCriterion,Long>();
-        List<Vote> votes = findByUserId(userId);
+        List<Vote> votes = findByUser(user);
         for(Vote vote : votes) {
-            result.put(VoteCriterion.findById(vote.criterionId), vote.projectId);
+            if(vote.getProject() == null){
+                result.put(VoteCriterion.findById(vote.getCriterion().getId()), Long.parseLong("-1"));
+            }else{
+                result.put(VoteCriterion.findById(vote.getCriterion().getId()), vote.getProject().getId());
+            }
         }
         return result;
     }
+
     public static List<Vote> findAllByPage(int page){
         return find.where().findPagingList(5).getPage(--page).getList();
     }
+
     public static MultiKeyMap summarize() {
         MultiKeyMap result = new MultiKeyMap();
         List<VoteCriterion> criteria = VoteCriterion.findAll();
@@ -79,8 +129,8 @@ public class Vote extends Model {
         for(VoteCriterion criterion : criteria) {
             for(Project project : projects) {
                 ResultBundle bundle = new ResultBundle();
-                bundle.sum = findVotesByCriterionIdAndProjectId(criterion.id,project.id).size();
-                bundle.totalVotes = findVotesByCriterionId(criterion.id).size();
+                bundle.sum = findVotesByCriterionAndProject(criterion, project).size();
+                bundle.totalVotes = findVotesByCriterion(criterion).size();
                 bundle.percent = 0;
                 if(bundle.totalVotes > 0) {
                     bundle.percent = 100.0*bundle.sum/bundle.totalVotes;
@@ -101,8 +151,8 @@ public class Vote extends Model {
             List<ResultBundle> bundleList = new ArrayList<ResultBundle>();
             for(Project project : projects) {
                 ResultBundle bundle = new ResultBundle();
-                bundle.sum = findVotesByCriterionIdAndProjectId(criterion.id, project.id).size();
-                bundle.totalVotes = findVotesByCriterionId(criterion.id).size();
+                bundle.sum = findVotesByCriterionAndProject(criterion, project).size();
+                bundle.totalVotes = findVotesByCriterion(criterion).size();
                 bundle.project = project;
                 bundle.percent = 0;
                 if(bundle.totalVotes > 0) {
@@ -136,7 +186,6 @@ public class Vote extends Model {
         }
         return result;
     }
-
     public static class ResultBundle {
         public int sum;
         public double percent;
@@ -144,6 +193,5 @@ public class Vote extends Model {
         public int totalVotes;
         public Project project;
     }
-
 }
 

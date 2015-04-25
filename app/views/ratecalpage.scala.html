@@ -1,5 +1,5 @@
 @(user: User)(projects: List[Project])(criteria: List[RateCriterion])(comments: List[Comment])(result: List[ArrayList[String]])
-    @import java.math.BigInteger; var index = 0; var index2 = 0;
+@import java.math.BigInteger; var index = 0; var index2 = 0;
     <html>
         <head>
             <title>Exceed Vote</title>
@@ -36,7 +36,7 @@
                     </div>
                 </div>
             </nav>
-            <div class="container padding-nav">
+            <div class="container padding-nav"">
                 <div class="animated fadeInDown">
                     <h1 class = "lobby-banner trigger trigger-text">Rating Result</h1>
                     <div class ="center">
@@ -47,7 +47,7 @@
                 <ul class="section animated fadeIn">
                 @result.zipWithIndex.map { case (r, index) =>
                 <li class= "card-panel">
-                    <h5 class ="trigger trigger-text"><i class="mdi-action-stars small"></i> @projects.get(index).projectName</h5>
+                    <h5 class ="trigger trigger-text"><i class="mdi-action-stars small"></i> @projects.get(index).getProjectName</h5>
                     <div class="section animated fadeIn">
                         <table class = "centered hoverable">
                             <thead>
@@ -60,7 +60,7 @@
                             @r.zipWithIndex.map { case (score, index2) =>
                             <tr>
                                 <td> @if(index2 < r.size() - 1) {
-                                    @criteria.get(index2).name
+                                    @criteria.get(index2).getName
                                 } else {
                                     <p class = "trigger trigger-text"><B>Total</B></p>
                                 }
@@ -82,17 +82,17 @@
                                     Comments</div>
                                 <div class="collapsible-body ">
                                     <ul class="collapsible" data-collapsible="accordion">
-                                    @if(Comment.findListByProjectId(projects.get(index).id).size == 0) {
+                                    @if(Comment.findListByProject(projects.get(index)).size == 0) {
                                         <p><I>No comment</I></p>
                                     } else {
                                         @comments.map { comment =>
-                                            @if(comment.projectId == projects.get(index).id) {
+                                            @if(comment.getProject.getId == projects.get(index).getId) {
                                                 <li>
-                                                    <div class="collapsible-header "><i class="mdi-action-face-unlock"></i>@User.findName(comment.userId) </div>
+                                                    <div class="collapsible-header "><i class="mdi-action-face-unlock"></i>@User.findName(comment.getUser) </div>
                                                     <div class="collapsible-body ">
                                                         <div class = "row">
                                                             <div class = "col s12 center">
-                                                                <p class="" >@comment.comment</p>
+                                                                <p class="" >@comment.getComment</p>
                                                             </div>
                                                         </div>
                                                         <div class ="divider "></div>
@@ -120,7 +120,7 @@
                 </a>
                 <ul>
                     <li><a class="btn-floating red " href="@routes.Application.logout()"><i class="large mdi-action-settings-power"></i></a></li>
-                    @if(user.idtype == User.ADMINISTRATOR) {
+                    @if(user.getIdtype == User.ADMINISTRATOR) {
                         <li><a class="btn-floating yellow derken-1" href="@routes.AdminPage.index()"><i class="large mdi-action-settings waves-effect waves-light"></i></a></li>
                     }
                 </ul>

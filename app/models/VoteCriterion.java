@@ -8,11 +8,48 @@ import java.util.List;
 @Entity
 public class VoteCriterion extends Model {
     @Id
-    public Long id;
+    private Long id;
 
     @Required
-    public String name;
-    public String description;
+    private String name;
+    private String description;
+
+    @OneToMany(cascade = CascadeType.REMOVE, mappedBy = "criterion")
+    private List<Vote> votes;
+
+    private static Finder<Long, VoteCriterion> find = new Finder<Long, VoteCriterion>(Long.class, VoteCriterion.class);
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public List<Vote> getVotes() {
+        return votes;
+    }
+
+    public void setVotes(List<Vote> votes) {
+        this.votes = votes;
+    }
 
     public static VoteCriterion create(String name, String description) {
         VoteCriterion thisCriterion = findByCriterionName(name);
@@ -28,8 +65,6 @@ public class VoteCriterion extends Model {
         return thisCriterion;
     }
 
-    public static Finder<Long, VoteCriterion> find = new Finder<Long, VoteCriterion>(Long.class, VoteCriterion.class);
-
     public static VoteCriterion findByCriterionName(String name) {
         return find.where().eq("name",name).findUnique();
     }
@@ -38,7 +73,7 @@ public class VoteCriterion extends Model {
         return find.all();
     }
 
-    public static VoteCriterion findById(Long id) {
-        return find.byId(id);
+    public static VoteCriterion findById(Long c) {
+        return find.byId(c);
     }
 }

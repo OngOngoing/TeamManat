@@ -150,10 +150,10 @@
                                         <tbody>
                                             @rateCs.map { rateC =>
                                                 <tr>
-                                                    <td>@rateC.id</td>
-                                                    <td>@rateC.name</td>
-                                                    <td class="hide-on-small-only">@rateC.description</td>
-                                                    <td><a href="@routes.AdminPage.deleteRateCriterion(rateC.id)" class="secondary-content"><i class="mdi-navigation-close trigger"></i></a></td>
+                                                    <td>@rateC.getId</td>
+                                                    <td>@rateC.getName</td>
+                                                    <td class="hide-on-small-only">@rateC.getDescription</td>
+                                                    <td><a href="@routes.AdminPage.deleteRateCriterion(rateC.getId)" class="secondary-content"><i class="mdi-navigation-close trigger"></i></a></td>
                                                 </tr>
 
                                             }
@@ -183,10 +183,10 @@
                                         <tbody>
                                         @voteCs.map { voteC =>
                                             <tr>
-                                                <td>@voteC.id</td>
-                                                <td>@voteC.name</td>
-                                                <td class="hide-on-small-only">@voteC.description</td>
-                                                <td><a href="@routes.AdminPage.deleteVoteCriterion(voteC.id)" class="secondary-content"><i class="mdi-navigation-close trigger"></i></a></td>
+                                                <td>@voteC.getId</td>
+                                                <td>@voteC.getName</td>
+                                                <td class="hide-on-small-only">@voteC.getDescription</td>
+                                                <td><a href="@routes.AdminPage.deleteVoteCriterion(voteC.getId)" class="secondary-content"><i class="mdi-navigation-close trigger"></i></a></td>
                                             </tr>
                                         }
                                         </tbody>

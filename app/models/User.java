@@ -8,38 +8,98 @@ import org.mindrot.jbcrypt.BCrypt;
 import play.data.validation.Constraints.Required;
 import play.db.ebean.*;
 import java.util.List;
+import java.util.ArrayList;
 @Entity
 @Table(name = "user_account")
 public class User extends Model {
     public final static int GUEST_USER = 1, NORMAL_USER = 2, ADMINISTRATOR = 3;
     @Id
-    public Long id;
+    private Long id;
 
+    @NotNull
     @Required
     @Column(unique=true)
-    public String username;
+    private String username;
 
     @NotNull
     @Required
-    public String password;
+    private String password;
 
     @NotNull
     @Required
-    public String firstname;
-    public String lastname;
-    public int idtype; // 0 - Administrator : 1 - Normal Users
-    public Long projectId; // -1 - None Project // Project Owner
+    private String firstname;
+    private String lastname;
+    private int idtype;
 
-    public User(String username, String password, String fname,String lname, int type, Long project){
-        this.firstname = fname;
-        this.lastname = lname;
-        this.username = username;
-        this.password =  BCrypt.hashpw(password, BCrypt.gensalt());
-        this.idtype = type;
-        this.projectId = project;
-    }
+    @OneToMany(cascade = CascadeType.REMOVE, mappedBy = "user")
+    private List<Comment> comments;
+
+    @OneToMany(cascade = CascadeType.REMOVE, mappedBy = "user")
+    private List<Vote> votes;
+
+    @OneToMany(cascade = CascadeType.REMOVE, mappedBy = "user")
+    private List<Rate> rates;
+
+    @OneToOne(cascade = CascadeType.REMOVE, mappedBy = "user")
+    private Groups group;
 
     private static Finder<Long, User> find = new Finder<Long, User>(Long.class, User.class);
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public String getFirstname() {
+        return firstname;
+    }
+
+    public void setFirstname(String firstname) {
+        this.firstname = firstname;
+    }
+
+    public String getLastname() {
+        return lastname;
+    }
+
+    public void setLastname(String lastname) {
+        this.lastname = lastname;
+    }
+
+    public int getIdtype() {
+        return idtype;
+    }
+
+    public void setIdtype(int idtype) {
+        this.idtype = idtype;
+    }
+
+    public Groups getGroup() {
+        return group;
+    }
+
+    public void setGroup(Groups _group) {
+        group = _group;
+    }
 
     public static User authenticate(String username, String password){
         User _login = User.find.where().eq("username", username).findUnique();
@@ -51,19 +111,23 @@ public class User extends Model {
 
     public static User create(String username, String password, String fname,String lname, int type){
         if(User.find.where().eq("username", username).findUnique() == null) {
-            User newUser = new User(username, password, fname, lname, type, Long.parseLong("-1"));
+            User newUser = new User();
+            newUser.username = username;
+            newUser.firstname = fname;
+            newUser.lastname = lname;
+            newUser.password = BCrypt.hashpw(password, BCrypt.gensalt());
+            newUser.idtype = type;
             newUser.save();
             return newUser;
         }
         return null;
     }
 
-    public static User findByUserId(Long userId){
-        return find.byId(userId);
+    public static User findByUserId(Long id){
+        return find.byId(id);
     }
 
-    public static String findName(Long userId){
-        User user = find.byId(userId);
+    public static String findName(User user){
         return user.firstname + " " + user.lastname;
     }
 
@@ -90,8 +154,12 @@ public class User extends Model {
                                 Expr.eq("id", key)))).findList();
         return listUser;
     }
-    public static List<User> findByTeam(Long teamId){
-        List<User> members = find.where().eq("projectId", teamId).findList();
+    public static List<User> findByProject(Project project){
+        List<Groups> groups = Groups.findByProject(project);
+        List<User> members = new ArrayList();
+        for(Groups group : groups){
+            members.add(group.getUser());
+        }
         return members;
     }
 }
