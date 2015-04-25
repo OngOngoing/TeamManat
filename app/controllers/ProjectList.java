@@ -15,11 +15,11 @@ public class ProjectList extends Controller {
     public static Result index() {
         Long userId = Long.parseLong(session().get("userId"));
         User user = User.findByUserId(userId);
-        Settings setting = Settings.value("stopTime");
-        Map<Long,Integer> mappedRate = Rate.getRateAndProjectIdMappingByUserId(userId);
+        Setting setting = Setting.value("stopTime");
+        Map<Long,Integer> mappedRate = Rate.getRateAndProjectMappingByUser(user);
         SimpleDateFormat dateFormat = new SimpleDateFormat("M-d-y HH:mm");
         Calendar calendar = Calendar.getInstance();
-        String date = setting.keyValue;
+        String date = setting.getKeyValue();
         String _time = "";
         try {
             calendar.setTime(dateFormat.parse(date));

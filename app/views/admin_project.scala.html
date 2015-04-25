@@ -70,19 +70,19 @@
                     <div class="row">
                         @projects.map { project =>
                             <div class="col s12">
-                                <a href="@routes.EditProject.index(project.id,routes.AdminPage.project()+"")">
+                                <a href="@routes.EditProject.index(project.getId,routes.AdminPage.project()+"")">
                                     <div class="card-app hoverable waves-effect waves-block z-depth-1">
                                         <div class="row">
                                             <div class="col s4 m2">
                                                 <div class="image-container">
                                                     <div class="square">
-                                                        <img src="@ProjectImage.getUrlDefaultImage(project.id)" alt="" class="crop">
+                                                        <img src="@Image.getUrlDefaultImage(project)" alt="" class="crop">
                                                     </div>
                                                 </div>
                                             </div>
                                             <div class="col s8 m10">
-                                                <p class="app-banner">@project.projectName</p>
-                                                <div class="info">ID : @project.id</div>
+                                                <p class="app-banner">@project.getProjectName</p>
+                                                <div class="info">ID : @project.getId</div>
                                             </div>
                                         </div>
                                     </div>

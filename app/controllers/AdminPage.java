@@ -14,15 +14,12 @@ public class AdminPage extends Controller {
 
     @Security.Authenticated(AdminSecured.class)
     public static Result index() {
-        List<Rate> rates = Rate.findAll();
-        List<User> users = User.findAll();
-        List<Settings> webconfig = Settings.findAll();
         response().setHeader("Cache-Control","no-cache");
-        return ok(adminpage.render(users, Project.findAll(), rates,Vote.findAll(), webconfig,RateCriterion.findAll(),VoteCriterion.findAll()));
+        return ok(adminpage.render());
     }
     public static Result user(int page){
         User _user = User.findByUserId(Long.parseLong(session("userId")));
-        Logger.info("["+_user.username+"] user admin page.");
+        Logger.info("["+_user.getUsername()+"] user admin page.");
         List<User> users = User.findAllByPage(page);
         List<Project> projects = Project.findAll();
         int num_page= User.totalPage();
@@ -31,14 +28,14 @@ public class AdminPage extends Controller {
     }
     public static Result score(){
         User _user = User.findByUserId(Long.parseLong(session("userId")));
-        Logger.info("["+_user.username+"] user admin page.");
+        Logger.info("["+_user.getUsername()+"] user admin page.");
         List<User> users = User.findAll();
         response().setHeader("Cache-Control", "no-cache");
         return ok(admin_score.render(_user,users));
     }
     public static Result rate(int page){
         User _user = User.findByUserId(Long.parseLong(session("userId")));
-        Logger.info("["+_user.username+"] user admin page.");
+        Logger.info("["+_user.getUsername()+"] user admin page.");
         List<User> users = User.findAll();
         List<Rate> rates = Rate.findAllByPage(page);
         int num_page= Rate.totalPage();
@@ -48,7 +45,7 @@ public class AdminPage extends Controller {
 
     public static Result vote() {
         User _user = User.findByUserId(Long.parseLong(session("userId")));
-        Logger.info("[" + _user.username + "] user admin page.");
+        Logger.info("[" + _user.getUsername() + "] user admin page.");
         List<User> users = User.findAll();
         List<Vote> votes = Vote.findAll();
         List<VoteCriterion> voteCs = VoteCriterion.findAll();
@@ -69,20 +66,21 @@ public class AdminPage extends Controller {
         List<Map> rate_data = new ArrayList();
         List<Project> projects = Project.findAll();
         List<RateCriterion> criterions = RateCriterion.findAll();
+        User user = User.findByUserId(_id);
         for(Project item : projects){
             Map _rate = new HashMap();
-            _rate.put("projectName", item.projectName);
+            _rate.put("projectName", item.getProjectName());
             List rates = new ArrayList();
             for(RateCriterion _item : criterions) {
                 Map<String, String> _r = new HashMap();
-                Rate rate = Rate.findByUserIdAndProjectIdAndCriteriaId(_id, item.id, _item.id);
+                Rate rate = Rate.findByUserAndProjectAndCriteria( user, item, _item);
                 String value;
                 if(rate == null){
                     value = "0";
                 }else{
-                    value = String.valueOf(rate.score);
+                    value = String.valueOf(rate.getScore());
                 }
-                _r.put("name", _item.name);
+                _r.put("name", _item.getName());
                 _r.put("value", value);
                 rates.add(_r);
             }
@@ -99,18 +97,18 @@ public class AdminPage extends Controller {
         List<Map<String, String>> user_data = new ArrayList();
         for(User item : userList){
             Map<String, String> i = new HashMap();
-            if(item.projectId == -1){
+            if(item.getProject() == null){
                 i.put("project", "None");
             }else{
-                i.put("project", Project.findById(item.projectId).projectName);
+                i.put("project", Project.findById(item.getProject().getId()).getProjectName());
             }
-            i.put("projectId", item.projectId.toString());
-            i.put("userType", (item.idtype == User.ADMINISTRATOR) ? "Administrator" : "Normal" );
-            i.put("userIdType", String.valueOf(item.idtype));
-            i.put("username", item.username);
-            i.put("lastname", item.lastname);
-            i.put("firstname", item.firstname);
-            i.put("userid", item.id.toString());
+            i.put("projectId", item.getProject().getId().toString());
+            i.put("userType", (item.getIdtype() == User.ADMINISTRATOR) ? "Administrator" : "Normal" );
+            i.put("userIdType", String.valueOf(item.getIdtype()));
+            i.put("username", item.getUsername());
+            i.put("lastname", item.getLastname());
+            i.put("firstname", item.getFirstname());
+            i.put("userid", item.getId().toString());
             user_data.add(i);
         }
         return ok(Json.toJson(user_data));
@@ -118,7 +116,7 @@ public class AdminPage extends Controller {
     public static Result comment()
     {
         User _user = User.findByUserId(Long.parseLong(session("userId")));
-        Logger.info("["+_user.username+"] user admin page.");
+        Logger.info("["+_user.getUsername()+"] user admin page.");
 
         List<Comment> comments = Comment.findAll();
         response().setHeader("Cache-Control","no-cache");
@@ -127,7 +125,7 @@ public class AdminPage extends Controller {
     }
     public static Result project(){
         User _user = User.findByUserId(Long.parseLong(session("userId")));
-        Logger.info("["+_user.username+"] user admin page.");
+        Logger.info("["+_user.getUsername()+"] user admin page.");
         List<User> users = User.findAll();
         List<Project> projects = Project.findAll();
         response().setHeader("Cache-Control","no-cache");
@@ -135,7 +133,7 @@ public class AdminPage extends Controller {
     }
     public static Result criteria(){
         User _user = User.findByUserId(Long.parseLong(session("userId")));
-        Logger.info("["+_user.username+"] user admin page.");
+        Logger.info("["+_user.getUsername()+"] user admin page.");
         List<RateCriterion> rateCriteria = RateCriterion.findAll();
         List<VoteCriterion> voteCriteria = VoteCriterion.findAll();
         response().setHeader("Cache-Control","no-cache");
@@ -143,8 +141,8 @@ public class AdminPage extends Controller {
     }
     public static Result systemConfig(){
         User _user = User.findByUserId(Long.parseLong(session("userId")));
-        Logger.info("["+_user.username+"] user admin page.");
-        List<Settings> webconfig = Settings.findAll();
+        Logger.info("["+_user.getUsername()+"] user admin page.");
+        List<Setting> webconfig = Setting.findAll();
         response().setHeader("Cache-Control","no-cache");
         return ok(admin_systemconfig.render(_user, webconfig));
     }
@@ -159,7 +157,7 @@ public class AdminPage extends Controller {
         String password = dynamicForm.get("password");
         String idType = dynamicForm.get("idtype");
         User user = User.create(username, password, firstname,lastname,Integer.parseInt(idType));
-        Logger.info("["+_user.username+"] add new user.("+user.id+")");
+        Logger.info("["+_user.getUsername()+"] add new user.("+user.getId()+")");
         response().setHeader("Cache-Control", "no-cache");
         flash("user_add_success", "User added");
         return redirect(routes.AdminPage.user(1));
@@ -170,7 +168,7 @@ public class AdminPage extends Controller {
         User _user = User.findByUserId(Long.parseLong(session("userId")));
         Project project = Form.form(Project.class).bindFromRequest().get();
         project.save();
-        Logger.info("[" + _user.username + "] add new project.(" + project.id+")");
+        Logger.info("[" + _user.getUsername() + "] add new project.(" + project.getId()+")");
         response().setHeader("Cache-Control", "no-cache");
         flash("project_add_success", "Project added");
         return redirect(routes.AdminPage.project());
@@ -180,7 +178,7 @@ public class AdminPage extends Controller {
         User _user = User.findByUserId(Long.parseLong(session("userId")));
         RateCriterion rateC = Form.form(RateCriterion.class).bindFromRequest().get();
         rateC.save();
-        Logger.info("[" + _user.username + "] add new Rate Criterion.(" + rateC.id + ")");
+        Logger.info("[" + _user.getUsername() + "] add new Rate Criterion.(" + rateC.getId() + ")");
         response().setHeader("Cache-Control", "no-cache");
         flash("rate_criterion_add_success", "Rating criterion added");
         return redirect(routes.AdminPage.criteria());
@@ -190,7 +188,7 @@ public class AdminPage extends Controller {
         User _user = User.findByUserId(Long.parseLong(session("userId")));
         VoteCriterion voteC = Form.form(VoteCriterion.class).bindFromRequest().get();
         voteC.save();
-        Logger.info("[" + _user.username + "] add new Vote Criterion.(" + voteC.id + ")");
+        Logger.info("[" + _user.getUsername() + "] add new Vote Criterion.(" + voteC.getId() + ")");
         response().setHeader("Cache-Control", "no-cache");
         flash("vote_criterion_add_success", "Voting criterion added");
         return redirect(routes.AdminPage.criteria());
@@ -207,17 +205,17 @@ public class AdminPage extends Controller {
         int count=0;
         for(String userId : checkedVal) {
             User user = User.findByUserId(Long.parseLong(userId));
-            List<Rate> rates = Rate.findListByUserId(Long.parseLong(userId));
-            List<Vote> votes = Vote.findByUserId(Long.parseLong(userId));
-            Logger.info("[" + _user.username + "] delete user.(" + user.id + ")"+user.username);
+            List<Rate> rates = Rate.findListByUser(user);
+            List<Vote> votes = Vote.findByUser(user);
+            Logger.info("[" + _user.getUsername() + "] delete user.(" + user.getId() + ")"+user.getUsername());
             user.delete();
             count++;
             for(Vote vote : votes ) {
-                Logger.info("[" + _user.username + "] delete rate.(" + vote.id + ")("+vote.projectId+")");
+                Logger.info("[" + _user.getUsername() + "] delete vote.(" + vote.getId() + ")("+vote.getProject().getProjectName()+")");
                 vote.delete();
             }
             for(Rate rate : rates ) {
-                Logger.info("[" + _user.username + "] delete rate.(" + rate.id + ")("+rate.projectId+")");
+                Logger.info("[" + _user.getUsername() + "] delete rate.(" + rate.getId() + ")("+rate.getProject().getId()+")");
                 rate.delete();
             }
         }
@@ -229,7 +227,7 @@ public class AdminPage extends Controller {
     public static Result deleteRate(Long id){
         User _user = User.findByUserId(Long.parseLong(session("userId")));
         Rate rate = Rate.findById(id);
-        Logger.info("[" + _user.username + "] delete rate.(" + rate.id + ")("+rate.projectId+")");
+        Logger.info("[" + _user.getUsername() + "] delete rate.(" + rate.getId() + ")("+rate.getProject().getId()+")");
         rate.delete();
         flash("rate_delete_success", "Rate deleted");
         response().setHeader("Cache-Control","no-cache");
@@ -239,7 +237,7 @@ public class AdminPage extends Controller {
     public static Result deleteVote(Long id){
         User _user = User.findByUserId(Long.parseLong(session("userId")));
         Vote vote = Vote.findById(id);
-        Logger.info("[" + _user.username + "] delete rate.(" + vote.id + ")("+vote.projectId+")");
+        Logger.info("[" + _user.getUsername() + "] delete rate.(" + vote.getId() + ")("+vote.getProject().getId()+")");
         vote.delete();
         flash("vote_delete_success", "Vote deleted");
         response().setHeader("Cache-Control","no-cache");
@@ -248,8 +246,9 @@ public class AdminPage extends Controller {
     @Security.Authenticated(AdminSecured.class)
     public static Result deleteComment(Long userId , Long projectId){
         User _user = User.findByUserId(Long.parseLong(session("userId")));
-        Comment comment = Comment.findByUserIdAndProjectId(userId, projectId);
-        Logger.info("[" + _user.username + "] delete comment.(" + comment.id + ")("+comment.projectId+")");
+        Project _project = Project.findById(projectId);
+        Comment comment = Comment.findByUserAndProject(_user, _project);
+        Logger.info("[" + _user.getUsername() + "] delete comment.(" + comment.getId() + ")("+comment.getProject().getId()+")");
         comment.delete();
         response().setHeader("Cache-Control","no-cache");
         return redirect(routes.AdminPage.comment());
@@ -260,12 +259,7 @@ public class AdminPage extends Controller {
         User _user = User.findByUserId(Long.parseLong(session("userId")));
         RateCriterion rateCs = RateCriterion.findById(id);
         if(rateCs != null) {
-            List<Rate> rates = Rate.findRateByCriterionId(rateCs.id);
-            for(Rate rate : rates){
-                Logger.info("[" + _user.username + "] delete rate.(" + rate.id + ")("+rate.projectId+")");
-                rate.delete();
-            }
-            Logger.info("[" + _user.username + "] delete rate criterion.(" + rateCs.id + ")("+rateCs.name+")");
+            Logger.info("[" + _user.getUsername() + "] delete rate criterion.(" + rateCs.getId() + ")("+rateCs.getName()+")");
             rateCs.delete();
         }
         flash("rate_criterion_delete_success","Rating criterion deleted");
@@ -277,14 +271,10 @@ public class AdminPage extends Controller {
         User _user = User.findByUserId(Long.parseLong(session("userId")));
         VoteCriterion voteCs = VoteCriterion.findById(id);
         if(voteCs != null) {
-            List<Vote> votes = Vote.findVotesByCriterionId(voteCs.id);
-            for(Vote vote : votes){
-                Logger.info("[" + _user.username + "] delete vote.(" + vote.id + ")("+vote.projectId+")");
-                vote.delete();
-            }
-            Logger.info("[" + _user.username + "] delete rate criterion.(" + voteCs.id + ")("+voteCs.name+")");
+            Logger.info("[" + _user.getUsername() + "] delete Vote criterion.(" + voteCs.getId() + ")(" + voteCs.getName() + ")");
             voteCs.delete();
         }
+
         flash("vote_criterion_delete_success","Voting criterion deleted");
         response().setHeader("Cache-Control","no-cache");
         return redirect(routes.AdminPage.criteria());
@@ -294,16 +284,16 @@ public class AdminPage extends Controller {
     public static Result editUser(){
         User _user = User.findByUserId(Long.parseLong(session("userId")));
         User newuser = Form.form(User.class).bindFromRequest().get();
-        User olduser = User.findByUserId(newuser.id);
-        olduser.firstname = newuser.firstname;
-        olduser.lastname = newuser.lastname;
-        olduser.username = newuser.username;
-        if(!newuser.password.equals("")) {
-            olduser.password = BCrypt.hashpw(newuser.password, BCrypt.gensalt());
+        User olduser = User.findByUserId(newuser.getId());
+        olduser.setUsername(newuser.getUsername());
+        olduser.setFirstname(newuser.getFirstname());
+        olduser.setLastname(newuser.getLastname());
+        if(!newuser.getPassword().equals("")) {
+            olduser.setPassword(BCrypt.hashpw(newuser.getPassword(), BCrypt.gensalt()));
         }
-        olduser.idtype = newuser.idtype;
+        olduser.setIdtype(newuser.getIdtype());
         olduser.update();
-        Logger.info("[" + _user.username + "] edite user.(" + olduser.id + ")" + olduser.username);
+        Logger.info("[" + _user.getUsername() + "] edite user.(" + olduser.getId() + ")" + olduser.getUsername());
         flash("user_edit_success", "User edited");
         response().setHeader("Cache-Control","no-cache");
         return redirect(routes.AdminPage.user(1));
@@ -311,9 +301,9 @@ public class AdminPage extends Controller {
     @Security.Authenticated(AdminSecured.class)
     public static Result saveSetting(){
         DynamicForm dynamicForm = new DynamicForm().bindFromRequest();
-        List<Settings> settings = Settings.findAll();
-        for(Settings item : settings){
-            Settings.update(item.keyName, dynamicForm.get(item.keyName));
+        List<Setting> settings = Setting.findAll();
+        for(Setting item : settings){
+            Setting.update(item.getKeyName(), dynamicForm.get(item.getKeyName()));
         }
         flash("setting_save_success","Settings saved");
         response().setHeader("Cache-Control", "no-cache");

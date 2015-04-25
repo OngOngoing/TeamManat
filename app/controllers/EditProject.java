@@ -25,8 +25,8 @@ public class EditProject extends Controller {
             return redirect(routes.ProjectList.index());
         }
         Project project = Project.findById(projectId);
-        List<User> members = User.findByTeam(projectId);
-        List<ProjectImage> images = ProjectImage.findImageOfProject(projectId);
+        List<User> members = User.findByProject(project);
+        List<Image> images = Image.findImageOfProject(project);
         response().setHeader("Cache-Control","no-cache");
         return ok(editproject.render(_user, project, members, images, h));
     }
@@ -49,9 +49,14 @@ public class EditProject extends Controller {
             flash("error", "User not found");
             return redirect(routes.EditProject.index(projectId, h));
         }
-        editUser.projectId = projectId;
+        Project project = Project.findById(projectId);
+        if(editUser == null){
+            flash("error", "Project not found");
+            return redirect(routes.EditProject.index(projectId, h));
+        }
+        editUser.setProject(project);
         editUser.update();
-        Logger.info("["+editUser.username+"] project id = "+projectId);
+        Logger.info("["+editUser.getUsername()+"] project = "+project.getProjectName()+"("+project.getId()+")");
         flash("success", "User is added!");
         response().setHeader("Cache-Control","no-cache");
         return redirect(routes.EditProject.index(projectId, h));
@@ -68,10 +73,10 @@ public class EditProject extends Controller {
             DynamicForm dynamicForm = new DynamicForm().bindFromRequest();
             String name = dynamicForm.get("projectName");
             String description = dynamicForm.get("description");
-            project.projectName = name;
-            project.projectDescription = description;
+            project.setProjectName(name);
+            project.setProjectDescription(description);
             project.update();
-            Logger.info("["+User.findByUserId(Long.parseLong(session("userId")+"")).username+"] edit project("+projectId+")"+project.projectName);
+            Logger.info("["+User.findByUserId(Long.parseLong(session("userId")+"")).getUsername()+"] edit project("+projectId+")"+project.getProjectName());
             flash("success", "Project is updated!");
         }
         response().setHeader("Cache-Control","no-cache");
@@ -86,8 +91,8 @@ public class EditProject extends Controller {
         }
         User editUser = User.findByUserId(userId);
         if (editUser != null) {
-            editUser.projectId = Long.parseLong("-1");
-            Logger.info("["+editUser.username+"] project id = -1.");
+            editUser.setProject(null);
+            Logger.info("["+editUser.getUsername()+"] is removed from project");
             editUser.update();
             flash("success", "User is successfully deleted");
         }
@@ -101,18 +106,18 @@ public class EditProject extends Controller {
         List<Map<String, String>> user_data = new ArrayList();
         for(User item : userList){
             Map<String, String> i = new HashedMap();
-            i.put("lastname", item.lastname);
-            i.put("firstname", item.firstname);
-            i.put("id", item.id.toString());
+            i.put("lastname", item.getLastname());
+            i.put("firstname", item.getFirstname());
+            i.put("id", item.getId().toString());
             user_data.add(i);
         }
         return ok(Json.toJson(user_data));
     }
 
     public static boolean canEditProject(User user, Long projectId){
-        if(user.idtype == User.ADMINISTRATOR)
+        if(user.getIdtype() == User.ADMINISTRATOR)
             return true;
-        if(user.projectId == projectId)
+        if(user.getProject().getId() == projectId)
             return true;
         return false;
     }
@@ -121,29 +126,29 @@ public class EditProject extends Controller {
         DynamicForm dynamicForm = new DynamicForm().bindFromRequest();
         Long proId = Long.parseLong(dynamicForm.get("projectId"));
         User _user = User.findByUserId(Long.parseLong(session("userId")));
-        Logger.info("["+_user.username+"] delete project:"+proId);
+        Logger.info("["+_user.getUsername()+"] delete project:"+proId);
         Project _pro = Project.findById(proId);
         if(_pro != null) {
-            String name = _pro.projectName;
-            List<Rate> _rates = Rate.findListByProjectId(_pro.id);
+            String name = _pro.getProjectName();
+            List<Rate> _rates = Rate.findListByProject(_pro);
             for (Rate item : _rates) {
-                Logger.info("rate ["+item.id+"] is delete. ProId:"+item.projectId+" UserId:"+item.userId);
+                Logger.info("rate ["+item.getId()+"] is delete. ProId:"+item.getProject().getId()+" UserId:"+item.getUser().getId());
                 item.delete();
             }
-            List<Vote> _votes = Vote.findByProjectId(_pro.id);
+            List<Vote> _votes = Vote.findByProject(_pro);
             for (Vote item : _votes) {
-                Logger.info("vote ["+item.id+"] is delete. ProId:"+item.projectId+" UserId:"+item.userId);
+                Logger.info("vote ["+item.getId()+"] is delete. ProId:"+item.getProject().getId()+" UserId:"+item.getUser().getId());
                 item.delete();
             }
-            List<Comment> _comments = Comment.findListByProjectId(_pro.id);
+            List<Comment> _comments = Comment.findListByProject(_pro);
             for (Comment item : _comments) {
-                Logger.info("comment ["+item.id+"] is delete. ProId:"+item.projectId+" UserId:"+item.userId);
+                Logger.info("comment ["+item.getId()+"] is delete. ProId:"+item.getProject().getId()+" UserId:"+item.getUser().getId());
                 item.delete();
             }
-            List<User> _users = User.findByTeam(_pro.id);
+            List<User> _users = User.findByProject(_pro);
             for (User item : _users) {
-                item.projectId = Long.parseLong("-1");
-                Logger.info("["+item.username+"] project id = -1.");
+                item.setProject(null);
+                Logger.info("["+item.getUsername()+"] is removed from project.");
                 item.update();
             }
             _pro.delete();
@@ -159,21 +164,22 @@ public class EditProject extends Controller {
         File file = body.getFile("file").getFile();
         String pId = body.asFormUrlEncoded().get("projectId")[0];
         Long proId = Long.parseLong(pId);
-        if(_user.projectId != proId && _user.idtype != User.ADMINISTRATOR){
+        Project pro = Project.findById(proId);
+        if(!canEditProject(_user, proId)) {
             flash("error", "access denied.");
             return redirect(routes.Application.index());
         }
-        List<ProjectImage> imgs = ProjectImage.findImageOfProject(proId);
+        List<Image> imgs = Image.findImageOfProject(pro);
         if(imgs.size() >= 10){
             return status(1);
         }
-        ProjectImage image;
+        Image image;
         if(imgs.size() == 0) {
-            image = new ProjectImage(proId, file, ProjectImage.DEFAULT);
+            image = new Image(pro, file, Image.DEFAULT);
         }else{
-            image = new ProjectImage(proId, file, ProjectImage.NORMAL);
+            image = new Image(pro, file, Image.NORMAL);
         }
-        Logger.info(Project.findById(proId).projectName+" upload new image["+image.Id+"]");
+        Logger.info(Project.findById(proId).getProjectName()+" upload new image["+image.getId()+"]");
         return ok("success!");
     }
 }

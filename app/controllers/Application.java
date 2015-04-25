@@ -36,13 +36,12 @@ public class Application extends Controller {
         Logger.info("["+username+"] login success.");
         session().clear();
         User currentUser = User.findByUsername(username);
-        session("userId", String.valueOf(currentUser.id));
-        session("projectOwnerId", String.valueOf(currentUser.projectId));
+        session("userId", String.valueOf(currentUser.getId()));
         return redirect(routes.ProjectList.index());
     }
 
     public static Result logout() {
-        Logger.info("["+User.findByUserId(Long.parseLong(session().get("userId"))).username+"]'ve been logged out.");
+        Logger.info("["+User.findByUserId(Long.parseLong(session().get("userId"))).getUsername()+"]'ve been logged out.");
         session().clear();
         flash("success", "You've been logged out");
         return redirect(routes.Application.index());
@@ -53,34 +52,36 @@ public class Application extends Controller {
     }
 
     public static Result getImgs(Long proId){
-        List<ProjectImage> images = ProjectImage.findImageOfProject(proId);
+        Project project = Project.findById(proId);
+        List<Image> images = Image.findImageOfProject(project);
         List<Map<String, Long>> img = new ArrayList();
-        for(ProjectImage item : images){
+        for(Image item : images){
             Map<String, Long> detail = new HashMap();
-            detail.put("Id", item.Id);
-            detail.put("projectId", item.projectId);
-            detail.put("imgType", Long.parseLong(item.imgType+""));
+            detail.put("Id", item.getId());
+            detail.put("projectId", item.getProject().getId());
+            detail.put("imgType", Long.parseLong(item.getImgType()+""));
             img.add(detail);
         }
         return ok(Json.toJson(img));
     }
     public static Result getImg(Long imgId){
-        ProjectImage image = ProjectImage.findById(imgId);
+        Image image = Image.findById(imgId);
         return ok(image.getData()).as("image");
     }
 
     public static Result deleteImg(Long imgId, Long proId, String h){
         User _user = User.findByUserId(Long.parseLong(session("userId")));
-        if(_user.projectId != proId && _user.idtype != User.ADMINISTRATOR){
+        Project _project = Project.findById(proId);
+        if(_user.getProject().getId() != proId && _user.getIdtype() != User.ADMINISTRATOR){
             flash("error", "access denied.");
             return redirect(routes.Application.index());
         }
-        ProjectImage image = ProjectImage.findByIdAndProId(imgId, proId);
+        Image image = Image.findByIdAndPro(imgId, _project);
         if(image != null) {
             image.delete();
-            List<ProjectImage> imgs = ProjectImage.findImageOfProject(proId);
+            List<Image> imgs = Image.findImageOfProject(_project);
             if(imgs.size() != 0){
-                imgs.get(0).imgType = ProjectImage.DEFAULT;
+                imgs.get(0).setImgType(image.DEFAULT);
                 imgs.get(0).save();
             }
             flash("success", "Screenshot is deleted.");
@@ -91,21 +92,22 @@ public class Application extends Controller {
     }
     public static Result setImgDefault(Long imgId, Long proId,String h){
         User _user = User.findByUserId(Long.parseLong(session("userId")));
-        if(_user.projectId != proId && _user.idtype != User.ADMINISTRATOR){
+        Project _project = Project.findById(proId);
+        if(_user.getProject().getId() != proId && _user.getIdtype() != User.ADMINISTRATOR){
             flash("error", "access denied.");
             return redirect(routes.Application.index());
         }
-        ProjectImage oldimg = ProjectImage.getDefaultImage(proId);
-        ProjectImage newimg = ProjectImage.findById(imgId);
+        Image oldimg = Image.getDefaultImage(_project);
+        Image newimg = Image.findById(imgId);
         if(newimg == null){
             flash("error", "Can't found image.");
             return redirect(routes.EditProject.index(proId, h));
         }
         if(oldimg != null) {
-            oldimg.imgType = ProjectImage.NORMAL;
+            oldimg.setImgType(Image.NORMAL);
             oldimg.save();
         }
-        newimg.imgType = ProjectImage.DEFAULT;
+        newimg.setImgType(Image.DEFAULT);
         newimg.save();
         flash("success", "Project is updated.");
         return redirect(routes.EditProject.index(proId, h));
@@ -116,11 +118,11 @@ public class Application extends Controller {
         if(User.findByUsername("admin") == null) {
             Calendar calendar = Calendar.getInstance(TimeZone.getTimeZone("Asia/Bangkok"));
             SimpleDateFormat dateFormat = new SimpleDateFormat("M-d-y HH:mm");
-            Settings.create("startTime", dateFormat.format(calendar.getTime()), Settings.TYPE_DATE, "Date for starting vote.");
+            Setting.create("startTime", dateFormat.format(calendar.getTime()), Setting.TYPE_DATE, "Date for starting vote.");
 
             calendar.set(Calendar.HOUR, calendar.get(Calendar.HOUR) + 1);
-            Settings.create("stopTime", dateFormat.format(calendar.getTime()), Settings.TYPE_DATE, "Date for stopping vote.");
-            Settings.create("siteType", "1", Settings.TYPE_INTEGER, "1 for vote, 2 for rate.");
+            Setting.create("stopTime", dateFormat.format(calendar.getTime()), Setting.TYPE_DATE, "Date for stopping vote.");
+            Setting.create("siteType", "1", Setting.TYPE_INTEGER, "1 for vote, 2 for rate.");
             //Mock user and project
             User.create("admin", "admin", "Admin's Firstname", "Admin's Lastname", User.ADMINISTRATOR);
             User.create("test1", "test1", "TestFirstname1", "TestLastName1", User.NORMAL_USER); // Add new account : username => test1 password => test1

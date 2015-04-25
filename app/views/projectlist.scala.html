@@ -49,21 +49,21 @@
                     </div>
                 </div>
             @projects.map { project =>
-                    @{criteriaLeft = ratingCriteria.size-mappedRates.get(project.id)}
+                    @{criteriaLeft = ratingCriteria.size - mappedRates.get(project.getId)}
                 <div class="col s12">
-                    <a href="@routes.RateProject.index(project.id)">
+                    <a href="@routes.RateProject.index(project.getId)">
                         <div class="card-app hoverable waves-effect waves-block z-depth-1">
                             <div class="row">
                                 <div class="col s4 m2">
                                     <div class="image-container">
                                         <div class="square">
-                                            <img src="@ProjectImage.getUrlDefaultImage(project.id)" alt="" class="crop">
+                                            <img src="@Image.getUrlDefaultImage(project)" alt="" class="crop">
                                         </div>
                                     </div>
                                 </div>
                                 <div class="col s8 m10">
-                                    <p class="app-banner">@project.projectName</p>
-                                    @if(mappedRates.get(project.id) == 0) {
+                                    <p class="app-banner">@project.getProjectName</p>
+                                    @if(mappedRates.get(project.getId) == 0) {
                                         <p class="secondary-text hide-on-med-and-down">click here to rate this project</p>
                                         <div class="info">NOT YET RATED</div>
                                     } @if(criteriaLeft == 1) {
@@ -87,7 +87,7 @@
             <!-- End of Page Content -->
         </div>
 
-        @if(user.idtype == User.ADMINISTRATOR ){
+        @if(user.getIdtype == User.ADMINISTRATOR ){
                 <div class="fixed-action-btn animated bounceInUp" style="bottom: 45px; right: 40px;">
                     <a class="btn-floating btn-large trigger" href="adminpage">
                         <i class="large mdi-action-settings waves-effect waves-light"></i>

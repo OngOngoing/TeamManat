@@ -162,58 +162,58 @@
                                     <li class="collection-item avatar">
                                         <div class="row">
                                         <div class="col s12">
-                                            @if(user.idtype != User.ADMINISTRATOR) {
-                                                <input type="checkbox" name="id" id= "@user.id" value="@user.id" />
+                                            @if(user.getIdtype != User.ADMINISTRATOR) {
+                                                <input type="checkbox" name="id" id= "@user.getId" value="@user.getId" />
                                             }
-                                                <label class="check" for="@user.id"></label>
-                                            @if(user.idtype == User.ADMINISTRATOR) {
+                                                <label class="check" for="@user.getId"></label>
+                                            @if(user.getIdtype == User.ADMINISTRATOR) {
                                                 <i class="mdi-social-whatshot circle teal lighten-1 trigger hide-on-small-only"></i>
                                             } else {
                                                 <i class="mdi-social-person circle teal lighten-1 trigger hide-on-small-only"></i>
                                             }
                                             <div class="hide-on-small-only">
-                                                <span class="title teal-text lighten-1 trigger">ID : @user.id</span>
+                                                <span class="title teal-text lighten-1 trigger">ID : @user.getId</span>
                                                 <p>
-                                                    <strong>Username</strong> : @user.username <br />
-                                                    <strong>Firstname</strong> : @user.firstname <strong>Lastname</strong> : @user.lastname<br />
+                                                    <strong>Username</strong> : @user.getUsername <br />
+                                                    <strong>Firstname</strong> : @user.getFirstname <strong>Lastname</strong> : @user.getLastname<br />
                                                     <strong>User Type</strong> :
-                                                    @if(user.idtype == User.ADMINISTRATOR){
+                                                    @if(user.getIdtype == User.ADMINISTRATOR){
                                                         Administrator
                                                     } else {
                                                         Normal
                                                     }
                                                     <br />
-                                                    @if(user.projectId != -1 ){
-                                                        <strong>Owner Project</strong> : @Project.findById(user.projectId).projectName
+                                                    @if(user.getProject != null ){
+                                                        <strong>Owner Project</strong> : @Project.findById(user.getProject.getId).getProjectName
                                                     }else{
                                                         <strong>Owner Project</strong> : None
                                                     }
                                                 </p>
                                             </div>
                                         <div class="hide-on-med-and-up" style="margin-left: -65px">
-                                            <span class="title teal-text lighten-1 trigger">ID : @user.id</span>
+                                            <span class="title teal-text lighten-1 trigger">ID : @user.getId</span>
                                             <p>
-                                                <strong>Username</strong> : @user.username <br />
-                                                <strong>Firstname</strong> : @user.firstname <br /><strong>Lastname</strong> : @user.lastname<br />
+                                                <strong>Username</strong> : @user.getUsername <br />
+                                                <strong>Firstname</strong> : @user.getFirstname <br /><strong>Lastname</strong> : @user.getLastname<br />
                                                 <strong>User Type</strong> :
-                                                @if(user.idtype == User.ADMINISTRATOR){
+                                                @if(user.getIdtype == User.ADMINISTRATOR){
                                                     Administrator
                                                 } else {
                                                     Normal
                                                 }
                                                 <br />
-                                                @if(user.projectId != -1 ){
-                                                    <strong>Owner Project</strong> : @Project.findById(user.projectId).projectName
+                                                @if(user.getProject != null ){
+                                                    <strong>Owner Project</strong> : @Project.findById(user.getProject.getId).getProjectName
                                                 }else{
                                                     <strong>Owner Project</strong> : None
                                                 }
                                             </p>
                                         </div>
                                         </div>
-                                        <a userId="@user.id" username="@user.username" password="" idtype="@user.idtype" projectId="@user.projectId" firstname="@user.firstname" lastname="@user.lastname" class="editModal secondary-content trigger modal-trigger" style="z-index: 100;" href="#editUserModal">
+                                        <a userId="@user.getId" username="@user.getUsername" password="" idtype="@user.getIdtype" projectId="@user.getProject.getId" firstname="@user.getFirstname" lastname="@user.getLastname" class="editModal secondary-content trigger modal-trigger" style="z-index: 100;" href="#editUserModal">
                                             <i class="mdi-editor-mode-edit small"></i>
                                         </a>
-                                        <a id="rate-user" href="#rate-user-m" userId="@user.id" class="rate-user modal-trigger waves-effect waves-light">
+                                        <a id="rate-user" href="#rate-user-m" userId="@user.getId" class="rate-user modal-trigger waves-effect waves-light">
                                             <i class="mdi-maps-rate-review small trigger"></i>
                                         </a>
                                 </div>

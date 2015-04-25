@@ -54,11 +54,11 @@
                     @comments.map { comment =>
                         <li class="collection-item avatar">
                             <i class="mdi-action-description circle teal lighten-1 trigger"></i>
-                            <span class="title teal-text lighten-1 trigger">Comment ID : @comment.id</span>
-                            <p>UserId @comment.userId Comment ProjectId @comment.projectId <br>
-                                @comment.comment
+                            <span class="title teal-text lighten-1 trigger">Comment ID : @comment.getId</span>
+                            <p>UserId @comment.getUser.getId Comment ProjectId @comment.getProject.getId <br>
+                                @comment.getComment
                             </p>
-                            <a href="@routes.AdminPage.deleteComment(comment.userId , comment.projectId)" class="secondary-content"><i class="mdi-navigation-close trigger"></i></a>
+                            <a href="@routes.AdminPage.deleteComment(comment.getUser.getId , comment.getProject.getId)" class="secondary-content"><i class="mdi-navigation-close trigger"></i></a>
                         </li>
                     }
                 </ul>

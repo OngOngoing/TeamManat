@@ -8,22 +8,52 @@ import java.util.List;
 @Entity
 public class RateCriterion extends Model {
     @Id
-    public Long id;
+    private Long id;
 
     @Required
-    public String name;
-    public String description;
+    private String name;
+    private String description;
 
-    public static Finder<Long, RateCriterion> find = new Finder<Long, RateCriterion>(Long.class, RateCriterion.class);
+    @OneToMany(cascade = CascadeType.REMOVE, mappedBy = "criterion")
+    private List<Rate> rates;
 
-    public RateCriterion(String name, String description){
+    private static Finder<Long, RateCriterion> find = new Finder<Long, RateCriterion>(Long.class, RateCriterion.class);
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
         this.name = name;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
         this.description = description;
+    }
+
+    public List<Rate> getRates() {
+        return rates;
+    }
+
+    public void setRates(List<Rate> rates) {
+        this.rates = rates;
     }
 
     public static RateCriterion create(String name, String description){
         if(findByCriterionName(name) == null) {
-            RateCriterion rate = new RateCriterion(name, description);
+            RateCriterion rate = new RateCriterion();
             rate.name = name;
             rate.description = description;
             rate.save();
@@ -40,7 +70,7 @@ public class RateCriterion extends Model {
     	return find.all();
     }
 
-    public static RateCriterion findById(Long id){
-        return find.byId(id);
+    public static RateCriterion findById(Long c){
+        return find.byId(c);
     }
 }

@@ -17,10 +17,10 @@ public class RateCalculator extends Controller {
 
     //@Security.Authenticated(Secured.class)
     public static Result index() {
-        boolean isTimeUp = Settings.isTimeUp();
+        boolean isTimeUp = Setting.isTimeUp();
         Long userId = Long.parseLong(session().get("userId"));
         User thisUser = User.findByUserId(userId);
-        if(!isTimeUp && thisUser.idtype != User.ADMINISTRATOR ) {
+        if(!isTimeUp && thisUser.getIdtype() != User.ADMINISTRATOR ) {
             flash("error","Please wait until the rating session is closed. Sorry for the inconvenience.");
             return redirect(routes.ProjectList.index());
         }
@@ -32,11 +32,11 @@ public class RateCalculator extends Controller {
             ArrayList<String> perProject = new ArrayList<String>();
             double allSum = 0;
             for(RateCriterion c : criteria){
-                List<Rate> rates = Rate.findListByProjectIdAndCriteriaId(p.id,c.id);
+                List<Rate> rates = Rate.findListByProjectAndCriteria(p, c);
                 double sum = 0;
                 int count = 0;
                 for(Rate r : rates ){
-                    sum += r.score;
+                    sum += r.getScore();
                     count++;
                 }
                 if(count == 0){
@@ -60,10 +60,10 @@ public class RateCalculator extends Controller {
         return ok(ratecalpage.render(thisUser,projects,criteria,comments,result));
     }
     public static Result rateSortByCriteria() {
-        boolean isTimeUp = Settings.isTimeUp();
+        boolean isTimeUp = Setting.isTimeUp();
         Long userId = Long.parseLong(session().get("userId"));
         User thisUser = User.findByUserId(userId);
-        if(!isTimeUp && thisUser.idtype != User.ADMINISTRATOR ) {
+        if(!isTimeUp && thisUser.getIdtype() != User.ADMINISTRATOR ) {
             flash("error","Please wait until the rating session is closed. Sorry for the inconvenience.");
             return redirect(routes.ProjectList.index());
         }
@@ -76,9 +76,9 @@ public class RateCalculator extends Controller {
                 Map<String, String> i = new HashMap<String,String>();
                 double sum = 0;
                 int count = 0;
-                List<Rate> rates = Rate.findListByProjectIdAndCriteriaId(p.id,c.id);
+                List<Rate> rates = Rate.findListByProjectAndCriteria(p, c);
                 for(Rate r : rates){
-                    sum += r.score;
+                    sum += r.getScore();
                     count++;
                 }
                 if(count == 0){
@@ -86,18 +86,10 @@ public class RateCalculator extends Controller {
                 }else{
                     sum = sum/count;
                 }
-                i.put("projectName", p.projectName);
+                i.put("projectName", p.getProjectName());
                 i.put("score", String.format("%.2f",sum));
                 score.add(i);
             }
-
-            /*for(int i = 0 ; i<score.size() ; i++){
-                for(int j = i ;j<score.size(). j++){
-                    if(Double.parseDouble(score.get(i).get("score")) < Double.parseDouble(score.get(j).get("score")) ){
-                        score.get(i) = score.get()
-                    }
-                }
-            }*/
 
             Collections.sort(score, Collections.reverseOrder(new Comparator() {
                 public int compare(Object o1, Object o2) {
