@@ -24,7 +24,7 @@ public class AdminPage extends Controller {
         List<Project> projects = Project.findAll();
         int num_page= User.totalPage();
         response().setHeader("Cache-Control","no-cache");
-        return ok(admin_user.render(_user,users,num_page,page,projects));
+        return ok(admin_user.render(users,num_page,page,projects));
     }
     public static Result score(){
         User _user = User.findByUserId(Long.parseLong(session("userId")));
@@ -102,7 +102,6 @@ public class AdminPage extends Controller {
             }else{
                 i.put("project", Project.findById(item.getProject().getId()).getProjectName());
             }
-            i.put("projectId", item.getProject().getId().toString());
             i.put("userType", (item.getIdtype() == User.ADMINISTRATOR) ? "Administrator" : "Normal" );
             i.put("userIdType", String.valueOf(item.getIdtype()));
             i.put("username", item.getUsername());
@@ -262,7 +261,7 @@ public class AdminPage extends Controller {
             Logger.info("[" + _user.getUsername() + "] delete rate criterion.(" + rateCs.getId() + ")("+rateCs.getName()+")");
             rateCs.delete();
         }
-        flash("rate_criterion_delete_success","Rating criterion deleted");
+        flash("rate_criterion_delete_success", "Rating criterion deleted");
         response().setHeader("Cache-Control","no-cache");
         return redirect(routes.AdminPage.criteria());
     }
@@ -283,17 +282,17 @@ public class AdminPage extends Controller {
     @Security.Authenticated(AdminSecured.class)
     public static Result editUser(){
         User _user = User.findByUserId(Long.parseLong(session("userId")));
-        User newuser = Form.form(User.class).bindFromRequest().get();
-        User olduser = User.findByUserId(newuser.getId());
-        olduser.setUsername(newuser.getUsername());
-        olduser.setFirstname(newuser.getFirstname());
-        olduser.setLastname(newuser.getLastname());
-        if(!newuser.getPassword().equals("")) {
-            olduser.setPassword(BCrypt.hashpw(newuser.getPassword(), BCrypt.gensalt()));
+        DynamicForm dy = new DynamicForm().bindFromRequest();
+        User edit_user = User.findByUserId(Long.parseLong(dy.get("id")));
+        edit_user.setUsername(dy.get("username"));
+        edit_user.setFirstname(dy.get("firstname"));
+        edit_user.setLastname(dy.get("lastname"));
+        if(!dy.get("password").equals("")) {
+            edit_user.setPassword(BCrypt.hashpw(dy.get("password"), BCrypt.gensalt()));
         }
-        olduser.setIdtype(newuser.getIdtype());
-        olduser.update();
-        Logger.info("[" + _user.getUsername() + "] edite user.(" + olduser.getId() + ")" + olduser.getUsername());
+        edit_user.setIdtype(Integer.parseInt(dy.get("idtype")));
+        edit_user.update();
+        Logger.info("[" + _user.getUsername() + "] edite user.(" + edit_user.getId() + ")" + edit_user.getUsername());
         flash("user_edit_success", "User edited");
         response().setHeader("Cache-Control","no-cache");
         return redirect(routes.AdminPage.user(1));

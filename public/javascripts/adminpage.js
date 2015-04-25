@@ -63,7 +63,6 @@ $(document).ready(function () {
                 var username = $(this).attr("username");
                 var password = $(this).attr("password");
                 var idtype = $(this).attr("idtype");
-                var projectId = $(this).attr("projectId");
                 var firstname = $(this).attr("firstname");
                 var lastname = $(this).attr("lastname");
                 if (idtype == 3) {
@@ -78,7 +77,6 @@ $(document).ready(function () {
                 $("#editUserModal #password").val(password);
                 $("#editUserModal #firstname").val(firstname);
                 $("#editUserModal #lastname").val(lastname);
-                $("#editUserModal #projectId").val(projectId);
                 $("#editUserModal #userID").val(userId);
                 $("#editUserModal #userId").val(userId);
             });
@@ -141,7 +139,6 @@ $(document).ready(function () {
                         var lastname = search[i].lastname;
                         var userType = search[i].userType;
                         var project = search[i].project;
-                        var projectId = search[i].projectId;
                         var userIdType = search[i].userIdType;
                         html += '<li class="collection-item avatar"><div class="row"><div class="col s12">';
                         if (userIdType != 3) {
@@ -154,7 +151,7 @@ $(document).ready(function () {
                         html += '<strong>Firstname</strong> : ' + firstname + ' <strong>Lastname</strong> : ' + lastname + '<br />';
                         html += '<strong>User Type</strong> : ' + userType + ' <br />';
                         html += '<strong>Owner Project</strong> : ' + project + '</p></div>';
-                        html += '<a userid="' + userid + '" username="' + username + '" password="" idtype="' + userIdType + '" projectid="' + projectId + '" firstname="' + firstname + '" lastname="' + lastname + '" class="editModal secondary-content trigger modal-trigger" href="#editUserModal">'
+                        html += '<a userid="' + userid + '" username="' + username + '" password="" idtype="' + userIdType + '" firstname="' + firstname + '" lastname="' + lastname + '" class="editModal secondary-content trigger modal-trigger" href="#editUserModal" style="z-index: 100;">'
                         html += '<i class="mdi-editor-mode-edit small"></i>';
                         html += '</a>';
                         html += '<a id="rate-user" href="#rate-user-m" userId="'+userid+'" class="rate-user modal-trigger waves-effect waves-light">';
@@ -230,8 +227,6 @@ $(document).ready(function () {
                         $("#editUserModal #password").val(password);
                         $("#editUserModal #firstname").val(firstname);
                         $("#editUserModal #lastname").val(lastname);
-                        $("#editUserModal #projectId").val(projectId);
-
 
                         $("#editUserModal #userID").val(userId);
                         $("#editUserModal #userId").val(userId);
@@ -295,8 +290,6 @@ $(document).ready(function () {
         $("#editUserModal #password").val(password);
         $("#editUserModal #firstname").val(firstname);
         $("#editUserModal #lastname").val(lastname);
-        $("#editUserModal #projectId").val(projectId);
-
 
         $("#editUserModal #userID").val(userId);
         $("#editUserModal #userId").val(userId);

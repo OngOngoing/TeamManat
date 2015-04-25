@@ -88,12 +88,6 @@ public class User extends Model {
     }
 
     public Project getProject() {
-        if(project == null){
-            Project _project = new Project();
-            _project.setProjectName("Mock");
-            _project.setId(Long.parseLong("-1"));
-            return _project;
-        }
         return project;
     }
 

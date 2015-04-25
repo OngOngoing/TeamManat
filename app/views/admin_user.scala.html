@@ -1,4 +1,4 @@
-@(user :User)(users :List[User])(totalPage:Integer)(currentPage : Integer)(projects :List[Project])
+@(users :List[User])(totalPage:Integer)(currentPage : Integer)(projects :List[Project])
     <html>
         <head>
             <title>Exceed Vote</title>
@@ -184,7 +184,7 @@
                                                     }
                                                     <br />
                                                     @if(user.getProject != null ){
-                                                        <strong>Owner Project</strong> : @Project.findById(user.getProject.getId).getProjectName
+                                                        <strong>Owner Project</strong> : @user.getProject.getProjectName
                                                     }else{
                                                         <strong>Owner Project</strong> : None
                                                     }
@@ -203,14 +203,14 @@
                                                 }
                                                 <br />
                                                 @if(user.getProject != null ){
-                                                    <strong>Owner Project</strong> : @Project.findById(user.getProject.getId).getProjectName
+                                                    <strong>Owner Project</strong> : @user.getProject.getProjectName
                                                 }else{
                                                     <strong>Owner Project</strong> : None
                                                 }
                                             </p>
                                         </div>
                                         </div>
-                                        <a userId="@user.getId" username="@user.getUsername" password="" idtype="@user.getIdtype" projectId="@user.getProject.getId" firstname="@user.getFirstname" lastname="@user.getLastname" class="editModal secondary-content trigger modal-trigger" style="z-index: 100;" href="#editUserModal">
+                                        <a userId="@user.getId" username="@user.getUsername" password="" idtype="@user.getIdtype" firstname="@user.getFirstname" lastname="@user.getLastname" class="editModal secondary-content trigger modal-trigger" style="z-index: 100;" href="#editUserModal">
                                             <i class="mdi-editor-mode-edit small"></i>
                                         </a>
                                         <a id="rate-user" href="#rate-user-m" userId="@user.getId" class="rate-user modal-trigger waves-effect waves-light">
