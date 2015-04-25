@@ -89,12 +89,11 @@
                             <th data-field="button"></th>
                         </tr>
                     </thead>
-
                     <tbody>
                     @rates.map { rate =>
                         <tr>
                             <td>@User.findByUserId(rate.getUser.getId).getUsername (ID:@rate.getUser.getId)</td>
-                            <td>@RateCriterion.findById(rate.getId).getName</td>
+                            <td>@RateCriterion.findById(rate.getCriterion.getId).getName</td>
                             <td>@Project.findById(rate.getProject.getId).getProjectName</td>
                             <td>@rate.getScore</td>
                             <td><a rate-id="@rate.getId" href="#confirmDelete" class="delete-rate secondary-content modal-trigger"><i class="mdi-navigation-close trigger"></i></a></td>
