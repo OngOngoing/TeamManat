@@ -97,10 +97,10 @@ public class AdminPage extends Controller {
         List<Map<String, String>> user_data = new ArrayList();
         for(User item : userList){
             Map<String, String> i = new HashMap();
-            if(item.getProject() == null){
+            if(item.getGroup() == null){
                 i.put("project", "None");
             }else{
-                i.put("project", Project.findById(item.getProject().getId()).getProjectName());
+                i.put("project", Project.findById(item.getGroup().getProject().getId()).getProjectName());
             }
             i.put("userType", (item.getIdtype() == User.ADMINISTRATOR) ? "Administrator" : "Normal" );
             i.put("userIdType", String.valueOf(item.getIdtype()));

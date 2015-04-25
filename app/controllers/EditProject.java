@@ -54,8 +54,7 @@ public class EditProject extends Controller {
             flash("error", "Project not found");
             return redirect(routes.EditProject.index(projectId, h));
         }
-        editUser.setProject(project);
-        editUser.update();
+        Groups g = Groups.create(editUser, project);
         Logger.info("["+editUser.getUsername()+"] project = "+project.getProjectName()+"("+project.getId()+")");
         flash("success", "User is added!");
         response().setHeader("Cache-Control","no-cache");
@@ -91,8 +90,8 @@ public class EditProject extends Controller {
         }
         User editUser = User.findByUserId(userId);
         if (editUser != null) {
-            editUser.setProject(null);
-            Logger.info("["+editUser.getUsername()+"] is removed from project");
+            editUser.getGroup().delete();
+            Logger.info("[" + editUser.getUsername() + "] is removed from project");
             editUser.update();
             flash("success", "User is successfully deleted");
         }
@@ -117,7 +116,9 @@ public class EditProject extends Controller {
     public static boolean canEditProject(User user, Long projectId){
         if(user.getIdtype() == User.ADMINISTRATOR)
             return true;
-        if(user.getProject().getId() == projectId)
+        if(user.getGroup() == null)
+            return false;
+        if(user.getGroup().getProject().getId() == projectId)
             return true;
         return false;
     }
@@ -130,6 +131,7 @@ public class EditProject extends Controller {
         Project _pro = Project.findById(proId);
         if(_pro != null) {
             String name = _pro.getProjectName();
+            /*
             List<Rate> _rates = Rate.findListByProject(_pro);
             for (Rate item : _rates) {
                 Logger.info("rate ["+item.getId()+"] is delete. ProId:"+item.getProject().getId()+" UserId:"+item.getUser().getId());
@@ -147,10 +149,11 @@ public class EditProject extends Controller {
             }
             List<User> _users = User.findByProject(_pro);
             for (User item : _users) {
-                item.setProject(null);
+                item.getGroup().delete();
                 Logger.info("["+item.getUsername()+"] is removed from project.");
                 item.update();
             }
+            */
             _pro.delete();
             Logger.info("Project ("+proId+")"+name+" is deleted");
         }

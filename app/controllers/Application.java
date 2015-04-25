@@ -72,7 +72,7 @@ public class Application extends Controller {
     public static Result deleteImg(Long imgId, Long proId, String h){
         User _user = User.findByUserId(Long.parseLong(session("userId")));
         Project _project = Project.findById(proId);
-        if(_user.getProject().getId() != proId && _user.getIdtype() != User.ADMINISTRATOR){
+        if(_user.getGroup().getProject().getId() != proId && _user.getIdtype() != User.ADMINISTRATOR){
             flash("error", "access denied.");
             return redirect(routes.Application.index());
         }
@@ -93,7 +93,7 @@ public class Application extends Controller {
     public static Result setImgDefault(Long imgId, Long proId,String h){
         User _user = User.findByUserId(Long.parseLong(session("userId")));
         Project _project = Project.findById(proId);
-        if(_user.getProject().getId() != proId && _user.getIdtype() != User.ADMINISTRATOR){
+        if(_user.getGroup().getProject().getId() != proId && _user.getIdtype() != User.ADMINISTRATOR){
             flash("error", "access denied.");
             return redirect(routes.Application.index());
         }

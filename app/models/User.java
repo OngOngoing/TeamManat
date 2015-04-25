@@ -8,6 +8,7 @@ import org.mindrot.jbcrypt.BCrypt;
 import play.data.validation.Constraints.Required;
 import play.db.ebean.*;
 import java.util.List;
+import java.util.ArrayList;
 @Entity
 @Table(name = "user_account")
 public class User extends Model {
@@ -30,12 +31,17 @@ public class User extends Model {
     private String lastname;
     private int idtype;
 
-    @ManyToOne
-    @JoinColumn(name = "project_id", referencedColumnName = "id")
-    private Project project;
-
     @OneToMany(cascade = CascadeType.REMOVE, mappedBy = "user")
     private List<Comment> comments;
+
+    @OneToMany(cascade = CascadeType.REMOVE, mappedBy = "user")
+    private List<Vote> votes;
+
+    @OneToMany(cascade = CascadeType.REMOVE, mappedBy = "user")
+    private List<Rate> rates;
+
+    @OneToOne(cascade = CascadeType.REMOVE, mappedBy = "user")
+    private Groups group;
 
     private static Finder<Long, User> find = new Finder<Long, User>(Long.class, User.class);
 
@@ -87,12 +93,12 @@ public class User extends Model {
         this.idtype = idtype;
     }
 
-    public Project getProject() {
-        return project;
+    public Groups getGroup() {
+        return group;
     }
 
-    public void setProject(Project project) {
-        this.project = project;
+    public void setGroup(Groups _group) {
+        group = _group;
     }
 
     public static User authenticate(String username, String password){
@@ -111,7 +117,6 @@ public class User extends Model {
             newUser.lastname = lname;
             newUser.password = BCrypt.hashpw(password, BCrypt.gensalt());
             newUser.idtype = type;
-            newUser.project = null;
             newUser.save();
             return newUser;
         }
@@ -150,7 +155,11 @@ public class User extends Model {
         return listUser;
     }
     public static List<User> findByProject(Project project){
-        List<User> members = find.where().eq("project", project).findList();
+        List<Groups> groups = Groups.findByProject(project);
+        List<User> members = new ArrayList();
+        for(Groups group : groups){
+            members.add(group.getUser());
+        }
         return members;
     }
 }

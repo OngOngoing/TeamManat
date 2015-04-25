@@ -183,8 +183,8 @@
                                                         Normal
                                                     }
                                                     <br />
-                                                    @if(user.getProject != null ){
-                                                        <strong>Owner Project</strong> : @user.getProject.getProjectName
+                                                    @if(user.getGroup != null ){
+                                                        <strong>Owner Project</strong> : @user.getGroup.getProject.getProjectName
                                                     }else{
                                                         <strong>Owner Project</strong> : None
                                                     }
@@ -202,8 +202,8 @@
                                                     Normal
                                                 }
                                                 <br />
-                                                @if(user.getProject != null ){
-                                                    <strong>Owner Project</strong> : @user.getProject.getProjectName
+                                                @if(user.getGroup != null ){
+                                                    <strong>Owner Project</strong> : @user.getGroup.getProject.getProjectName
                                                 }else{
                                                     <strong>Owner Project</strong> : None
                                                 }

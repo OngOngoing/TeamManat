@@ -16,8 +16,8 @@ public class Project extends Model
     private String projectName;
     private String projectDescription;
 
-    @OneToMany(cascade = CascadeType.DETACH, mappedBy = "project")
-    private List<User> members;
+    @OneToMany(cascade = CascadeType.REMOVE, mappedBy = "project")
+    private List<Groups> memnbers;
 
     @OneToMany(cascade = CascadeType.REMOVE, mappedBy = "project")
     private List<Image> images;
@@ -76,20 +76,20 @@ public class Project extends Model
         this.projectDescription = projectDescription;
     }
 
-    public List<User> getMembers() {
-        return members;
-    }
-
-    public void setMembers(List<User> members) {
-        this.members = members;
-    }
-
     public List<Image> getImages() {
         return images;
     }
 
     public void setImages(List<Image> images) {
         this.images = images;
+    }
+
+    public List<Groups> getMemnbers() {
+        return memnbers;
+    }
+
+    public void setMemnbers(List<Groups> memnbers) {
+        this.memnbers = memnbers;
     }
 
     public static void deleteProject(Project pro){

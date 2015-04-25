@@ -72,8 +72,8 @@
                             </a>
                         </div>
                     }else {
-                        @if(user.getProject != null) {
-                            @if(user.getProject.getId == project.getId) {
+                        @if(user.getGroup.getProject != null) {
+                            @if(user.getGroup.getProject.getId == project.getId) {
                                 <div class="center-on-small-only">
                                     <a class="waves-effect waves-light btn" href="@routes.EditProject.index(project.getId, routes.RateProject.index(project.getId) + "")">
                                         <i class="mdi-image-edit left"></i>EDIT
