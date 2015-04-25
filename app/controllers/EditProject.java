@@ -13,9 +13,7 @@ import java.util.List;
 import play.libs.Json;
 import java.util.Map;
 import java.util.ArrayList;
-/**
- * Created by Chin on 4/15/2015.
- */
+
 public class EditProject extends Controller {
     @Security.Authenticated(Secured.class)
     public static Result index(Long projectId, String h){
@@ -131,29 +129,6 @@ public class EditProject extends Controller {
         Project _pro = Project.findById(proId);
         if(_pro != null) {
             String name = _pro.getProjectName();
-            /*
-            List<Rate> _rates = Rate.findListByProject(_pro);
-            for (Rate item : _rates) {
-                Logger.info("rate ["+item.getId()+"] is delete. ProId:"+item.getProject().getId()+" UserId:"+item.getUser().getId());
-                item.delete();
-            }
-            List<Vote> _votes = Vote.findByProject(_pro);
-            for (Vote item : _votes) {
-                Logger.info("vote ["+item.getId()+"] is delete. ProId:"+item.getProject().getId()+" UserId:"+item.getUser().getId());
-                item.delete();
-            }
-            List<Comment> _comments = Comment.findListByProject(_pro);
-            for (Comment item : _comments) {
-                Logger.info("comment ["+item.getId()+"] is delete. ProId:"+item.getProject().getId()+" UserId:"+item.getUser().getId());
-                item.delete();
-            }
-            List<User> _users = User.findByProject(_pro);
-            for (User item : _users) {
-                item.getGroup().delete();
-                Logger.info("["+item.getUsername()+"] is removed from project.");
-                item.update();
-            }
-            */
             _pro.delete();
             Logger.info("Project ("+proId+")"+name+" is deleted");
         }
