@@ -66,13 +66,13 @@
                                     @if(mappedRates.get(project.getId) == 0) {
                                         <p class="secondary-text hide-on-med-and-down">click here to rate this project</p>
                                         <div class="info">NOT YET RATED</div>
-                                    } @if(criteriaLeft == 1) {
+                                    } @if(criteriaLeft == 1 && ratingCriteria.size > 1) {
                                         <p class="secondary-text hide-on-med-and-down">click here to update your rate</p>
                                         <div class="info">1 CRITERION LEFT</div>
                                     } @if(criteriaLeft > 1 && criteriaLeft < ratingCriteria.size) {
                                         <p class="secondary-text hide-on-med-and-down">click here to update your rate</p>
                                         <div class="info">@criteriaLeft CRITERIA LEFT</div>
-                                    } @if(criteriaLeft == 0) {
+                                    } @if(criteriaLeft == 0 && ratingCriteria.size > 0) {
                                         <p class="secondary-text hide-on-med-and-down">click here to edit your rate</p>
                                         <div class="info">COMPLETED</div>
                                     }

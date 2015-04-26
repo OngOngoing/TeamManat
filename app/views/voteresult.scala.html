@@ -1,7 +1,7 @@
 @(user: User)(criteria: List[VoteCriterion])(projects: List[Project])(winnerSummary: Map[VoteCriterion,List[Vote.ResultBundle]])(orderedSummary: Map[VoteCriterion,List[Vote.ResultBundle]])
 @import java.util
 @import models.Vote.ResultBundle
-@import java.math.BigInteger; var totalVotes = orderedSummary.get(criteria(0)).get(0).asInstanceOf[Vote.ResultBundle].totalVotes
+@import java.math.BigInteger; var totalVotes = 0;
 
 <!DOCTYPE html>
 
@@ -40,49 +40,55 @@
             <div class="divider"></div>
 
             <div class="section animated fadeIn">
+                @if(criteria.size == 0) {
+                    <div class="center-align flow-text">It's lonely here.</div>
+                    <h5 class="center-align">There is no voting criterion.</h5>
+                } else {
+                    <ul class="collapsible" data-collapsible="accordion">
+                        <li>
+                            <div class="collapsible-header trigger-text trigger"><i class="mdi-action-grade"></i>
+                                Show Winner</div>
+                            <div class="collapsible-body">
+                                <div class="collapsible-container">
+                                    <table class="hoverable centered">
+                                        <thead>
+                                            <tr>
+                                                <th class="topic-banner flow-text" data-field="project_name">Criterion</th>
+                                                <th class="topic-banner flow-text" data-field="score_percent">Winner</th>
+                                                <th class="topic-banner flow-text" data-field="score_sum">Votes</th>
+                                            </tr>
+                                        </thead>
 
-                <ul class="collapsible" data-collapsible="accordion">
-                    <li>
-                        <div class="collapsible-header trigger-text trigger"><i class="mdi-action-grade"></i>Show Winner</div>
-                        <div class="collapsible-body">
-                            <div class="collapsible-container">
-                            <table class="hoverable centered">
-                                <thead>
-                                    <tr>
-                                        <th class="topic-banner flow-text" data-field="project_name">Criterion</th>
-                                        <th class="topic-banner flow-text" data-field="score_percent">Winner</th>
-                                        <th class="topic-banner flow-text" data-field="score_sum">Votes</th>
-                                    </tr>
-                                </thead>
+                                        <tbody>
 
-                                <tbody>
+                                        @criteria.map { criterion =>
+                                            <tr>
+                                                <td class="flow-text">@criterion.getName</td>
+                                                <td class="flow-text">
+                                                @if(winnerSummary.get(criterion).size > 1) {
+                                                    @winnerSummary.get(criterion).map { eachWinner =>
+                                                        <div>@eachWinner.project.getProjectName</div>
+                                                    }
+                                                } else {
+                                                    @winnerSummary.get(criterion)(0).project.getProjectName
+                                                }
+                                                </td>
+                                                <td class="flow-text">@winnerSummary.get(criterion)(0).sum</td>
+                                            </tr>
+                                        }
 
-                                @criteria.map { criterion =>
-                                    <tr>
-                                        <td class="flow-text">@criterion.getName</td>
-                                        <td class="flow-text">
-                                        @if(winnerSummary.get(criterion).size > 1) {
-                                            @winnerSummary.get(criterion).map { eachWinner =>
-                                                <div>@eachWinner.project.getProjectName</div>
-                                            }
-                                        } else {
-                                            @winnerSummary.get(criterion)(0).project.getProjectName
-                                            }
-                                        </td>
-                                        <td class="flow-text">@winnerSummary.get(criterion)(0).sum</td>
-                                    </tr>
-                                }
+                                        </tbody>
 
-                                </tbody>
-
-                            </table>
+                                    </table>
+                                </div>
                             </div>
-                        </div>
-                    </li>
-                </ul>
+                        </li>
+                    </ul>
 
-                @criteria.map { criterion =>
-                    @{totalVotes = orderedSummary.get(criterion).get(0).asInstanceOf[Vote.ResultBundle].totalVotes}
+                    @criteria.map { criterion =>
+                        @{
+                            totalVotes = orderedSummary.get(criterion).get(0).asInstanceOf[Vote.ResultBundle].totalVotes
+                        }
                     <div class="card-panel">
 
                         <h4 class="center-align criterion-banner">@criterion.getName</h4>
@@ -97,24 +103,24 @@
 
                             <tbody>
 
-                                @orderedSummary.get(criterion).map { orderedBundle =>
-                                    <tr>
-                                        <td class="flow-text">@orderedBundle.asInstanceOf[Vote.ResultBundle].project.getProjectName</td>
-                                        <td class="flow-text">
-                                            <div class="progress trigger">
-                                                <div class="determinate" style="width: @orderedBundle.asInstanceOf[Vote.ResultBundle].roundedPercent%"></div>
-                                            </div>
-                                            @orderedBundle.asInstanceOf[Vote.ResultBundle].roundedPercent %
+                            @orderedSummary.get(criterion).map { orderedBundle =>
+                                <tr>
+                                    <td class="flow-text">@orderedBundle.asInstanceOf[Vote.ResultBundle].project.getProjectName</td>
+                                    <td class="flow-text">
+                                        <div class="progress trigger">
+                                            <div class="determinate" style="width : @orderedBundle.asInstanceOf[Vote.ResultBundle].roundedPercent%"></div>
+                                        </div>
+                                        @orderedBundle.asInstanceOf[Vote.ResultBundle].roundedPercent %
 
-                                        </td>
-                                        <td class="flow-text">@orderedBundle.asInstanceOf[Vote.ResultBundle].sum</td>
-                                    </tr>
-                                }
+                                    </td>
+                                    <td class="flow-text">@orderedBundle.asInstanceOf[Vote.ResultBundle].sum</td>
+                                </tr>
+                            }
 
                             </tbody>
-
                         </table>
                     </div>
+                    }
                 }
 
             </div>
