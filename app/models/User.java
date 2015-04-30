@@ -37,6 +37,12 @@ public class User extends Model {
     @OneToMany(cascade = CascadeType.REMOVE, mappedBy = "user")
     private List<Comment> comments;
 
+    @OneToMany(cascade = CascadeType.REMOVE, mappedBy = "project")
+    private List<Rate> rates;
+
+    @OneToMany(cascade = CascadeType.REMOVE, mappedBy = "project")
+    private List<Vote> votes;
+
     private static Finder<Long, User> find = new Finder<Long, User>(Long.class, User.class);
 
     public Long getId() {

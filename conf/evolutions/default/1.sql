@@ -59,7 +59,7 @@ create table user_account (
   firstname                 varchar(255) not null,
   lastname                  varchar(255),
   idtype                    integer,
-  project_id                bigint,
+  project_id                bigint not null,
   constraint uq_user_account_username unique (username),
   constraint pk_user_account primary key (id))
 ;
