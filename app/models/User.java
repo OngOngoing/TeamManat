@@ -3,6 +3,7 @@ package models;
 import javax.persistence.*;
 import javax.validation.constraints.*;
 
+import util.Authenticator;
 import com.avaje.ebean.Expr;
 import org.mindrot.jbcrypt.BCrypt;
 import play.data.validation.Constraints.Required;
@@ -99,14 +100,6 @@ public class User extends Model {
 
     public void setGroup(Groups _group) {
         group = _group;
-    }
-
-    public static User authenticate(String username, String password){
-        User _login = User.find.where().eq("username", username).findUnique();
-        if(_login == null) return null;
-        if(BCrypt.checkpw(password, _login.password))
-            return _login;
-        return null;
     }
 
     public static User create(String username, String password, String fname,String lname, int type){

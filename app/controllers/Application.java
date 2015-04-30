@@ -10,6 +10,7 @@ import play.mvc.*;
 import play.data.*;
 import java.util.ArrayList;
 
+import util.Authenticator;
 import views.html.*;
 
 public class Application extends Controller {
@@ -27,7 +28,8 @@ public class Application extends Controller {
         DynamicForm dynamicForm = new DynamicForm().bindFromRequest();
         String username = dynamicForm.get("username");
         String password = dynamicForm.get("password");
-        User user = User.authenticate(username, password);
+
+        User user = Authenticator.getInstance().authenticate(username,password);
         if (user == null) {
             Logger.error("Login failed : cannot found user.");
             flash("error", "Username and password are incorrect.");
