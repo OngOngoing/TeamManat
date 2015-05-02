@@ -27,7 +27,6 @@ public class RateCalculator extends Controller {
         List<Project> projects = Project.findAll();
         List<RateCriterion> criteria = RateCriterion.findAll();
         List<ArrayList<String>> result = new ArrayList<ArrayList<String>>();
-        List<Comment> comments = Comment.findAll();
         for(Project p : projects){
             ArrayList<String> perProject = new ArrayList<String>();
             double allSum = 0;
@@ -57,7 +56,7 @@ public class RateCalculator extends Controller {
             result.add(perProject);
         }
         response().setHeader("Cache-Control","no-cache");
-        return ok(ratecalpage.render(thisUser,projects,criteria,comments,result));
+        return ok(ratecalpage.render(thisUser,projects,criteria,result));
     }
     public static Result rateSortByCriteria() {
         boolean isTimeUp = Setting.isTimeUp();

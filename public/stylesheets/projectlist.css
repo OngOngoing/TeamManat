@@ -299,3 +299,28 @@
     text-transform: uppercase;
     text-align: left;
 }
+.menu-s{
+    background: rgba(0, 0, 0, .1);
+    content: '';
+    height: 50px;
+    margin-top: 5px;
+    position: absolute;
+    width: 1px;
+}
+.badge {
+    position:relative;
+}
+.badge[data-badge]:after {
+    content:attr(data-badge);
+    position:absolute;
+    top:15%;
+    left: 50%;
+    font-size:.5rem;
+    background:red;
+    color:white;
+    width:18px;
+    height:18px;
+    text-align:center;
+    line-height:18px;
+    box-shadow:0 0 1px #333;
+}

@@ -1,4 +1,4 @@
-@(user: User)(projects: List[Project])(criteria: List[RateCriterion])(comments: List[Comment])(result: List[ArrayList[String]])
+@(user: User)(projects: List[Project])(criteria: List[RateCriterion])(result: List[ArrayList[String]])
 @import java.math.BigInteger; var index = 0; var index2 = 0;
     <html>
         <head>
@@ -76,44 +76,11 @@
                             }
                             </tbody>
                         </table>
-                        <ul class="collapsible" data-collapsible="Expandable">
-                            <li>
-                                <div class="collapsible-header trigger trigger-text" ><i class="mdi-communication-comment"></i>
-                                    Comments</div>
-                                <div class="collapsible-body ">
-                                    <ul class="collapsible" data-collapsible="accordion">
-                                    @if(Comment.findListByProject(projects.get(index)).size == 0) {
-                                        <p><I>No comment</I></p>
-                                    } else {
-                                        @comments.map { comment =>
-                                            @if(comment.getProject.getId == projects.get(index).getId) {
-                                                <li>
-                                                    <div class="collapsible-header "><i class="mdi-action-face-unlock"></i>@User.findName(comment.getUser) </div>
-                                                    <div class="collapsible-body ">
-                                                        <div class = "row">
-                                                            <div class = "col s12 center">
-                                                                <p class="" >@comment.getComment</p>
-                                                            </div>
-                                                        </div>
-                                                        <div class ="divider "></div>
-                                                    </div>
-                                                </li>
-                                            }
-                                        }
-                                    }
-                                    </ul>
-                                </div>
-                            </li>
-                        </ul>
                     </div>
                 </li>
                 }
                 </ul>
-                <br>
-
-            </div>
-
-
+                <br />
             <div class="fixed-action-btn animated bounceInUp" style="bottom : 45 px ; right : 40 px ;">
                 <a class="btn-floating btn-large trigger" href="@routes.ProjectList.index()">
                     <i class="large mdi-action-home waves-effect waves-light"></i>
