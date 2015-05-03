@@ -11,6 +11,7 @@ $(function () {
     );
     $('#inbox').click(function(){
         $('.pointer').css('left', $(this).position().left - $('#inbox_message').position().left + 15 );
+        $('.badge').removeAttr('data-badge');
     });
     $('#scrollbar-message').slimscroll({
         color: '#000',
