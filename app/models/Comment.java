@@ -72,14 +72,15 @@ public class Comment extends Model {
         if(_comment != null){
             _comment.comment = comment;
             _comment.update();
-            return _comment;
+        }else {
+            _comment = new Comment();
+            _comment.user = user;
+            _comment.project = project;
+            _comment.comment = comment;
+            _comment.save();
         }
-        Comment thisComment = new Comment();
-        thisComment.user = user;
-        thisComment.project = project;
-        thisComment.comment = comment;
-        thisComment.save();
-        return thisComment;
+        Inbox.createByProject(user, project, _comment);
+        return _comment;
     }
 
     public static List<Comment> findAll(){

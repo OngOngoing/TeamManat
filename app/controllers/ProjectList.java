@@ -8,7 +8,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Map;
-
+import java.util.List;
 public class ProjectList extends Controller {
 
     @Security.Authenticated(Secured.class)
@@ -33,8 +33,9 @@ public class ProjectList extends Controller {
         } catch (ParseException e) {
             e.printStackTrace();
         }
+        List<Comment> comments = Inbox.findCommentByReceiver(user);
         response().setHeader("Cache-Control","no-cache");
-        return ok(projectlist.render(Project.findAll(),RateCriterion.findAll(),mappedRate,user,_time));
+        return ok(projectlist.render(Project.findAll(),RateCriterion.findAll(),mappedRate,user,_time, comments));
     }
 
 }

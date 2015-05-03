@@ -302,7 +302,7 @@ public class AdminPage extends Controller {
         DynamicForm dynamicForm = new DynamicForm().bindFromRequest();
         List<Setting> settings = Setting.findAll();
         for(Setting item : settings){
-            Setting.update(item.getKeyName(), dynamicForm.get(item.getKeyName()));
+            Setting.update(item, dynamicForm.get(item.getKeyName()));
         }
         flash("setting_save_success","Settings saved");
         response().setHeader("Cache-Control", "no-cache");

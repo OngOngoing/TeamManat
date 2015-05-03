@@ -26,12 +26,13 @@ create table image (
   constraint pk_image primary key (id))
 ;
 
-create table inbox (
+create table inbox_message (
   id                        bigint auto_increment not null,
   sender_id                 bigint,
   receiver_id               bigint,
   comment_id                bigint,
-  constraint pk_inbox primary key (id))
+  is_read                   integer,
+  constraint pk_inbox_message primary key (id))
 ;
 
 create table project (
@@ -103,12 +104,12 @@ alter table groups add constraint fk_groups_project_4 foreign key (project_id) r
 create index ix_groups_project_4 on groups (project_id);
 alter table image add constraint fk_image_project_5 foreign key (project_id) references project (id) on delete restrict on update restrict;
 create index ix_image_project_5 on image (project_id);
-alter table inbox add constraint fk_inbox_sender_6 foreign key (sender_id) references user_account (id) on delete restrict on update restrict;
-create index ix_inbox_sender_6 on inbox (sender_id);
-alter table inbox add constraint fk_inbox_receiver_7 foreign key (receiver_id) references user_account (id) on delete restrict on update restrict;
-create index ix_inbox_receiver_7 on inbox (receiver_id);
-alter table inbox add constraint fk_inbox_comment_8 foreign key (comment_id) references comment (id) on delete restrict on update restrict;
-create index ix_inbox_comment_8 on inbox (comment_id);
+alter table inbox_message add constraint fk_inbox_message_sender_6 foreign key (sender_id) references user_account (id) on delete restrict on update restrict;
+create index ix_inbox_message_sender_6 on inbox_message (sender_id);
+alter table inbox_message add constraint fk_inbox_message_receiver_7 foreign key (receiver_id) references user_account (id) on delete restrict on update restrict;
+create index ix_inbox_message_receiver_7 on inbox_message (receiver_id);
+alter table inbox_message add constraint fk_inbox_message_comment_8 foreign key (comment_id) references comment (id) on delete restrict on update restrict;
+create index ix_inbox_message_comment_8 on inbox_message (comment_id);
 alter table rate add constraint fk_rate_user_9 foreign key (user_id) references user_account (id) on delete restrict on update restrict;
 create index ix_rate_user_9 on rate (user_id);
 alter table rate add constraint fk_rate_project_10 foreign key (project_id) references project (id) on delete restrict on update restrict;
@@ -134,7 +135,7 @@ drop table groups;
 
 drop table image;
 
-drop table inbox;
+drop table inbox_message;
 
 drop table project;
 

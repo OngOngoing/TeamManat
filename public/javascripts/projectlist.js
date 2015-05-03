@@ -3,6 +3,22 @@ $(function () {
     $('.projectDescription').each(function () {
         $(this).html(convert($(this).attr("data")));
     });
+    $('.dropdown-button').dropdown({
+            inDuration: 0,
+            gutter: -250,
+            belowOrigin: true
+        }
+    );
+    $('#inbox').click(function(){
+        $('.pointer').css('left', $(this).position().left - $('#inbox_message').position().left + 15 );
+    });
+    $('#scrollbar-message').slimscroll({
+        color: '#000',
+        size: '10px',
+        width: '100%',
+        height: 'auto',
+        maxHeight: '250px'
+    });
     $('#countdown').each(function(){
       $(this).countdown($('#countdown').attr("end-date"))
           .on('update.countdown', function (event) {
