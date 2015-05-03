@@ -20,6 +20,9 @@ public class Comment extends Model {
     @JoinColumn(name = "project_id", referencedColumnName = "id")
     private Project project;
 
+    @OneToMany(cascade = CascadeType.REMOVE, mappedBy = "comment")
+    private List<Inbox> inbox;
+
     private String comment;
 
     private static Finder<Long, Comment> find = new Finder<Long, Comment>(Long.class, Comment.class);
@@ -54,6 +57,14 @@ public class Comment extends Model {
 
     public void setComment(String comment) {
         this.comment = comment;
+    }
+
+    public List<Inbox> getInbox() {
+        return inbox;
+    }
+
+    public void setInbox(List<Inbox> inbox) {
+        this.inbox = inbox;
     }
 
     public static Comment create(User user, Project project, String comment) {

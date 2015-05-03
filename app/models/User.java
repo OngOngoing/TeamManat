@@ -44,6 +44,12 @@ public class User extends Model {
     @OneToOne(cascade = CascadeType.REMOVE, mappedBy = "user")
     private Groups group;
 
+    @OneToMany(cascade = CascadeType.REMOVE, mappedBy = "sender")
+    private List<Inbox> sender;
+
+    @OneToMany(cascade = CascadeType.REMOVE, mappedBy = "receiver")
+    private List<Inbox> receiver;
+
     private static Finder<Long, User> find = new Finder<Long, User>(Long.class, User.class);
 
     public Long getId() {

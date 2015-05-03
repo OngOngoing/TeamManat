@@ -26,6 +26,14 @@ create table image (
   constraint pk_image primary key (id))
 ;
 
+create table inbox (
+  id                        bigint auto_increment not null,
+  sender_id                 bigint,
+  receiver_id               bigint,
+  comment_id                bigint,
+  constraint pk_inbox primary key (id))
+;
+
 create table project (
   id                        bigint auto_increment not null,
   project_name              varchar(255),
@@ -95,18 +103,24 @@ alter table groups add constraint fk_groups_project_4 foreign key (project_id) r
 create index ix_groups_project_4 on groups (project_id);
 alter table image add constraint fk_image_project_5 foreign key (project_id) references project (id) on delete restrict on update restrict;
 create index ix_image_project_5 on image (project_id);
-alter table rate add constraint fk_rate_user_6 foreign key (user_id) references user_account (id) on delete restrict on update restrict;
-create index ix_rate_user_6 on rate (user_id);
-alter table rate add constraint fk_rate_project_7 foreign key (project_id) references project (id) on delete restrict on update restrict;
-create index ix_rate_project_7 on rate (project_id);
-alter table rate add constraint fk_rate_criterion_8 foreign key (criteria_id) references rate_criterion (id) on delete restrict on update restrict;
-create index ix_rate_criterion_8 on rate (criteria_id);
-alter table vote add constraint fk_vote_user_9 foreign key (user_id) references user_account (id) on delete restrict on update restrict;
-create index ix_vote_user_9 on vote (user_id);
-alter table vote add constraint fk_vote_criterion_10 foreign key (criteria_id) references vote_criterion (id) on delete restrict on update restrict;
-create index ix_vote_criterion_10 on vote (criteria_id);
-alter table vote add constraint fk_vote_project_11 foreign key (project_id) references project (id) on delete restrict on update restrict;
-create index ix_vote_project_11 on vote (project_id);
+alter table inbox add constraint fk_inbox_sender_6 foreign key (sender_id) references user_account (id) on delete restrict on update restrict;
+create index ix_inbox_sender_6 on inbox (sender_id);
+alter table inbox add constraint fk_inbox_receiver_7 foreign key (receiver_id) references user_account (id) on delete restrict on update restrict;
+create index ix_inbox_receiver_7 on inbox (receiver_id);
+alter table inbox add constraint fk_inbox_comment_8 foreign key (comment_id) references comment (id) on delete restrict on update restrict;
+create index ix_inbox_comment_8 on inbox (comment_id);
+alter table rate add constraint fk_rate_user_9 foreign key (user_id) references user_account (id) on delete restrict on update restrict;
+create index ix_rate_user_9 on rate (user_id);
+alter table rate add constraint fk_rate_project_10 foreign key (project_id) references project (id) on delete restrict on update restrict;
+create index ix_rate_project_10 on rate (project_id);
+alter table rate add constraint fk_rate_criterion_11 foreign key (criteria_id) references rate_criterion (id) on delete restrict on update restrict;
+create index ix_rate_criterion_11 on rate (criteria_id);
+alter table vote add constraint fk_vote_user_12 foreign key (user_id) references user_account (id) on delete restrict on update restrict;
+create index ix_vote_user_12 on vote (user_id);
+alter table vote add constraint fk_vote_criterion_13 foreign key (criteria_id) references vote_criterion (id) on delete restrict on update restrict;
+create index ix_vote_criterion_13 on vote (criteria_id);
+alter table vote add constraint fk_vote_project_14 foreign key (project_id) references project (id) on delete restrict on update restrict;
+create index ix_vote_project_14 on vote (project_id);
 
 
 
@@ -119,6 +133,8 @@ drop table comment;
 drop table groups;
 
 drop table image;
+
+drop table inbox;
 
 drop table project;
 
