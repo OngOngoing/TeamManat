@@ -32,6 +32,7 @@ create table inbox_message (
   receiver_id               bigint,
   comment_id                bigint,
   is_read                   integer,
+  timestamp                 datetime not null,
   constraint pk_inbox_message primary key (id))
 ;
 

@@ -1,5 +1,5 @@
 @(user: User)(project: Project)(thisRate: List[Rate])(criterias: List[RateCriterion])(images: List[Image])(teamMember: List[User])(thisComment: Comment)(setting: Map[String, String])
-    @import java.math.BigInteger; var isRate = false; var numOfUnread = Inbox.findNumOfUnreadByReceiver(user); var comments = Inbox.findCommentByReceiver(user);
+    @import java.math.BigInteger; var isRate = false; var numOfUnread = Inbox.findNumOfUnreadByReceiver(user); var comments = Inbox.findAllByReceiver(user);
     @canRate = @{
         import java.util.Calendar
         import java.text.SimpleDateFormat
@@ -30,15 +30,9 @@
                         <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="mdi-navigation-menu"></i></a>
                         <div class="center">
                             <ul class="right hide-on-med-and-down">
-                                <li><a href="@routes.RateCalculator.index()"><i class="medium mdi-editor-insert-chart left"></i>
-                                    Rating Result</a>
-                                </li>
-                                <li><div class="menu-s"></div><a href="@routes.VoteController.showResult()"><i class="medium mdi-action-class left"></i>
-                                    Voting Result</a>
-                                </li>
-                                <li><div class="menu-s"></div><a href="@routes.VoteController.index()"><i class="medium mdi-maps-rate-review left"></i>
-                                    Let's Vote!</a>
-                                </li>
+                                <li><a href="@routes.RateCalculator.index()"><i class="medium mdi-editor-insert-chart left"></i>Rating Result</a></li>
+                                <li><div class="menu-s"></div><a href="@routes.VoteController.showResult()"><i class="medium mdi-action-class left"></i>Voting Result</a></li>
+                                <li><div class="menu-s"></div><a href="@routes.VoteController.index()"><i class="medium mdi-maps-rate-review left"></i>Let's Vote!</a></li>
                                 @if(numOfUnread == 0) {
                                     <li><a href="#!" id="inbox" class="dropdown-button backgroud-link" data-activates='inbox_message'><i class="medium mdi-communication-forum center badge"></i></a></li>
                                 }else{
@@ -48,12 +42,7 @@
                                     <div id='inbox-message-arrow' class="pointer"></div>
                                     <div id="scrollbar-message" class="mousescroll">
                                         @comments.map{ comment =>
-                                            <li class="inbox-li collection-item"><a href="#!">
-                                                @comment.getComment
-                                            <br /><span class="secondary-text">
-                                                from @comment.getUser.getUsername
-                                            </span>
-                                            </a></li>
+                                            <li class="inbox-li collection-item" id="inbox-id-@comment.getId" inbox-id="@comment.getId">@if(comment.isRead==Inbox.UNREAD){<i class="mdi-content-markunread left" id="icon-inbox-@comment.getId" style="margin-right: -10px;padding-left: 10px;"></i>}else{<i class="mdi-content-drafts left" style="margin-right: -10px;padding-left: 10px;"></i>}<a href="#!">@comment.getComment.getComment<br /><span class="secondary-text">from @comment.getComment.getUser.getUsername @comment.getTimestamp</span></a></li>
                                             <li class="divider"></li>
                                         }
                                         @if(comments.size == 0){
@@ -63,19 +52,18 @@
                                 </ul>
                                 <li><a href="@routes.Application.logout()" class="backgroud-link"><i class="medium mdi-action-lock-outline center"></i></a></li>
                             </ul>
-                            <ul class="side-nav" id="mobile-demo" style="margin-right : - 40 px ;">
-                                <li><a href="@routes.RateCalculator.index()"><i class="medium mdi-editor-insert-chart left"></i>
-                                    Rating Result</a>
-                                </li>
-                                <li><a href="@routes.VoteController.showResult()"><i class="medium mdi-action-class left"></i>
-                                    Voting Result</a>
-                                </li>
-                                <li><a href="@routes.VoteController.index()"><i class="medium mdi-maps-rate-review left"></i>
-                                    Let's Vote!</a>
-                                </li>
-                                <li><a href="@routes.Application.logout()"><i class="medium mdi-action-settings-power left"></i>
-                                    Logout</a>
-                                </li>
+                            <ul class="side-nav" id="mobile-demo" style="margin-right: -40px;">
+                                <li><a href="@routes.RateCalculator.index()"><i class="medium mdi-editor-insert-chart left"></i>Rating Result</a></li>
+                                <li><a href="@routes.VoteController.showResult()"><i class="medium mdi-action-class left"></i>Voting Result</a></li>
+                                <li><a href="@routes.VoteController.index()"><i class="medium mdi-maps-rate-review left"></i>Let's Vote!</a></li>
+                                @if(numOfUnread == 0) {
+                                    <li><a id='inbox' href="@routes.Application.inboxMobile()" data-activates='inbox_message'><i class="medium mdi-communication-forum left badge"></i>
+                                        Inbox</a></li>
+                                }else{
+                                    <li><a id="inbox" href="@routes.Application.inboxMobile()" data-activates='inbox_message'><i class="medium mdi-communication-forum left badge" data-badge="@numOfUnread"></i>
+                                        Inbox</a></li>
+                                }
+                                <li><a href="@routes.Application.logout()"><i class="medium mdi-action-settings-power left"></i>Logout</a></li>
                             </ul>
                         </div>
                     </div>

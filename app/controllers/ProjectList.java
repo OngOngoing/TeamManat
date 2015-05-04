@@ -33,7 +33,7 @@ public class ProjectList extends Controller {
         } catch (ParseException e) {
             e.printStackTrace();
         }
-        List<Comment> comments = Inbox.findCommentByReceiver(user);
+        List<Inbox> comments = Inbox.findAllByReceiver(user);
         response().setHeader("Cache-Control","no-cache");
         return ok(projectlist.render(Project.findAll(),RateCriterion.findAll(),mappedRate,user,_time, comments));
     }

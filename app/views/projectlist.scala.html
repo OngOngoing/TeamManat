@@ -32,8 +32,21 @@
                                 <div id='inbox-message-arrow' class="pointer"></div>
                                 <div id="scrollbar-message" class="mousescroll">
                                     @comments.map{ comment =>
-                                        <li class="inbox-li collection-item">@if(comment.isRead==Inbox.UNREAD){<i class="mdi-content-markunread left" style="margin-right: -10px;padding-left: 10px;"></i>}else{<i class="mdi-content-drafts left" style="margin-right: -10px;padding-left: 10px;"></i>}<a href="#!">@comment.getComment.getComment<br /><span class="secondary-text">from @comment.getComment.getUser.getUsername @comment.getTimestamp</span></a></li>
-                                        <li class="divider"></li>
+                                        @if(comment.isRead==Inbox.UNREAD) {
+                                            <li class="inbox-li collection-item tooltipped" id="inbox-id-@comment.getId" inbox-id="@comment.getId" data-position="left" data-delay="50" data-tooltip="Make as read">
+                                                <i class="mdi-content-markunread left" id="icon-inbox-@comment.getId" style="margin-right : - 10px ; padding-left : 10px ;"></i>
+                                                <a href="#!">@comment.getComment.getComment <br /> <span class="secondary-text">
+                                                    from @comment.getComment.getUser.getUsername @comment.getTimestamp</span></a>
+                                            </li>
+                                            <li class="divider"></li>
+                                        }else{
+                                            <li class="inbox-li collection-item tooltipped" id="inbox-id-@comment.getId" inbox-id="@comment.getId" data-position="left" data-delay="50" data-tooltip="Make as unread">
+                                                <i class="mdi-content-drafts left" id="icon-inbox-@comment.getId" style="margin-right : -10px ; padding-left : 10px ;"></i>
+                                                <a href="#!">@comment.getComment.getComment <br /> <span class="secondary-text">
+                                                    from @comment.getComment.getUser.getUsername @comment.getTimestamp</span></a>
+                                            </li>
+                                            <li class="divider"></li>
+                                        }
                                     }
                                     @if(comments.size == 0){
                                         <li class="inbox-li"><a><span class="secondary-text">Inbox is empty.</span></a></li>
@@ -131,7 +144,6 @@
                     </ul>
                 </div>
         }
-
         <script src="http://code.jquery.com/jquery-2.1.3.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.96.1/js/materialize.min.js"></script>
         <script src="@routes.Assets.at("javascripts/jquery-ui.js")"></script>

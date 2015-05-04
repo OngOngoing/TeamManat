@@ -166,8 +166,8 @@ ul {
     font-weight: normal !important;
     color: rgba(0, 0, 0, 0.87) !important;
     overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
+    white-space: pre-line;
+    word-wrap:break-word;
 }
 .inbox-li a .secondary-text{
     text-align: right;

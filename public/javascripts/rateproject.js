@@ -40,4 +40,16 @@ $(document).ready(function(){
         height: 'auto',
         maxHeight: '250px'
     });
+    $('li[id^="inbox-id-"]').click(function(){
+        var that = $(this);
+        $.ajax({
+            type: "get",
+            url: "../inbox/" + $(this).attr("inbox-id"),
+            dataType: "text",
+            success: function (msg) {
+                $("#icon-inbox-"+that.attr("inbox-id")).removeClass();
+                $("#icon-inbox-"+that.attr("inbox-id")).attr('class', 'mdi-content-drafts left');
+            }
+        });
+    });
 });

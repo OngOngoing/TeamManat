@@ -61,6 +61,7 @@ GET         /delimg/:proId/:id                                 controllers.Appli
 GET         /setimg/:proId/:id                                 controllers.Application.setImgDefault(id:Long, proId:Long,h :String)
 
 GET         /inbox                                             controllers.Application.inboxMobile()
+GET         /inbox/:id                                         controllers.Application.inboxRead(id:Long)
 # Create initial data for testing.
 GET         /install                                           controllers.Application.mockDatabase()
 # Map static resources from the /public folder to the /assets URL path

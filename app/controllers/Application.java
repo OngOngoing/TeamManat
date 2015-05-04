@@ -51,7 +51,7 @@ public class Application extends Controller {
     public static Result login(){
         return ok(login.render(""));
     }
-
+    @Security.Authenticated(Secured.class)
     public static Result getImgs(Long proId){
         Project project = Project.findById(proId);
         List<Image> images = Image.findImageOfProject(project);
@@ -65,11 +65,12 @@ public class Application extends Controller {
         }
         return ok(Json.toJson(img));
     }
+    @Security.Authenticated(Secured.class)
     public static Result getImg(Long imgId){
         Image image = Image.findById(imgId);
         return ok(image.getData()).as("image");
     }
-
+    @Security.Authenticated(Secured.class)
     public static Result deleteImg(Long imgId, Long proId, String h){
         User _user = User.findByUserId(Long.parseLong(session("userId")));
         Project _project = Project.findById(proId);
@@ -91,13 +92,34 @@ public class Application extends Controller {
         }
         return redirect(routes.EditProject.index(proId, h));
     }
-
+    @Security.Authenticated(Secured.class)
     public static Result inboxMobile(){
         User _user = User.findByUserId(Long.parseLong(session("userId")));
         List<Comment> comments = Inbox.findCommentByReceiver(_user);
+        List<Inbox> inboxs = Inbox.findUnreadByReceiver(_user);
+        for(Inbox inbox: inboxs){
+            inbox.setRead(Inbox.READ);
+            inbox.update();
+        }
         return ok(inbox_mobile.render(_user, comments));
     }
-
+    @Security.Authenticated(Secured.class)
+    public static Result inboxRead(Long id){
+        Inbox _inbox = Inbox.findById(id);
+        if(_inbox != null){
+            if(_inbox.isRead() == Inbox.UNREAD) {
+                _inbox.setRead(Inbox.READ);
+                _inbox.update();
+                return ok("READ");
+            }else{
+                _inbox.setRead(Inbox.UNREAD);
+                _inbox.update();
+                return ok("UNREAD");
+            }
+        }
+        return badRequest();
+    }
+    @Security.Authenticated(Secured.class)
     public static Result setImgDefault(Long imgId, Long proId,String h){
         User _user = User.findByUserId(Long.parseLong(session("userId")));
         Project _project = Project.findById(proId);

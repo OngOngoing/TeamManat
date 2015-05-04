@@ -78,7 +78,7 @@ public class Setting extends Model{
         return null;
     }
     public static void update(Setting s, String v){
-        s.keyValue = v;
+        s.setKeyValue(v);
         s.update();
     }
     public static List<Setting> findAll(){

@@ -7167,7 +7167,8 @@ $.widget( "ui.autocomplete", {
 
 		this._initSource();
 		this.menu = $( "<ul>" )
-			.addClass( "ui-autocomplete ui-front" )
+            .addClass( "dropdown-content active" )
+            .css("opacity", 1)
 			.appendTo( this._appendTo() )
 			.menu({
 				// disable ARIA support, the live region takes care of that
@@ -7507,7 +7508,7 @@ $.widget( "ui.autocomplete", {
 	},
 
 	_renderItem: function( ul, item ) {
-		return $( "<li>" ).text( item.label ).appendTo( ul );
+        return $( "<li class='add-css'>" ).text( item.label ).appendTo( ul );
 	},
 
 	_move: function( direction, event ) {
@@ -13745,7 +13746,7 @@ var tabs = $.widget( "ui.tabs", {
  */
 
 
-var tooltip = $.widget( "ui.tooltip", {
+var tooltips = $.widget( "ui.tooltips", {
 	version: "1.11.4",
 	options: {
 		content: function() {

@@ -4,6 +4,8 @@ import play.data.validation.Constraints.Required;
 import play.db.ebean.*;
 import java.util.List;
 import java.util.ArrayList;
+import java.sql.Timestamp;
+import java.util.Date;
 
 import javax.persistence.*;
 
@@ -33,6 +35,9 @@ public class Inbox extends Model {
 
     private int isRead;
 
+    @Version
+    private Timestamp timestamp;
+
     private static Finder<Long, Inbox> find = new Finder<Long, Inbox>(Long.class, Inbox.class);
 
     public static Inbox create(User sender, User receiver, Comment comment){
@@ -43,9 +48,11 @@ public class Inbox extends Model {
             _inbox.receiver = receiver;
             _inbox.comment = comment;
             _inbox.isRead = Inbox.UNREAD;
+            _inbox.timestamp = new Timestamp((new Date()).getTime());
             _inbox.save();
         }else{
             _inbox.isRead = Inbox.UNREAD;
+            _inbox.timestamp = new Timestamp((new Date()).getTime());
             _inbox.setComment(comment);
             _inbox.update();
         }
@@ -99,16 +106,28 @@ public class Inbox extends Model {
         this.isRead = read;
     }
 
+    public Timestamp getTimestamp() {
+        return timestamp;
+    }
+
+    public void setTimestamp(Timestamp timestamp) {
+        this.timestamp = timestamp;
+    }
+
     public static Inbox findBySenderAndReceiver(User sender, User receiver){
         return find.where().eq("sender", sender).eq("receiver", receiver).findUnique();
     }
 
     public static List<Inbox> findAllByReceiver(User receiver){
-        return find.where().eq("receiver", receiver).findList();
+        return find.where().eq("receiver", receiver).order().desc("timestamp").findList();
     }
 
     public static List<Inbox> findUnreadByReceiver(User receiver){
-        return find.where().eq("receiver", receiver).eq("isRead", Inbox.UNREAD).findList();
+        return find.where().eq("receiver", receiver).eq("isRead", Inbox.UNREAD).order().asc("timestamp").findList();
+    }
+
+    public static Inbox findById(Long id){
+        return find.byId(id);
     }
 
     public static int findNumOfUnreadByReceiver(User receiver){
@@ -116,7 +135,7 @@ public class Inbox extends Model {
     }
 
     public static List<Comment> findCommentByReceiver(User receiver){
-        List<Inbox> inboxs = find.where().eq("receiver", receiver).findList();
+        List<Inbox> inboxs = find.where().eq("receiver", receiver).order().desc("timestamp").findList();
         List<Comment> _comment = new ArrayList();
         for(Inbox item: inboxs){
             _comment.add(item.getComment());
