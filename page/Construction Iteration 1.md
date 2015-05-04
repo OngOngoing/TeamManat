@@ -12,7 +12,7 @@
 |  Voting result is successfully implemented  | Voting result can be computed and presented |
 |  Voting by Criterion is successfully implemented  | voting criterion is usable and can be added, deleted in AdminPage |
 |  Timer is successfully implemented  | Timer is successfully implemented to Voting and Rating features |
-
+|  Users' comments can be shown in AdminPage  | Users' comments can be shown in AdminPage |
 
 
 ## Iteration Objective(s)
@@ -29,8 +29,10 @@
 | AdminPage - Show Rates | 4 |
 | AdminPage - Users - Delete | 3 |
 | AdminPage - Users - Edit | 3 |
+| AdminPage - Users - Comment | 5 |
 | AdminPage - Projects - Delete | 3 |
 | AdminPage - Projects - Edit | 3 |
+
 
 
 
