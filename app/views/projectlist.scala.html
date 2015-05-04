@@ -16,7 +16,7 @@
         <nav class="teal lighten-1 large" id="head">
             <div class="container">
                 <div class="nav-wrapper">
-                    <a class="brand-logo"><span class="glyphicon glyphicon-ice-lolly-tasted logo" aria-hidden="true"></span></a>
+                    <a class="brand-logo"><span class="glyphicon glyphicon-ice-lolly-tasted logo" aria-hidden="true"></span><span style="font-size: 2rem; top: 10px;">eXceed</span></a>
                     <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="mdi-navigation-menu"></i></a>
                     <div class="center">
                         <ul class="right hide-on-med-and-down">
@@ -52,10 +52,10 @@
                             <li><a href="@routes.VoteController.showResult()"><i class="medium mdi-action-class left"></i>Voting Result</a></li>
                             <li><a href="@routes.VoteController.index()"><i class="medium mdi-maps-rate-review left"></i>Let's Vote!</a></li>
                             @if(numOfUnread == 0) {
-                                <li><a href="@routes.VoteController.index()"><i class="medium mdi-communication-forum left badge"></i>
+                                <li><a id='inbox' href="@routes.Application.inboxMobile()" data-activates='inbox_message'><i class="medium mdi-communication-forum left badge"></i>
                                     Inbox</a></li>
                             }else{
-                                <li><a href="@routes.VoteController.index()"><i class="medium mdi-communication-forum left badge" data-badge="@numOfUnread"></i>
+                                <li><a id="inbox" href="@routes.Application.inboxMobile()" data-activates='inbox_message'><i class="medium mdi-communication-forum left badge" data-badge="@numOfUnread"></i>
                                     Inbox</a></li>
                             }
                             <li><a href="@routes.Application.logout()"><i class="medium mdi-action-settings-power left"></i>Logout</a></li>
@@ -114,6 +114,16 @@
             }
             </div>
             <!-- End of Page Content -->
+        </div>
+
+        <div id="inbox" class="modal">
+            <div class="modal-content">
+                <h4>Modal Header</h4>
+                <p>A bunch of text</p>
+            </div>
+            <div class="modal-footer">
+                <a href="#!" class=" modal-action modal-close waves-effect waves-green btn-flat">Agree</a>
+            </div>
         </div>
 
         @if(user.getIdtype == User.ADMINISTRATOR ){

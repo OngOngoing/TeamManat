@@ -8,7 +8,6 @@ import play.Logger;
 import play.libs.Json;
 import play.mvc.*;
 import play.data.*;
-import java.util.ArrayList;
 
 import util.Authenticator;
 import views.html.*;
@@ -92,6 +91,13 @@ public class Application extends Controller {
         }
         return redirect(routes.EditProject.index(proId, h));
     }
+
+    public static Result inboxMobile(){
+        User _user = User.findByUserId(Long.parseLong(session("userId")));
+        List<Comment> comments = Inbox.findCommentByReceiver(_user);
+        return ok(inbox_mobile.render(_user, comments));
+    }
+
     public static Result setImgDefault(Long imgId, Long proId,String h){
         User _user = User.findByUserId(Long.parseLong(session("userId")));
         Project _project = Project.findById(proId);
