@@ -1,4 +1,4 @@
-@(projects: List[Project])(ratingCriteria: List[RateCriterion])(mappedRates : Map[Long,Integer])(user : User)(time : String)(comments : List[Comment])
+@(projects: List[Project])(ratingCriteria: List[RateCriterion])(mappedRates : Map[Long,Integer])(user : User)(time : String)(comments : List[Inbox])
 @import java.math.BigInteger; var criteriaLeft = 0; var numOfUnread = Inbox.findNumOfUnreadByReceiver(user);
 
 <!DOCTYPE html>
@@ -13,7 +13,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
     </head>
     <body>
-        <nav class="teal lighten-1 large" id="head">
+        <nav class="teal lighten-1 trigger large" id="head">
             <div class="container">
                 <div class="nav-wrapper">
                     <a href="@routes.Application.index()" class="brand-logo"><span class="glyphicon glyphicon-ice-lolly-tasted logo" aria-hidden="true"></span><span style="font-size: 2rem; top: 10px;">eXceed</span></a>
@@ -32,12 +32,7 @@
                                 <div id='inbox-message-arrow' class="pointer"></div>
                                 <div id="scrollbar-message" class="mousescroll">
                                     @comments.map{ comment =>
-                                        <li class="inbox-li collection-item"><a href="#!">
-                                            @comment.getComment
-                                            <br /><span class="secondary-text">
-                                                from @comment.getUser.getUsername
-                                            </span>
-                                        </a></li>
+                                        <li class="inbox-li collection-item">@if(comment.isRead==Inbox.UNREAD){<i class="mdi-content-markunread left" style="margin-right: -10px;padding-left: 10px;"></i>}else{<i class="mdi-content-drafts left" style="margin-right: -10px;padding-left: 10px;"></i>}<a href="#!">@comment.getComment.getComment<br /><span class="secondary-text">from @comment.getComment.getUser.getUsername @comment.getTimestamp</span></a></li>
                                         <li class="divider"></li>
                                     }
                                     @if(comments.size == 0){
@@ -128,7 +123,7 @@
 
         @if(user.getIdtype == User.ADMINISTRATOR ){
                 <div class="fixed-action-btn animated bounceInUp" style="bottom: 45px; right: 40px;">
-                    <a class="btn-floating btn-large" href="adminpage">
+                    <a class="btn-floating trigger btn-large" href="adminpage">
                         <i class="large mdi-action-settings waves-effect waves-light"></i>
                     </a>
                     <ul>

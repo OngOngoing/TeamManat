@@ -23,7 +23,7 @@
             <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
         </head>
         <body>
-            <nav class="teal lighten-1 large" id="head">
+            <nav class="teal lighten-1 trigger large" id="head">
                 <div class="container">
                     <div class="nav-wrapper">
                         <a href="@routes.Application.index()" class="brand-logo"><span class="glyphicon glyphicon-ice-lolly-tasted logo" aria-hidden="true"></span><span style="font-size: 2rem; top: 10px;">eXceed</span></a>
@@ -83,8 +83,8 @@
             </nav>
             <div class="container" style="padding: 4.5rem 1.5rem 0 1.5rem;">
                 <div class="animated fadeInDown">
-                    <h2 class="trigger-text pageBanner hide-on-small-only">@project.getProjectName</h2>
-                    <h4 class="trigger-text pageBanner hide-on-med-and-up center-align">@project.getProjectName</h4>
+                    <h2 class="trigger-text trigger pageBanner hide-on-small-only">@project.getProjectName</h2>
+                    <h4 class="trigger-text trigger pageBanner hide-on-med-and-up center-align">@project.getProjectName</h4>
                     @if(user.getIdtype == User.ADMINISTRATOR){
                         <div class="center-on-small-only">
                             <a class="waves-effect waves-light btn" href="@routes.EditProject.index(project.getId, routes.RateProject.index(project.getId) + "")">
@@ -161,31 +161,31 @@
                                             @criterias.map { criteria =>
                                                 <input id="@criteria.getId" type="hidden" name="@criteria.getId" value="0">
                                                 <div class = "row" id="rating">
-                                                    <div class = "criterion-name col s12 center trigger-text">@criteria.getName</div>
+                                                    <div class = "criterion-name col s12 center trigger-text trigger">@criteria.getName</div>
                                                     <div class="divider container"></div><br>
                                                     <div class = "col s12 center">
                                                         <div class = "hide-on-med-and-up">
                                                             @for(index <- 1 until 6) {
-                                                                <a id="@criteria.getId" class="waves-effect waves-teal btn btn-flat btn-floating" name="criteriaButton" score="@index" href="#!">@index</a>
+                                                                <a id="@criteria.getId" class="waves-effect waves-teal btn btn-flat btn-floating trigger" name="criteriaButton" score="@index" href="#!">@index</a>
                                                             }
-                                                            <a id="@criteria.getId" class="waves-effect waves-teal btn btn-floating" name="criteriaButton" score="0" href="#!"><i class="mdi-navigation-close"></i></a>
+                                                            <a id="@criteria.getId" class="waves-effect waves-teal btn btn-floating trigger" name="criteriaButton" score="0" href="#!"><i class="mdi-navigation-close"></i></a>
                                                         </div>
                                                         <div class = "hide-on-small-only">
                                                             @for(index <- 1 until 6) {
-                                                                <a id="@criteria.getId" class="waves-effect waves-teal btn btn-flat btn-floating btn-large" name="criteriaButton" score="@index" href="#!">@index</a>
+                                                                <a id="@criteria.getId" class="waves-effect waves-teal btn btn-flat btn-floating btn-large trigger" name="criteriaButton" score="@index" href="#!">@index</a>
                                                             }
-                                                            <a id="@criteria.getId" class="waves-effect waves-teal btn  btn-floating" name="criteriaButton" score="0" href="#!"><i class="mdi-navigation-close"></i></a>
+                                                            <a id="@criteria.getId" class="waves-effect waves-teal btn  btn-floating trigger" name="criteriaButton" score="0" href="#!"><i class="mdi-navigation-close"></i></a>
                                                         </div>
                                                     </div>
                                                 </div>
                                             }
                                             <div class="row">
                                                 <div class="input-field col s12">
-                                                    <textarea id="textarea1" class="materialize-textarea" name="comment" ></textarea>
+                                                    <textarea id="textarea1" class="materialize-textarea trigger" name="comment" ></textarea>
                                                     <label for="textarea1">Comment</label>
                                                 </div>
                                             </div>
-                                            <button type="submit" class="waves-effect waves-light btn-large">
+                                            <button type="submit" class="waves-effect waves-light btn-large trigger">
                                                 <i class="mdi-action-thumb-up right"></i>
                                                 Rate
                                             </button>
@@ -210,29 +210,29 @@
                                                     @if(rate.getCriterion.getId == criteria.getId) {
                                                         @(isRate = true)
                                                         <input id="@rate.getCriterion.getId" type="hidden" name="@rate.getCriterion.getId" value="@rate.getScore">
-                                                        <div class = "criterion-name col s12 center text-darken-2 trigger-text">@criteria.getName</div>
+                                                        <div class = "criterion-name col s12 center text-darken-2 trigger-text trigger">@criteria.getName</div>
                                                         <div class="divider container"></div> <br>
                                                         <div class="row">
                                                             <div class="col s12 center">
                                                                 <div class = "hide-on-med-and-up">
                                                                     @for(index <- 1 until 6) {
                                                                         @if(rate.getScore == index) {
-                                                                            <a id="@rate.getCriterion.getId" class=" waves-effect waves-teal btn btn-floating" name="criteriaButton" score="@index" href="#!">@index</a>
+                                                                            <a id="@rate.getCriterion.getId" class=" waves-effect waves-teal btn btn-floating trigger" name="criteriaButton" score="@index" href="#!">@index</a>
                                                                         } else {
-                                                                            <a id="@rate.getCriterion.getId" class=" waves-effect waves-teal btn btn-flat btn-floating" name="criteriaButton" score="@index" href="#!">@index</a>
+                                                                            <a id="@rate.getCriterion.getId" class=" waves-effect waves-teal btn btn-flat btn-floating trigger" name="criteriaButton" score="@index" href="#!">@index</a>
                                                                         }
                                                                     }
-                                                                    <a id="@criteria.getId" class="waves-effect waves-teal btn btn-floating" name="criteriaButton" score="0" href="#!"><i class="mdi-navigation-close"></i></a>
+                                                                    <a id="@criteria.getId" class="waves-effect waves-teal btn btn-floating trigger" name="criteriaButton" score="0" href="#!"><i class="mdi-navigation-close"></i></a>
                                                                 </div>
                                                                 <div class = "hide-on-small-only">
                                                                     @for(index <- 1 until 6) {
                                                                         @if(rate.getScore == index) {
-                                                                            <a id="@rate.getCriterion.getId" class=" waves-effect waves-teal btn btn-large btn-floating" name="criteriaButton" score="@index" href="#!">@index</a>
+                                                                            <a id="@rate.getCriterion.getId" class=" waves-effect waves-teal btn btn-large btn-floating trigger" name="criteriaButton" score="@index" href="#!">@index</a>
                                                                         } else {
-                                                                            <a id="@rate.getCriterion.getId" class=" waves-effect waves-teal btn btn-large btn-flat btn-floating" name="criteriaButton" score="@index" href="#!">@index</a>
+                                                                            <a id="@rate.getCriterion.getId" class=" waves-effect waves-teal btn btn-large btn-flat btn-floating trigger" name="criteriaButton" score="@index" href="#!">@index</a>
                                                                         }
                                                                     }
-                                                                    <a id="@criteria.getId" class="waves-effect waves-teal btn btn-floating" name="criteriaButton" score="0" href="#!"><i class="mdi-navigation-close"></i></a>
+                                                                    <a id="@criteria.getId" class="waves-effect waves-teal btn btn-floating trigger" name="criteriaButton" score="0" href="#!"><i class="mdi-navigation-close"></i></a>
                                                                 </div>
 
                                                             </div>
@@ -243,20 +243,20 @@
                                                 @if(isRate == false) {
                                                     <input id="@criteria.getId" type="hidden" name="@criteria.getId" value="0">
                                                     <div class = "row" id="rating">
-                                                        <div class = "criterion-name col s12 center trigger-text">@criteria.getName</div>
+                                                        <div class = "criterion-name col s12 center trigger-text trigger">@criteria.getName</div>
                                                         <div class="divider container"></div><br>
                                                         <div class = "col s12 center">
                                                             <div class = "hide-on-med-and-up">
                                                                 @for(index <- 1 until 6) {
-                                                                    <a id="@criteria.getId" class="waves-effect waves-teal btn btn-flat btn-floating" name="criteriaButton" score="@index" href="#!">@index</a>
+                                                                    <a id="@criteria.getId" class="waves-effect waves-teal btn btn-flat btn-floating trigger" name="criteriaButton" score="@index" href="#!">@index</a>
                                                                 }
-                                                                <a id="@criteria.getId" class="waves-effect waves-teal btn btn-floating" name="criteriaButton" score="0" href="#!"><i class="mdi-navigation-close"></i></a>
+                                                                <a id="@criteria.getId" class="waves-effect waves-teal btn btn-floating trigger" name="criteriaButton" score="0" href="#!"><i class="mdi-navigation-close"></i></a>
                                                             </div>
                                                             <div class = "hide-on-small-only">
                                                                 @for(index <- 1 until 6) {
-                                                                    <a id="@criteria.getId" class="waves-effect waves-teal btn btn-flat btn-floating btn-large" name="criteriaButton" score="@index" href="#!">@index</a>
+                                                                    <a id="@criteria.getId" class="waves-effect waves-teal btn btn-flat btn-floating btn-large trigger" name="criteriaButton" score="@index" href="#!">@index</a>
                                                                 }
-                                                                <a id="@criteria.getId" class="waves-effect waves-teal btn btn-floating" name="criteriaButton" score="0" href="#!"><i class="mdi-navigation-close"></i></a>
+                                                                <a id="@criteria.getId" class="waves-effect waves-teal btn btn-floating trigger" name="criteriaButton" score="0" href="#!"><i class="mdi-navigation-close"></i></a>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -266,16 +266,16 @@
                                         <div class="row">
                                             <div class="input-field col s12">
                                             @if(thisComment != null) {
-                                                <textarea id="textarea1" class="materialize-textarea" name="comment" >@thisComment.getComment</textarea>
+                                                <textarea id="textarea1" class="materialize-textarea trigger" name="comment" >@thisComment.getComment</textarea>
                                                 <label for="textarea1">Comment</label>
                                             } else {
-                                                <textarea id="textarea1" class="materialize-textarea" name="comment" ></textarea>
+                                                <textarea id="textarea1" class="materialize-textarea trigger" name="comment" ></textarea>
                                                 <label for="textarea1">Comment</label>
                                             }
 
                                             </div>
                                         </div>
-                                        <button type="submit" class="waves-effect waves-light btn-large"><i class="mdi-action-thumb-up right"></i>
+                                        <button type="submit" class="waves-effect waves-light btn-large trigger"><i class="mdi-action-thumb-up right"></i>
                                             Update
                                         </button>
                                     </form>
@@ -286,9 +286,9 @@
                 } else {
                     <div class="section animated fadeIn">
                         <div class="row">
-                            <h2 class="center col s12 trigger-text">Time's up!</h2>
+                            <h2 class="center col s12 trigger-text trigger">Time's up!</h2>
                             <div class ="center col s12">
-                                <a href="@routes.RateCalculator.index()" class = "btn btn-large"><i class="medium mdi-editor-insert-chart left"></i>
+                                <a href="@routes.RateCalculator.index()" class = "btn btn-large trigger" ><i class="medium mdi-editor-insert-chart left"></i>
                                     Rating Result<i class="mdi-content-send right"></i></a>
                             </div>
                         </div>
@@ -298,7 +298,7 @@
             </div>
 
             <div class="fixed-action-btn animated bounceInUp" style="bottom : 45 px ; right : 40 px ;">
-                <a class="btn-floating btn-large" href="@routes.ProjectList.index()">
+                <a class="btn-floating btn-large trigger" href="@routes.ProjectList.index()">
                     <i class="large mdi-action-home waves-effect waves-light"></i>
                 </a>
                 <ul>
