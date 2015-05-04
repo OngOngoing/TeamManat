@@ -366,3 +366,9 @@ ul {
     font-size: 0.8rem !important;
     line-height: 30%;
 }
+.backgroud-link{
+    color: rgba(0, 0, 0, .3);
+}
+.backgroud-link:hover{
+    color: rgba(0, 0, 0, .9);
+}
