@@ -24,5 +24,20 @@ $(document).ready(function(){
         full_width: true
     });
     $('.materialboxed').materialbox();
-
+    $('.dropdown-button').dropdown({
+        inDuration: 0,
+        gutter: -250,
+        belowOrigin: true
+    });
+    $('#inbox').click(function(){
+        $('.pointer').css('left', $(this).position().left - $('#inbox_message').position().left + 15 );
+        $('.badge').removeAttr('data-badge');
+    });
+    $('#scrollbar-message').slimscroll({
+        color: '#000',
+        size: '10px',
+        width: '100%',
+        height: 'auto',
+        maxHeight: '250px'
+    });
 });

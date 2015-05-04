@@ -7,8 +7,7 @@ $(function () {
             inDuration: 0,
             gutter: -250,
             belowOrigin: true
-        }
-    );
+    });
     $('#inbox').click(function(){
         $('.pointer').css('left', $(this).position().left - $('#inbox_message').position().left + 15 );
         $('.badge').removeAttr('data-badge');
