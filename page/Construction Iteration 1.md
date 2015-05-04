@@ -42,5 +42,5 @@
 |------------------------|:-----------------------------:|
 | UI Improvement | 2 |
 | Database Backup | 1 |
-| More System configuration | 1 |
+| More System configuration | 3 |
 
