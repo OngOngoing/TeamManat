@@ -41,4 +41,6 @@
 | Objective/Feature/Task | Priority (1=very high, 5=low) |
 |------------------------|:-----------------------------:|
 | UI Improvement | 2 |
+| Database Backup | 1 |
+| More System configuration | 1 |
 
