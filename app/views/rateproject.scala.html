@@ -84,25 +84,18 @@
             </nav>
             <div class="container" style="padding: 4.5rem 1.5rem 0 1.5rem;">
                 <div class="animated fadeInDown">
-                    <h2 class="trigger-text trigger pageBanner hide-on-small-only">@project.getProjectName</h2>
-                    <h4 class="trigger-text trigger pageBanner hide-on-med-and-up center-align">@project.getProjectName</h4>
-                    @if(user.getIdtype == User.ADMINISTRATOR){
-                        <div class="center-on-small-only">
-                            <a class="waves-effect waves-light btn" href="@routes.EditProject.index(project.getId, routes.RateProject.index(project.getId) + "")">
-                                <i class="mdi-image-edit left"></i>EDIT
-                            </a>
-                        </div>
-                    }else {
-                        @if(user.getGroup != null) {
-                            @if(user.getGroup.getProject.getId == project.getId) {
-                                <div class="center-on-small-only">
-                                    <a class="waves-effect waves-light btn" href="@routes.EditProject.index(project.getId, routes.RateProject.index(project.getId) + "")">
-                                        <i class="mdi-image-edit left"></i>EDIT
-                                    </a>
-                                </div>
+                    <div class="trigger-text trigger hide-on-small-only" style="margin: 1.78rem 0 1.424rem 0;"><span class="pageBanner">@project.getProjectName     </span>
+                        @if(user.getIdtype == User.ADMINISTRATOR){
+                            <a href="@routes.EditProject.index(project.getId, routes.RateProject.index(project.getId) + "")" class="btn btn-floating waves-effect waves-light yellow darken-1" style="vertical-align: baseline;"><i class="mdi-image-edit medium"></i></a>
+                        }else{
+                            @if(user.getGroup != null) {
+                                @if(user.getGroup.getProject.getId == project.getId) {
+                                    <a href="@routes.EditProject.index(project.getId, routes.RateProject.index(project.getId) + "")" class="btn btn-floating waves-effect waves-light yellow darken-1" style="vertical-align: baseline;"><i class="mdi-image-edit"></i></a>
+                                }
                             }
                         }
-                    }
+                    </div>
+                    <h4 class="trigger-text trigger pageBanner hide-on-med-and-up center-align">@project.getProjectName</h4>
                 </div>
                 <div class="divider"></div>
                 <div class="section">
