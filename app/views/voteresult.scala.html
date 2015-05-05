@@ -1,7 +1,7 @@
 @(user: User)(criteria: List[VoteCriterion])(projects: List[Project])(winnerSummary: Map[VoteCriterion,List[Vote.ResultBundle]])(orderedSummary: Map[VoteCriterion,List[Vote.ResultBundle]])
 @import java.util
 @import models.Vote.ResultBundle
-@import java.math.BigInteger; var totalVotes = 0;
+@import java.math.BigInteger; var totalVotes = 0; var numOfUnread = Inbox.findNumOfUnreadByReceiver(user); var comments = Inbox.findAllByReceiver(user);
 
 <!DOCTYPE html>
 
@@ -18,15 +18,50 @@
         <nav class="teal lighten-1 trigger large" id="head">
             <div class="container">
                 <div class="nav-wrapper">
-                    <a class="brand-logo hide-on-small-only"><span class="glyphicon glyphicon-ice-lolly-tasted logo" aria-hidden="true"></span></a>
+                    <a href="@routes.Application.index()" class="brand-logo"><span class="glyphicon glyphicon-ice-lolly-tasted logo" aria-hidden="true"></span><span style="font-size: 2rem; top: 10px;">eXceed</span></a>
                     <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="mdi-navigation-menu"></i></a>
                     <div class="center">
                         <ul class="right hide-on-med-and-down">
                             <li><a href="@routes.RateCalculator.index()"><i class="medium mdi-editor-insert-chart left"></i>Rating Result</a></li>
-                            <li><a href="../logout"><i class="medium mdi-action-settings-power left"></i>Logout</a></li>
+                            @if(numOfUnread == 0) {
+                                <li><a href="#!" id="inbox" class="dropdown-button backgroud-link" data-activates='inbox_message'><i id="i-inbox" class="medium mdi-communication-forum center badge"></i></a></li>
+                            }else{
+                                <li><a href="#!" id="inbox" class="dropdown-button backgroud-link" data-activates='inbox_message'><i id="i-inbox" class="medium mdi-communication-forum center badge" data-badge="@numOfUnread"></i></a></li>
+                            }
+                            <ul id='inbox_message' class='dropdown-content inbox-message'>
+                                <div id='inbox-message-arrow' class="pointer"></div>
+                                <div id="scrollbar-message" class="mousescroll">
+                                    @comments.map{ comment =>
+                                        @if(comment.isRead==Inbox.UNREAD) {
+                                            <li class="inbox-li collection-item tooltipped" id="inbox-id-@comment.getId" inbox-id="@comment.getId" data-position="left" data-delay="50" data-tooltip="Make as read">
+                                                <i class="mdi-content-markunread left" id="icon-inbox-@comment.getId" style="margin-right : - 10px ; padding-left : 10px ;"></i>
+                                                <a href="#!">@comment.getComment.getComment <br /> <span class="secondary-text">
+                                                    from @comment.getComment.getUser.getUsername @comment.getTimestamp</span></a>
+                                            </li>
+                                            <li class="divider"></li>
+                                        }else{
+                                            <li class="inbox-li collection-item tooltipped" id="inbox-id-@comment.getId" inbox-id="@comment.getId" data-position="left" data-delay="50" data-tooltip="Make as unread">
+                                                <i class="mdi-content-drafts left" id="icon-inbox-@comment.getId" style="margin-right : -10px ; padding-left : 10px ;"></i>
+                                                <a href="#!">@comment.getComment.getComment <br /> <span class="secondary-text">
+                                                    from @comment.getComment.getUser.getUsername @comment.getTimestamp</span></a>
+                                            </li>
+                                            <li class="divider"></li>
+                                        }
+                                    }
+                                    @if(comments.size == 0){
+                                        <li class="inbox-li"><a><span class="secondary-text">Inbox is empty.</span></a></li>
+                                    }
+                                </div>
+                            </ul>
+                            <li><a href="@routes.Application.logout()" class="backgroud-link"><i class="medium mdi-action-lock-outline center"></i></a></li>
                         </ul>
                         <ul class="side-nav" id="mobile-demo" style="margin-right: -40px;">
                             <li><a href="@routes.RateCalculator.index()"><i class="medium mdi-editor-insert-chart left"></i>Rating Result</a></li>
+                            @if(numOfUnread == 0) {
+                                <li><a id='inbox' href="@routes.Application.inboxMobile()" data-activates='inbox_message'><i class="medium mdi-communication-forum left badge"></i>Inbox</a></li>
+                            }else{
+                                <li><a id="inbox" href="@routes.Application.inboxMobile()" data-activates='inbox_message'><i class="medium mdi-communication-forum left badge" data-badge="@numOfUnread"></i>Inbox</a></li>
+                            }
                             <li><a href="../logout"><i class="medium mdi-action-settings-power left"></i>Logout</a></li>
                         </ul>
                     </div>
@@ -141,9 +176,9 @@
 
         <script src="http://code.jquery.com/jquery-2.1.3.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.96.1/js/materialize.min.js"></script>
-
-            <script type="text/javascript" src="@routes.Assets.at("javascripts/init.js")"></script>
-
+        <script src="@routes.Assets.at("javascripts/jquery-ui.js")"></script>
+        <script src="@routes.Assets.at("javascripts/jquery.scrollbar.js")"></script>
+        <script type="text/javascript" src="@routes.Assets.at("javascripts/init.js")"></script>
 
     </body>
 </html>
