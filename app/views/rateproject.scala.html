@@ -44,16 +44,14 @@
                                         @comments.map{ comment =>
                                             @if(comment.isRead==Inbox.UNREAD) {
                                                 <li class="inbox-li collection-item tooltipped" id="inbox-id-@comment.getId" inbox-id="@comment.getId" data-position="left" data-delay="50" data-tooltip="Make as read">
-                                                    <i class="mdi-content-markunread left" id="icon-inbox-@comment.getId" style="margin-right : - 10px ; padding-left : 10px ;"></i>
-                                                    <a href="#!">@comment.getComment.getComment <br /> <span class="secondary-text">
-                                                        from @comment.getComment.getUser.getUsername @comment.getTimestamp</span></a>
+                                                    <i class="mdi-content-markunread left" id="icon-inbox-@comment.getId" style="margin-right : -10px ; padding-left : 10px ;"></i>
+                                                    <a href="#!">@comment.getComment.getComment <br /> <span class="secondary-text">from @comment.getComment.getUser.getUsername @comment.getTimestamp</span></a>
                                                 </li>
                                                 <li class="divider"></li>
                                             }else{
                                                 <li class="inbox-li collection-item tooltipped" id="inbox-id-@comment.getId" inbox-id="@comment.getId" data-position="left" data-delay="50" data-tooltip="Make as unread">
                                                     <i class="mdi-content-drafts left" id="icon-inbox-@comment.getId" style="margin-right : -10px ; padding-left : 10px ;"></i>
-                                                    <a href="#!">@comment.getComment.getComment <br /> <span class="secondary-text">
-                                                        from @comment.getComment.getUser.getUsername @comment.getTimestamp</span></a>
+                                                    <a href="#!">@comment.getComment.getComment <br /> <span class="secondary-text">from @comment.getComment.getUser.getUsername @comment.getTimestamp</span></a>
                                                 </li>
                                                 <li class="divider"></li>
                                             }
@@ -111,7 +109,7 @@
                         </ul>
                     </div>
                 </div>
-                <div class="section animated fadeIn">
+                <div class="animated fadeIn">
                     <div class="card-panel">
                         <i class="mdi-action-description small"></i>
                         <span class="black-text text-darken-2 ">
@@ -145,7 +143,6 @@
                 @if(canRate) {
                     @if(thisRate.size == 0 && thisComment == null) {
                         <div class="card-panel ">
-                            <div class = "row">
                                 <div class="input-field col s12">
                                     <form action="/rateproject" method="post">
                                         <div class="input-field">
@@ -175,18 +172,19 @@
                                             }
                                             <div class="row">
                                                 <div class="input-field col s12">
-                                                    <textarea id="textarea1" class="materialize-textarea trigger" name="comment" length="255" ></textarea>
+                                                    <textarea id="textarea1" class="materialize-textarea trigger" name="comment" length="255" placeholder="Give Project Feedback" ></textarea>
                                                     <label for="textarea1">Comment</label>
                                                 </div>
                                             </div>
+                                            <div class="row center">
                                             <button type="submit" class="waves-effect waves-light btn-large trigger">
                                                 <i class="mdi-action-thumb-up right"></i>
                                                 Rate
                                             </button>
+                                            </div>
                                         </div>
                                     </form>
                                 </div>
-                            </div>
                         </div>
                     } else {
                         <div class="card-panel ">
@@ -260,18 +258,20 @@
                                         <div class="row">
                                             <div class="input-field col s12">
                                             @if(thisComment != null) {
-                                                <textarea id="textarea1" class="materialize-textarea trigger" name="comment" length="255">@thisComment.getComment</textarea>
+                                                <textarea id="textarea1" class="materialize-textarea trigger" name="comment" length="255" placeholder="Give Project Feedback">@thisComment.getComment</textarea>
                                                 <label for="textarea1">Comment</label>
                                             } else {
-                                                <textarea id="textarea1" class="materialize-textarea trigger" name="comment" length="255"></textarea>
+                                                <textarea id="textarea1" class="materialize-textarea trigger" name="comment" length="255" placeholder="Give Project Feedback"></textarea>
                                                 <label for="textarea1">Comment</label>
                                             }
 
                                             </div>
                                         </div>
+                                        <div class="row center">
                                         <button type="submit" class="waves-effect waves-light btn-large trigger"><i class="mdi-action-thumb-up right"></i>
                                             Update
                                         </button>
+                                        </div>
                                     </form>
                                 </div>
                             </div>

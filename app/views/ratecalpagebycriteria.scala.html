@@ -31,7 +31,7 @@
                                         @comments.map{ comment =>
                                             @if(comment.isRead==Inbox.UNREAD) {
                                                 <li class="inbox-li collection-item tooltipped" id="inbox-id-@comment.getId" inbox-id="@comment.getId" data-position="left" data-delay="50" data-tooltip="Make as read">
-                                                    <i class="mdi-content-markunread left" id="icon-inbox-@comment.getId" style="margin-right : - 10px ; padding-left : 10px ;"></i>
+                                                    <i class="mdi-content-markunread left" id="icon-inbox-@comment.getId" style="margin-right : -10px ; padding-left : 10px ;"></i>
                                                     <a href="#!">@comment.getComment.getComment <br /> <span class="secondary-text">
                                                         from @comment.getComment.getUser.getUsername @comment.getTimestamp</span></a>
                                                 </li>
@@ -52,7 +52,7 @@
                                 </ul>
                                 <li><a href="@routes.Application.logout()" class="backgroud-link"><i class="medium mdi-action-settings-power center"></i></a></li>
                             </ul>
-                            <ul class="side-nav" id="mobile-demo" style="margin-right : - 40 px ;">
+                            <ul class="side-nav" id="mobile-demo" style="margin-right : -40 px ;">
                                 <li><a href="@routes.VoteController.showResult()"><i class="medium mdi-action-class left"></i>Voting Result</a>
                                 </li>
                                 @if(numOfUnread == 0) {
@@ -70,12 +70,13 @@
             <div class="container padding-nav">
                 <div class="animated fadeInDown">
                     <h1 class = "lobby-banner trigger trigger-text">Rating Result</h1>
-                    <div class ="center">
-                        <a class = "btn btn-large trigger " href="@routes.RateCalculator.rateSortByCriteria()">Criteria</a>
-                        <a class = "btn btn-large trigger " href="@routes.RateCalculator.index()">Project</a>
+                    <div class ="right-align">
+                        <span style="color: #929292; font-style: italic; line-height: 36px; padding-right: 10px;">sort by</span>
+                        <div class = "btn trigger disabled" style="padding: 0 1rem;">Criteria</div>
+                        <a class = "btn trigger" href="@routes.RateCalculator.index()" style="padding: 0 1rem;">Project</a>
                     </div>
                 </div>
-                    <ul class="section animated fadeIn">
+                    <ul class="animated fadeIn">
                         @result.zipWithIndex.map { case (r, index) =>
                             <li class ="card-panel">
                                 <h4 class = "trigger trigger-text"><i class="mdi-action-receipt"></i>@criteria.get(index).getName</h4>

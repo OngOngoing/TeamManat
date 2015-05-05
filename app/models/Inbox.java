@@ -119,7 +119,7 @@ public class Inbox extends Model {
     }
 
     public static List<Inbox> findAllByReceiver(User receiver){
-        return find.where().eq("receiver", receiver).order().desc("timestamp").findList();
+        return find.where().eq("receiver", receiver).order().desc("isRead").order().desc("timestamp").findList();
     }
 
     public static List<Inbox> findUnreadByReceiver(User receiver){

@@ -31,7 +31,7 @@
                                     @comments.map{ comment =>
                                         @if(comment.isRead==Inbox.UNREAD) {
                                             <li class="inbox-li collection-item tooltipped" id="inbox-id-@comment.getId" inbox-id="@comment.getId" data-position="left" data-delay="50" data-tooltip="Make as read">
-                                                <i class="mdi-content-markunread left" id="icon-inbox-@comment.getId" style="margin-right : - 10px ; padding-left : 10px ;"></i>
+                                                <i class="mdi-content-markunread left" id="icon-inbox-@comment.getId" style="margin-right : -10px ; padding-left : 10px ;"></i>
                                                 <a href="#!">@comment.getComment.getComment <br /> <span class="secondary-text">
                                                     from @comment.getComment.getUser.getUsername @comment.getTimestamp</span></a>
                                             </li>
@@ -52,7 +52,7 @@
                             </ul>
                             <li><a href="@routes.Application.logout()" class="backgroud-link"><i class="medium mdi-action-settings-power center"></i></a></li>
                         </ul>
-                        <ul class="side-nav" id="mobile-demo" style="margin-right : - 40 px ;">
+                        <ul class="side-nav" id="mobile-demo" style="margin-right : -40 px;">
                             <li><a href="@routes.ProjectList.index()"><i class="medium mdi-navigation-arrow-back left"></i>Back</a></li>
                             @if(numOfUnread == 0) {
                                 <li><a id='inbox' href="@routes.Application.inboxMobile()" data-activates='inbox_message'><i class="medium mdi-communication-forum left badge"></i>Inbox</a></li>
