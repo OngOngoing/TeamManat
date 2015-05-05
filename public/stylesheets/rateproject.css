@@ -83,6 +83,9 @@
     background-size:  contain;
     height: 450px;
 }
+.slider .indicators .indicator-item {
+    background-color: #757575 ;
+}
 @font-face {
     font-family: 'Glyphicons Halflings';
 

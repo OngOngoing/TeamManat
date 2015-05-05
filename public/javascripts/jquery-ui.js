@@ -11673,7 +11673,7 @@ var selectmenu = $.widget( "ui.selectmenu", {
  */
 
 
-var slider = $.widget( "ui.slider", $.ui.mouse, {
+var slider2 = $.widget( "ui.slider2", $.ui.mouse, {
 	version: "1.11.4",
 	widgetEventPrefix: "slide",
 

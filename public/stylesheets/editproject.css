@@ -26,6 +26,9 @@
     background: url('../img/no_image.png') no-repeat center;
     background-size:  contain;
 }
+.slider .indicators .indicator-item {
+    background-color: #757575 ;
+}
 .add-css{
     font-size: 1.2rem;
     color: #26a69a !important;
