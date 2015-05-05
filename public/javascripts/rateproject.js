@@ -4,16 +4,37 @@ $("a[name='criteriaButton']").click(function () {
     $("a[id='" + criteria + "']").each(function () {
         if($(this).attr('score') != 0){
             $(this).addClass("btn-flat");
+        }else{
+            $(this).removeClass("btn-flat").addClass("btn");
         }
     })
-    $("#" + criteria).val(value);
     $(this).removeClass("btn-flat").addClass("btn");
+    $("#" + criteria).val(value);
 
 });
+
+$("a[name='criteriaButtonRemove']").click(function () {
+    var criteria = this.id;
+    var value = $(this).attr('score');
+    $("a[id='" + criteria + "']").each(function () {
+        $(this).addClass("btn-flat");
+    });
+    $("#" + criteria).val(value);
+});
+
+
 $(function() {
     var $textarea = $('.projectDescription').attr("data"),
         convert = new Markdown.getSanitizingConverter().makeHtml;
     $('.projectDescription').html(convert($textarea));
+});
+
+$("a[name='criteriaButtonRemove']").each(function(){
+    var criteria = this.id;
+    var score = $("#" + criteria).attr('value');
+    if(score == 0){
+        $(this).addClass("btn-flat");
+    }
 });
 
 $(document).ready(function(){
@@ -24,4 +45,6 @@ $(document).ready(function(){
         full_width: true
     });
     $('.materialboxed').materialbox();
+
+   
 });

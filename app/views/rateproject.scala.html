@@ -169,20 +169,20 @@
                                                             @for(index <- 1 until 6) {
                                                                 <a id="@criteria.getId" class="waves-effect waves-teal btn btn-flat btn-floating trigger" name="criteriaButton" score="@index" href="#!">@index</a>
                                                             }
-                                                            <a id="@criteria.getId" class="waves-effect waves-teal btn btn-floating trigger" name="criteriaButton" score="0" href="#!"><i class="mdi-navigation-close"></i></a>
+                                                            <a id="@criteria.getId" class="waves-effect waves-teal btn btn-floating trigger" name="criteriaButtonRemove" score="0" href="#!"><i class="mdi-navigation-close"></i></a>
                                                         </div>
                                                         <div class = "hide-on-small-only">
                                                             @for(index <- 1 until 6) {
                                                                 <a id="@criteria.getId" class="waves-effect waves-teal btn btn-flat btn-floating btn-large trigger" name="criteriaButton" score="@index" href="#!">@index</a>
                                                             }
-                                                            <a id="@criteria.getId" class="waves-effect waves-teal btn  btn-floating trigger" name="criteriaButton" score="0" href="#!"><i class="mdi-navigation-close"></i></a>
+                                                            <a id="@criteria.getId" class="waves-effect waves-teal btn btn-flat btn-floating trigger" name="criteriaButtonRemove" score="0" href="#!"><i class="mdi-navigation-close"></i></a>
                                                         </div>
                                                     </div>
                                                 </div>
                                             }
                                             <div class="row">
                                                 <div class="input-field col s12">
-                                                    <textarea id="textarea1" class="materialize-textarea trigger" name="comment" ></textarea>
+                                                    <textarea id="textarea1" class="materialize-textarea trigger" name="comment" length="255" ></textarea>
                                                     <label for="textarea1">Comment</label>
                                                 </div>
                                             </div>
@@ -223,7 +223,7 @@
                                                                             <a id="@rate.getCriterion.getId" class=" waves-effect waves-teal btn btn-flat btn-floating trigger" name="criteriaButton" score="@index" href="#!">@index</a>
                                                                         }
                                                                     }
-                                                                    <a id="@criteria.getId" class="waves-effect waves-teal btn btn-floating trigger" name="criteriaButton" score="0" href="#!"><i class="mdi-navigation-close"></i></a>
+                                                                    <a id="@criteria.getId" class="waves-effect waves-teal btn btn-floating trigger" name="criteriaButtonRemove" score="0" href="#!"><i class="mdi-navigation-close"></i></a>
                                                                 </div>
                                                                 <div class = "hide-on-small-only">
                                                                     @for(index <- 1 until 6) {
@@ -233,7 +233,7 @@
                                                                             <a id="@rate.getCriterion.getId" class=" waves-effect waves-teal btn btn-large btn-flat btn-floating trigger" name="criteriaButton" score="@index" href="#!">@index</a>
                                                                         }
                                                                     }
-                                                                    <a id="@criteria.getId" class="waves-effect waves-teal btn btn-floating trigger" name="criteriaButton" score="0" href="#!"><i class="mdi-navigation-close"></i></a>
+                                                                    <a id="@criteria.getId" class="waves-effect waves-teal btn btn-floating trigger" name="criteriaButtonRemove" score="0" href="#!"><i class="mdi-navigation-close"></i></a>
                                                                 </div>
 
                                                             </div>
@@ -251,13 +251,13 @@
                                                                 @for(index <- 1 until 6) {
                                                                     <a id="@criteria.getId" class="waves-effect waves-teal btn btn-flat btn-floating trigger" name="criteriaButton" score="@index" href="#!">@index</a>
                                                                 }
-                                                                <a id="@criteria.getId" class="waves-effect waves-teal btn btn-floating trigger" name="criteriaButton" score="0" href="#!"><i class="mdi-navigation-close"></i></a>
+                                                                <a id="@criteria.getId" class="waves-effect waves-teal btn btn-floating trigger" name="criteriaButtonRemove" score="0" href="#!"><i class="mdi-navigation-close"></i></a>
                                                             </div>
                                                             <div class = "hide-on-small-only">
                                                                 @for(index <- 1 until 6) {
                                                                     <a id="@criteria.getId" class="waves-effect waves-teal btn btn-flat btn-floating btn-large trigger" name="criteriaButton" score="@index" href="#!">@index</a>
                                                                 }
-                                                                <a id="@criteria.getId" class="waves-effect waves-teal btn btn-floating trigger" name="criteriaButton" score="0" href="#!"><i class="mdi-navigation-close"></i></a>
+                                                                <a id="@criteria.getId" class="waves-effect waves-teal btn btn-floating trigger" name="criteriaButtonRemove" score="0" href="#!"><i class="mdi-navigation-close"></i></a>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -267,10 +267,10 @@
                                         <div class="row">
                                             <div class="input-field col s12">
                                             @if(thisComment != null) {
-                                                <textarea id="textarea1" class="materialize-textarea trigger" name="comment" >@thisComment.getComment</textarea>
+                                                <textarea id="textarea1" class="materialize-textarea trigger" name="comment" length="255">@thisComment.getComment</textarea>
                                                 <label for="textarea1">Comment</label>
                                             } else {
-                                                <textarea id="textarea1" class="materialize-textarea trigger" name="comment" ></textarea>
+                                                <textarea id="textarea1" class="materialize-textarea trigger" name="comment" length="255"></textarea>
                                                 <label for="textarea1">Comment</label>
                                             }
 
