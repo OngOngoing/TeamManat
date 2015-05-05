@@ -6,7 +6,7 @@
 <html>
     <head>
         <title>Exceed Vote</title>
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.96.1/css/materialize.min.css">
+        <link rel="stylesheet" media="screen" href="@routes.Assets.at("stylesheets/materialize.min.css")">
         <link rel="stylesheet" media="screen" href="@routes.Assets.at("stylesheets/animate.css")">
         <link rel="stylesheet" media="screen" href="@routes.Assets.at("stylesheets/projectlist.css")">
         <link rel="icon" type="image/png" href="@routes.Assets.at("img/favicon.png")">
@@ -34,7 +34,7 @@
                                     @comments.map{ comment =>
                                         @if(comment.isRead==Inbox.UNREAD) {
                                             <li class="inbox-li collection-item tooltipped" id="inbox-id-@comment.getId" inbox-id="@comment.getId" data-position="left" data-delay="50" data-tooltip="Make as read">
-                                                <i class="mdi-content-markunread left" id="icon-inbox-@comment.getId" style="margin-right : - 10px ; padding-left : 10px ;"></i>
+                                                <i class="mdi-content-markunread left" id="icon-inbox-@comment.getId" style="margin-right : -10px ; padding-left : 10px ;"></i>
                                                 <a href="#!">@comment.getComment.getComment <br /> <span class="secondary-text">
                                                     from @comment.getComment.getUser.getUsername @comment.getTimestamp</span></a>
                                             </li>
@@ -76,11 +76,11 @@
             <!-- Page Content goes here -->
             <div class="row">
                 <div class="col s12">
-                    <div class="card-panel waves-effect waves-block hide-on-small-only" id="count-down">
+                    <div class="card-panel waves-effect waves-block hide-on-small-only" id="count-down" style="cursor: default;">
                         <div class="count-down col s6 right-align" id="countdown" end-date="@time"></div>
                         <div class="count-down-label col s6">left <i class="mdi-device-access-alarm"></i> </div>
                     </div>
-                    <div class="card-panel waves-effect waves-block hide-on-med-and-up" id="count-down-s">
+                    <div class="card-panel waves-effect waves-block hide-on-med-and-up" id="count-down-s" style="cursor: default;">
                         <div class="count-down-s col s8 right-align" id="countdown-s" end-date="@time"></div>
                         <div class="count-down-label-s col s4">left <i class="mdi-device-access-alarm"></i> </div>
                     </div>
