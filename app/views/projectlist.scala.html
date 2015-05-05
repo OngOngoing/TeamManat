@@ -24,9 +24,9 @@
                             <li><div class="menu-s"></div><a href="@routes.VoteController.showResult()"><i class="medium mdi-action-class left"></i>Voting Result</a></li>
                             <li><div class="menu-s"></div><a href="@routes.VoteController.index()"><i class="medium mdi-maps-rate-review left"></i>Let's Vote!</a></li>
                             @if(numOfUnread == 0) {
-                                <li><a href="#!" id="inbox" class="dropdown-button backgroud-link" data-activates='inbox_message'><i class="medium mdi-communication-forum center badge"></i></a></li>
+                                <li><a href="#!" id="inbox" class="dropdown-button backgroud-link" data-activates='inbox_message'><i id="i-inbox" class="medium mdi-communication-forum center badge"></i></a></li>
                             }else{
-                                <li><a href="#!" id="inbox" class="dropdown-button backgroud-link" data-activates='inbox_message'><i class="medium mdi-communication-forum center badge" data-badge="@numOfUnread"></i></a></li>
+                                <li><a href="#!" id="inbox" class="dropdown-button backgroud-link" data-activates='inbox_message'><i id="i-inbox" class="medium mdi-communication-forum center badge" data-badge="@numOfUnread"></i></a></li>
                             }
                             <ul id='inbox_message' class='dropdown-content inbox-message'>
                                 <div id='inbox-message-arrow' class="pointer"></div>
