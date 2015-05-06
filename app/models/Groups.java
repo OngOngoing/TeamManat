@@ -45,11 +45,20 @@ public class Groups extends Model {
     }
 
     public static Groups create(User user, Project project){
-        Groups g = new Groups();
-        g.user = user;
-        g.project = project;
-        g.save();
-        return g;
+        Groups _tmp = findByUserAndProject(user, project);
+        if( _tmp != null){
+            return _tmp;
+        }else {
+            Groups g = new Groups();
+            g.user = user;
+            g.project = project;
+            g.save();
+            return g;
+        }
+    }
+
+    public static Groups findByUserAndProject(User user, Project project){
+        return find.where().eq("user", user).eq("project", project).findUnique();
     }
 
     public static List<Groups> findByProject(Project project){
