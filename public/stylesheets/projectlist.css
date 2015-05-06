@@ -146,6 +146,7 @@
 
 
 }
+
 .card-app:hover .image-container img {
 
     opacity: 1.0;
@@ -153,6 +154,9 @@
     -moz-transition: opacity .25s ease-in-out;
     -webkit-transition: opacity .25s ease-in-out;
 }
+
+
+
 .app-banner {
     display: block;
     font-family:Roboto Light;
@@ -172,6 +176,7 @@
         font-size: 1.5rem;
     }
 }
+
 
 .card-app:hover .app-banner {
     color: #353535;
@@ -229,29 +234,6 @@
     top: 0;
     width: 100%;
     z-index: 1000;
-    transition: -webkit-transform 200ms linear;
-    transition: transform 200ms linear;
-}
-#head.scroll {
-    -webkit-transform: translateY(-56px);
-    -ms-transform: translateY(-56px);
-    transform: translateY(-56px);
-}
-#head-2{
-    background: #75AFEB !important;
-    height: 50px;
-    padding-top: 7px;
-    position: fixed;
-    top: 56px;
-    width: 100%;
-    z-index: 900;
-    transition: -webkit-transform 200ms linear;
-    transition: transform 200ms linear;
-}
-#head-2.scroll {
-    -webkit-transform: translateY(-56px);
-    -ms-transform: translateY(-56px);
-    transform: translateY(-56px);
 }
 @font-face {
     font-family: 'Glyphicons Halflings';
@@ -288,7 +270,7 @@
     font-size: 20px;
     font-weight: 100;
     line-height: 1;
-    text-align: center;
+    text-align: right;
 }
 /* IE7 inline-block hack */
 *+html .count-down-s div{
@@ -300,27 +282,27 @@
 }
 .count-down-s div span {
     display: block;
-    border-top: 1px solid #FFFFFF;
+    border-top: 1px solid #cecece;
     padding-top: 3px;
     font-size: 8px;
     font-weight: normal;
     text-transform: uppercase;
-    text-align: center;
+    text-align: left;
 }
 .count-down-label{
     display: block;
     padding-top: 3px;
-    font-size: 1.5rem;
+    font-size: 30px;
     font-weight: normal;
     text-transform: uppercase;
 }
 .count-down div {
     display: inline-block;
     margin-left: 10px;
-    font-size: 3.5rem;
+    font-size: 30px;
     font-weight: 100;
     line-height: 1;
-    text-align: center;
+    text-align: right;
 }
 /* IE7 inline-block hack */
 *+html .count-down div{
@@ -332,12 +314,12 @@
 }
 .count-down div span {
     display: block;
-    border-top: 1px solid #FFFFFF;
+    border-top: 1px solid #cecece;
     padding-top: 3px;
     font-size: 12px;
     font-weight: normal;
     text-transform: uppercase;
-    text-align: center;
+    text-align: left;
 }
 .menu-s{
     background: rgba(0, 0, 0, .1);
@@ -414,99 +396,6 @@ ul {
 }
 
 
-
-/* Circular Progress Bar */
-
-
-
-
-/* Container */
-
-.progress-circular {
-    position: relative;
-    display: inline-block;
-    padding: 0;
-    text-align: center;
-}
-
-/* Item */
-
-.progress-circular>li {
-    display: inline-block;
-    position: relative;
-    text-align: center;
-    color: #93A2AC;
-    font-family: Roboto Light;
-    font-weight: 100;
-}
-
-.progress-circular>li:before {
-    content: attr(data-name);
-    position: absolute;
-    width: 100%;
-    bottom: -2rem;
-    font-weight: 400;
-}
-
-.progress-circular>li:after {
-    content: attr(data-percent);
-    position: absolute;
-    width: 100%;
-    top: 35%;
-    left: 0;
-    font-size: 4vw;
-    text-align: center;
-}
-
-.progress-circular svg {
-    max-width: 60vh;
-    width: 100%;
-    height: 100%;
-}
-
-.progress-circular svg:nth-child(2) {
-    position: absolute;
-    left: 0;
-    top: 0;
-    transform: rotate(-90deg);
-    -webkit-transform: rotate(-90deg);
-    -moz-transform: rotate(-90deg);
-    -ms-transform: rotate(-90deg);
-}
-
-.progress-circular svg:nth-child(2) path {
-    fill: none;
-    stroke-width: 4rem;
-    stroke-dasharray: 629;
-    stroke: rgba(255, 255, 255, 0.9);
-    -webkit-animation: load 2s;
-    -moz-animation: load 2s;
-    -o-animation: load 2s;
-    animation: load 2s;
-}
-
-
-
-@-webkit-keyframes
-load { 0% {
-    stroke-dashoffset:0
-}
-}
-
-@-moz-keyframes
-load { 0% {
-    stroke-dashoffset:0
-}
-}
-
-@keyframes
-load { 0% {
-    stroke-dashoffset:0
-}
-}
-
-
-
 .content-hoverable {
     background-color: #fff;
     -webkit-transition: background-color .3s ease-in-out;
@@ -546,4 +435,25 @@ p {
     color: rgba(0, 0, 0, 0.71);
     padding: 0;
     -webkit-font-smoothing: antialiased;
+}
+
+
+
+/* Circular Progress Bar */
+
+
+.progress-circle {
+    max-height: 100%;
+    width: auto;
+}
+
+.progress-circle > svg {
+    height: 100%;
+    display: block;
+
+}
+
+.progress-circle .progressbar-text {
+    font-size: 4vw;
+    font-family: Roboto Light;
 }
