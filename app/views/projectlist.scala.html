@@ -1,4 +1,4 @@
-@(projects: List[Project])(ratingCriteria: List[RateCriterion])(mappedRates : Map[Long,Integer])(user : User)(time : String)(comments : List[Inbox])
+@(projects: List[Project])(ratingCriteria: List[RateCriterion])(mappedRates : Map[Long,Integer])(voteCriteria : List[VoteCriterion])(votesLeft : Integer)(user : User)(time : String)(comments : List[Inbox])
 @import java.math.BigInteger; var criteriaLeft = 0; var numOfUnread = Inbox.findNumOfUnreadByReceiver(user);
 
 <!DOCTYPE html>
@@ -6,17 +6,17 @@
 <html>
     <head>
         <title>Exceed Vote</title>
-        <link rel="stylesheet" media="screen" href="@routes.Assets.at("stylesheets/materialize.min.css")">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.96.1/css/materialize.min.css">
         <link rel="stylesheet" media="screen" href="@routes.Assets.at("stylesheets/animate.css")">
         <link rel="stylesheet" media="screen" href="@routes.Assets.at("stylesheets/projectlist.css")">
         <link rel="icon" type="image/png" href="@routes.Assets.at("img/favicon.png")">
         <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
     </head>
     <body>
-        <nav class="blue-grey darken-2 large" id="head">
+        <nav class="trigger large" id="head">
             <div class="container">
                 <div class="nav-wrapper">
-                    <a href="@routes.Application.index()" class="brand-logo"><span class="glyphicon glyphicon-ice-lolly-tasted logo" aria-hidden="true"></span><span style="font-size: 2rem; top: 10px;">eXceed</span></a>
+                    <a href="@routes.Application.index()" link-to="#index-banner" class="linkable brand-logo"><span class="glyphicon glyphicon-ice-lolly-tasted logo" aria-hidden="true"></span><span style="font-size: 2rem; top: 10px;">eXceed</span></a>
                     <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="mdi-navigation-menu"></i></a>
                     <div class="center">
                         <ul class="right hide-on-med-and-down">
@@ -34,14 +34,16 @@
                                     @comments.map{ comment =>
                                         @if(comment.isRead==Inbox.UNREAD) {
                                             <li class="inbox-li collection-item tooltipped" id="inbox-id-@comment.getId" inbox-id="@comment.getId" data-position="left" data-delay="50" data-tooltip="Make as read">
-                                                <i class="mdi-content-markunread left" id="icon-inbox-@comment.getId" style="margin-right : -10px ; padding-left : 10px ;"></i>
-                                                <a href="#!">@comment.getComment.getComment <br /> <span class="secondary-text">from @comment.getComment.getUser.getUsername @comment.getTimestamp</span></a>
+                                                <i class="mdi-content-markunread left" id="icon-inbox-@comment.getId" style="margin-right : - 10px ; padding-left : 10px ;"></i>
+                                                <a href="#!">@comment.getComment.getComment <br /> <span class="secondary-text">
+                                                    from @comment.getComment.getUser.getUsername @comment.getTimestamp</span></a>
                                             </li>
                                             <li class="divider"></li>
                                         }else{
                                             <li class="inbox-li collection-item tooltipped" id="inbox-id-@comment.getId" inbox-id="@comment.getId" data-position="left" data-delay="50" data-tooltip="Make as unread">
                                                 <i class="mdi-content-drafts left" id="icon-inbox-@comment.getId" style="margin-right : -10px ; padding-left : 10px ;"></i>
-                                                <a href="#!">@comment.getComment.getComment <br /> <span class="secondary-text">from @comment.getComment.getUser.getUsername @comment.getTimestamp</span></a>
+                                                <a href="#!">@comment.getComment.getComment <br /> <span class="secondary-text">
+                                                    from @comment.getComment.getUser.getUsername @comment.getTimestamp</span></a>
                                             </li>
                                             <li class="divider"></li>
                                         }
@@ -51,7 +53,7 @@
                                     }
                                 </div>
                             </ul>
-                            <li><a href="@routes.Application.logout()" class="backgroud-link"><i class="medium mdi-action-settings-power center"></i></a></li>
+                            <li><a href="@routes.Application.logout()" class="backgroud-link"><i class="medium mdi-action-lock-outline center"></i></a></li>
                         </ul>
                         <ul class="side-nav" id="mobile-demo" style="margin-right: -40px;">
                             <li><a href="@routes.RateCalculator.index()"><i class="medium mdi-editor-insert-chart left"></i>Rating Result</a></li>
@@ -70,57 +72,165 @@
                 </div>
             </div>
         </nav>
-        <div class="container animated fadeIn" style="padding: 4.5rem 1.5rem 0 1.5rem;">
-            <!-- Page Content goes here -->
-            <div class="row">
-                <div class="col s12">
-                    <div class="card-panel waves-effect waves-block hide-on-small-only" id="count-down" style="cursor: default;">
-                        <div class="count-down col s6 right-align" id="countdown" end-date="@time"></div>
-                        <div class="count-down-label col s6">left <i class="mdi-device-access-alarm"></i> </div>
+
+        <div class="z-depth-1">
+            <section id="index-banner">
+                <div class="index-banner-content container animated fadeIn">
+
+                    <div class="row">
+
+                        <div class="col s8 m8">
+                            <h3 class="teal-text">Welcome</h3>
+                            <p class="flow-text">You have 2 more steps left to complete the eXceed vote</p>
+                        </div>
+
+                        <div class="col s4 m4">
+                                <!--  Container  -->
+                            <ul class="progress-circular">
+                                    <!--  Item  -->
+                                <li data-name="Completed" data-percent="100%"> <svg viewBox="-10 -10 220 220">
+                                    <g fill="none" stroke-width="6" transform="translate(100,100)">
+                                        <path d="M 0,-100 A 100,100 0 0,1 86.6,-50" stroke="url(#cl1)"/>
+                                        <path d="M 86.6,-50 A 100,100 0 0,1 86.6,50" stroke="url(#cl2)"/>
+                                        <path d="M 86.6,50 A 100,100 0 0,1 0,100" stroke="url(#cl3)"/>
+                                        <path d="M 0,100 A 100,100 0 0,1 -86.6,50" stroke="url(#cl4)"/>
+                                        <path d="M -86.6,50 A 100,100 0 0,1 -86.6,-50" stroke="url(#cl5)"/>
+                                        <path d="M -86.6,-50 A 100,100 0 0,1 0,-100" stroke="url(#cl6)"/>
+                                    </g>
+                                </svg> <svg viewBox="-10 -10 220 220">
+                                    <path d="M200,100 C200,44.771525 155.228475,0 100,0 C44.771525,0 0,44.771525 0,100 C0,155.228475 44.771525,200 100,200 C155.228475,200 200,155.228475 200,100 Z" stroke-dashoffset="629"></path>
+                                </svg> </li>
+                            </ul>
+                                <!--  Defining Angle Gradient Colors  -->
+
+
+                            <svg width="0" height="0">
+                                <defs>
+                                    <linearGradient id="cl1" gradientUnits="objectBoundingBox" x1="0" y1="0" x2="1" y2="1">
+                                        <stop stop-color="#618099"/>
+                                        <stop offset="100%" stop-color="#8e6677"/>
+                                    </linearGradient>
+                                    <linearGradient id="cl2" gradientUnits="objectBoundingBox" x1="0" y1="0" x2="0" y2="1">
+                                        <stop stop-color="#8e6677"/>
+                                        <stop offset="100%" stop-color="#9b5e67"/>
+                                    </linearGradient>
+                                    <linearGradient id="cl3" gradientUnits="objectBoundingBox" x1="1" y1="0" x2="0" y2="1">
+                                        <stop stop-color="#9b5e67"/>
+                                        <stop offset="100%" stop-color="#9c787a"/>
+                                    </linearGradient>
+                                    <linearGradient id="cl4" gradientUnits="objectBoundingBox" x1="1" y1="1" x2="0" y2="0">
+                                        <stop stop-color="#9c787a"/>
+                                        <stop offset="100%" stop-color="#817a94"/>
+                                    </linearGradient>
+                                    <linearGradient id="cl5" gradientUnits="objectBoundingBox" x1="0" y1="1" x2="0" y2="0">
+                                        <stop stop-color="#817a94"/>
+                                        <stop offset="100%" stop-color="#498a98"/>
+                                    </linearGradient>
+                                    <linearGradient id="cl6" gradientUnits="objectBoundingBox" x1="0" y1="1" x2="1" y2="0">
+                                        <stop stop-color="#498a98"/>
+                                        <stop offset="100%" stop-color="#618099"/>
+                                    </linearGradient>
+                                </defs>
+                            </svg>
+                        </div>
+
+
+
+                        <div class="row">
+                            <div class="col s12 m6">
+                                <a link-to="#project-list" class="linkable card-panel full-size waves-effect content-hoverable" href="#project-list">
+                                    <div class="center promo promo-example">
+                                        <p class="promo-caption flow-text"><i class="badge mdi-action-grade"></i>Rate</p>
+                                        <p class="pink-text darken-2 light center">3 more projects to go</p>
+                                    </div>
+                                </a>
+                            </div>
+                            <div class="col s12 m6">
+                                <a class="card-panel full-size waves-effect content-hoverable" href="@routes.VoteController.index()">
+                                    <div class="center promo promo-example">
+                                        @if(votesLeft == 0) {
+                                            <p class="promo-caption flow-text"><i class="teal-text badge mdi-action-done"></i>Vote</p>
+                                            <p class="teal-text darken-2 light center">COMPLETED</p>
+                                        } else {
+                                            <p class="promo-caption flow-text"><i class="badge mdi-editor-insert-chart"></i>Vote</p>
+                                            @if(votesLeft == 1) {
+                                                <p class="pink-text darken-2 light center">1 criterion left</p>
+                                            }
+                                            @if(votesLeft > 1) {
+                                                <p class="pink-text darken-2 light center">@votesLeft criteria left</p>
+                                            }
+                                        }
+                                    </div>
+                                </a>
+                            </div>
+
+                        </div>
+
+
+
                     </div>
-                    <div class="card-panel waves-effect waves-block hide-on-med-and-up" id="count-down-s" style="cursor: default;">
-                        <div class="count-down-s col s8 right-align" id="countdown-s" end-date="@time"></div>
-                        <div class="count-down-label-s col s4">left <i class="mdi-device-access-alarm"></i> </div>
-                    </div>
+
                 </div>
-            @projects.map { project =>
-                    @{criteriaLeft = ratingCriteria.size - mappedRates.get(project.getId)}
-                <div class="col s12">
-                    <a href="@routes.RateProject.index(project.getId)">
-                        <div class="card-app hoverable waves-effect waves-block z-depth-1">
-                            <div class="row">
-                                <div class="col s4 m2">
-                                    <div class="image-container">
-                                        <div class="square">
-                                            <img src="@Image.getUrlDefaultImage(project)" alt="" class="crop">
+            </section>
+        </div>
+
+        <section id="project-list">
+            <div class="container animated fadeIn"  style="padding: 4.5rem 1.5rem 0 1.5rem;">
+                <!-- Page Content goes here -->
+
+                <div class="row">
+                    <div class="col s12">
+                        <div class="card-panel waves-effect waves-block hide-on-small-only" id="count-down">
+                            <div class="count-down col s6 right-align" id="countdown" end-date="@time"></div>
+                            <div class="count-down-label col s6">left <i class="mdi-device-access-alarm"></i> </div>
+                        </div>
+                        <div class="card-panel waves-effect waves-block hide-on-med-and-up" id="count-down-s">
+                            <div class="count-down-s col s8 right-align" id="countdown-s" end-date="@time"></div>
+                            <div class="count-down-label-s col s4">left <i class="mdi-device-access-alarm"></i> </div>
+                        </div>
+                    </div>
+                @projects.map { project =>
+                        @{criteriaLeft = ratingCriteria.size - mappedRates.get(project.getId)}
+                    <div class="col s12">
+                        <a href="@routes.RateProject.index(project.getId)">
+                            <div class="card-app hoverable waves-effect waves-block z-depth-1">
+                                <div class="row">
+                                    <div class="col s4 m2">
+                                        <div class="image-container">
+                                            <div class="square">
+                                                <img src="@Image.getUrlDefaultImage(project)" alt="" class="crop">
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                                <div class="col s8 m10">
-                                    <p class="app-banner">@project.getProjectName</p>
-                                    @if(mappedRates.get(project.getId) == 0) {
-                                        <p class="secondary-text hide-on-med-and-down">click here to rate this project</p>
-                                        <div class="info"><i class="mdi-alert-warning"></i> NOT YET RATED</div>
-                                    } @if(criteriaLeft == 1 && ratingCriteria.size > 1) {
-                                        <p class="secondary-text hide-on-med-and-down">click here to update your rate</p>
-                                        <div class="info">1 CRITERION LEFT</div>
-                                    } @if(criteriaLeft > 1 && criteriaLeft < ratingCriteria.size) {
-                                        <p class="secondary-text hide-on-med-and-down">click here to update your rate</p>
-                                        <div class="info">@criteriaLeft CRITERIA LEFT</div>
-                                    } @if(criteriaLeft == 0 && ratingCriteria.size > 0) {
-                                        <p class="secondary-text hide-on-med-and-down">click here to edit your rate</p>
-                                        <div class="info">COMPLETED</div>
-                                    }
+                                    <div class="col s8 m10">
+                                        <p class="app-banner">@project.getProjectName</p>
+                                        @if(mappedRates.get(project.getId) == 0) {
+                                            <p class="secondary-text hide-on-med-and-down">click here to rate this project</p>
+                                            <div class="info">NOT YET RATED</div>
+                                        } @if(criteriaLeft == 1 && ratingCriteria.size > 1) {
+                                            <p class="secondary-text hide-on-med-and-down">click here to update your rate</p>
+                                            <div class="info">1 CRITERION LEFT</div>
+                                        } @if(criteriaLeft > 1 && criteriaLeft < ratingCriteria.size) {
+                                            <p class="secondary-text hide-on-med-and-down">click here to update your rate</p>
+                                            <div class="info">@criteriaLeft CRITERIA LEFT</div>
+                                        } @if(criteriaLeft == 0 && ratingCriteria.size > 0) {
+                                            <p class="secondary-text hide-on-med-and-down">click here to edit your rate</p>
+                                            <div class="info">COMPLETED</div>
+                                        }
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                    </a>
+                        </a>
+                    </div>
+
+                }
                 </div>
 
-            }
             </div>
+        </section>
+
+
             <!-- End of Page Content -->
-        </div>
 
         <div id="inbox" class="modal">
             <div class="modal-content">

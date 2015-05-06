@@ -44,3 +44,14 @@ $(document).ready(function(){
     });
     $('.tooltipped').tooltip({delay: 50});
   });
+
+
+
+
+
+$('.linkable').click(function(){
+    $('html, body').animate({
+        scrollTop: $( $(this).attr("link-to") ).offset().top-36
+    }, 500);
+    return false;
+});

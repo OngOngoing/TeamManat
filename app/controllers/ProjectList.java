@@ -34,8 +34,9 @@ public class ProjectList extends Controller {
             e.printStackTrace();
         }
         List<Inbox> comments = Inbox.findAllByReceiver(user);
+        int voteLeft = VoteCriterion.findAll().size() - Vote.findByUser(user).size();
         response().setHeader("Cache-Control","no-cache");
-        return ok(projectlist.render(Project.findAll(),RateCriterion.findAll(),mappedRate,user,_time, comments));
+        return ok(projectlist.render(Project.findAll(),RateCriterion.findAll(),mappedRate,VoteCriterion.findAll(), voteLeft, user,_time, comments));
     }
 
 }
