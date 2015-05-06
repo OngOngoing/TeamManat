@@ -30,4 +30,33 @@ $(function () {
         }).on('finish.countdown', function (event) {
             $('#count-down-s').html('<div class="count-down-label col s12 red-text center">Time\'s up<i class="mdi-device-access-alarm"></i></div>');
         });
+    var prevScroll = 0,
+        curDir = 'down',
+        prevDir = 'up';
+
+    $(window).scroll(function(){
+        if ($(this).scrollTop() >= prevScroll) {
+            if($(this).scrollTop() >= 45 && $('#mobile-demo').position().left != 0) {
+                curDir = 'down';
+                if (curDir != prevDir) {
+                    $('#head').addClass('scroll');
+                    $('#head').removeClass('scroll-non');
+                    $('#head-2').addClass('scroll');
+                    $('#head-2').removeClass('scroll-non');
+                    prevDir = curDir;
+                }
+            }
+        } else {
+            curDir = 'up';
+            if (curDir != prevDir) {
+                $('#head').removeClass('scroll');
+                $('#head').addClass('scroll-non');
+                $('#head-2').removeClass('scroll');
+                $('#head-2').addClass('scroll-non');
+                prevDir = curDir;
+            }
+        }
+        prevScroll = $(this).scrollTop();
+    });
+
 });

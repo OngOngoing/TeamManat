@@ -3,7 +3,6 @@ package models;
 import javax.persistence.*;
 import javax.validation.constraints.*;
 
-import util.Authenticator;
 import com.avaje.ebean.Expr;
 import org.mindrot.jbcrypt.BCrypt;
 import play.data.validation.Constraints.Required;

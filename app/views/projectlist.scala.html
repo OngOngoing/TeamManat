@@ -13,11 +13,25 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
     </head>
     <body>
-        <nav class="trigger large" id="head">
-            <div class="container">
-                <div class="nav-wrapper">
-                    <a href="@routes.Application.index()" link-to="#index-banner" class="linkable brand-logo"><span class="glyphicon glyphicon-ice-lolly-tasted logo" aria-hidden="true"></span><span style="font-size: 2rem; top: 10px;">eXceed</span></a>
-                    <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="mdi-navigation-menu"></i></a>
+        <nav class="cyan darken-1" id="head" style="background-color: #4188D2 !important;">
+            <div class="nav-wrapper">
+                <a href="#" data-activates="mobile-demo" class="button-collapse" style="padding: 0 1.5rem; width:90%;"><i class="mdi-navigation-menu"></i></a>
+                <ul class="side-nav" id="mobile-demo" style="margin-right: -40px;">
+                    <li><a href="@routes.RateCalculator.index()"><i class="medium mdi-editor-insert-chart left"></i>Rating Result</a></li>
+                    <li><a href="@routes.VoteController.showResult()"><i class="medium mdi-action-class left"></i>Voting Result</a></li>
+                    <li><a href="@routes.VoteController.index()"><i class="medium mdi-maps-rate-review left"></i>Let's Vote!</a></li>
+                    @if(numOfUnread == 0) {
+                        <li><a id='inbox' href="@routes.Application.inboxMobile()" data-activates='inbox_message'><i class="medium mdi-communication-forum left badge"></i>
+                            Inbox</a></li>
+                    }else{
+                        <li><a id="inbox" href="@routes.Application.inboxMobile()" data-activates='inbox_message'><i class="medium mdi-communication-forum left badge" data-badge="@numOfUnread"></i>
+                            Inbox</a></li>
+                    }
+                    <li><a href="@routes.AdminPage.index()"><i class="medium mdi-action-settings left"></i>Admin Page</a></li>
+                    <li><a href="@routes.Application.logout()"><i class="medium mdi-action-settings-power left"></i>Logout</a></li>
+                </ul>
+                <div class="container">
+                    <a href="@routes.Application.index()" class="brand-logo"><span class="glyphicon glyphicon-ice-lolly-tasted logo" aria-hidden="true"></span><span style="font-size: 2rem; top: 10px;">eXceed</span></a>
                     <div class="center">
                         <ul class="right hide-on-med-and-down">
                             <li><a href="@routes.RateCalculator.index()"><i class="medium mdi-editor-insert-chart left"></i>Rating Result</a></li>
@@ -55,20 +69,14 @@
                             </ul>
                             <li><a href="@routes.Application.logout()" class="backgroud-link"><i class="medium mdi-action-lock-outline center"></i></a></li>
                         </ul>
-                        <ul class="side-nav" id="mobile-demo" style="margin-right: -40px;">
-                            <li><a href="@routes.RateCalculator.index()"><i class="medium mdi-editor-insert-chart left"></i>Rating Result</a></li>
-                            <li><a href="@routes.VoteController.showResult()"><i class="medium mdi-action-class left"></i>Voting Result</a></li>
-                            <li><a href="@routes.VoteController.index()"><i class="medium mdi-maps-rate-review left"></i>Let's Vote!</a></li>
-                            @if(numOfUnread == 0) {
-                                <li><a id='inbox' href="@routes.Application.inboxMobile()" data-activates='inbox_message'><i class="medium mdi-communication-forum left badge"></i>
-                                    Inbox</a></li>
-                            }else{
-                                <li><a id="inbox" href="@routes.Application.inboxMobile()" data-activates='inbox_message'><i class="medium mdi-communication-forum left badge" data-badge="@numOfUnread"></i>
-                                    Inbox</a></li>
-                            }
-                            <li><a href="@routes.Application.logout()"><i class="medium mdi-action-settings-power left"></i>Logout</a></li>
-                        </ul>
                     </div>
+                </div>
+            </div>
+        </nav>
+        <nav id="head-2" class="hide-on-large-only">
+            <div class="nav-wrapper">
+                <div class="white-text col s8" id="count-down-s" style="cursor: default; margin: 0;">
+                    <div class="count-down-s center-align" id="countdown-s" end-date="@time"></div>
                 </div>
             </div>
         </nav>
@@ -201,10 +209,6 @@
                             <div class="count-down col s6 right-align" id="countdown" end-date="@time"></div>
                             <div class="count-down-label col s6">left <i class="mdi-device-access-alarm"></i> </div>
                         </div>
-                        <div class="card-panel waves-effect waves-block hide-on-med-and-up" id="count-down-s">
-                            <div class="count-down-s col s8 right-align" id="countdown-s" end-date="@time"></div>
-                            <div class="count-down-label-s col s4">left <i class="mdi-device-access-alarm"></i> </div>
-                        </div>
                     </div>
                 @projects.map { project =>
                         @{criteriaLeft = ratingCriteria.size - mappedRates.get(project.getId)}
@@ -219,22 +223,23 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col s8 m10">
-                                        <p class="app-banner">@project.getProjectName</p>
-                                        @if(mappedRates.get(project.getId) == 0) {
-                                            <p class="secondary-text hide-on-med-and-down">click here to rate this project</p>
-                                            <div class="info">NOT YET RATED</div>
-                                        } @if(criteriaLeft == 1 && ratingCriteria.size > 1) {
-                                            <p class="secondary-text hide-on-med-and-down">click here to update your rate</p>
-                                            <div class="info">1 CRITERION LEFT</div>
-                                        } @if(criteriaLeft > 1 && criteriaLeft < ratingCriteria.size) {
-                                            <p class="secondary-text hide-on-med-and-down">click here to update your rate</p>
-                                            <div class="info">@criteriaLeft CRITERIA LEFT</div>
-                                        } @if(criteriaLeft == 0 && ratingCriteria.size > 0) {
-                                            <p class="secondary-text hide-on-med-and-down">click here to edit your rate</p>
-                                            <div class="info">COMPLETED</div>
-                                        }
-                                    </div>
+                                </div>
+                                <div class="col s8 m10">
+                                    <p class="app-banner">@project.getProjectName</p>
+                                    @if(mappedRates.get(project.getId) == 0) {
+                                        <p class="secondary-text hide-on-med-and-down">click here to rate this project</p>
+                                        <div class="info red-text text-darken-1"><i class="mdi-content-block"></i> NOT YET RATED</div>
+                                    } @if(criteriaLeft == 1 && ratingCriteria.size > 1) {
+                                        <p class="secondary-text hide-on-med-and-down">click here to update your rate</p>
+                                        <div class="info yellow-text text-darken-3"><i class="mdi-action-done"></i> 1 CRITERION LEFT</div>
+                                    } @if(criteriaLeft > 1 && criteriaLeft < ratingCriteria.size) {
+                                        <p class="secondary-text hide-on-med-and-down">click here to update your rate</p>
+                                        <div class="info yellow-text text-darken-3"><i class="mdi-action-done"></i> @criteriaLeft CRITERIA LEFT</div>
+                                    } @if(criteriaLeft == 0 && ratingCriteria.size > 0) {
+                                        <p class="secondary-text hide-on-med-and-down">click here to edit your rate</p>
+                                        <div class="info teal-text text-darken-1"><i class="mdi-action-done-all"></i> COMPLETED</div>
+                                    }
+                                </div>
                                 </div>
                             </div>
                         </a>
@@ -249,19 +254,9 @@
 
             <!-- End of Page Content -->
 
-        <div id="inbox" class="modal">
-            <div class="modal-content">
-                <h4>Modal Header</h4>
-                <p>A bunch of text</p>
-            </div>
-            <div class="modal-footer">
-                <a href="#!" class=" modal-action modal-close waves-effect waves-green btn-flat">Agree</a>
-            </div>
-        </div>
-
         @if(user.getIdtype == User.ADMINISTRATOR ){
-                <div class="fixed-action-btn animated bounceInUp" style="bottom: 45px; right: 40px;">
-                    <a class="btn-floating trigger btn-large" href="adminpage">
+                <div class="fixed-action-btn animated bounceInUp hide-on-med-and-down" style="bottom: 45px; right: 40px;">
+                    <a class="btn-floating trigger btn-large" href="adminpage" style="background-color: #4188D2 !important;">
                         <i class="large mdi-action-settings waves-effect waves-light"></i>
                     </a>
                     <ul>
