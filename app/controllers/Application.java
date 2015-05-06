@@ -19,7 +19,7 @@ public class Application extends Controller {
         if(user != null) {
             return redirect(routes.ProjectList.index());
         }else{
-            return ok(login.render(""));
+            return ok(login.render("",Setting.isTimeUp()));
         }
     }
 
@@ -32,7 +32,7 @@ public class Application extends Controller {
         if (user == null) {
             Logger.error("Login failed : cannot found user.");
             flash("error", "Username and password are incorrect.");
-            return badRequest(login.render(username));
+            return badRequest(login.render(username,Setting.isTimeUp()));
         }
         Logger.info("["+username+"] login success.");
         session().clear();
@@ -49,7 +49,7 @@ public class Application extends Controller {
     }
 
     public static Result login(){
-        return ok(login.render(""));
+        return ok(login.render("",Setting.isTimeUp()));
     }
     @Security.Authenticated(Secured.class)
     public static Result getImgs(Long proId){
