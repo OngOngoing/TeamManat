@@ -42,7 +42,7 @@
                                     <div class="col-md-4"></div>
                                     <div class="col-md-4" style="text-align: center;">
                                         <a role="button" href="/ratecalculator" class="btn btn-info btn-block" style="margin-top: 1%;">
-                                            Rating Result
+                                            Rating&nbsp;Result
                                             <span class="glyphicon glyphicon-menu-right" aria-hidden="true"></span>
                                         </a>
                                     </div>
@@ -52,7 +52,7 @@
                                     <div class="col-md-4"></div>
                                     <div class="col-md-4" style="text-align: center;">
                                         <a role="button" href="/vote/result" class="btn btn-warning btn-block" style="margin-top: 1%;">
-                                            Voting Result
+                                            Voting&nbsp;Result
                                             <span class="glyphicon glyphicon-menu-right" aria-hidden="true"></span>
                                         </a>
                                     </div>
@@ -60,9 +60,8 @@
                                 </div>
                             }
                         </div>
-                        <div class="row" style="padding-top: 20px;">
                             @if(flash.contains("error")) {
-                                <div class="row">
+                                <div class="row" style="padding-top: 10px;">
                                     <div class="alert alert-danger" role="alert">
                                         <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
                                         <span class="sr-only">Error:</span>
@@ -71,7 +70,7 @@
                                 </div>
                             }
                             @if(flash.contains("success")) {
-                                <div class="row">
+                                <div class="row" style="padding-top: 10px;">
                                     <div class="alert alert-success-colorized" role="alert">
                                         <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
                                         <span class="sr-only">Error:</span>
@@ -81,18 +80,6 @@
                             }
                         </div>
                     </div>
-                </div>
-                <div id="footer">
-                    <div class="container text-center">
-                        <p class="muted credit"><span class="glyphicon glyphicon-subtitles" aria-hidden="true" style="font-size: 20px;"></span>  eXceed vote by <a href="https://github.com/SSD2015/TeamManat" target="_blank" >TeamManat</a><br/>
-                            <a href="https://github.com/OngOngoing" target="_blank" >@@OngOngoing</a>
-                            <a href="https://github.com/chinclubi" target="_blank" >@@chinclubi</a>
-                            <a href="https://github.com/smart2538" target="_blank" >@@smart2538</a>
-                            <a href="https://github.com/NitiK" target="_blank" >@@NitiK</a>
-                            <a href="https://github.com/XMistralX" target="_blank" >@@XMistralX</a>
-                        </p>
-                    </div>
-                </div>
             </div>
         </section>
         <script src="http://code.jquery.com/jquery-2.1.3.min.js"></script>

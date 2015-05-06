@@ -19,7 +19,7 @@
                         <div class="center">
                             <ul class="right hide-on-med-and-down">
                                 <li>
-                                    <a href="@routes.VoteController.showResult()"><i class="medium mdi-action-class left"></i>Voting Result</a>
+                                    <a href="@routes.VoteController.showResult()"><i class="medium mdi-action-class left"></i>Voting&nbsp;Result</a>
                                 </li>
                                 @if(numOfUnread == 0) {
                                     <li><a href="#!" id="inbox" class="dropdown-button backgroud-link" data-activates='inbox_message'><i id="i-inbox" class="medium mdi-communication-forum center badge"></i></a></li>
@@ -55,7 +55,7 @@
                             </ul>
                             <ul class="side-nav" id="mobile-demo" style="margin-right : -40 px ;">
                                 <li><a href="@routes.VoteController.showResult()"><i class="medium mdi-action-class left"></i>
-                                    Voting Result</a>
+                                    Voting&nbsp;Result</a>
                                 </li>
                                 @if(numOfUnread == 0) {
                                     <li><a id='inbox' href="@routes.Application.inboxMobile()" data-activates='inbox_message'><i class="medium mdi-communication-forum left badge"></i>Inbox</a></li>
@@ -72,7 +72,7 @@
             </nav>
             <div class="container padding-nav">
                 <div class="animated fadeInDown">
-                    <h1 class = "lobby-banner trigger-text">Rating Result</h1>
+                    <h1 class = "lobby-banner trigger-text">Rating&nbsp;Result</h1>
                     <div class ="right-align">
                         <span style="color: #929292; font-style: italic; line-height: 36px; padding-right: 10px;">sort by</span>
                         <a class = "btn trigger" href="@routes.RateCalculator.rateSortByCriteria()" style="padding: 0 1rem;">Criteria</a>
