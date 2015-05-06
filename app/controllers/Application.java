@@ -162,7 +162,7 @@ public class Application extends Controller {
             User.create("test1", "test1", "TestFirstname1", "TestLastName1", User.NORMAL_USER); // Add new account : username => test1 password => test1
             User.create("test2", "test2", "TestFirstname2", "TestLastName2", User.NORMAL_USER); // Add new account : username => test2 password => test2
 
-            mockProjectsInDivision1();
+            mockProjects();
             mockUsersInDivision1();
             mockUsersInDivision2();
             mockCriteria();
@@ -174,26 +174,31 @@ public class Application extends Controller {
 
     public static void mockCriteria() {
 
-        VoteCriterion.create("Best Application","Best app for use at ExceedCamp.");
+        VoteCriterion.create("Most beautiful UI","");
+        VoteCriterion.create("Most feature-complete","");
+        VoteCriterion.create("Easiest to use","");
+
         RateCriterion.create("Ease of use","how easy is to understand how to vote and actually vote? How easy is navigation? Is there clear feedback on what you have done so far?");
         RateCriterion.create("Reliability","can you smoothly login and complete voting? Does app prevent submission of invalid data?");
-        RateCriterion.create("Completeness","does it have the features required by customer?");
+        RateCriterion.create("UI/UX Quality", "does it have consistent look? Can use on different size screens? Is important info clearly displayed? Is navigation clearly provided (not using browser 'back' button)?");
         RateCriterion.create("Security ","does application prevent unauthorized access? Can you logout of application? Hint: Look at the project's routes file on Github. Try to directly access the URLs without logging in.");
-        RateCriterion.create("Quality of UI", "does it have consistent look? Can use on different size screens? Is important info clearly displayed? Is navigation clearly provided (not using browser 'back' button)?");
-
+        RateCriterion.create("Suitability","does it have the features required by customer?");
     }
 
-    public static void mockProjectsInDivision1() {
-        Project.create("TeamSaint4","Team Saint4's description belongs here");
-        Project.create("TeamManat","TeamManat's description belongs here");
+    public static void mockProjects() {
         Project.create("Team2Big2Slim","Team2Big2Slim's description belongs here");
-        Project.create("TeamFatCat","TeamFatCat's description belongs here");
+        Project.create("TeamJDED","TeamJDED's description belongs here");
+        Project.create("TeamMalee","TeamMalee's description belongs here");
+        Project.create("TeamTheFrank","TeamTheFrank's description belongs here");
 
     }
 
     public static void mockUsersInDivision1() {
+
+        User thisUser;
+
         //TeamSaint4
-        User.create("b5610545765", "muninthorn.t", "Muninthorn", "Thongnuc", User.NORMAL_USER);
+        User.create("b5610545765", "muninthorn.t", "Muninthorn", "Thongnuch", User.NORMAL_USER);
         User.create("b5610545781", "runyasak.c", "Runyasak", "Chaengnaimuang", User.NORMAL_USER);
         User.create("b5610545706", "nara.s", "Nara", "Surawit", User.NORMAL_USER);
         User.create("b5610546788", "vasupol.c", "Vasupol", "Charmethakul", User.NORMAL_USER);
@@ -209,11 +214,19 @@ public class Application extends Controller {
 
 
         //Team2Big2Slim
-        User.create("b5610545722", "punpikorn.r", "Punpikorn", "Rattanawirojkul", User.NORMAL_USER);
-        User.create("b5610545668", "nathakorn.s", "Nathakorn", "Sukumsirichart", User.NORMAL_USER);
-        User.create("b5610545731", "piyaphat.t", "Piyaphat", "Tulakoop", User.NORMAL_USER);
-        User.create("b5610546711", "nabhat.y", "Nabhat", "Yuktadatta", User.NORMAL_USER);
-        User.create("b5610545676", "nut.k", "Nut", "Kaewnak", User.NORMAL_USER);
+        thisUser = User.create("b5610545722", "punpikorn.r", "Punpikorn", "Rattanawirojkul", User.NORMAL_USER);
+        Groups.create(thisUser, Project.findByName("Team2Big2Slim"));
+        thisUser = User.create("b5610545668", "nathakorn.s", "Nathakorn", "Sukumsirichart", User.NORMAL_USER);
+        Groups.create(thisUser, Project.findByName("Team2Big2Slim"));
+        thisUser = User.create("b5610545731", "piyaphat.t", "Piyaphat", "Tulakoop", User.NORMAL_USER);
+        Groups.create(thisUser, Project.findByName("Team2Big2Slim"));
+        thisUser = User.create("b5610546711", "nabhat.y", "Nabhat", "Yuktadatta", User.NORMAL_USER);
+        Groups.create(thisUser, Project.findByName("Team2Big2Slim"));
+        thisUser = User.create("b5610545676", "nut.k", "Nut", "Kaewnak", User.NORMAL_USER);
+        Groups.create(thisUser, Project.findByName("Team2Big2Slim"));
+
+
+
 
         //TeamFatCat
         User.create("b5610546702", "jiratchaya.i", "Jiratchaya", "Intaragumhaeng", User.NORMAL_USER);
@@ -225,30 +238,46 @@ public class Application extends Controller {
     }
 
     public static void mockUsersInDivision2() {
+        User thisUser;
+
         // TEAMGG
         User.create("b5610545757", "manatsawin.h", "Manatsawin", "Hanmongkolchai", User.NORMAL_USER);
         User.create("b5610546770", "varis.k", "Varis", "Kritpolchai", User.NORMAL_USER);
         User.create("b5610545749", "pongsachon.p", "Pongsachon", "Pornsriniyom", User.NORMAL_USER);
 
         //TeamTheFrank
-        User.create("b5610546681", "kittinan.n", "Kittinan", "Napapongsa", User.NORMAL_USER);
-        User.create("b5610546281", "perawith.j", "Perawith", "Jarunithi", User.NORMAL_USER);
-        User.create("b5610546753", "nathas.y", "Nathas", "Yingsukamol", User.NORMAL_USER);
-        User.create("b5610545692", "thanachote.v", "Thanachote", "Visetsuthimont", User.NORMAL_USER);
-        User.create("b5610546729", "thanaphon.k", "Thanaphon", "Ketsin", User.NORMAL_USER);
+        thisUser = User.create("b5610546681", "kittinan.n", "Kittinan", "Napapongsa", User.NORMAL_USER);
+        Groups.create(thisUser, Project.findByName("TeamTheFrank"));
+        thisUser = User.create("b5610546281", "perawith.j", "Perawith", "Jarunithi", User.NORMAL_USER);
+        Groups.create(thisUser, Project.findByName("TeamTheFrank"));
+        thisUser = User.create("b5610546753", "nathas.y", "Nathas", "Yingsukamol", User.NORMAL_USER);
+        Groups.create(thisUser, Project.findByName("TeamTheFrank"));
+        thisUser = User.create("b5610545692", "thanachote.v", "Thanachote", "Visetsuthimont", User.NORMAL_USER);
+        Groups.create(thisUser, Project.findByName("TeamTheFrank"));
+        thisUser = User.create("b5610546729", "thanaphon.k", "Thanaphon", "Ketsin", User.NORMAL_USER);
+        Groups.create(thisUser, Project.findByName("TeamTheFrank"));
 
         //TeamMalee
-        User.create("b5610545048", "tanatorn.a", "Tanatorn", "Assawaamnuey", User.NORMAL_USER);
-        User.create("b5610545714", "patawat.w", "Patawat", "Watakul", User.NORMAL_USER);
-        User.create("b5610546745", "thanyaboon.t", "Thanyaboon", "Tovorapan", User.NORMAL_USER);
-        User.create("b5610546761", "mintra.t", "Mintra", "Thirasirisin", User.NORMAL_USER);
+        thisUser = User.create("b5610545048", "tanatorn.a", "Tanatorn", "Assawaamnuey", User.NORMAL_USER);
+        Groups.create(thisUser, Project.findByName("TeamMalee"));
+        thisUser = User.create("b5610545714", "patawat.w", "Patawat", "Watakul", User.NORMAL_USER);
+        Groups.create(thisUser, Project.findByName("TeamMalee"));
+        thisUser = User.create("b5610546745", "thanyaboon.t", "Thanyaboon", "Tovorapan", User.NORMAL_USER);
+        Groups.create(thisUser, Project.findByName("TeamMalee"));
+        thisUser = User.create("b5610546761", "mintra.t", "Mintra", "Thirasirisin", User.NORMAL_USER);
+        Groups.create(thisUser, Project.findByName("TeamMalee"));
 
         //TEAMJDED
-        User.create("b5410545044", "waranyu.r", "Waranyu", "Rerkdee", User.NORMAL_USER);
-        User.create("b5410545052", "supayut.r", "Supayut", "Raksuk", User.NORMAL_USER);
-        User.create("b5410546334", "wasin.h", "Wasin", "Hawaree", User.NORMAL_USER);
-        User.create("b5410546393", "akkarawit.p", "Akkarawit", "Piyawin", User.NORMAL_USER);
-        User.create("b5410547594", "nachanok.s", "Nachanok", "Suktarachan", User.NORMAL_USER);
+        thisUser = User.create("b5410545044", "waranyu.r", "Waranyu", "Rerkdee", User.NORMAL_USER);
+        Groups.create(thisUser, Project.findByName("TeamJDED"));
+        thisUser = User.create("b5410545052", "supayut.r", "Supayut", "Raksuk", User.NORMAL_USER);
+        Groups.create(thisUser, Project.findByName("TeamJDED"));
+        thisUser = User.create("b5410546334", "wasin.h", "Wasin", "Hawaree", User.NORMAL_USER);
+        Groups.create(thisUser, Project.findByName("TeamJDED"));
+        thisUser = User.create("b5410546393", "akkarawit.p", "Akkarawit", "Piyawin", User.NORMAL_USER);
+        Groups.create(thisUser, Project.findByName("TeamJDED"));
+        thisUser = User.create("b5410547594", "nachanok.s", "Nachanok", "Suktarachan", User.NORMAL_USER);
+        Groups.create(thisUser, Project.findByName("TeamJDED"));
 
         //STAFF
         User.create("b5510546166", "sarun.wo", "Sarun", "Wongtanakarn", User.NORMAL_USER);
