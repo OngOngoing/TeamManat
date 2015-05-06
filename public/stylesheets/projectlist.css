@@ -221,6 +221,11 @@
     vertical-align: middle;
     font-size: 2.8rem;
 }
+@media only screen and (max-width: 992px) {
+    .logo{
+        font-size: 2rem;
+    }
+}
 .menu-s{
     background: rgba(0, 0, 0, .1);
     content: '';

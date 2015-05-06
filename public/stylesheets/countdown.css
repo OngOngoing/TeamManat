@@ -1,7 +1,6 @@
 
 .count-down-label-s{
     display: block;
-    padding-top: 40%;
     font-size: 17px;
     font-weight: normal;
     text-transform: uppercase;
@@ -34,7 +33,7 @@
 .count-down-label{
     display: block;
     padding-top: 3px;
-    font-size: 30px;
+    font-size: 2rem;
     font-weight: normal;
     text-transform: uppercase;
 }

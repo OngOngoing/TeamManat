@@ -16,10 +16,10 @@
     </head>
     <body>
         <nav id="head">
-            <div class="container">
                 <div class="nav-wrapper">
-                    <a href="@routes.Application.index()" link-to="#index-banner" class="linkable brand-logo"><span class="glyphicon glyphicon-ice-lolly-tasted logo" aria-hidden="true"></span><span style="font-size: 2rem; top: 10px;">eXceed</span></a>
                     <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="mdi-navigation-menu"></i></a>
+                    <div class="container">
+                    <a href="@routes.Application.index()" link-to="#index-banner" class="linkable brand-logo"><span class="glyphicon glyphicon-ice-lolly-tasted logo" aria-hidden="true"></span><span class="hide-on-large-only" style="font-size: 1.5rem; top: 10px;">eXceed</span><span class="hide-on-med-and-down" style="font-size: 2rem; top: 10px;">eXceed</span></a>
                     <div class="center">
                         <ul class="right hide-on-med-and-down">
                             <li><a href="@routes.RateCalculator.index()"><i class="medium mdi-editor-insert-chart left"></i>Rating Result</a></li>
@@ -56,6 +56,7 @@
                             </ul>
                             <li><a href="@routes.Application.logout()" class="backgroud-link"><i class="medium mdi-action-lock-outline center"></i></a></li>
                         </ul>
+                            </div>
                         <ul class="side-nav" id="mobile-demo" style="margin-right: -40px;">
                             <li><a href="@routes.RateCalculator.index()"><i class="medium mdi-editor-insert-chart left"></i>Rating Result</a></li>
                             <li><a href="@routes.VoteController.showResult()"><i class="medium mdi-action-class left"></i>Voting Result</a></li>
@@ -70,7 +71,6 @@
                         </ul>
                     </div>
                 </div>
-            </div>
         </nav>
         <nav id="head-2">
             <div class="nav-wrapper hide-on-large-only">
