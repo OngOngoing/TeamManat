@@ -11,11 +11,12 @@
         <link rel="stylesheet" media="screen" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.96.1/css/materialize.min.css">
         <link rel="stylesheet" media="screen" href="@routes.Assets.at("stylesheets/animate.css")">
         <link rel="stylesheet" media="screen" href="@routes.Assets.at("stylesheets/votepage.css")">
+        <link rel="stylesheet" media="screen" href="@routes.Assets.at("stylesheets/init.css")">
         <link rel="icon" type="image/png" href="@routes.Assets.at("img/favicon.png")">
         <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
     </head>
     <body>
-        <nav class="teal lighten-1 trigger large" id="head">
+        <nav class="teal lighten-1  large" id="head">
             <div class="container">
                 <div class="nav-wrapper">
                     <a href="@routes.Application.index()" class="brand-logo"><span class="glyphicon glyphicon-ice-lolly-tasted logo" aria-hidden="true"></span><span style="font-size: 2rem; top: 10px;">eXceed</span></a>
@@ -68,7 +69,7 @@
         </nav>
         <div class="container padding-nav">
             <div class="animated fadeInDown">
-                <h1 class="trigger-text trigger pageBanner center-align">Voting Result</h1>
+                <h1 class="trigger-text  pageBanner center-align">Voting Result</h1>
             </div>
             <div class="divider"></div>
 
@@ -79,7 +80,7 @@
                 } else {
                     <ul class="collapsible" data-collapsible="accordion">
                         <li>
-                            <div class="collapsible-header trigger-text trigger"><i class="mdi-action-grade"></i>
+                            <div class="collapsible-header trigger-text "><i class="mdi-action-grade"></i>
                                 Show Winner</div>
                             <div class="collapsible-body">
                                 <div class="collapsible-container">
@@ -140,7 +141,7 @@
                                 <tr>
                                     <td class="flow-text">@orderedBundle.asInstanceOf[Vote.ResultBundle].project.getProjectName</td>
                                     <td class="flow-text">
-                                        <div class="progress trigger">
+                                        <div class="progress ">
                                             <div class="determinate" style="width : @orderedBundle.asInstanceOf[Vote.ResultBundle].roundedPercent%"></div>
                                         </div>
                                         @orderedBundle.asInstanceOf[Vote.ResultBundle].roundedPercent %
@@ -153,7 +154,7 @@
                             <tr>
                                 <td class="flow-text grey-text darken-2"><i class="mdi-av-mic-off"></i> @noVoteMapping.get(criterion).asInstanceOf[Vote.ResultBundle].project.getProjectName</td>
                                 <td class="flow-text grey-text darken-2">
-                                    <div class="progress trigger">
+                                    <div class="progress ">
                                         <div class="determinate" style="width : @noVoteMapping.get(criterion).asInstanceOf[Vote.ResultBundle].roundedPercent%"></div>
                                     </div>
                                     @noVoteMapping.get(criterion).asInstanceOf[Vote.ResultBundle].roundedPercent %
