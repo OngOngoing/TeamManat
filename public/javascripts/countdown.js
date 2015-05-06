@@ -9,7 +9,6 @@ $(document).ready(function() {
                 + '%S<span>sec</span></div><div>'));
             }).on('finish.countdown', function (event) {
                 $('#count-down').html('<div class="count-down-label col s12 center">Time\'s up</div>');
-                $('#head-2').attr('style', 'background: red !important');
             });
     });
     $('#countdown-s').countdown($('#countdown-s').attr("end-date"))
@@ -21,6 +20,5 @@ $(document).ready(function() {
             + '%S<span>sec</span></div><div>'));
         }).on('finish.countdown', function (event) {
             $('#count-down-s').html('<div class="count-down-label-s col s12 center">Time\'s up</div>');
-            $('#head-2').attr('style', 'background: #d32f2f !important');
         });
 });

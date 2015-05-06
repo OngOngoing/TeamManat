@@ -17,8 +17,8 @@
     <body>
         <nav id="head">
                 <div class="nav-wrapper">
-                    <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="mdi-navigation-menu"></i></a>
                     <div class="container">
+                    <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="mdi-navigation-menu"></i></a>
                     <a href="@routes.Application.index()" link-to="#index-banner" class="linkable brand-logo"><span class="glyphicon glyphicon-ice-lolly-tasted logo" aria-hidden="true"></span><span class="hide-on-large-only" style="font-size: 1.5rem; top: 10px;">eXceed</span><span class="hide-on-med-and-down" style="font-size: 2rem; top: 10px;">eXceed</span></a>
                     <div class="center">
                         <ul class="right hide-on-med-and-down">
@@ -35,16 +35,14 @@
                                     @comments.map{ comment =>
                                         @if(comment.isRead==Inbox.UNREAD) {
                                             <li class="inbox-li collection-item tooltipped" id="inbox-id-@comment.getId" inbox-id="@comment.getId" data-position="left" data-delay="50" data-tooltip="Make as read">
-                                                <i class="mdi-content-markunread left" id="icon-inbox-@comment.getId" style="margin-right : - 10px ; padding-left : 10px ;"></i>
-                                                <a href="#!">@comment.getComment.getComment <br /> <span class="secondary-text">
-                                                    from @comment.getComment.getUser.getUsername @comment.getTimestamp</span></a>
+                                                <i class="mdi-content-markunread left" id="icon-inbox-@comment.getId" style="margin-right : -10px ; padding-left : 10px ;"></i>
+                                                <a href="#!">@comment.getComment.getComment <br /> <span class="secondary-text">from @comment.getComment.getUser.getUsername @comment.getTimestamp</span></a>
                                             </li>
                                             <li class="divider"></li>
                                         }else{
                                             <li class="inbox-li collection-item tooltipped" id="inbox-id-@comment.getId" inbox-id="@comment.getId" data-position="left" data-delay="50" data-tooltip="Make as unread">
                                                 <i class="mdi-content-drafts left" id="icon-inbox-@comment.getId" style="margin-right : -10px ; padding-left : 10px ;"></i>
-                                                <a href="#!">@comment.getComment.getComment <br /> <span class="secondary-text">
-                                                    from @comment.getComment.getUser.getUsername @comment.getTimestamp</span></a>
+                                                <a href="#!">@comment.getComment.getComment <br /> <span class="secondary-text">from @comment.getComment.getUser.getUsername @comment.getTimestamp</span></a>
                                             </li>
                                             <li class="divider"></li>
                                         }
@@ -54,7 +52,7 @@
                                     }
                                 </div>
                             </ul>
-                            <li><a href="@routes.Application.logout()" class="backgroud-link"><i class="medium mdi-action-lock-outline center"></i></a></li>
+                            <li><a href="@routes.Application.logout()" class="backgroud-link"><i class="medium mdi-action-settings-power center"></i></a></li>
                         </ul>
                             </div>
                         <ul class="side-nav" id="mobile-demo" style="margin-right: -40px;">
@@ -110,8 +108,8 @@
                             </div>
                         </div>
                         <div class="row">
-                            <div class="col s12 m6">
-                                <a link-to="#project-list" class="linkable card-panel full-size waves-effect content-hoverable" href="#project-list">
+                            <div class="col s6 m6">
+                                <a link-to="#project-list" class="linkable card-panel full-size waves-effect content-hoverable hide-on-large-only" href="#project-list" style="padding: 0;">
                                     <div class="center promo promo-example">
                                         @if(projectsLeft == 0) {
                                             <p class="promo-caption flow-text"><i class="teal-text badge mdi-action-done"></i>Rate</p>
@@ -127,9 +125,25 @@
                                         }
                                     </div>
                                 </a>
+                                <a link-to="#project-list" class="linkable card-panel full-size waves-effect content-hoverable hide-on-med-and-down" href="#project-list">
+                                    <div class="center promo promo-example">
+                                    @if(projectsLeft == 0) {
+                                        <p class="promo-caption flow-text"><i class="teal-text badge mdi-action-done"></i>Rate</p>
+                                        <p class="teal-text darken-2 light center">COMPLETED</p>
+                                    }else {
+                                        <p class="promo-caption flow-text"><i class="badge mdi-action-grade"></i>Rate</p>
+                                        @if(projectsLeft == 1) {
+                                            <p class="pink-text darken-2 light center">1 project left</p>
+                                        }
+                                        @if(projectsLeft > 1) {
+                                            <p class="pink-text darken-2 light center">@projectsLeft projects left</p>
+                                        }
+                                    }
+                                    </div>
+                                </a>
                             </div>
-                            <div class="col s12 m6">
-                                <a class="card-panel full-size waves-effect content-hoverable" href="@routes.VoteController.index()">
+                            <div class="col s6 m6">
+                                <a class="card-panel full-size waves-effect content-hoverable hide-on-med-and-down" href="@routes.VoteController.index()">
                                     <div class="center promo promo-example">
                                         @if(votesLeft == 0) {
                                             <p class="promo-caption flow-text"><i class="teal-text badge mdi-action-done"></i>Vote</p>
@@ -143,6 +157,22 @@
                                                 <p class="pink-text darken-2 light center">@votesLeft criteria left</p>
                                             }
                                         }
+                                    </div>
+                                </a>
+                                <a class="card-panel full-size waves-effect content-hoverable hide-on-large-only" href="@routes.VoteController.index()" style="padding: 0;">
+                                    <div class="center promo promo-example">
+                                    @if(votesLeft == 0) {
+                                        <p class="promo-caption flow-text"><i class="teal-text badge mdi-action-done"></i>Vote</p>
+                                        <p class="teal-text darken-2 light center">COMPLETED</p>
+                                    } else {
+                                        <p class="promo-caption flow-text"><i class="badge mdi-editor-insert-chart"></i>Vote</p>
+                                        @if(votesLeft == 1) {
+                                            <p class="pink-text darken-2 light center">1 criterion left</p>
+                                        }
+                                        @if(votesLeft > 1) {
+                                            <p class="pink-text darken-2 light center">@votesLeft criteria left</p>
+                                        }
+                                    }
                                     </div>
                                 </a>
                             </div>

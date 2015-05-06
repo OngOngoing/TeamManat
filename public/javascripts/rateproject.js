@@ -5,7 +5,7 @@ $("a[name='criteriaButton']").click(function () {
         if($(this).attr('score') != 0){
             $(this).addClass("btn-flat");
         }else{
-            $(this).removeClass("btn-flat").addClass("btn");
+            $(this).removeClass("btn-flat").addClass("btn").addClass("red");
         }
     })
     $(this).removeClass("btn-flat").addClass("btn");
@@ -19,6 +19,7 @@ $("a[name='criteriaButtonRemove']").click(function () {
     $("a[id='" + criteria + "']").each(function () {
         $(this).addClass("btn-flat");
     });
+    $(this).removeClass("btn").removeClass("red").addClass("disabled");
     $("#" + criteria).val(value);
 });
 
@@ -33,7 +34,7 @@ $("a[name='criteriaButtonRemove']").each(function(){
     var criteria = this.id;
     var score = $("#" + criteria).attr('value');
     if(score == 0){
-        $(this).addClass("btn-flat");
+        $(this).addClass("btn-flat").removeClass("red").addClass("disabled");
     }
 });
 
