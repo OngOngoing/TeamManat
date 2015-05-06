@@ -104,7 +104,12 @@ public class VoteController extends Controller {
                     Project project =Project.findById(Long.parseLong(projectId));
                     if (thisVote == null) {
                         Vote.create(criterion, user, project);
-                        Logger.info("[" + user.getUsername() + "] vote (" + criterion.getId() + ")" + criterion.getName() + ", project : (" + projectId + ")" + project.getProjectName());
+                        if(project == null){
+                            Logger.info("[" + user.getUsername() + "] vote (" + criterion.getId() + ")" + criterion.getName() + ", to no vote");
+                        }else {
+                            Logger.info("[" + user.getUsername() + "] vote (" + criterion.getId() + ")" + criterion.getName() + ", project : (" + projectId + ")" + project.getProjectName());
+                        }
+
                     }else {
                         if(project == null){
                             Logger.info("[" + User.findByUserId(userId).getUsername() + "] edit vote (" + criterion.getId() + ")" + criterion.getName() + ", to no vote");
