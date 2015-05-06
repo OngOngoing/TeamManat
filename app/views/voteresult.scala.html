@@ -1,4 +1,4 @@
-@(user: User)(criteria: List[VoteCriterion])(projects: List[Project])(winnerSummary: Map[VoteCriterion,List[Vote.ResultBundle]])(orderedSummary: Map[VoteCriterion,List[Vote.ResultBundle]])
+@(user: User)(criteria: List[VoteCriterion])(projects: List[Project])(winnerSummary: Map[VoteCriterion,List[Vote.ResultBundle]])(orderedSummary: Map[VoteCriterion,List[Vote.ResultBundle]])(noVoteMapping : Map[VoteCriterion,Vote.ResultBundle])
 @import java.util
 @import models.Vote.ResultBundle
 @import java.math.BigInteger; var totalVotes = 0; var numOfUnread = Inbox.findNumOfUnreadByReceiver(user); var comments = Inbox.findAllByReceiver(user);
@@ -11,7 +11,6 @@
         <link rel="stylesheet" media="screen" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.96.1/css/materialize.min.css">
         <link rel="stylesheet" media="screen" href="@routes.Assets.at("stylesheets/animate.css")">
         <link rel="stylesheet" media="screen" href="@routes.Assets.at("stylesheets/votepage.css")">
-        <link rel="stylesheet" media="screen" href="@routes.Assets.at("stylesheets/init.css")">
         <link rel="icon" type="image/png" href="@routes.Assets.at("img/favicon.png")">
         <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
     </head>
@@ -69,7 +68,7 @@
         </nav>
         <div class="container padding-nav">
             <div class="animated fadeInDown">
-                <h1 class="trigger-text pageBanner center-align">Voting Result</h1>
+                <h1 class="trigger-text trigger pageBanner center-align">Voting Result</h1>
             </div>
             <div class="divider"></div>
 
@@ -80,7 +79,7 @@
                 } else {
                     <ul class="collapsible" data-collapsible="accordion">
                         <li>
-                            <div class="collapsible-header trigger-text"><i class="mdi-action-grade"></i>
+                            <div class="collapsible-header trigger-text trigger"><i class="mdi-action-grade"></i>
                                 Show Winner</div>
                             <div class="collapsible-body">
                                 <div class="collapsible-container">
@@ -150,6 +149,19 @@
                                     <td class="flow-text">@orderedBundle.asInstanceOf[Vote.ResultBundle].sum</td>
                                 </tr>
                             }
+
+                            <tr>
+                                <td class="flow-text grey-text darken-2"><i class="mdi-av-mic-off"></i> @noVoteMapping.get(criterion).asInstanceOf[Vote.ResultBundle].project.getProjectName</td>
+                                <td class="flow-text grey-text darken-2">
+                                    <div class="progress trigger">
+                                        <div class="determinate" style="width : @noVoteMapping.get(criterion).asInstanceOf[Vote.ResultBundle].roundedPercent%"></div>
+                                    </div>
+                                    @noVoteMapping.get(criterion).asInstanceOf[Vote.ResultBundle].roundedPercent %
+
+                                </td>
+                                <td class="flow-text grey-text darken-2">@noVoteMapping.get(criterion).asInstanceOf[Vote.ResultBundle].sum</td>
+                            </tr>
+
 
                             </tbody>
                         </table>

@@ -149,6 +149,27 @@ public class Vote extends Model {
         return result;
     }
 
+    public static HashMap<VoteCriterion,ResultBundle> getNoVoteMapping() {
+        HashMap<VoteCriterion,ResultBundle> result = new HashMap<VoteCriterion,ResultBundle>();
+        List<VoteCriterion> criteria = VoteCriterion.findAll();
+        for(VoteCriterion criterion : criteria) {
+            ResultBundle bundle = new ResultBundle();
+            bundle.sum = findVotesByCriterionAndProject(criterion,null).size();
+            bundle.totalVotes = findVotesByCriterion(criterion).size();
+            bundle.percent = 0;
+            if(bundle.totalVotes > 0) {
+                bundle.percent = 100.0*bundle.sum/bundle.totalVotes;
+            }
+            bundle.roundedPercent = String.format("%.2f",bundle.percent);
+            Project dummy = new Project();
+            dummy.setProjectName("No Vote");
+            dummy.setId(Long.parseLong(-1+""));
+            bundle.project = dummy;
+            result.put(criterion, bundle);
+        }
+        return result;
+    }
+
     public static HashMap<VoteCriterion,List<ResultBundle>> summarizeWithReverseOrder() {
         HashMap<VoteCriterion, List<ResultBundle>> result = new HashMap<VoteCriterion, List<ResultBundle>>();
         List<VoteCriterion> criteria = VoteCriterion.findAll();

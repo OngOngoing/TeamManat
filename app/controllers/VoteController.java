@@ -45,7 +45,8 @@ public class VoteController extends Controller {
             List<Project> projects = Project.findAll();
             HashMap<VoteCriterion, List<Vote.ResultBundle>> orderedSummary = Vote.summarizeWithReverseOrder();
             HashMap<VoteCriterion, List<Vote.ResultBundle>> winnerSummary = Vote.getWinnerSummary();
-            return ok(voteresult.render(thisUser, criteria, projects, winnerSummary, orderedSummary ));
+            HashMap<VoteCriterion, Vote.ResultBundle> noVoteMapping = Vote.getNoVoteMapping();
+            return ok(voteresult.render(thisUser, criteria, projects, winnerSummary, orderedSummary, noVoteMapping ));
         }
         flash("error","Please wait until the voting session is closed. Sorry for the inconvenience.");
         response().setHeader("Cache-Control","no-cache");
