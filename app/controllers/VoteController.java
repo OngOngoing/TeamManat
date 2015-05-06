@@ -23,7 +23,7 @@ public class VoteController extends Controller {
         Map<VoteCriterion,Long> voteMapping = Vote.getVoteMappingByUser(thisUser);
         boolean isTimeUp = Setting.isTimeUp();
         if(isTimeUp) {
-            flash("time_up","Time is already up. Sorry for the inconvenience.");
+            flash("time_up","Time is already up.");
         }
         response().setHeader("Cache-Control","no-cache");
         return ok(votepage.render(thisUser, userId, Project.findAll(), voteMapping, VoteCriterion.findAll(),isTimeUp));
@@ -48,7 +48,7 @@ public class VoteController extends Controller {
             HashMap<VoteCriterion, Vote.ResultBundle> noVoteMapping = Vote.getNoVoteMapping();
             return ok(voteresult.render(thisUser, criteria, projects, winnerSummary, orderedSummary, noVoteMapping ));
         }
-        flash("error","Please wait until the voting session is closed. Sorry for the inconvenience.");
+        flash("error","Please wait until the voting session is closed.");
         response().setHeader("Cache-Control","no-cache");
         return redirect(routes.ProjectList.index());
     }
