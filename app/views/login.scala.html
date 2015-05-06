@@ -1,4 +1,4 @@
-@(username:String)
+@(username:String)(timeUp : Boolean)
 
 <!DOCTYPE html>
 
@@ -13,7 +13,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
     </head>
     <body>
-        <section id="login-window" class="colorBg5 colorBg login-window trigger">
+        <section id="login-window" class="colorBg5 colorBg login-window ">
             <div class="container animated zoomIn">
                 <div class="wrap">
                     <div class="form-wrap">
@@ -37,6 +37,28 @@
                                     <div class="col-md-4"></div>
                                 </div>
                             </form>
+                            @if(timeUp){
+                                <div class="row">
+                                    <div class="col-md-4"></div>
+                                    <div class="col-md-4" style="text-align: center;">
+                                        <a role="button" href="/ratecalculator" class="btn btn-info btn-block" style="margin-top: 1%;">
+                                            Rating Result
+                                            <span class="glyphicon glyphicon-menu-right" aria-hidden="true"></span>
+                                        </a>
+                                    </div>
+                                    <div class="col-md-4"></div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-4"></div>
+                                    <div class="col-md-4" style="text-align: center;">
+                                        <a role="button" href="/vote/result" class="btn btn-warning btn-block" style="margin-top: 1%;">
+                                            Voting Result
+                                            <span class="glyphicon glyphicon-menu-right" aria-hidden="true"></span>
+                                        </a>
+                                    </div>
+                                    <div class="col-md-4"></div>
+                                </div>
+                            }
                         </div>
                         <div class="row" style="padding-top: 20px;">
                             @if(flash.contains("error")) {
