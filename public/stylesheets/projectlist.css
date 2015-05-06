@@ -237,11 +237,6 @@
     -ms-transform: translateY(-56px);
     transform: translateY(-56px);
 }
-#head.scroll-non {
-    -webkit-transform: translateY(0px);
-    -ms-transform: translateY(0px);
-    transform: translateY(0px);
-}
 #head-2{
     background: #75AFEB !important;
     height: 50px;
@@ -257,11 +252,6 @@
     -webkit-transform: translateY(-56px);
     -ms-transform: translateY(-56px);
     transform: translateY(-56px);
-}
-#head-2.scroll-non {
-    -webkit-transform: translateY(0px);
-    -ms-transform: translateY(0px);
-    transform: translateY(0px);
 }
 @font-face {
     font-family: 'Glyphicons Halflings';
@@ -486,7 +476,7 @@ ul {
 
 .progress-circular svg:nth-child(2) path {
     fill: none;
-    stroke-width: 2rem;
+    stroke-width: 4rem;
     stroke-dasharray: 629;
     stroke: rgba(255, 255, 255, 0.9);
     -webkit-animation: load 2s;

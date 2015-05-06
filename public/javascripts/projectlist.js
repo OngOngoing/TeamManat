@@ -40,9 +40,7 @@ $(function () {
                 curDir = 'down';
                 if (curDir != prevDir) {
                     $('#head').addClass('scroll');
-                    $('#head').removeClass('scroll-non');
                     $('#head-2').addClass('scroll');
-                    $('#head-2').removeClass('scroll-non');
                     prevDir = curDir;
                 }
             }
@@ -50,9 +48,7 @@ $(function () {
             curDir = 'up';
             if (curDir != prevDir) {
                 $('#head').removeClass('scroll');
-                $('#head').addClass('scroll-non');
                 $('#head-2').removeClass('scroll');
-                $('#head-2').addClass('scroll-non');
                 prevDir = curDir;
             }
         }
