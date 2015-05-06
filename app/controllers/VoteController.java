@@ -29,10 +29,17 @@ public class VoteController extends Controller {
         return ok(votepage.render(thisUser, userId, Project.findAll(), voteMapping, VoteCriterion.findAll(),isTimeUp));
     }
 
-    @Security.Authenticated(Secured.class)
+    //@Security.Authenticated(Secured.class)
     public static Result showResult() {
-        Long userId = Long.parseLong(session().get("userId"));
-        User thisUser = User.findByUserId(userId);
+        User thisUser; 
+        if(session().get("userId") == null){
+            thisUser = new User();
+            thisUser.setIdtype(-1);
+            thisUser.setId(Long.parseLong(-1 + ""));
+        }else{
+            Long userId = Long.parseLong(session().get("userId"));
+            thisUser = User.findByUserId(userId);    
+        }
         if(thisUser.getIdtype() == User.ADMINISTRATOR || Setting.isTimeUp()) {
             List<VoteCriterion> criteria = VoteCriterion.findAll();
             List<Project> projects = Project.findAll();

@@ -18,8 +18,16 @@ public class RateCalculator extends Controller {
     //@Security.Authenticated(Secured.class)
     public static Result index() {
         boolean isTimeUp = Setting.isTimeUp();
-        Long userId = Long.parseLong(session().get("userId"));
-        User thisUser = User.findByUserId(userId);
+        User thisUser; 
+        if(session().get("userId") == null){
+            thisUser = new User();
+            thisUser.setIdtype(-1);
+            thisUser.setId(Long.parseLong(-1 + ""));
+        }else{
+            Long userId = Long.parseLong(session().get("userId"));
+            thisUser = User.findByUserId(userId);    
+        }
+        
         if(!isTimeUp && thisUser.getIdtype() != User.ADMINISTRATOR ) {
             flash("error","Please wait until the rating session is closed. Sorry for the inconvenience.");
             return redirect(routes.ProjectList.index());
@@ -60,8 +68,15 @@ public class RateCalculator extends Controller {
     }
     public static Result rateSortByCriteria() {
         boolean isTimeUp = Setting.isTimeUp();
-        Long userId = Long.parseLong(session().get("userId"));
-        User thisUser = User.findByUserId(userId);
+        User thisUser; 
+        if(session().get("userId") == null){
+            thisUser = new User();
+            thisUser.setIdtype(-1);
+            thisUser.setId(Long.parseLong(-1 + ""));
+        }else{
+            Long userId = Long.parseLong(session().get("userId"));
+            thisUser = User.findByUserId(userId);    
+        }
         if(!isTimeUp && thisUser.getIdtype() != User.ADMINISTRATOR ) {
             flash("error","Please wait until the rating session is closed. Sorry for the inconvenience.");
             return redirect(routes.ProjectList.index());

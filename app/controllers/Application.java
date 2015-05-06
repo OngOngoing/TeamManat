@@ -42,6 +42,10 @@ public class Application extends Controller {
     }
 
     public static Result logout() {
+        if(session().get("userId") == null){
+            Logger.info("[Guest]'ve been logged out.");
+            return redirect(routes.Application.index());
+        }
         Logger.info("["+User.findByUserId(Long.parseLong(session().get("userId"))).getUsername()+"]'ve been logged out.");
         session().clear();
         flash("success", "You've been logged out");
