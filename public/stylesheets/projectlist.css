@@ -7,42 +7,11 @@
  */
 
 /* For Mobile Auto-Image Size*/
-@font-face{
-    font-family:"Roboto Thin";
-    src:url("../font/roboto/Roboto-Thin.woff2") format("woff2"),url("../font/roboto/Roboto-Thin.woff") format("woff"),url("../font/roboto/Roboto-Thin.ttf") format("truetype");
-    font-weight:200;
-}
-@font-face{
-    font-family:"Roboto Light";
-    src:url("../font/roboto/Roboto-Light.woff2") format("woff2"),url("../font/roboto/Roboto-Light.woff") format("woff"),url("../font/roboto/Roboto-Light.ttf") format("truetype");
-    font-weight:300;
-}
-@font-face{
-    font-family:"Roboto Regular";
-    src:url("../font/roboto/Roboto-Regular.woff2") format("woff2"),url("../font/roboto/Roboto-Regular.woff") format("woff"),url("../font/roboto/Roboto-Regular.ttf") format("truetype");
-    font-weight:400;
-}
-@font-face{
-    font-family:"Roboto Medium";
-    src:url("../font/roboto/Roboto-Medium.woff2") format("woff2"),url("../font/roboto/Roboto-Medium.woff") format("woff"),url("../font/roboto/Roboto-Medium.ttf") format("truetype");
-    font-weight:500;
-}
-@font-face{
-    font-family:"Roboto Bold";
-    src:url("../font/roboto/Roboto-Bold.woff2") format("woff2"),url("../font/roboto/Roboto-Bold.woff") format("woff"),url("../font/roboto/Roboto-Bold.ttf") format("truetype");
-    font-weight:700;
-}
-
-
-
 @media only screen and (max-width : 600px) {
     .container.mobile {
         width: 100%;
     }
 }
-
-
-
 
 #index-banner {
     padding-top: 100px;
@@ -55,10 +24,16 @@
 
 .index-banner-content
 {
+    padding-top: 64px;
     padding-bottom: 40px;
     color: #fff;
     font-size: 1.2em;
     text-align: center;
+}
+@media only screen and (max-width: 992px) {
+    .index-banner-content {
+        padding-top: 26px;
+    }
 }
 
 #index-banner .step {
@@ -164,13 +139,11 @@
     word-wrap: break-word;
     line-height: 20%;
     -webkit-font-smoothing: antialiased;
-
     -webkit-transition: all 0.25s ease-in;
     -moz-transition: all 0.25s ease-in;
     -o-transition: all 0.25s ease-in;
-
-
-    color: #484848;  }
+    color: #484848;
+}
 @media only screen and (max-width: 600px) {
     .app-banner {
         font-size: 1.5rem;
@@ -226,15 +199,6 @@
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
 }
-
-
-
-#head{
-    position: fixed;
-    top: 0;
-    width: 100%;
-    z-index: 1000;
-}
 @font-face {
     font-family: 'Glyphicons Halflings';
     src: url('../font/glyphicons-halflings-regular.eot');
@@ -256,70 +220,6 @@
 .logo{
     vertical-align: middle;
     font-size: 2.8rem;
-}
-.count-down-label-s{
-    display: block;
-    padding-top: 40%;
-    font-size: 17px;
-    font-weight: normal;
-    text-transform: uppercase;
-}
-.count-down-s div {
-    display: inline-block;
-    margin-left: 10px;
-    font-size: 20px;
-    font-weight: 100;
-    line-height: 1;
-    text-align: right;
-}
-/* IE7 inline-block hack */
-*+html .count-down-s div{
-    display: inline;
-    zoom: 1;
-}
-.count-down-s div:first-child {
-    margin-left: 0;
-}
-.count-down-s div span {
-    display: block;
-    border-top: 1px solid #cecece;
-    padding-top: 3px;
-    font-size: 8px;
-    font-weight: normal;
-    text-transform: uppercase;
-    text-align: left;
-}
-.count-down-label{
-    display: block;
-    padding-top: 3px;
-    font-size: 30px;
-    font-weight: normal;
-    text-transform: uppercase;
-}
-.count-down div {
-    display: inline-block;
-    margin-left: 10px;
-    font-size: 30px;
-    font-weight: 100;
-    line-height: 1;
-    text-align: right;
-}
-/* IE7 inline-block hack */
-*+html .count-down div{
-    display: inline;
-    zoom: 1;
-}
-.count-down div:first-child {
-    margin-left: 0;
-}
-.count-down div span {
-    display: block;
-    border-top: 1px solid #cecece;
-    padding-top: 3px;
-    font-size: 12px;
-    font-weight: normal;
-    text-transform: uppercase;
-    text-align: left;
 }
 .menu-s{
     background: rgba(0, 0, 0, .1);
@@ -437,11 +337,12 @@ p {
     -webkit-font-smoothing: antialiased;
 }
 
-
-
 /* Circular Progress Bar */
-
-
+@media only screen and (max-width: 992px) {
+    .progress-padding{
+        padding-top: 50%;
+    }
+}
 .progress-circle {
     max-height: 100%;
     width: auto;
@@ -456,4 +357,8 @@ p {
 .progress-circle .progressbar-text {
     font-size: 4vw;
     font-family: Roboto Light;
+}
+.page-footer{
+    color: #ffffff !important;
+    background-color: #75AFEB !important;
 }

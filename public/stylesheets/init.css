@@ -1,0 +1,74 @@
+@font-face{
+    font-family:"Roboto Thin";
+    src:url("../font/roboto/Roboto-Thin.woff2") format("woff2"),url("../font/roboto/Roboto-Thin.woff") format("woff"),url("../font/roboto/Roboto-Thin.ttf") format("truetype");
+    font-weight:200;
+}
+@font-face{
+    font-family:"Roboto Light";
+    src:url("../font/roboto/Roboto-Light.woff2") format("woff2"),url("../font/roboto/Roboto-Light.woff") format("woff"),url("../font/roboto/Roboto-Light.ttf") format("truetype");
+    font-weight:300;
+}
+@font-face{
+    font-family:"Roboto Regular";
+    src:url("../font/roboto/Roboto-Regular.woff2") format("woff2"),url("../font/roboto/Roboto-Regular.woff") format("woff"),url("../font/roboto/Roboto-Regular.ttf") format("truetype");
+    font-weight:400;
+}
+@font-face{
+    font-family:"Roboto Medium";
+    src:url("../font/roboto/Roboto-Medium.woff2") format("woff2"),url("../font/roboto/Roboto-Medium.woff") format("woff"),url("../font/roboto/Roboto-Medium.ttf") format("truetype");
+    font-weight:500;
+}
+@font-face{
+    font-family:"Roboto Bold";
+    src:url("../font/roboto/Roboto-Bold.woff2") format("woff2"),url("../font/roboto/Roboto-Bold.woff") format("woff"),url("../font/roboto/Roboto-Bold.ttf") format("truetype");
+    font-weight:700;
+}
+#head{
+    background-color: #4188D2 !important;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 1000;
+    transition: -webkit-transform 200ms linear;
+    transition: transform 200ms linear;
+}
+#head.scroll {
+    -webkit-transform: translateY(-64px);
+    -ms-transform: translateY(-64px);
+    transform: translateY(-64px);
+}
+@media only screen and (max-width: 992px) {
+    #head.scroll {
+        -webkit-transform: translateY(-56px);
+        -ms-transform: translateY(-56px);
+        transform: translateY(-56px);
+    }
+}
+#head-2{
+    background: #75AFEB !important;
+    padding-top: 7px;
+    position: fixed;
+    top: 56px;
+    width: 100%;
+    z-index: 900;
+    transition: -webkit-transform 200ms linear;
+    transition: transform 200ms linear;
+}
+@media only screen and (max-width: 992px) {
+    #head-2{
+        background: #75AFEB !important;
+        height: 50px;
+        padding-top: 7px;
+        position: fixed;
+        top: 56px;
+        width: 100%;
+        z-index: 900;
+        transition: -webkit-transform 200ms linear;
+        transition: transform 200ms linear;
+    }
+}
+#head-2.scroll {
+    -webkit-transform: translateY(-56px);
+    -ms-transform: translateY(-56px);
+    transform: translateY(-56px);
+}
