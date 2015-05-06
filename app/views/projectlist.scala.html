@@ -101,7 +101,6 @@
                                 }
                             }
                         </div>
-
                         <div class="col s4 m4">
                             <div class="progress-padding">
                             <div class="progress-circle" id="progress-circle" value="@progress"></div>
@@ -176,7 +175,7 @@
                                     </div>
                                 </a>
                             </div>
-
+                            <div class="col s12 container" style="color : #000000;"><blockquote>Choose rate or vote.</blockquote></div>
                         </div>
                     </div>
                 </div>
@@ -205,7 +204,7 @@
                                     <p class="app-banner">@project.getProjectName</p>
                                     @if(mappedRates.get(project.getId) == 0) {
                                         <p class="secondary-text hide-on-med-and-down">click here to rate this project</p>
-                                        <div class="info red-text text-darken-1"><i class="mdi-content-block"></i> NOT YET RATED</div>
+                                        <div class="info red-text text-darken-1">NOT YET RATED</div>
                                     } @if(criteriaLeft == 1 && ratingCriteria.size > 1) {
                                         <p class="secondary-text hide-on-med-and-down">click here to update your rate</p>
                                         <div class="info yellow-text text-darken-3"><i class="mdi-action-done"></i> 1 CRITERION LEFT</div>

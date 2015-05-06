@@ -1,6 +1,6 @@
 @(user: User)(criteria :List[RateCriterion])(result : List[List[Map[String, String]]])
     @import java.math.BigInteger; var numOfUnread = Inbox.findNumOfUnreadByReceiver(user); var comments = Inbox.findAllByReceiver(user);var index = 0; var index2 = 0;
-    <html>
+<!DOCTYPE html>
         <head>
             <title>Exceed Vote</title>
             <link rel="stylesheet" media="screen" href="@routes.Assets.at("stylesheets/materialize.min.css")">
@@ -68,9 +68,9 @@
                     </div>
                 </div>
             </nav>
-            <div class="container padding-nav">
+            <div class="container padding-nav" style="padding-top: 50px;">
                 <div class="animated fadeInDown">
-                    <h1 class = "lobby-banner trigger-text">Rating&nbsp;Result</h1>
+                    <h1 class = "lobby-banner trigger-text">Rating Result</h1>
                     <div class ="right-align">
                         <span style="color: #929292; font-style: italic; line-height: 36px; padding-right: 10px;">sort by</span>
                         <div class = "btn disabled" style="padding: 0 1rem;">Criteria</div>

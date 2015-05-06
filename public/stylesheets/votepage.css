@@ -70,7 +70,9 @@ body{
     line-height: 120%;
     -webkit-font-smoothing: antialiased;
 }
-
+.container {
+    padding: 0;
+}
 
 
 /*-----------------------------------*\
