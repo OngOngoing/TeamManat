@@ -23,6 +23,7 @@ public class RateProject extends Controller {
         List<User> teamMember = User.findByProject(project);
         List<Image> images = Image.findImageOfProject(project);
         Comment comment = Comment.findByUserAndProject(user, project);
+        String time = Setting.getTime();
         List<Setting> webconfig = Setting.findAll();
 
         Map setting = new HashMap();
@@ -33,7 +34,7 @@ public class RateProject extends Controller {
         if (Project.findById(projectId) == null) {
             return redirect(routes.ProjectList.index());
         }
-        return ok(rateproject.render(user, Project.findById(projectId), rates, RateCriterion.findAll(), images, teamMember, comment, setting));
+        return ok(rateproject.render(user, Project.findById(projectId), rates, RateCriterion.findAll(), images, teamMember, comment,time, setting));
     }
 
     @Security.Authenticated(Secured.class)

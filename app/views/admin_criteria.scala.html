@@ -5,11 +5,12 @@
             <link rel="stylesheet" media="screen" href="@routes.Assets.at("stylesheets/materialize.min.css")">
             <link rel="stylesheet" media="screen" href="@routes.Assets.at("stylesheets/animate.css")">
             <link rel="stylesheet" media="screen" href="@routes.Assets.at("stylesheets/adminpage.css")">
+            <link rel="stylesheet" media="screen" href="@routes.Assets.at("stylesheets/init.css")">
             <link rel="icon" type="image/png" href="@routes.Assets.at("img/favicon.png")">
             <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
         </head>
         <body>
-            <nav class="teal lighten-1 trigger large" id="head">
+            <nav class="teal lighten-1  large" id="head">
                 <div class="container">
                     <div class="nav-wrapper">
                         <a class="brand-logo"><span class="glyphicon glyphicon-ice-lolly-tasted logo" aria-hidden="true"></span></a>
@@ -55,11 +56,11 @@
             </nav>
             <div class="container padding-nav animated fadeIn">
                 <!-- User -->
-                <h2 class = "trigger trigger-text center-align">Criteria Management</h2>
+                <h2 class = " -text center-align">Criteria Management</h2>
                 <div class ="section">
                     <ul class="collapsible" data-collapsible="accordion">
                         <li>
-                            <div class="collapsible-header teal-text lighten-1 trigger"><i class="mdi-content-add"></i>
+                            <div class="collapsible-header teal-text lighten-1 "><i class="mdi-content-add"></i>
                                 Add Rate Criterion</div>
                             <div class="collapsible-body">
                                 <div class="container">
@@ -96,7 +97,7 @@
 
 
                         <li>
-                            <div class="collapsible-header teal-text lighten-1 trigger"><i class="mdi-content-add"></i>
+                            <div class="collapsible-header teal-text lighten-1 "><i class="mdi-content-add"></i>
                                 Add Vote Criterion</div>
                             <div class="collapsible-body">
                                 <div class="container">
@@ -133,7 +134,7 @@
 
 
                         <li>
-                            <div class="collapsible-header teal-text lighten-1 trigger"><i class="mdi-action-list"></i>
+                            <div class="collapsible-header teal-text lighten-1 "><i class="mdi-action-list"></i>
                                 Show All Rate Criterion</div>
                             <div class="collapsible-body">
                                 <div class="collapsible-container">
@@ -153,7 +154,7 @@
                                                     <td>@rateC.getId</td>
                                                     <td>@rateC.getName</td>
                                                     <td class="hide-on-small-only">@rateC.getDescription</td>
-                                                    <td><a href="@routes.AdminPage.deleteRateCriterion(rateC.getId)" class="secondary-content"><i class="mdi-navigation-close trigger"></i></a></td>
+                                                    <td><a href="@routes.AdminPage.deleteRateCriterion(rateC.getId)" class="secondary-content"><i class="mdi-navigation-close "></i></a></td>
                                                 </tr>
 
                                             }
@@ -166,7 +167,7 @@
 
 
                         <li>
-                            <div class="collapsible-header teal-text lighten-1 trigger"><i class="mdi-action-list"></i>
+                            <div class="collapsible-header teal-text lighten-1 "><i class="mdi-action-list"></i>
                                 Show All Vote Criterion</div>
                             <div class="collapsible-body">
                                 <div class="collapsible-container">
@@ -186,7 +187,7 @@
                                                 <td>@voteC.getId</td>
                                                 <td>@voteC.getName</td>
                                                 <td class="hide-on-small-only">@voteC.getDescription</td>
-                                                <td><a href="@routes.AdminPage.deleteVoteCriterion(voteC.getId)" class="secondary-content"><i class="mdi-navigation-close trigger"></i></a></td>
+                                                <td><a href="@routes.AdminPage.deleteVoteCriterion(voteC.getId)" class="secondary-content"><i class="mdi-navigation-close "></i></a></td>
                                             </tr>
                                         }
                                         </tbody>
@@ -204,7 +205,7 @@
 
 
             <div class="fixed-action-btn animated bounceInUp" style="bottom : 45px ; right : 40px ;">
-                <a class="btn-floating btn-large trigger " href="@routes.AdminPage.index()"><i class="large mdi-action-settings waves-effect waves-light"></i></a>
+                <a class="btn-floating btn-large trigger" href="@routes.AdminPage.index()"><i class="large mdi-action-settings waves-effect waves-light"></i></a>
                 <ul>
                     <li>
                         <a class="btn-floating red " href="@routes.Application.logout()"><i class="large mdi-action-settings-power">    </i></a>

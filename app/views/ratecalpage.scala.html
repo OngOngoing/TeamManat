@@ -6,6 +6,7 @@
             <link rel="stylesheet" media="screen" href="@routes.Assets.at("stylesheets/materialize.min.css")">
             <link rel="stylesheet" media="screen" href="@routes.Assets.at("stylesheets/animate.css")">
             <link rel="stylesheet" media="screen" href="@routes.Assets.at("stylesheets/ratecalculator.css")">
+            <link rel="stylesheet" media="screen" href="@routes.Assets.at("stylesheets/init.css")">
             <link rel="icon" type="image/png" href="@routes.Assets.at("img/favicon.png")">
             <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
         </head>
@@ -71,23 +72,23 @@
             </nav>
             <div class="container padding-nav">
                 <div class="animated fadeInDown">
-                    <h1 class = "lobby-banner trigger trigger-text">Rating Result</h1>
+                    <h1 class = "lobby-banner trigger-text">Rating Result</h1>
                     <div class ="right-align">
                         <span style="color: #929292; font-style: italic; line-height: 36px; padding-right: 10px;">sort by</span>
                         <a class = "btn trigger" href="@routes.RateCalculator.rateSortByCriteria()" style="padding: 0 1rem;">Criteria</a>
-                        <div class = "btn trigger disabled" style="padding: 0 1rem;">Project</div>
+                        <div class = "btn disabled" style="padding: 0 1rem;">Project</div>
                     </div>
                 </div>
                 <ul class="animated fadeIn">
                 @result.zipWithIndex.map { case (r, index) =>
                 <li class= "card-panel">
-                    <h5 class ="trigger trigger-text"><i class="mdi-action-stars small"></i> @projects.get(index).getProjectName</h5>
+                    <h5 class ="trigger-text"><i class="mdi-action-stars small"></i> @projects.get(index).getProjectName</h5>
                     <div class="section animated fadeIn">
                         <table class = "centered hoverable">
                             <thead>
                                 <tr>
-                                    <th class ="trigger trigger-text" data-field="cname">CriteriaName</th>
-                                    <th class ="trigger trigger-text" data-field="score">Score</th>
+                                    <th class ="trigger-text" data-field="cname">CriteriaName</th>
+                                    <th class ="trigger-text" data-field="score">Score</th>
                                 </tr>
                             </thead>
                             <tbody >
@@ -96,12 +97,12 @@
                                 <td> @if(index2 < r.size() - 1) {
                                     @criteria.get(index2).getName
                                 } else {
-                                    <p class = "trigger trigger-text"><B>Total</B></p>
+                                    <p class = "trigger-text"><B>Total</B></p>
                                 }
                                 </td>
                                 <td>
                                 @if(index2 == r.size() - 1) {
-                                    <p class = "trigger trigger-text"><B>@score</B></p>
+                                    <p class = "trigger-text"><B>@score</B></p>
                                 } else {
                                     @score
                                 }

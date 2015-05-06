@@ -119,10 +119,10 @@
                                         }else {
                                             <p class="promo-caption flow-text"><i class="badge mdi-action-grade"></i>Rate</p>
                                             @if(projectsLeft == 1) {
-                                                <p class="pink-text darken-2 light center">1 more project to complete</p>
+                                                <p class="pink-text darken-2 light center">1 project left</p>
                                             }
                                             @if(projectsLeft > 1) {
-                                                <p class="pink-text darken-2 light center">@projectsLeft more projects to complete</p>
+                                                <p class="pink-text darken-2 light center">@projectsLeft projects left</p>
                                             }
                                         }
                                     </div>
@@ -200,7 +200,7 @@
         <!-- End of Page Content -->
         @if(user.getIdtype == User.ADMINISTRATOR ){
                 <div class="fixed-action-btn animated bounceInUp">
-                    <a class="btn-floating btn-large" href="adminpage" style="background-color: #4188D2 !important">
+                    <a class="btn-floating btn-large trigger" href="adminpage">
                         <i class="large mdi-action-settings waves-effect waves-light"></i>
                     </a>
                     <ul>

@@ -104,4 +104,25 @@ public class Setting extends Model{
         }
         return calendar.compareTo(endingCalendar) > 0;
     }
+
+    public static String getTime(){
+        Setting setting = Setting.value("stopTime");
+        SimpleDateFormat dateFormat = new SimpleDateFormat("M-d-y HH:mm");
+        Calendar calendar = Calendar.getInstance();
+        String date = setting.getKeyValue();
+        String _time = "";
+        try {
+            calendar.setTime(dateFormat.parse(date));
+            int year = calendar.get(Calendar.YEAR);
+            int month = calendar.get(Calendar.MONTH);
+            int day = calendar.get(Calendar.DAY_OF_MONTH);
+            int hour = calendar.get(Calendar.HOUR_OF_DAY);
+            int minute = calendar.get(Calendar.MINUTE);
+            int second = calendar.get(Calendar.SECOND);
+            _time = String.format("%d/%02d/%02d %02d:%02d:%02d", year, month + 1, day, hour, minute, second);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return _time;
+    }
 }

@@ -5,11 +5,12 @@
             <link rel="stylesheet" media="screen" href="@routes.Assets.at("stylesheets/materialize.min.css")">
             <link rel="stylesheet" media="screen" href="@routes.Assets.at("stylesheets/animate.css")">
             <link rel="stylesheet" media="screen" href="@routes.Assets.at("stylesheets/adminpage.css")">
+            <link rel="stylesheet" media="screen" href="@routes.Assets.at("stylesheets/init.css")">
             <link rel="icon" type="image/png" href="@routes.Assets.at("img/favicon.png")">
             <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
         </head>
         <body>
-            <nav class="teal lighten-1 trigger large" id="head">
+            <nav class="teal lighten-1  large" id="head">
                 <div class="container">
                     <div class="nav-wrapper">
                         <a class="brand-logo"><span class="glyphicon glyphicon-ice-lolly-tasted logo" aria-hidden="true"></span></a>
@@ -49,16 +50,16 @@
             </nav>
             <div class="container padding-nav">
                 <!-- User -->
-                <h2 class = "trigger trigger-text">Comment</h2>
+                <h2 class = " -text">Comment</h2>
                 <ul class="collection">
                     @comments.map { comment =>
                         <li class="collection-item avatar">
-                            <i class="mdi-action-description circle teal lighten-1 trigger"></i>
-                            <span class="title teal-text lighten-1 trigger">Comment ID : @comment.getId</span>
+                            <i class="mdi-action-description circle teal lighten-1 "></i>
+                            <span class="title teal-text lighten-1 ">Comment ID : @comment.getId</span>
                             <p>UserId @comment.getUser.getId Comment ProjectId @comment.getProject.getId <br>
                                 @comment.getComment
                             </p>
-                            <a href="@routes.AdminPage.deleteComment(comment.getUser.getId , comment.getProject.getId)" class="secondary-content"><i class="mdi-navigation-close trigger"></i></a>
+                            <a href="@routes.AdminPage.deleteComment(comment.getUser.getId , comment.getProject.getId)" class="secondary-content"><i class="mdi-navigation-close "></i></a>
                         </li>
                     }
                 </ul>
@@ -70,7 +71,7 @@
 
 
             <div class="fixed-action-btn animated bounceInUp" style="bottom : 45 px ; right : 40 px ;">
-                <a class="btn-floating btn-large trigger " href="@routes.AdminPage.index()"><i class="large mdi-action-settings waves-effect waves-light"></i></a>
+                <a class="btn-floating btn-large trigger" href="@routes.AdminPage.index()"><i class="large mdi-action-settings waves-effect waves-light"></i></a>
                 <ul>
                     <li>
                         <a class="btn-floating red " href="@routes.Application.logout()"><i class="large mdi-action-settings-power">    </i></a>

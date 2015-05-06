@@ -6,6 +6,7 @@
             <link rel="stylesheet" media="screen" href="@routes.Assets.at("stylesheets/materialize.min.css")">
             <link rel="stylesheet" media="screen" href="@routes.Assets.at("stylesheets/animate.css")">
             <link rel="stylesheet" media="screen" href="@routes.Assets.at("stylesheets/ratecalculator.css")">
+            <link rel="stylesheet" media="screen" href="@routes.Assets.at("stylesheets/init.css")">
             <link rel="icon" type="image/png" href="@routes.Assets.at("img/favicon.png")">
             <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
         </head>
@@ -69,23 +70,23 @@
             </nav>
             <div class="container padding-nav">
                 <div class="animated fadeInDown">
-                    <h1 class = "lobby-banner trigger trigger-text">Rating Result</h1>
+                    <h1 class = "lobby-banner trigger-text">Rating Result</h1>
                     <div class ="right-align">
                         <span style="color: #929292; font-style: italic; line-height: 36px; padding-right: 10px;">sort by</span>
-                        <div class = "btn trigger disabled" style="padding: 0 1rem;">Criteria</div>
+                        <div class = "btn disabled" style="padding: 0 1rem;">Criteria</div>
                         <a class = "btn trigger" href="@routes.RateCalculator.index()" style="padding: 0 1rem;">Project</a>
                     </div>
                 </div>
                     <ul class="animated fadeIn">
                         @result.zipWithIndex.map { case (r, index) =>
                             <li class ="card-panel">
-                                <h4 class = "trigger trigger-text"><i class="mdi-action-receipt"></i>@criteria.get(index).getName</h4>
+                                <h4 class = "trigger-text"><i class="mdi-action-receipt"></i>@criteria.get(index).getName</h4>
                                 <div class ="row">
                                     <table class = "centered hoverable">
                                         <thead>
                                             <tr>
-                                                <th class ="trigger trigger-text" data-field="cname">Project Name</th>
-                                                <th class ="trigger trigger-text" data-field="score">Score</th>
+                                                <th class ="trigger-text" data-field="cname">Project Name</th>
+                                                <th class ="trigger-text" data-field="score">Score</th>
                                             </tr>
                                         </thead>
                                         <tbody >

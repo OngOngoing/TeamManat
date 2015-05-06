@@ -5,11 +5,12 @@
             <link rel="stylesheet" media="screen" href="@routes.Assets.at("stylesheets/materialize.min.css")">
             <link rel="stylesheet" media="screen" href="@routes.Assets.at("stylesheets/animate.css")">
             <link rel="stylesheet" media="screen" href="@routes.Assets.at("stylesheets/adminpage.css")">
+            <link rel="stylesheet" media="screen" href="@routes.Assets.at("stylesheets/init.css")">
             <link rel="icon" type="image/png" href="@routes.Assets.at("img/favicon.png")">
             <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
         </head>
         <body>
-            <nav class="teal lighten-1 trigger large" id="head">
+            <nav class="teal lighten-1 large" id="head">
                 <div class="container">
                     <div class="nav-wrapper">
                         <a class="brand-logo"><span class="glyphicon glyphicon-ice-lolly-tasted logo" aria-hidden="true"></span></a>
@@ -59,7 +60,7 @@
                     <div class ="section" style="padding-bottom: 0rem">
                         <ul class="collapsible" data-collapsible="accordion">
                         <li>
-                            <div class="collapsible-header teal-text lighten-1 trigger"><i class="mdi-social-person-add"></i>
+                            <div class="collapsible-header teal-text lighten-1 "><i class="mdi-social-person-add"></i>
                                 Add User</div>
                             <div class="collapsible-body">
                                 <div class="container">
@@ -115,7 +116,7 @@
                     </ul>
                         <ul class="collapsible-for-search active" data-collapsible="accordion">
                             <li>
-                                <div class="collapsible-header-for-search teal-text lighten-1 trigger" style="cursor: default;">
+                                <div class="collapsible-header-for-search teal-text lighten-1 " style="cursor: default;">
                                     <div class="col s12 search-admin" style="margin-top:0px;">
                                         <i class="mdi-action-search small"></i>
                                         <input placeholder="Search User" class="input-search-admin" name="search_keyword" id="search-user" type="text" style="background-color: transparent;" autocomplete="false">
@@ -167,12 +168,12 @@
                                             }
                                                 <label class="check" for="@user.getId"></label>
                                             @if(user.getIdtype == User.ADMINISTRATOR) {
-                                                <i class="mdi-social-whatshot circle teal lighten-1 trigger hide-on-small-only"></i>
+                                                <i class="mdi-social-whatshot circle teal lighten-1  hide-on-small-only"></i>
                                             } else {
-                                                <i class="mdi-social-person circle teal lighten-1 trigger hide-on-small-only"></i>
+                                                <i class="mdi-social-person circle teal lighten-1  hide-on-small-only"></i>
                                             }
                                             <div class="hide-on-small-only">
-                                                <span class="title teal-text lighten-1 trigger">ID : @user.getId</span>
+                                                <span class="title teal-text lighten-1 ">ID : @user.getId</span>
                                                 <p>
                                                     <strong>Username</strong> : @user.getUsername <br />
                                                     <strong>Firstname</strong> : @user.getFirstname <strong>Lastname</strong> : @user.getLastname<br />
@@ -191,7 +192,7 @@
                                                 </p>
                                             </div>
                                         <div class="hide-on-med-and-up" style="margin-left: -65px">
-                                            <span class="title teal-text lighten-1 trigger">ID : @user.getId</span>
+                                            <span class="title teal-text lighten-1 ">ID : @user.getId</span>
                                             <p>
                                                 <strong>Username</strong> : @user.getUsername <br />
                                                 <strong>Firstname</strong> : @user.getFirstname <br /><strong>Lastname</strong> : @user.getLastname<br />
@@ -210,17 +211,17 @@
                                             </p>
                                         </div>
                                         </div>
-                                        <a userId="@user.getId" username="@user.getUsername" password="" idtype="@user.getIdtype" firstname="@user.getFirstname" lastname="@user.getLastname" class="editModal secondary-content trigger modal-trigger" style="z-index: 100;" href="#editUserModal">
+                                        <a userId="@user.getId" username="@user.getUsername" password="" idtype="@user.getIdtype" firstname="@user.getFirstname" lastname="@user.getLastname" class="editModal secondary-content  modal-" style="z-index: 100;" href="#editUserModal">
                                             <i class="mdi-editor-mode-edit small"></i>
                                         </a>
-                                        <a id="rate-user" href="#rate-user-m" userId="@user.getId" class="rate-user modal-trigger waves-effect waves-light">
-                                            <i class="mdi-maps-rate-review small trigger"></i>
+                                        <a id="rate-user" href="#rate-user-m" userId="@user.getId" class="rate-user modal- waves-effect waves-light">
+                                            <i class="mdi-maps-rate-review small "></i>
                                         </a>
                                 </div>
                                 </li>
                                 }
                             </ul>
-                            <a class="btn waves-effect waves-light trigger modal-trigger" href="#confirmDelete">Delete
+                            <a class="btn waves-effect waves-light  modal-" href="#confirmDelete">Delete
                                 <i class="mdi-action-delete right"></i>
                             </a>
                     </div>
@@ -303,7 +304,7 @@
             </div>
 
             <div class="fixed-action-btn animated bounceInUp" style="bottom : 45 px ; right : 40 px ;">
-                <a class="btn-floating btn-large trigger " href="@routes.AdminPage.index()"><i class="large mdi-action-settings waves-effect waves-light"></i></a>
+                <a class="btn-floating btn-large trigger" href="@routes.AdminPage.index()"><i class="large mdi-action-settings waves-effect waves-light"></i></a>
                 <ul>
                     <li>
                         <a class="btn-floating red " href="@routes.Application.logout()"><i class="large mdi-action-settings-power">    </i></a>

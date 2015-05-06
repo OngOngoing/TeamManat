@@ -6,11 +6,12 @@
             <link rel="stylesheet" media="screen" href="@routes.Assets.at("stylesheets/materialize.min.css")">
             <link rel="stylesheet" media="screen" href="@routes.Assets.at("stylesheets/animate.css")">
             <link rel="stylesheet" media="screen" href="@routes.Assets.at("stylesheets/adminpage.css")">
+            <link rel="stylesheet" media="screen" href="@routes.Assets.at("stylesheets/init.css")">
             <link rel="icon" type="image/png" href="@routes.Assets.at("img/favicon.png")">
             <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
         </head>
         <body>
-            <nav class="teal lighten-1 trigger large" id="head">
+            <nav class="teal lighten-1  large" id="head">
                 <div class="container">
                     <div class="nav-wrapper">
                         <a class="brand-logo"><span class="glyphicon glyphicon-ice-lolly-tasted logo" aria-hidden="true"></span></a>
@@ -56,9 +57,9 @@
             </nav>
             <div class="container padding-nav animated fadeIn">
                 <!-- User -->
-                <h2 class = "center-align trigger trigger-text">System Configuration</h2>
+                <h2 class = "center-align  -text">System Configuration</h2>
                 <div class ="section">
-                        <!-- Modal Trigger -->
+                        <!-- Modal  -->
                     <div class="row collection">
                         @helper.form(action = routes.AdminPage.saveSetting()) {
                             @configs.map { config =>
@@ -116,7 +117,7 @@
             </div>
 
             <div class="fixed-action-btn animated bounceInUp" style="bottom : 45 px ; right : 40 px ;">
-                <a class="btn-floating btn-large trigger " href="@routes.AdminPage.index()"><i class="large mdi-action-settings waves-effect waves-light"></i></a>
+                <a class="btn-floating btn-large  trigger" href="@routes.AdminPage.index()"><i class="large mdi-action-settings waves-effect waves-light"></i></a>
                 <ul>
                     <li>
                         <a class="btn-floating red " href="@routes.Application.logout()"><i class="large mdi-action-settings-power">    </i></a>

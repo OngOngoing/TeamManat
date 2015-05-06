@@ -18,22 +18,7 @@ public class ProjectList extends Controller {
         User user = User.findByUserId(userId);
         Setting setting = Setting.value("stopTime");
         Map<Long,Integer> mappedRate = Rate.getRateAndProjectMappingByUser(user);
-        SimpleDateFormat dateFormat = new SimpleDateFormat("M-d-y HH:mm");
-        Calendar calendar = Calendar.getInstance();
-        String date = setting.getKeyValue();
-        String _time = "";
-        try {
-            calendar.setTime(dateFormat.parse(date));
-            int year = calendar.get(Calendar.YEAR);
-            int month = calendar.get(Calendar.MONTH);
-            int day = calendar.get(Calendar.DAY_OF_MONTH);
-            int hour = calendar.get(Calendar.HOUR_OF_DAY);
-            int minute = calendar.get(Calendar.MINUTE);
-            int second = calendar.get(Calendar.SECOND);
-            _time = String.format("%d/%02d/%02d %02d:%02d:%02d", year, month + 1, day, hour, minute, second);
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
+        String _time = Setting.getTime();
         List<Inbox> comments = Inbox.findAllByReceiver(user);
         int countVotes = Vote.findByUser(user).size();
         int countVotingCriterion = VoteCriterion.findAll().size();

@@ -6,6 +6,7 @@
             <link rel="stylesheet" media="screen" href="@routes.Assets.at("stylesheets/materialize.min.css")">
             <link rel="stylesheet" media="screen" href="@routes.Assets.at("stylesheets/animate.css")">
             <link rel="stylesheet" media="screen" href="@routes.Assets.at("stylesheets/adminpage.css")">
+            <link rel="stylesheet" media="screen" href="@routes.Assets.at("stylesheets/init.css")">
             <link rel="icon" type="image/png" href="@routes.Assets.at("img/favicon.png")">
             <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
         </head>
@@ -50,11 +51,11 @@
             </nav>
             <div class="container padding-nav animated fadeIn">
 
-                <h5 class = "center-align trigger trigger-text"><i class="mdi-editor-insert-chart"></i>Voting Management</h5>
+                <h5 class = "center-align trigger-text"><i class="mdi-editor-insert-chart"></i>Voting Management</h5>
                 <div class="divider"></div>
                 @voteCs.map { voteC =>
                         @(numVote = 0)
-                    <h3 class="col s12 animate fadeIn center trigger trigger-text">@voteC.getName</h3>
+                    <h3 class="col s12 animate fadeIn center trigger-text">@voteC.getName</h3>
                         <table class="hoverable centered " >
                             <thead>
                                 <tr>
