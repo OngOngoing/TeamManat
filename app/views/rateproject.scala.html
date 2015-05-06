@@ -16,7 +16,7 @@
     <html>
         <head>
             <title>Exceed Vote</title>
-            <link rel="stylesheet" media="screen" href="@routes.Assets.at("stylesheets/materialize.min.css")">
+            <link rel="stylesheet" media="screen" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.96.1/css/materialize.min.css">
             <link rel="stylesheet" media="screen" href="@routes.Assets.at("stylesheets/animate.css")">
             <link rel="stylesheet" media="screen" href="@routes.Assets.at("stylesheets/rateproject.css")">
             <link rel="stylesheet" media="screen" href="@routes.Assets.at("stylesheets/init.css")">
@@ -25,6 +25,7 @@
             <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
         </head>
         <body>
+            <div class="background">
             <nav id="head">
                 <div class="nav-wrapper">
                     <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="mdi-navigation-menu"></i></a>
@@ -133,7 +134,7 @@
                         <li>
                             <div class="collapsible-header"><i class="mdi-action-face-unlock"></i>
                                 Project Members<i class="mdi-navigation-expand-more right"></i></div>
-                            <div class="collapsible-body">
+                            <div class="collapsible-body" style="  background-color: white;">
                                 <table class = "centered hoverable">
                                     <thead>
                                         <tr>
@@ -333,5 +334,6 @@
                 Materialize.toast ( '<i class="mdi-alert-warning red-text small"></i> @flash.get("error") </span> ', 4000)
                 </script>
             }
+                </div>
         </body>
     </html>

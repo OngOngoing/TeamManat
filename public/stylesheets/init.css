@@ -29,7 +29,10 @@
     src: url('../font/glyphicons-halflings-regular.eot');
     src: url('../font/glyphicons-halflings-regular.eot?#iefix') format('embedded-opentype'), url('../font/glyphicons-halflings-regular.woff2') format('woff2'), url('../assets/font/glyphicons-halflings-regular.woff') format('woff'), url('../assets/font/glyphicons-halflings-regular.ttf') format('truetype'), url('../font/glyphicons-halflings-regular.svg#glyphicons_halflingsregular') format('svg');
 }
-
+.background{
+    height: 100%;
+    background: #EDF6FF !important;
+}
 #head{
     background-color: #4188D2 !important;
     position: fixed;

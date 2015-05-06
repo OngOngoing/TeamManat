@@ -43,7 +43,7 @@ $(document).ready(function () {
                             html += '<tr>';
                             html += '<td class="flow-text">' + criteria[j]['name'] + '</td>';
                             var percent = ((criteria[j]['value'] / 5.0) * 100.0);
-                            html += '<td class="flow-text"><div class="progress trigger"><div class="determinate" style="width: ' + percent + '%"></div></div></td>';
+                            html += '<td class="flow-text"><div class="progress"><div class="determinate" style="width: ' + percent + '%"></div></div></td>';
                             html += '<td class="flow-text">' + parseFloat(criteria[j]['value']).toFixed(2) + '<span style="font-size: 1rem;"> ( ' + parseFloat(percent).toFixed(2) + ' % )</span></td>';
                             html += '</tr>';
                         }
@@ -110,7 +110,7 @@ $(document).ready(function () {
                                     html += '<tr>';
                                     html += '<td class="flow-text">' + criteria[j]['name'] + '</td>';
                                     var percent = ((criteria[j]['value'] / 5.0) * 100.0);
-                                    html += '<td class="flow-text"><div class="progress trigger"><div class="determinate" style="width: ' + percent + '%"></div></div></td>';
+                                    html += '<td class="flow-text"><div class="progress"><div class="determinate" style="width: ' + percent + '%"></div></div></td>';
                                     html += '<td class="flow-text">' + parseFloat(criteria[j]['value']).toFixed(2) + '<span style="font-size: 1rem;"> ( ' + parseFloat(percent).toFixed(2) + ' % )</span></td>';
                                     html += '</tr>';
                                 }
@@ -145,17 +145,17 @@ $(document).ready(function () {
                             html += '<input type="checkbox" name="id" id="' + userid + '" value="' + userid + '">';
                             html += '<label class="check" for="' + userid + '"></label>';
                         }
-                        html += '<i class="mdi-social-person circle teal lighten-1 trigger"></i>';
-                        html += '<span class="title teal-text lighten-1 trigger">ID : ' + userid + '</span><p>';
+                        html += '<i class="mdi-social-person circle teal lighten-1"></i>';
+                        html += '<span class="title teal-text lighten-1">ID : ' + userid + '</span><p>';
                         html += '<strong>Username</strong> : ' + username + ' <br />';
                         html += '<strong>Firstname</strong> : ' + firstname + ' <strong>Lastname</strong> : ' + lastname + '<br />';
                         html += '<strong>User Type</strong> : ' + userType + ' <br />';
                         html += '<strong>Owner Project</strong> : ' + project + '</p></div>';
-                        html += '<a userid="' + userid + '" username="' + username + '" password="" idtype="' + userIdType + '" firstname="' + firstname + '" lastname="' + lastname + '" class="editModal secondary-content trigger modal-trigger" href="#editUserModal" style="z-index: 100;">'
+                        html += '<a userid="' + userid + '" username="' + username + '" password="" idtype="' + userIdType + '" firstname="' + firstname + '" lastname="' + lastname + '" class="editModal secondary-content modal-trigger" href="#editUserModal" style="z-index: 100;">'
                         html += '<i class="mdi-editor-mode-edit small"></i>';
                         html += '</a>';
                         html += '<a id="rate-user" href="#rate-user-m" userId="'+userid+'" class="rate-user modal-trigger waves-effect waves-light">';
-                        html += '<i class="mdi-maps-rate-review small trigger"></i>';
+                        html += '<i class="mdi-maps-rate-review small"></i>';
                         html += '</a>';
                         html += '</div>';
                         html += '</li>';
@@ -195,7 +195,7 @@ $(document).ready(function () {
                                             html += '<tr>';
                                             html += '<td class="flow-text">' + criteria[j]['name'] + '</td>';
                                             var percent = ((criteria[j]['value'] / 5.0) * 100.0);
-                                            html += '<td class="flow-text"><div class="progress trigger"><div class="determinate" style="width: ' + percent + '%"></div></div></td>';
+                                            html += '<td class="flow-text"><div class="progress"><div class="determinate" style="width: ' + percent + '%"></div></div></td>';
                                             html += '<td class="flow-text">' + parseFloat(criteria[j]['value']).toFixed(2) + '<span style="font-size: 1rem;"> ( ' + parseFloat(percent).toFixed(2) + ' % )</span></td>';
                                             html += '</tr>';
                                         }

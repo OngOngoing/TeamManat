@@ -6,7 +6,7 @@
 <html>
     <head>
         <title>Exceed Vote</title>
-        <link rel="stylesheet" media="screen" href="@routes.Assets.at("stylesheets/materialize.min.css")">
+        <link rel="stylesheet" media="screen" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.96.1/css/materialize.min.css">
         <link rel="stylesheet" media="screen" href="@routes.Assets.at("stylesheets/animate.css")">
         <link rel="stylesheet" media="screen" href="@routes.Assets.at("stylesheets/projectlist.css")">
         <link rel="stylesheet" media="screen" href="@routes.Assets.at("stylesheets/init.css")">
@@ -15,6 +15,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
     </head>
     <body>
+        <div class="background">
         <nav id="head">
                 <div class="nav-wrapper">
                     <div class="container">
@@ -175,7 +176,7 @@
                                     </div>
                                 </a>
                             </div>
-                            <div class="col s12 container" style="color : #000000;"><blockquote>Choose rate or vote.</blockquote></div>
+                            <div class="col s12 container" style="color : #000000;"><blockquote>Choose rate, vote or scroll down.</blockquote></div>
                         </div>
                     </div>
                 </div>
@@ -243,6 +244,7 @@
                 power by TeamManat
             </div>
         </footer>
+
         <script src="http://code.jquery.com/jquery-2.1.3.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.96.1/js/materialize.min.js"></script>
         <script src="https://cdn.rawgit.com/kimmobrunfeldt/progressbar.js/0.8.1/dist/progressbar.js"></script>
@@ -264,5 +266,6 @@
             Materialize.toast('<i class="mdi-alert-warning red-text small"></i>@flash.get("error")', 4000)
             </script>
         }
+            </div>
     </body>
 </html>
