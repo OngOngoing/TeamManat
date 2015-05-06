@@ -46,16 +46,14 @@
                                     @comments.map{ comment =>
                                         @if(comment.isRead==Inbox.UNREAD) {
                                             <li class="inbox-li collection-item tooltipped" id="inbox-id-@comment.getId" inbox-id="@comment.getId" data-position="left" data-delay="50" data-tooltip="Make as read">
-                                                <i class="mdi-content-markunread left" id="icon-inbox-@comment.getId" style="margin-right : - 10px ; padding-left : 10px ;"></i>
-                                                <a href="#!">@comment.getComment.getComment <br /> <span class="secondary-text">
-                                                    from @comment.getComment.getUser.getUsername @comment.getTimestamp</span></a>
+                                                <i class="mdi-content-markunread left" id="icon-inbox-@comment.getId" style="margin-right : -10px ; padding-left : 10px ;"></i>
+                                                <a href="#!">@comment.getComment.getComment <br /> <span class="secondary-text">from @comment.getComment.getUser.getUsername @comment.getTimestamp</span></a>
                                             </li>
                                             <li class="divider"></li>
                                         }else{
                                             <li class="inbox-li collection-item tooltipped" id="inbox-id-@comment.getId" inbox-id="@comment.getId" data-position="left" data-delay="50" data-tooltip="Make as unread">
                                                 <i class="mdi-content-drafts left" id="icon-inbox-@comment.getId" style="margin-right : -10px ; padding-left : 10px ;"></i>
-                                                <a href="#!">@comment.getComment.getComment <br /> <span class="secondary-text">
-                                                    from @comment.getComment.getUser.getUsername @comment.getTimestamp</span></a>
+                                                <a href="#!">@comment.getComment.getComment <br /> <span class="secondary-text">from @comment.getComment.getUser.getUsername @comment.getTimestamp</span></a>
                                             </li>
                                             <li class="divider"></li>
                                         }
