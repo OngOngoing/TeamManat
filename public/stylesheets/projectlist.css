@@ -204,43 +204,31 @@
 }
 
 
-  .lobby-banner {
-      display: block;
-      text-align: center;
-      font-family:Roboto Light;
-      line-height: 120%;
-      -webkit-font-smoothing: antialiased;
-      color: #26a69a;
-      background-image: -webkit-linear-gradient(92deg,#26a69a,#80cbc4);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-  }
-
-  .trigger {
-      background-color: #37bc9b;
-  }
-
-  .trigger-text {
-      color: #26a69a;
-      background-image: -webkit-linear-gradient(92deg,#26a69a,#26a69a);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-  }
-
-
-/*-----------------------------------*\
-  $ANIMATIONS
-\*-----------------------------------*/
-
-@-webkit-keyframes hue {
-    from {
-        -webkit-filter: hue-rotate(0deg);
-    }
-
-    to {
-        -webkit-filter: hue-rotate(-360deg);
-    }
+.lobby-banner {
+    display: block;
+    text-align: center;
+    font-family:Roboto Light;
+    line-height: 120%;
+    -webkit-font-smoothing: antialiased;
+    color: #26a69a;
+    background-image: -webkit-linear-gradient(92deg,#26a69a,#80cbc4);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
 }
+
+.trigger {
+    background-color: #37bc9b;
+}
+
+.trigger-text {
+    color: #26a69a;
+    background-image: -webkit-linear-gradient(92deg,#26a69a,#26a69a);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+
+
 #head{
     position: fixed;
     top: 0;
@@ -430,7 +418,7 @@ ul {
     position: relative;
     text-align: center;
     color: #93A2AC;
-    font-family: Lato;
+    font-family: Roboto Light;
     font-weight: 100;
 }
 
@@ -446,14 +434,14 @@ ul {
     content: attr(data-percent);
     position: absolute;
     width: 100%;
-    top: 30%;
+    top: 35%;
     left: 0;
     font-size: 4vw;
     text-align: center;
 }
 
 .progress-circular svg {
-    max-height: 60vh;
+    max-width: 60vh;
     width: 100%;
     height: 100%;
 }
@@ -470,7 +458,7 @@ ul {
 
 .progress-circular svg:nth-child(2) path {
     fill: none;
-    stroke-width: 1em;
+    stroke-width: 2rem;
     stroke-dasharray: 629;
     stroke: rgba(255, 255, 255, 0.9);
     -webkit-animation: load 2s;
@@ -482,21 +470,21 @@ ul {
 
 
 @-webkit-keyframes
-    load { 0% {
-        stroke-dashoffset:0
-    }
+load { 0% {
+    stroke-dashoffset:0
+}
 }
 
 @-moz-keyframes
-    load { 0% {
-      stroke-dashoffset:0
-    }
+load { 0% {
+    stroke-dashoffset:0
+}
 }
 
 @keyframes
-    load { 0% {
-        stroke-dashoffset:0
-    }
+load { 0% {
+    stroke-dashoffset:0
+}
 }
 
 

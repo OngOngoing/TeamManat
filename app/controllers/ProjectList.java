@@ -1,6 +1,7 @@
 package controllers;
 
 import models.*;
+import play.Logger;
 import play.mvc.*;
 import views.html.*;
 
@@ -34,9 +35,23 @@ public class ProjectList extends Controller {
             e.printStackTrace();
         }
         List<Inbox> comments = Inbox.findAllByReceiver(user);
-        int voteLeft = VoteCriterion.findAll().size() - Vote.findByUser(user).size();
-        response().setHeader("Cache-Control","no-cache");
-        return ok(projectlist.render(Project.findAll(),RateCriterion.findAll(),mappedRate,VoteCriterion.findAll(), voteLeft, user,_time, comments));
+        int countVotes = Vote.findByUser(user).size();
+        int countVotingCriterion = VoteCriterion.findAll().size();
+        int voteLeft = countVotingCriterion - countVotes;
+        int countProjectRated = 0;
+        List<Project> projects = Project.findAll();
+        int countProgress = 0;
+        for(Project project : projects) {
+            countProjectRated += mappedRate.get(project.getId()) == RateCriterion.findAll().size() ? 1:0;
+            countProgress += mappedRate.get(project.getId());
+        }
+        countProgress += countVotes;
+        int totalProgress = countVotingCriterion + Project.findAll().size()*RateCriterion.findAll().size();
+        int projectsLeft = projects.size() - countProjectRated;
+        double percent = (1.0*countProgress/totalProgress)*100.0;
+        int roundPercent = Integer.parseInt(String.format("%.0f", percent));
+        response().setHeader("Cache-Control", "no-cache");
+        return ok(projectlist.render(projects,RateCriterion.findAll(),mappedRate, projectsLeft, voteLeft, roundPercent, user,_time, comments));
     }
 
 }
