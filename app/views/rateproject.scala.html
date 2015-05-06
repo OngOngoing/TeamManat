@@ -97,7 +97,7 @@
         </nav>
             <div class="container" style="padding: 9rem 1.5rem 0 1.5rem;">
                 <div class="animated fadeInDown">
-                    <div class="hide-on-small-only" style="margin: 1.78rem 0 1.424rem 0;"><span class="pageBanner">@project.getProjectName     </span>
+                    <div class="hide-on-small-only" style="margin: 1.78rem 0 1.424rem 0;"><span class="pageBanner" style="font-size: 3.56rem;">@project.getProjectName    </span>
                         @if(user.getIdtype == User.ADMINISTRATOR){
                             <a href="@routes.EditProject.index(project.getId, routes.RateProject.index(project.getId) + "")" class="btn btn-floating waves-effect waves-light yellow darken-1" style="vertical-align: baseline;"><i class="mdi-image-edit medium"></i></a>
                         }else{

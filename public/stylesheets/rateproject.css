@@ -19,7 +19,7 @@
     font-family:Roboto Light;
     line-height: 120%;
     -webkit-font-smoothing: antialiased;
-    font-size: 3.56rem;
+    word-wrap: break-word;
     line-height: 3.916rem;
     margin: 1.78rem 0 1.424rem 0;
 }
