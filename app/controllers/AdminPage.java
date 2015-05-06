@@ -204,19 +204,9 @@ public class AdminPage extends Controller {
         int count=0;
         for(String userId : checkedVal) {
             User user = User.findByUserId(Long.parseLong(userId));
-            List<Rate> rates = Rate.findListByUser(user);
-            List<Vote> votes = Vote.findByUser(user);
             Logger.info("[" + _user.getUsername() + "] delete user.(" + user.getId() + ")"+user.getUsername());
             user.delete();
             count++;
-            for(Vote vote : votes ) {
-                Logger.info("[" + _user.getUsername() + "] delete vote.(" + vote.getId() + ")("+vote.getProject().getProjectName()+")");
-                vote.delete();
-            }
-            for(Rate rate : rates ) {
-                Logger.info("[" + _user.getUsername() + "] delete rate.(" + rate.getId() + ")("+rate.getProject().getId()+")");
-                rate.delete();
-            }
         }
         flash("user_delete_success",count+ " Users deleted");
         response().setHeader("Cache-Control","no-cache");
@@ -273,7 +263,6 @@ public class AdminPage extends Controller {
             Logger.info("[" + _user.getUsername() + "] delete Vote criterion.(" + voteCs.getId() + ")(" + voteCs.getName() + ")");
             voteCs.delete();
         }
-
         flash("vote_criterion_delete_success","Voting criterion deleted");
         response().setHeader("Cache-Control","no-cache");
         return redirect(routes.AdminPage.criteria());

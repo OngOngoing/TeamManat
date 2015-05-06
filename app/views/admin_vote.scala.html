@@ -72,7 +72,7 @@
                                         <tr>
                                             <td>@User.findByUserId(vote.getUser.getId).getUsername (ID:@vote.getUser.getId)</td>
                                             <td>@VoteCriterion.findById(vote.getCriterion.getId).getName</td>
-                                            <td>@Project.findById(vote.getProject.getId).getProjectName</td>
+                                            <td>@vote.getProject.getProjectName</td>
                                             <td><a href="#confirmDelete" vote-id="@vote.getId" class="delete-vote secondary-content modal-trigger"><i class="mdi-navigation-close trigger"></i></a></td>
                                         </tr>
                                     }

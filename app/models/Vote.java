@@ -53,6 +53,12 @@ public class Vote extends Model {
     }
 
     public Project getProject() {
+        if(project == null){
+            Project tmp = new Project();
+            tmp.setId(Long.parseLong("-1"));
+            tmp.setProjectName("No Vote.");
+            return tmp;
+        }
         return project;
     }
 
