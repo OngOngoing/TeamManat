@@ -23,6 +23,7 @@
                     <a href="@routes.Application.index()" link-to="#index-banner" class="linkable brand-logo"><span class="glyphicon glyphicon-ice-lolly-tasted logo" aria-hidden="true"></span><span class="hide-on-large-only" style="font-size: 1.5rem; top: 10px;">eXceed</span><span class="hide-on-med-and-down" style="font-size: 2rem; top: 10px;">eXceed</span></a>
                     <div class="center">
                         <ul class="right hide-on-med-and-down">
+                            <li><a href="@history"><i class="medium mdi-navigation-arrow-back left"></i>Back</a></li>
                             <li><a href="@routes.RateCalculator.index()"><i class="medium mdi-editor-insert-chart left"></i>Rating&nbsp;Result</a></li>
                             <li><div class="menu-s"></div><a href="@routes.VoteController.showResult()"><i class="medium mdi-action-class left"></i>Voting&nbsp;Result</a></li>
                             @if(numOfUnread == 0) {
@@ -59,6 +60,7 @@
                         </ul>
                             </div>
                         <ul class="side-nav" id="mobile-demo" style="margin-right: -40px;">
+                            <li><a href="@history"><i class="medium mdi-navigation-arrow-back left"></i>Back</a></li>
                             <li><a href="@routes.RateCalculator.index()"><i class="medium mdi-editor-insert-chart left"></i>Rating&nbsp;Result</a></li>
                             <li><a href="@routes.VoteController.showResult()"><i class="medium mdi-action-class left"></i>Voting&nbsp;Result</a></li>
                             @if(numOfUnread == 0) {
