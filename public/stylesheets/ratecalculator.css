@@ -8,11 +8,7 @@
       font-family:Roboto Light;
       line-height: 120%;
       -webkit-font-smoothing: antialiased;
-      color: #26a69a;
-      background-image: -webkit-linear-gradient(92deg,#26a69a,#80cbc4);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      -webkit-animation: hue 40s infinite linear;
+      color: #0277bd;
   }
 .container {
     padding: 0;
