@@ -94,10 +94,10 @@ function onFileComplete(e, file, response) {
                 html += "<div class='row'>";
                 if(data[i].imgType != 1){
                     html += "<a class='waves-effect waves-light btn blue' href='../setimg/"+$("#show-slides").attr("projectId")+"/"+data[i].Id+"?h="+history+"#upload'><i class='mdi-toggle-check-box right'></i>";
-                    html += "Set Default</a>";
+                    html += "Set Project Icon</a>";
                 }else{
                     html += "<a class='waves-effect waves-light btn disabled'><i class='mdi-toggle-check-box right'></i>";
-                    html += "Default</a>";
+                    html += "Project Icon</a>";
                 }
                 html += "</div>";
                 html += "<div class='row'>";

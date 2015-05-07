@@ -12,8 +12,6 @@
     }
 
 <!DOCTYPE html>
-
-    <html>
         <head>
             <title>Exceed Vote</title>
             <link rel="stylesheet" media="screen" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.96.1/css/materialize.min.css">
@@ -93,7 +91,7 @@
                 </div>
             </div>
         </nav>
-            <div class="container" style="padding: 9rem 1.5rem 0 1.5rem;">
+            <div class="container" style="padding: 7rem 0 0 0;">
                 <div class="animated fadeInDown">
                     <div class="hide-on-small-only" style="margin: 1.78rem 0 1.424rem 0;"><span class="pageBanner" style="font-size: 3.56rem;">@project.getProjectName    </span>
                         @if(user.getIdtype == User.ADMINISTRATOR){
@@ -106,7 +104,17 @@
                             }
                         }
                     </div>
-                    <h4 class=" pageBanner hide-on-med-and-up center-align">@project.getProjectName</h4>
+                    <h4 class=" pageBanner hide-on-med-and-up center-align">@project.getProjectName
+                        @if(user.getIdtype == User.ADMINISTRATOR){
+                            <a href="@routes.EditProject.index(project.getId, routes.RateProject.index(project.getId) + "")" class="btn btn-floating waves-effect waves-light yellow darken-1" style="vertical-align: baseline;"><i class="mdi-image-edit medium"></i></a>
+                        }else{
+                            @if(user.getGroup != null) {
+                                @if(user.getGroup.getProject.getId == project.getId) {
+                                    <a href="@routes.EditProject.index(project.getId, routes.RateProject.index(project.getId) + "")" class="btn btn-floating waves-effect waves-light yellow darken-1" style="vertical-align: baseline;"><i class="mdi-image-edit"></i></a>
+                                }
+                            }
+                        }
+                    </h4>
                 </div>
                 <div class="divider"></div>
                 <div class="section">
