@@ -61,10 +61,24 @@
                                     }
                                 </div>
                             </ul>
+                            @if(user.getIdtype == User.ADMINISTRATOR ){
+                                <li>
+                                    <a class="backgroud-link" href="adminpage">
+                                        <i class="large mdi-action-settings"></i>
+                                    </a>
+                                </li>
+                            }
                             <li><a href="@routes.Application.logout()" class="backgroud-link"><i class="medium mdi-action-settings-power center"></i></a></li>
                         </ul>
                             </div>
                         <ul class="side-nav" id="mobile-demo" style="margin-right: -40px;">
+                            @if(user.getIdtype == User.ADMINISTRATOR ){
+                                <li>
+                                    <a href="adminpage">
+                                        <i class="large mdi-action-settings left"></i>Settings
+                                    </a>
+                                </li>
+                            }
                             <li><a href="@routes.RateCalculator.index()"><i class="medium mdi-editor-insert-chart left"></i>Rating&nbsp;Result</a></li>
                             <li><a href="@routes.VoteController.showResult()"><i class="medium mdi-action-class left"></i>Voting&nbsp;Result</a></li>
                             @if(numOfUnread == 0) {
