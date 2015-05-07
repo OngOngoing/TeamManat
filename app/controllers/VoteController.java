@@ -35,7 +35,7 @@ public class VoteController extends Controller {
         if(session().get("userId") == null){
             thisUser = new User();
             thisUser.setIdtype(-1);
-            thisUser.setId(Long.parseLong(-1 + ""));
+            thisUser.setId(Long.parseLong("-1"));
         }else{
             Long userId = Long.parseLong(session().get("userId"));
             thisUser = User.findByUserId(userId);    
@@ -50,6 +50,9 @@ public class VoteController extends Controller {
         }
         flash("error","Please wait until the voting session is closed.");
         response().setHeader("Cache-Control","no-cache");
+        if(thisUser.getIdtype() == -1){
+            return redirect(routes.Application.index());
+        }
         return redirect(routes.ProjectList.index());
     }
     @Security.Authenticated(Secured.class)

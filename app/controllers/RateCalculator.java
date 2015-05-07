@@ -22,14 +22,17 @@ public class RateCalculator extends Controller {
         if(session().get("userId") == null){
             thisUser = new User();
             thisUser.setIdtype(-1);
-            thisUser.setId(Long.parseLong(-1 + ""));
+            thisUser.setId(Long.parseLong("-1"));
         }else{
             Long userId = Long.parseLong(session().get("userId"));
             thisUser = User.findByUserId(userId);    
         }
-        
-        if(!isTimeUp && thisUser.getIdtype() != User.ADMINISTRATOR ) {
-            flash("error","Please wait until the rating session is closed. Sorry for the inconvenience.");
+        if(thisUser.getIdtype() == -1 && !isTimeUp && thisUser.getIdtype() != User.ADMINISTRATOR ) {
+            flash("error","Please wait until the rating session is closed.");
+            return redirect(routes.Application.index());
+        }
+        if(thisUser.getIdtype() != -1 &&!isTimeUp && thisUser.getIdtype() != User.ADMINISTRATOR ) {
+            flash("error","Please wait until the rating session is closed.");
             return redirect(routes.ProjectList.index());
         }
         List<Project> projects = Project.findAll();
@@ -72,13 +75,13 @@ public class RateCalculator extends Controller {
         if(session().get("userId") == null){
             thisUser = new User();
             thisUser.setIdtype(-1);
-            thisUser.setId(Long.parseLong(-1 + ""));
+            thisUser.setId(Long.parseLong("-1"));
         }else{
             Long userId = Long.parseLong(session().get("userId"));
             thisUser = User.findByUserId(userId);    
         }
         if(!isTimeUp && thisUser.getIdtype() != User.ADMINISTRATOR ) {
-            flash("error","Please wait until the rating session is closed. Sorry for the inconvenience.");
+            flash("error","Please wait until the rating session is closed.");
             return redirect(routes.ProjectList.index());
         }
         List< List< Map<String,String> > > result = new ArrayList < List< Map<String,String> > >(); 
