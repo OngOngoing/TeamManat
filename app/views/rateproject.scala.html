@@ -24,7 +24,6 @@
             <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
         </head>
         <body>
-            <div class="background">
             <nav id="head">
                 <div class="nav-wrapper">
                     <div class="container" style="padding: 0;">
@@ -137,30 +136,6 @@
                         <span class="black-text text-darken-2 ">
                             <div class="projectDescription" data="@project.getProjectDescription"></div></span>
                     </div>
-                    <ul class="collapsible" data-collapsible="accordion">
-                        <li>
-                            <div class="collapsible-header"><i class="mdi-action-face-unlock"></i>
-                                Project Members<i class="mdi-navigation-expand-more right"></i></div>
-                            <div class="collapsible-body" style="  background-color: white;">
-                                <table class = "centered hoverable">
-                                    <thead>
-                                        <tr>
-                                            <th data-field="cname">Firstname</th>
-                                            <th data-field="score">Lastname</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody >
-                                    @teamMember.map { member =>
-                                        <tr>
-                                            <td >@member.getFirstname</td>
-                                            <td >@member.getLastname</td>
-                                        </tr>
-                                    }
-                                    </tbody>
-                                </table>
-                            </div>
-                        </li>
-                    </ul>
                 </div>
                 @if(canRate) {
                     @if(thisRate.size == 0 && thisComment == null) {
@@ -300,7 +275,32 @@
                         </div>
                     }
                 }
-
+                <div class="animated fadeIn">
+                    <ul class="collapsible" data-collapsible="accordion">
+                        <li>
+                            <div class="collapsible-header"><i class="mdi-action-face-unlock"></i>
+                                Project Members<i class="mdi-navigation-expand-more right"></i></div>
+                            <div class="collapsible-body" style="  background-color: white;">
+                                <table class = "centered hoverable">
+                                    <thead>
+                                        <tr>
+                                            <th data-field="cname">Firstname</th>
+                                            <th data-field="score">Lastname</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody >
+                                    @teamMember.map { member =>
+                                        <tr>
+                                            <td >@member.getFirstname</td>
+                                            <td >@member.getLastname</td>
+                                        </tr>
+                                    }
+                                    </tbody>
+                                </table>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
             </div>
 
             <div class="fixed-action-btn animated bounceInUp" style="bottom : 45 px ; right : 40 px ;">
@@ -341,6 +341,5 @@
                 Materialize.toast ( '<i class="mdi-alert-warning red-text small"></i> @flash.get("error") </span> ', 4000)
                 </script>
             }
-                </div>
         </body>
     </html>
