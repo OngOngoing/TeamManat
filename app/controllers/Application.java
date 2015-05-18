@@ -130,6 +130,7 @@ public class Application extends Controller {
             flash("error", "access denied.");
             return redirect(routes.Application.index());
         }
+        Project _project = Project.findById(proId);
         Image oldimg = Image.getDefaultImage(_project);
         Image newimg = Image.findById(imgId);
         if(newimg == null){
