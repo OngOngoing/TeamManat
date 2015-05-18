@@ -77,11 +77,11 @@ public class Application extends Controller {
     @Security.Authenticated(Secured.class)
     public static Result deleteImg(Long imgId, Long proId, String h){
         User _user = User.findByUserId(Long.parseLong(session("userId")));
-        Project _project = Project.findById(proId);
-        if(_user.getGroup().getProject().getId() != proId && _user.getIdtype() != User.ADMINISTRATOR){
+        if(EditProject.canEditProject(_user, proId)){
             flash("error", "access denied.");
             return redirect(routes.Application.index());
         }
+        Project _project = Project.findById(proId);
         Image image = Image.findByIdAndPro(imgId, _project);
         if(image != null) {
             image.delete();
@@ -126,8 +126,7 @@ public class Application extends Controller {
     @Security.Authenticated(Secured.class)
     public static Result setImgDefault(Long imgId, Long proId,String h){
         User _user = User.findByUserId(Long.parseLong(session("userId")));
-        Project _project = Project.findById(proId);
-        if(_user.getGroup().getProject().getId() != proId && _user.getIdtype() != User.ADMINISTRATOR){
+        if(EditProject.canEditProject(_user, proId)){
             flash("error", "access denied.");
             return redirect(routes.Application.index());
         }
