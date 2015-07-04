@@ -109,7 +109,7 @@
                             } else {
                                 <h4 class="teal-text hide-on-large-only">Welcome</h4>
                                 <h3 class="teal-text hide-on-med-and-down">Welcome</h3>
-                                @if(votesLeft + projectsLeft == 1) {
+                                @if(votesLeft == 0 || projectsLeft == 0) {
                                     <p class="flow-text">You need only 1 more step to complete the eXceed vote</p>
                                 } else {
                                     <p class="flow-text">There are 2 more steps left to complete the eXceed vote</p>

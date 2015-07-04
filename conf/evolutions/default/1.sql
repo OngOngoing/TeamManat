@@ -43,6 +43,14 @@ create table project (
   constraint pk_project primary key (id))
 ;
 
+create table project_image (
+  id                        bigint auto_increment not null,
+  project_id                bigint,
+  data                      longblob,
+  img_type                  integer,
+  constraint pk_project_image primary key (id))
+;
+
 create table rate (
   id                        bigint auto_increment not null,
   score                     integer,
@@ -67,6 +75,16 @@ create table setting (
   description               varchar(255),
   constraint uq_setting_key_name unique (key_name),
   constraint pk_setting primary key (id))
+;
+
+create table settings (
+  id                        bigint auto_increment not null,
+  key_name                  varchar(255),
+  key_value                 varchar(255),
+  id_type                   integer,
+  description               varchar(255),
+  constraint uq_settings_key_name unique (key_name),
+  constraint pk_settings primary key (id))
 ;
 
 create table user_account (
@@ -140,11 +158,15 @@ drop table inbox_message;
 
 drop table project;
 
+drop table project_image;
+
 drop table rate;
 
 drop table rate_criterion;
 
 drop table setting;
+
+drop table settings;
 
 drop table user_account;
 

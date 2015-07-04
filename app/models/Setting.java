@@ -96,6 +96,7 @@ public class Setting extends Model{
 
         Setting endingTimeSetting = Setting.value("stopTime");
         Calendar endingCalendar = Calendar.getInstance(TimeZone.getTimeZone("Asia/Bangkok"));
+        Logger.info(endingCalendar.toString());
         try {
             endingCalendar.setTime(dateFormat.parse(endingTimeSetting.keyValue));
             endingCalendar.setTimeZone(TimeZone.getTimeZone("Asia/Bangkok"));
