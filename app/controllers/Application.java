@@ -83,11 +83,12 @@ public class Application extends Controller {
         }
         Project _project = Project.findById(proId);
         Image image = Image.findByIdAndPro(imgId, _project);
+        int isDefault = image.getImgType();
         if(image != null) {
             image.delete();
             List<Image> imgs = Image.findImageOfProject(_project);
-            if(imgs.size() != 0){
-                imgs.get(0).setImgType(image.DEFAULT);
+            if(isDefault == Image.DEFAULT){
+                imgs.get(0).setImgType(Image.DEFAULT);
                 imgs.get(0).save();
             }
             flash("success", "Screenshot is deleted.");
