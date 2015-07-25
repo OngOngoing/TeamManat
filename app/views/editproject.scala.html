@@ -243,22 +243,20 @@
                             </table>
                         </div>
                     </div>
-                    <form action="@routes.EditProject.addMember(currentProject.getId , history)" method="post">
+                    @*<form action="@routes.EditProject.addMember(currentProject.getId , history)" method="post">*@
                         <div class="row">
                             <div class="col s12">
                                 <div class="input-field">
-                                    <input id="searchUser" type="text" class="validate" name="searchUser" placeholder="Input first name or last name for search." required>
+                                    <input id="searchUser" type="text" class="validate disabled" name="searchUser" placeholder="Input first name or last name for search." disabled>
                                     <label for="user">Add new member.</label>
                                     <div id='show-result'></div>
                                 </div>
                             </div>
                             <div class="col s12 center-align">
-                                <button class="btn waves-effect waves-light green" type="submit" name="action">
-                                    <i class="mdi-content-add"></i>
-                                </button>
+                                <i>Can't add member on mobile device.</i>
                             </div>
                         </div>
-                    </form>
+                    @*</form>*@
                     <div class="row">
                         <div class="col s12">
                             <blockquote>
