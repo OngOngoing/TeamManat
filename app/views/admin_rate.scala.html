@@ -97,7 +97,7 @@
                             <td>@RateCriterion.findById(rate.getCriterion.getId).getName</td>
                             <td>@Project.findById(rate.getProject.getId).getProjectName</td>
                             <td>@rate.getScore</td>
-                            <td><a rate-id="@rate.getId" href="#confirmDelete" class="delete-rate secondary-content modal-"><i class="mdi-navigation-close "></i></a></td>
+                            <td><a rate-id="@rate.getId" href="#confirmDelete" class="delete-rate secondary-content modal-trigger"><i class="mdi-navigation-close "></i></a></td>
                         </tr>
                     }
                     @if(rates.size==0){
