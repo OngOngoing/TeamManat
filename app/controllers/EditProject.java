@@ -147,6 +147,12 @@ public class EditProject extends Controller {
             flash("error", "access denied.");
             return redirect(routes.Application.index());
         }
+        System.out.println(body.getFile("file").getContentType().split("/")[0]);
+        System.out.println(!body.getFile("file").getContentType().split("/")[0].equals("image"));
+        if(!body.getFile("file").getContentType().split("/")[0].equals("image")){
+            System.out.println("Wrong file type!!!");
+            return status(2);
+        }
         List<Image> imgs = Image.findImageOfProject(pro);
         if(imgs.size() >= 10){
             return status(1);
@@ -157,6 +163,7 @@ public class EditProject extends Controller {
         }else{
             image = new Image(pro, file, Image.NORMAL);
         }
+        System.out.println("Upload new Image");
         Logger.info(Project.findById(proId).getProjectName()+" upload new image["+image.getId()+"]");
         return ok("success!");
     }

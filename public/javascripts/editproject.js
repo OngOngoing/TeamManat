@@ -118,6 +118,8 @@ function onFileComplete(e, file, response) {
 function onFileError(e, file, error) {
     if(error == "Unknown Status (1)"){
         Materialize.toast("<i class='mdi-alert-warning red-text small'></i><span style='padding-left: 5px'>Attachment limit.</span>", 4000);
+    }else if(error == "Unknown Status (2)"){
+        Materialize.toast("<i class='mdi-alert-warning red-text small'></i><span style='padding-left: 5px'>File type error.</span>", 4000);
     }else{
         Materialize.toast("<i class='mdi-alert-warning red-text small'></i><span style='padding-left: 5px'>"+error+"</span>", 4000);
     }
