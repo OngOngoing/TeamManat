@@ -77,7 +77,7 @@ public class Application extends Controller {
     @Security.Authenticated(Secured.class)
     public static Result deleteImg(Long imgId, Long proId, String h){
         User _user = User.findByUserId(Long.parseLong(session("userId")));
-        if(EditProject.canEditProject(_user, proId)){
+        if(!EditProject.canEditProject(_user, proId)){
             flash("error", "access denied.");
             return redirect(routes.Application.index());
         }
@@ -126,7 +126,7 @@ public class Application extends Controller {
     @Security.Authenticated(Secured.class)
     public static Result setImgDefault(Long imgId, Long proId,String h){
         User _user = User.findByUserId(Long.parseLong(session("userId")));
-        if(EditProject.canEditProject(_user, proId)){
+        if(!EditProject.canEditProject(_user, proId)){
             flash("error", "access denied.");
             return redirect(routes.Application.index());
         }
