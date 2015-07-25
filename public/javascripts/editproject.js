@@ -36,7 +36,7 @@ $(document).ready(function(){
             return false;
         },
         focus: function( event, ui ) {
-            $( "#searchUser" ).val( ui.item.label );
+            $("#searchUser").val(ui.item.label);
             return false;
         }
     });
@@ -44,6 +44,11 @@ $(document).ready(function(){
         $("#show-result-ul").focusout(function(){
             $("#show-result").html("");
         });
+    });
+
+    $("#searchUser").on('input', function() {
+        console.log("Change!!!");
+        $( "#user-id").val("");
     });
 
     $(".upload").upload({
@@ -60,7 +65,6 @@ $(document).ready(function(){
         .on("filecomplete.upload", onFileComplete)
         .on("fileerror.upload", onFileError);
 });
-
 function onStart(e, files) {
 }
 
