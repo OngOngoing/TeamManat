@@ -89,7 +89,7 @@ public class Application extends Controller {
         if(image != null) {
             image.delete();
             List<Image> imgs = Image.findImageOfProject(_project);
-            if(isDefault == Image.DEFAULT){
+            if(isDefault == Image.DEFAULT && imgs.size() != 0){
                 imgs.get(0).setImgType(Image.DEFAULT);
                 imgs.get(0).save();
             }
