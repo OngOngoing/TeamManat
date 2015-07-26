@@ -47,30 +47,30 @@ $(document).ready(function(){
         curDir = 'down',
         prevDir = 'up';
 
-    $(window).scroll(function(){
-        if ($(this).scrollTop() >= prevScroll) {
-            if($(this).scrollTop() >= 45 && $('#mobile-demo').position().left != 0) {
-                curDir = 'down';
-                if (curDir != prevDir) {
-                    $('#head').addClass('scroll');
-                    $('#head-2').addClass('scroll');
-                    prevDir = curDir;
-                }
-            }
-        } else {
-            curDir = 'up';
-            if (curDir != prevDir) {
-                $('#head').removeClass('scroll');
-                $('#head-2').removeClass('scroll');
-                prevDir = curDir;
-            }
-        }
-        if($(window).scrollTop() + $(window).height() >= $(document).height()- 5) {
-            $('#head').removeClass('scroll');
-            $('#head-2').removeClass('scroll');
-        }
-        prevScroll = $(this).scrollTop();
-    });
+    //$(window).scroll(function(){
+    //    if ($(this).scrollTop() >= prevScroll) {
+    //        if($(this).scrollTop() >= 45 && $('#mobile-demo').position().left != 0) {
+    //            curDir = 'down';
+    //            if (curDir != prevDir) {
+    //                $('#head').addClass('scroll');
+    //                $('#head-2').addClass('scroll');
+    //                prevDir = curDir;
+    //            }
+    //        }
+    //    } else {
+    //        curDir = 'up';
+    //        if (curDir != prevDir) {
+    //            $('#head').removeClass('scroll');
+    //            $('#head-2').removeClass('scroll');
+    //            prevDir = curDir;
+    //        }
+    //    }
+    //    if($(window).scrollTop() + $(window).height() >= $(document).height()- 5) {
+    //        $('#head').removeClass('scroll');
+    //        $('#head-2').removeClass('scroll');
+    //    }
+    //    prevScroll = $(this).scrollTop();
+    //});
     $('.linkable').click(function(){
         prevDir = 'down';
         $('html, body').animate({
