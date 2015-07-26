@@ -16,7 +16,6 @@
 #index-banner {
     padding-top: 100px;
     background: #fafafa;
-    min-height: 100vh;
     height:auto;
     color: #000;
     box-shadow: 0 -1px 5px rgba(0, 0, 0, .2);
@@ -25,7 +24,6 @@
 .index-banner-content
 {
     padding-top: 64px;
-    padding-bottom: 40px;
     color: #fff;
     font-size: 1.2em;
     text-align: left;
