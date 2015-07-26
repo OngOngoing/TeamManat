@@ -82,41 +82,47 @@ function onFileProgress(e, file, percent) {
 }
 
 function onFileComplete(e, file, response) {
-    Materialize.toast("<i class='mdi-file-cloud-upload green-text small'></i><span style='padding-left: 5px'>upload successful.</span>", 4000);
-    $.ajax({
-        type: "get",
-        url: "../getimgs/" + $("#show-slides").attr("projectId"),
-        dataType: "text",
-        success: function (msg) {
-            var data = JSON.parse(msg);
-            var html = "";
-            var history = $("#show-slides").attr("history");
-            for(var i=data.length-1;i>=0;i--){
-                html += "<li>";
-                html += "<img src='../getimg/"+data[i].Id+"' style='background-size: auto 450px;background-position-y: 0;background-repeat: no-repeat;' >";
-                html += "<div class='caption right-align'>";
-                html += "<div class='row'>";
-                if(data[i].imgType != 1){
-                    html += "<a class='waves-effect waves-light btn blue' href='../setimg/"+$("#show-slides").attr("projectId")+"/"+data[i].Id+"?h="+history+"#upload'><i class='mdi-toggle-check-box right'></i>";
-                    html += "Set Project Icon</a>";
-                }else{
-                    html += "<a class='waves-effect waves-light btn disabled'><i class='mdi-toggle-check-box right'></i>";
-                    html += "Project Icon</a>";
+    if(response.error_code == 1){
+        Materialize.toast("<i class='mdi-alert-warning red-text small'></i><span style='padding-left: 5px'>"+response.message+".</span>", 4000);
+    }else if(response.error_code == 2){
+        Materialize.toast("<i class='mdi-alert-warning red-text small'></i><span style='padding-left: 5px'>"+response.message+"</span>", 4000);
+    }else {
+        Materialize.toast("<i class='mdi-file-cloud-upload green-text small'></i><span style='padding-left: 5px'>upload successful.</span>", 4000);
+        $.ajax({
+            type: "get",
+            url: "../getimgs/" + $("#show-slides").attr("projectId"),
+            dataType: "text",
+            success: function (msg) {
+                var data = JSON.parse(msg);
+                var html = "";
+                var history = $("#show-slides").attr("history");
+                for (var i = data.length - 1; i >= 0; i--) {
+                    html += "<li>";
+                    html += "<img src='../getimg/" + data[i].Id + "' style='background-size: auto 450px;background-position-y: 0;background-repeat: no-repeat;' >";
+                    html += "<div class='caption right-align'>";
+                    html += "<div class='row'>";
+                    if (data[i].imgType != 1) {
+                        html += "<a class='waves-effect waves-light btn blue' href='../setimg/" + $("#show-slides").attr("projectId") + "/" + data[i].Id + "?h=" + history + "#upload'><i class='mdi-toggle-check-box right'></i>";
+                        html += "Set Project Icon</a>";
+                    } else {
+                        html += "<a class='waves-effect waves-light btn disabled'><i class='mdi-toggle-check-box right'></i>";
+                        html += "Project Icon</a>";
+                    }
+                    html += "</div>";
+                    html += "<div class='row'>";
+                    html += "<a class='waves-effect waves-light btn red'  href='../delimg/" + $("#show-slides").attr("projectId") + "/" + data[i].Id + "?h=" + history + "#upload'><i class='mdi-navigation-close right'></i>Delete</a>";
+                    html += "</div>";
+                    html += "</div></li>";
                 }
-                html += "</div>";
-                html += "<div class='row'>";
-                html += "<a class='waves-effect waves-light btn red'  href='../delimg/"+$("#show-slides").attr("projectId")+"/"+data[i].Id+"?h="+history+"#upload'><i class='mdi-navigation-close right'></i>Delete</a>";
-                html += "</div>";
-                html += "</div></li>";
+                $('#show-slides').html(html);
+                $('.indicators').replaceWith("");
+                $('.slider').slider({
+                    full_width: true
+                });
             }
-            $('#show-slides').html(html);
-            $('.indicators').replaceWith("");
-            $('.slider').slider({
-                full_width: true
-            });
-        }
-    });
-    $('#process-'+file.index).remove();
+        });
+    }
+    $('#process-' + file.index).remove();
 }
 
 function onFileError(e, file, error) {

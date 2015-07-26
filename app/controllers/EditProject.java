@@ -1,5 +1,6 @@
 package controllers;
 
+import com.fasterxml.jackson.databind.node.ObjectNode;
 import models.*;
 import org.apache.commons.collections.map.HashedMap;
 import play.Logger;
@@ -147,15 +148,18 @@ public class EditProject extends Controller {
             flash("error", "access denied.");
             return redirect(routes.Application.index());
         }
-        System.out.println(body.getFile("file").getContentType().split("/")[0]);
-        System.out.println(!body.getFile("file").getContentType().split("/")[0].equals("image"));
         if(!body.getFile("file").getContentType().split("/")[0].equals("image")){
-            System.out.println("Wrong file type!!!");
-            return status(2);
+            ObjectNode result = Json.newObject();
+            result.put("error_code","2");
+            result.put("message", "Wrong file type");
+            return ok(result);
         }
         List<Image> imgs = Image.findImageOfProject(pro);
         if(imgs.size() >= 10){
-            return status(1);
+            ObjectNode result = Json.newObject();
+            result.put("error_code","1");
+            result.put("message", "Attachment limit");
+            return ok(result);
         }
         Image image;
         if(imgs.size() == 0) {
