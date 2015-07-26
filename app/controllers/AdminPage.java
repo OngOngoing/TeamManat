@@ -234,7 +234,7 @@ public class AdminPage extends Controller {
     }
     @Security.Authenticated(AdminSecured.class)
     public static Result deleteComment(Long userId , Long projectId){
-        User _user = User.findByUserId(Long.parseLong(session("userId")));
+        User _user = User.findByUserId(userId);
         Project _project = Project.findById(projectId);
         Comment comment = Comment.findByUserAndProject(_user, _project);
         Logger.info("[" + _user.getUsername() + "] delete comment.(" + comment.getId() + ")("+comment.getProject().getId()+")");
