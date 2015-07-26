@@ -151,12 +151,8 @@ public class Application extends Controller {
     public static Result mockDatabase(){
         //Web App setting
         if(User.findByUsername("admin") == null) {
-            Calendar calendar = Calendar.getInstance(TimeZone.getTimeZone("Asia/Bangkok"));
-            SimpleDateFormat dateFormat = new SimpleDateFormat("M-d-y HH:mm");
-            Setting.create("startTime", dateFormat.format(calendar.getTime()), Setting.TYPE_DATE, "Date for starting vote.");
-
-            calendar.set(Calendar.HOUR, calendar.get(Calendar.HOUR) + 1);
-            Setting.create("stopTime", dateFormat.format(calendar.getTime()), Setting.TYPE_DATE, "Date for stopping vote.");
+            Setting.create("startTime", "07-15-10 00:00", Setting.TYPE_DATE, "Date for starting vote.");
+            Setting.create("stopTime", "07-15-20 00:00", Setting.TYPE_DATE, "Date for stopping vote.");
             Setting.create("siteType", "1", Setting.TYPE_INTEGER, "1 for vote, 2 for rate.");
             //Mock user and project
             User.create("admin", "admin", "Admin's Firstname", "Admin's Lastname", User.ADMINISTRATOR);

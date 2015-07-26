@@ -237,7 +237,7 @@ $(document).ready(function () {
     });
     $(".datePicker").each(function () {
         $(this).datetimepicker({
-            format: 'm-d-Y H:m'
+            format: 'm-d-y H:m'
         });
     });
     $(".materialize-textarea").focus(
