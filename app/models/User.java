@@ -130,7 +130,7 @@ public class User extends Model {
     }
 
     public static User findByUsername(String username){
-        return find.where().eq("username", username).findUnique();
+        return find.setMaxRows(1).where().eq("username", username).findUnique();
     }
 
     public static List<User> findAll(){
