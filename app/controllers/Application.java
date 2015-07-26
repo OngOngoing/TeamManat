@@ -1,6 +1,5 @@
 package controllers;
 
-import java.text.*;
 import java.util.*;
 
 import models.*;
@@ -15,6 +14,9 @@ import views.html.*;
 public class Application extends Controller {
 
     public static Result index() {
+        if(Setting.value("stopTime") == null){
+            return redirect(routes.Application.mockDatabase());
+        }
         String user = session("userId");
         if(user != null) {
             return redirect(routes.ProjectList.index());
