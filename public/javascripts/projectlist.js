@@ -7,8 +7,6 @@ $(function () {
     });
 });
 
-
-
 var startColor = '#FC5B3F';
 var endColor = '#6FD57F';
 
