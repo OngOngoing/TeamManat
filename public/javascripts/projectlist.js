@@ -1,10 +1,5 @@
 $(function () {
     $('.tooltipped').tooltip({delay: 50});
-    $('.dropdown-button').dropdown({
-            inDuration: 0,
-            belowOrigin: true,
-            constrain_width: true
-    });
 });
 
 var startColor = '#FC5B3F';

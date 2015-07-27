@@ -2,7 +2,8 @@ $(document).ready(function(){
     $(".button-collapse").sideNav();
     $('.dropdown-button').dropdown({
         inDuration: 0,
-        belowOrigin: true
+        belowOrigin: true,
+        constrain_width: false
     });
     $('#inbox').click(function(){
         $('.pointer').css('left', $(this).position().left - $('#inbox_message').position().left + 15 );
