@@ -10,6 +10,7 @@
         <link rel="stylesheet" media="screen" href="@routes.Assets.at("stylesheets/animate.css")">
         <link rel="stylesheet" media="screen" href="@routes.Assets.at("stylesheets/login.css")">
         <link rel="icon" type="image/png" href="@routes.Assets.at("img/favicon.png")">
+        <link href='http://fonts.googleapis.com/css?family=Work+Sans:400,700' rel='stylesheet' type='text/css'>
         <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
     </head>
     <body>
@@ -25,9 +26,13 @@
                         </div>
                         <div class="row">
                             <form action="./login" method="post">
-                                <div class="form-group">
-                                    <input name="username" type="text" class="form-control" placeholder="Username" value="@username">
-                                    <input name="password" type="password" class="form-control" placeholder="Password">
+                                <div class="form-inline form-group">
+                                    <label for="username">Username</label>
+                                    <input id="username" name="username" type="text" class="form-control" placeholder="Username" value="@username">
+                                </div>
+                                <div class="form-inline form-group">
+                                    <label for="password">Password</label>
+                                    <input id="password" name="password" type="password" class="form-control" placeholder="Password">
                                 </div>
                                 <div class="row">
                                     <div class="col-md-4"></div>

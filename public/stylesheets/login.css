@@ -3,6 +3,7 @@ html {
     height:auto;
 }
 body {
+    font-family: 'HelveticaNeue Regular', sans-serif;
     width: 100%;
     height: auto;
     background-repeat: no-repeat;
@@ -13,10 +14,10 @@ body {
     background-attachment: fixed;
 }
 .logo{
-    font-size : 10rem ;
+    font-size : 8rem ;
 }
 .logo-text{
-    font-size : 5rem ;
+    font-size : 4rem ;
     margin-left : -0.8em ;
 }
 .colorBg {
@@ -28,11 +29,6 @@ body {
     -webkit-background-size: cover;
     background-size: cover;
     position: relative;
-    -o-box-shadow: inset 0 3px 3px -3px rgba(0, 0, 0, 0.3);
-    -ms-box-shadow: inset 0 3px 3px -3px rgba(0, 0, 0, 0.3);
-    -moz-box-shadow: inset 0 3px 3px -3px rgba(0, 0, 0, 0.3);
-    -webkit-box-shadow: inset 0 3px 3px -3px rgba(0, 0, 0, 0.3);
-    box-shadow: inset 0 3px 3px -3px rgba(0, 0, 0, 0.3);
 }
 @media only screen and (max-width: 992px) {
     .colorBg {
@@ -41,13 +37,7 @@ body {
 }
 
 .colorBg.colorBg5 {
-    background-color: #34dbce;
-    background-image: -ms-radial-gradient(center top, circle farthest-side, #8beae3 0%, #34dbce 100%);
-    background-image: -moz-radial-gradient(center top, circle farthest-side, #8beae3 0%, #34dbce 100%);
-    background-image: -o-radial-gradient(center top, circle farthest-side, #8beae3 0%, #34dbce 100%);
-    background-image: -webkit-gradient(radial, center top, 0, center top, 487, color-stop(0, #8beae3), color-stop(1, #34dbce));
-    background-image: -webkit-radial-gradient(center top, circle farthest-side, #8beae3 0%, #34dbce 100%);
-    background-image: radial-gradient(circle farthest-side at center top, #8beae3 0%, #34dbce 100%);
+    background-color: #5b5b65;
 }
 .login-window .wrap {
     padding-top: 2%;
@@ -55,7 +45,7 @@ body {
 
 }
 .login-window .form-wrap {
-    background-color: #e0f2f1;
+    background-color: #e9e9e9;
     padding-top : 5%;
     padding-bottom : 5%;
     padding-left: 10%;
@@ -73,26 +63,35 @@ body {
 .login-window input[type="email"] {
     background: none;
     border: none;
-    border-bottom: 1px solid #b2dfdb;
-    box-shadow: none;
+    line-height: 2.5rem;
+    font-size: 2rem;
+    /*width: 70%;*/
+    /*margin-left: 15%;*/
+    /*margin-top: 50px;*/
+    /*border-bottom: 1px solid #97979b;*/
+    /*box-shadow: none;*/
     padding: 10px 0 10px 10px;
     border-radius: 0;
     margin-bottom: 20px;
     color: #565656;
 }
+.login-window input[type="password"]{
+    /*margin-bottom: 50px;*/
+}
+
 .login-window .signup {
-    padding: 8px 15px;
-    background-color: #34dbce;
-    color: #ffffff;
-    -webkit-transition: background-color 300ms linear;
-    -moz-transition: background-color 300ms linear;
-    -o-transition: background-color 300ms linear;
-    -ms-transition: background-color 300ms linear;
-    transition: background-color 300ms linear;
+    /*padding: 8px 15px;*/
+    /*background-color: #97979b;*/
+    /*color: #ffffff;*/
+    /*-webkit-transition: background-color 300ms linear;*/
+    /*-moz-transition: background-color 300ms linear;*/
+    /*-o-transition: background-color 300ms linear;*/
+    /*-ms-transition: background-color 300ms linear;*/
+    /*transition: background-color 300ms linear;*/
 }
 .login-window .title {
-    text-align: left;
-    color: #34dbce;
+    /*text-align: left;*/
+    /*color: #34dbce;*/
 }
  .txt-center {
     text-align: center;
