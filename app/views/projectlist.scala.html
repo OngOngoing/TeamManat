@@ -16,14 +16,22 @@
     </head>
     <body>
         <div class="background">
-            <ul id="dropdown_admin" class="dropdown-content">
-                <li><a href="@routes.AdminPage.index()"><i class="medium material-icons left" style="height:1rem; line-height:1rem;">settings</i>Admin&nbsp;Panel</a></li>
-                <li class="divider"></li>
-                <li><a href="@routes.RateCalculator.index()"><i class="medium mdi-editor-insert-chart left" style="height:1rem; line-height:1rem;"></i>Rating&nbsp;Result</a></li>
-                <li class="divider"></li>
-                <li><a href="@routes.VoteController.showResult()"><i class="medium mdi-action-class left" style="height:1rem; line-height:1rem;"></i>Voting&nbsp;Result</a></li>
-                <li class="divider"></li>
-                <li><a href="@routes.Application.logout()" class="backgroud-link"><i class="medium mdi-action-settings-power left" style="height:1rem; line-height:1rem;"></i>Logout</a></li>
+            <ul id="dropdown_menu" class="dropdown-content">
+                @if(user.getIdtype() == User.ADMINISTRATOR) {
+                    <li><a href="@routes.AdminPage.index()"><i class="material-icons left" style="height : 1rem ; line-height : 1.5rem ;">settings</i>Admin&nbsp;Panel</a></li>
+                    <li class="divider"></li>
+                }
+                @if(user.getGroup() != null) {
+                    <li><a href="@routes.EditProject.index(user.getGroup().getProject().getId(), routes.ProjectList.index().toString())"><i class="material-icons left" style="height : 1rem ; line-height : 1.5rem ;">settings_applications</i>Edit&nbsp;Project</a></li>
+                    <li class="divider"></li>
+                }
+                @if(Setting.isTimeUp || user.getIdtype() == User.ADMINISTRATOR) {
+                    <li><a href="@routes.RateCalculator.index()"><i class="mdi-editor-insert-chart left" style="height : 1rem ; line-height : 1.5rem ;"></i>Rating&nbsp;Result</a></li>
+                    <li class="divider"></li>
+                    <li><a href="@routes.VoteController.showResult()"><i class="mdi-action-class left" style="height : 1rem ; line-height : 1.5rem ;"></i>Voting&nbsp;Result</a></li>
+                    <li class="divider"></li>
+                }
+                <li><a href="@routes.Application.logout()"><i class="mdi-action-settings-power left" style="height:1rem; line-height:1.5rem;"></i>Logout</a></li>
             </ul>
             <nav id="head">
                 <div class="nav-wrapper">
@@ -76,16 +84,11 @@
                                         }
                                     </div>
                                 </ul>
-                                @if(user.getIdtype == User.ADMINISTRATOR ){
-                                    <li>
-                                        <a class="dropdown-button" href="#!" data-activates="dropdown_admin">
-                                            <i class="material-icons">more_vert</i>
-                                        </a>
-                                    </li>
-                                }
-                                @if(user.getIdtype != User.ADMINISTRATOR ) {
-                                    <li><a href="@routes.Application.logout()"><i class="medium mdi-action-settings-power center"></i></a></li>
-                                }
+                                <li>
+                                    <a class="dropdown-button" href="#!" data-activates="dropdown_menu">
+                                        <i class="material-icons">more_vert</i>
+                                    </a>
+                                </li>
                         </ul>
                         </div>
                         <ul class="side-nav" id="mobile-demo" style="margin-right: -40px;">
