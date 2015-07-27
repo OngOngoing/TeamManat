@@ -1,9 +1,5 @@
 $(function () {
-    var convert = new Markdown.getSanitizingConverter().makeHtml;
     $('.tooltipped').tooltip({delay: 50});
-    $('.projectDescription').each(function () {
-        $(this).html(convert($(this).attr("data")));
-    });
     $('.dropdown-button').dropdown({
             inDuration: 0,
             belowOrigin: true
