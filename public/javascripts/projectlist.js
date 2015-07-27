@@ -3,7 +3,7 @@ $(function () {
     $('.dropdown-button').dropdown({
             inDuration: 0,
             belowOrigin: true,
-        constrain_width: true
+            constrain_width: true
     });
 });
 

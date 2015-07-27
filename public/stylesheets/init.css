@@ -23,6 +23,36 @@
     src:url("../font/roboto/Roboto-Bold.woff2") format("woff2"),url("../font/roboto/Roboto-Bold.woff") format("woff"),url("../font/roboto/Roboto-Bold.ttf") format("truetype");
     font-weight:700;
 }
+@font-face{
+    font-family:"Sansation Medium";
+    src:url("../font/sansation/Sansation_Bold.ttf") format("truetype");
+    font-weight:500;
+}
+@font-face{
+    font-family:"Sansation Light";
+    src:url("../font/sansation/Sansation_Light.ttf") format("truetype");
+    font-weight:300;
+}
+@font-face{
+    font-family:"Sansation Regular";
+    src:url("../font/sansation/Sansation_Regular.ttf") format("truetype");
+    font-weight:400;
+}
+@font-face{
+    font-family:"Sansation Bold";
+    src:url("../font/sansation/Sansation_Bold.ttf") format("truetype");
+    font-weight:700;
+}
+@font-face{
+    font-family:"HelveticaNeue Light";
+    src:url("../font/HelveticaNeue-Light.ttf") format("truetype");
+    font-weight:300;
+}
+@font-face{
+    font-family:"HelveticaNeue Regular";
+    src:url("../font/HelveticaNeueLTStd Lt.ttf") format("truetype");
+    font-weight:400;
+}
 @font-face {
     font-family: 'Glyphicons Halflings';
 
