@@ -79,7 +79,7 @@
                                 <div class="row" style="padding-top: 10px;">
                                     <div class="alert alert-success-colorized" role="alert">
                                         <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
-                                        <span class="sr-only">Error:</span>
+                                        <span class="sr-only">Success:</span>
                                         @flash.get("success")
                                     </div>
                                 </div>
@@ -90,6 +90,15 @@
                                         <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
                                         <span class="sr-only">Error:</span>
                                         @flash.get("create_user_error")
+                                    </div>
+                                </div>
+                            }
+                            @if(flash.contains("create_user_success")) {
+                                <div class="row" style="padding-top: 10px;">
+                                    <div class="alert alert-success-colorized" role="alert">
+                                        <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+                                        <span class="sr-only">Success:</span>
+                                        @flash.get("create_user_success")
                                     </div>
                                 </div>
                             }
@@ -110,38 +119,37 @@
             </div>
                 <form class="col s12" action="@routes.registerController.addUser()" method="post">  
                 <div class="modal-body">
-                    <div class="input-field ">
+                    <div class="form-group">
                         <label for="username">Username</label>
                         <input id="username" name="username" type="text" class="form-control" required >
                     </div>
-                    <div class="input-field ">
+                    <div class="form-group">
                         <label for="password">Password</label>
                         <input id="password" name="password" type="password" class="form-control" required>
                     </div>
-                    <div class="input-field ">
+                    <div class="form-group">
                         <label for="firstname">First Name</label>
                         <input id="firstname" name="firstname" type="text" class="form-control" required>
                         
                     </div>
-                    <div class="input-field ">
+                    <div class="form-group">
                         <label for="lastname">Last Name</label>
                         <input id="lastname" name="lastname" type="text" class="form-control" required>
                         
                     </div>
                     
-                    <div class="input-field ">
-                        <input class="with-gap" value="@User.GUEST_USER" name="idtype" type="radio" id="type2" checked/>
-                        <label for="type1">Guest</label>
-                    </div>
-                    <div class="input-field ">
-                        <input class="with-gap" value="@User.NORMAL_USER" name="idtype" type="radio" id="type2" checked/>
+                    <div class="form-group">
+                        <input class="with-gap" value="@User.NORMAL_USER" name="idtype" type="radio" id="type2" required/>
                         <label for="type2">Student</label>
+                        <input class="with-gap" value="@User.GUEST_USER" name="idtype" type="radio" id="type1" />
+                        <label for="type1">Guest</label>
+                        
                     </div>
                 
               </div>
               <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                <button type="submit" class="btn btn-primary">Save changes</button>
+                <button type="submit" class="btn btn-primary">Register</button>
               </div>
           </form>
         </div>
