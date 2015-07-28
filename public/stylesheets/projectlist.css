@@ -89,11 +89,15 @@
     overflow: hidden;
 }
 .card-app .img-slope {
-     background-repeat: no-repeat;
-     background-position: center;
+     overflow: hidden;
      height: 100%;
      width: 100%;
  }
+
+.card-app .img-slope img {
+    margin-left: -50%;
+    margin-top: -50%;
+}
 
 .card-app:hover .img-container {
     border-r-width: 0;
@@ -195,7 +199,8 @@
     transition: background-color .3s ease-in-out; }
 
 .content-hoverable:hover {
-    background-color: #f2f2f2; }
+    background-color: #f2f2f2;
+}
 
 
 .promo i.banner {
