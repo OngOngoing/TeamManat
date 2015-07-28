@@ -26,11 +26,11 @@
                         </div>
                         <div class="row">
                             <form action="./login" method="post">
-                                <div class="form-inline form-group">
+                                <div class="form-group">
                                     <label for="username">Username</label>
                                     <input id="username" name="username" type="text" class="form-control" placeholder="Username" value="@username">
                                 </div>
-                                <div class="form-inline form-group">
+                                <div class="form-group">
                                     <label for="password">Password</label>
                                     <input id="password" name="password" type="password" class="form-control" placeholder="Password">
                                 </div>
@@ -38,6 +38,9 @@
                                     <div class="col-md-4"></div>
                                     <div class="col-md-4">
                                         <button type="submit" name="action" class="btn btn-block signup">Login</button>
+                                        <button type="button" class="btn btn-block btn-success" data-toggle="modal" data-target="#registerModal">
+                                          register
+                                        </button
                                     </div>
                                     <div class="col-md-4"></div>
                                 </div>
@@ -89,4 +92,45 @@
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
         <script async defer id="github-bjs" src="https://buttons.github.io/buttons.js"></script>
     </body>
+    <div class="modal fade" id="registerModal" tabindex="-1" role="dialog" aria-labelledby="registerModalLabel">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title" id="registerModalLabel">Register</h4>
+            </div>
+                <form class="col s12" action="@routes.registerController.addUser()" method="post">  
+                <div class="modal-body">
+                    <div class="input-field ">
+                        <input id="username" name="username" type="text" class="validate" required >
+                        <label for="username">Username</label>
+                    </div>
+                    <div class="input-field ">
+                        <input id="password" name="password" type="password" class="validate" required>
+                        <label for="password">Password</label>
+                    </div>
+                    <div class="input-field ">
+                        <input id="firstname" name="firstname" type="text" class="validate" required>
+                        <label for="firstname">First Name</label>
+                    </div>
+                    <div class="input-field ">
+                        <input id="lastname" name="lastname" type="text" class="validate" required>
+                        <label for="lastname">Last Name</label>
+                    </div>
+                    <input id="projectId" name="projectId" type="hidden" value="-1" />
+                    
+                    <div class="input-field ">
+                        <input class="with-gap" value="@User.NORMAL_USER" name="idtype" type="radio" id="type2" checked/>
+                        <label for="type2">Normal User</label>
+                    </div>
+                
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="submit" class="btn btn-primary">Save changes</button>
+              </div>
+          </form>
+        </div>
+      </div>
+    </div>
 </html>

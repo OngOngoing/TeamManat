@@ -4,6 +4,7 @@
 
 GET         /                                                  controllers.Application.index()
 POST        /login                                             controllers.Application.authenticate()
+POST        /register                                          controllers.registerController.addUser()
 GET         /projectlist                                       controllers.ProjectList.index()
 
 # Admin Page
