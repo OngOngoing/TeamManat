@@ -61,7 +61,7 @@ public class RateProject extends Controller {
             Comment comment = Comment.create(user, project, thisComment);
         }
         if (Rate.findListByUserAndProject(user, project).size() > 0 || thisComment.length() > 0) {
-            flash("rate_success", "Rate and Comment submitted");
+            flash("success", "Rate and Comment submitted");
         }
         return redirect(routes.RateProject.index(projectId));
     }
@@ -96,7 +96,7 @@ public class RateProject extends Controller {
             thisComment.setComment(getComment);
             thisComment.update();
         }
-        flash("edit_success", "Rate updated");
+        flash("success", "Rate updated");
         response().setHeader("Cache-Control", "no-cache");
         return redirect(routes.RateProject.index(projectId));
     }

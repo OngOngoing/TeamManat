@@ -126,7 +126,7 @@ public class VoteController extends Controller {
                 }
             }
         }
-        flash("edit_success", "Vote updated");
+        flash("success", "Vote updated");
         response().setHeader("Cache-Control","no-cache");
         return redirect(routes.VoteController.index());
     }

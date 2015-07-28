@@ -340,14 +340,9 @@
             <script src="@routes.Assets.at("javascripts/countdown.js")" type="text/javascript"></script>
             <script src="@routes.Assets.at("javascripts/rateproject.js")" type="text/javascript"></script>
             <script src="@routes.Assets.at("javascripts/jquery.scrollbar.js")"></script>
-            @if(flash.contains("rate_success")) {
+            @if(flash.contains("success")) {
                 <script type="text/javascript">
-                Materialize.toast ( '<i class="mdi-action-done green-text small"></i><span style="padding-left: 5px"> @flash.get("rate_success") </span> ', 4000)
-                </script>
-            }
-            @if(flash.contains("edit_success")) {
-                <script type="text/javascript">
-                Materialize.toast ( '<i class="mdi-action-done green-text small"></i><span style="padding-left: 5px"> @flash.get("edit_success") </span> ', 4000)
+                Materialize.toast ( '<i class="mdi-action-done green-text small"></i><span style="padding-left: 5px"> @flash.get("success") </span> ', 4000)
                 </script>
             }
             @if(flash.contains("error")) {
