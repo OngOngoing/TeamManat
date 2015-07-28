@@ -130,7 +130,6 @@
                                 </a>
                             }
                         </div>
-                        <div class="col s12 container" style="color : #000000;"><blockquote>Choose rate, vote or scroll down.</blockquote></div>
                     </div>
                 </div>
             </div>
@@ -146,27 +145,19 @@
                     <div class="col s12">
                         <a href="@routes.RateProject.index(project.getId)">
                             <div class="card-app hoverable waves-effect waves-block z-depth-1">
+                                <div class="img-container">
+                                    <div class="img-slope" style="background: url(@Image.getUrlDefaultImage(project))"></div>
+                                </div>
                                 <div class="row">
-                                    <div class="col s4 m2">
-                                        <div class="image-container">
-                                            <div class="square">
-                                                <img src="@Image.getUrlDefaultImage(project)" alt="" class="crop">
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col s8 m10">
-                                        <p class="app-banner">@project.getProjectName</p>
+                                    <div class="col s12 m12">
+                                        <div class="app-banner">@project.getProjectName</div>
                                         @if(mappedRates.get(project.getId) == 0) {
-                                            <p class="secondary-text hide-on-med-and-down">click here to rate this project</p>
                                             <div class="info red-text text-darken-1">NOT YET RATED</div>
                                         } @if(criteriaLeft == 1 && ratingCriteria.size > 1) {
-                                            <p class="secondary-text hide-on-med-and-down">click here to update your rate</p>
                                             <div class="info yellow-text text-darken-3"><i class="mdi-action-done"></i> 1 CRITERION LEFT</div>
                                         } @if(criteriaLeft > 1 && criteriaLeft < ratingCriteria.size) {
-                                            <p class="secondary-text hide-on-med-and-down">click here to update your rate</p>
                                             <div class="info yellow-text text-darken-3"><i class="mdi-action-done"></i> @criteriaLeft CRITERIA LEFT</div>
                                         } @if(criteriaLeft == 0 && ratingCriteria.size > 0) {
-                                            <p class="secondary-text hide-on-med-and-down">click here to edit your rate</p>
                                             <div class="info teal-text text-darken-1"><i class="mdi-action-done-all"></i> COMPLETED</div>
                                         }
                                     </div>
