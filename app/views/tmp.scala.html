@@ -1,4 +1,4 @@
-@(user : User, time : String, comments : List[Inbox], isTimeUp : Boolean)(content: => Html)(css: =>Html)(js: Html)
+@(user : User, time : String, comments : List[Inbox])(content: => Html)(css: =>Html)(js: Html)
 @import java.math.BigInteger; var criteriaLeft = 0; var numOfUnread = Inbox.findNumOfUnreadByReceiver(user);
 
 <!DOCTYPE html>

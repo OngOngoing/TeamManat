@@ -1,7 +1,7 @@
-@(projects: List[Project])(ratingCriteria: List[RateCriterion])(mappedRates : Map[Long,Integer])(projectsLeft : Integer)(votesLeft : Integer)(percent : Integer)(currentUser : User)(time : String)(comments : List[Inbox])(isTimeUp : Boolean)
+@(projects: List[Project])(ratingCriteria: List[RateCriterion])(mappedRates : Map[Long,Integer])(projectsLeft : Integer)(votesLeft : Integer)(percent : Integer)(currentUser : User)(time : String)(comments : List[Inbox])
 @import java.math.BigInteger; var criteriaLeft = 0; var numOfUnread = Inbox.findNumOfUnreadByReceiver(currentUser); var progress = (percent/100.0);
 
-@tmp(currentUser, time, comments, isTimeUp){
+@tmp(currentUser, time, comments){
     <div class="z-depth-1">
         <section id="index-banner">
             <div class="index-banner-content container animated fadeIn">
@@ -27,7 +27,7 @@
                         </div>
                         <div class="row">
                             <div class="col s6 m6">
-                            @if(isTimeUp){
+                            @if(Setting.isTimeUp()){
                                 <a link-to="@routes.RateCalculator.index()" class="linkable card-panel full-size waves-effect content-hoverable hide-on-large-only" href="#project-list" style="padding: 0;">
                                     <div class="center promo promo-example">
                                         <p class="promo-caption flow-text"><img src="@routes.Assets.at("img/trophy.svg")" height="50" widtgh="50"></p>
@@ -52,7 +52,7 @@
                                     </div>
                                 </a>
                             }
-                            @if(isTimeUp){
+                            @if(Setting.isTimeUp()){
                                 <a class="linkable card-panel full-size waves-effect content-hoverable hide-on-med-and-down" href="@routes.RateCalculator.index()">
                                     <div class="center promo promo-example">
                                         <p class="promo-caption flow-text"><img src="@routes.Assets.at("img/trophy.svg")" height="50" widtgh="50"></p>
@@ -79,7 +79,7 @@
                             }
                             </div>
                             <div class="col s6 m6">
-                            @if(isTimeUp){
+                            @if(Setting.isTimeUp()){
                                 <a class="card-panel full-size waves-effect content-hoverable hide-on-med-and-down" href="@routes.VoteController.showResult()">
                                     <div class="center promo promo-example">
                                         <p class="promo-caption flow-text"><img src="@routes.Assets.at("img/trophy.svg")" height="50" widtgh="50"></p>
@@ -104,7 +104,7 @@
                                     </div>
                                 </a>
                                 }
-                            @if(isTimeUp){
+                            @if(Setting.isTimeUp()){
                                 <a class="card-panel full-size waves-effect content-hoverable hide-on-large-only" href="@routes.VoteController.showResult()" style="padding: 0;">
                                     <div class="center promo promo-example">
                                         <p class="promo-caption flow-text"><img src="@routes.Assets.at("img/trophy.svg")" height="50" widtgh="50"></p>
