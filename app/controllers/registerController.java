@@ -19,9 +19,14 @@ public class registerController extends Controller {
         String password = dynamicForm.get("password");
         String idType = dynamicForm.get("idtype");
         User user = User.create(username, password, firstname,lastname,Integer.parseInt(idType));
+        if(user == null){
+            flash("create_user_error", "username is existed.");
+            return redirect("/");
+
+        }
         Logger.info("["+user.getUsername()+"] has regis.("+user.getId()+")");
         response().setHeader("Cache-Control", "no-cache");
-        flash("registration_complete", "User added");
+        flash("create_user_success", "User is created.");
         return redirect(routes.ProjectList.index());
     }
 }

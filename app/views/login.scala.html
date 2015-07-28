@@ -84,6 +84,15 @@
                                     </div>
                                 </div>
                             }
+                            @if(flash.contains("create_user_error")) {
+                                <div class="row" style="padding-top: 10px;">
+                                    <div class="alert alert-danger" role="alert">
+                                        <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+                                        <span class="sr-only">Error:</span>
+                                        @flash.get("create_user_error")
+                                    </div>
+                                </div>
+                            }
                         </div>
                     </div>
             </div>
@@ -102,26 +111,31 @@
                 <form class="col s12" action="@routes.registerController.addUser()" method="post">  
                 <div class="modal-body">
                     <div class="input-field ">
-                        <input id="username" name="username" type="text" class="validate" required >
                         <label for="username">Username</label>
+                        <input id="username" name="username" type="text" class="form-control" required >
                     </div>
                     <div class="input-field ">
-                        <input id="password" name="password" type="password" class="validate" required>
                         <label for="password">Password</label>
+                        <input id="password" name="password" type="password" class="form-control" required>
                     </div>
                     <div class="input-field ">
-                        <input id="firstname" name="firstname" type="text" class="validate" required>
                         <label for="firstname">First Name</label>
+                        <input id="firstname" name="firstname" type="text" class="form-control" required>
+                        
                     </div>
                     <div class="input-field ">
-                        <input id="lastname" name="lastname" type="text" class="validate" required>
                         <label for="lastname">Last Name</label>
+                        <input id="lastname" name="lastname" type="text" class="form-control" required>
+                        
                     </div>
-                    <input id="projectId" name="projectId" type="hidden" value="-1" />
                     
                     <div class="input-field ">
+                        <input class="with-gap" value="@User.GUEST_USER" name="idtype" type="radio" id="type2" checked/>
+                        <label for="type1">Guest</label>
+                    </div>
+                    <div class="input-field ">
                         <input class="with-gap" value="@User.NORMAL_USER" name="idtype" type="radio" id="type2" checked/>
-                        <label for="type2">Normal User</label>
+                        <label for="type2">Student</label>
                     </div>
                 
               </div>
