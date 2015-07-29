@@ -1,4 +1,4 @@
-@(user : User, time : String, comments : List[Inbox])(content: => Html)(css: =>Html)(js: Html)
+@(user : User, comments : List[Inbox])(content: => Html)(css: =>Html)(js: Html)
 @import java.math.BigInteger; var criteriaLeft = 0; var numOfUnread = Inbox.findNumOfUnreadByReceiver(user);
 
 <!DOCTYPE html>
@@ -67,12 +67,12 @@
             <div class="time">
               <div class="nav-wrapper hide-on-large-only">
                 <div class="white-text" id="count-down-s" style="cursor: default; margin: 0;">
-                  <div class="count-down-s center-align" id="countdown-s" end-date="@time"></div>
+                  <div class="count-down-s center-align" id="countdown-s" end-date="@Setting.getTime()"></div>
                 </div>
               </div>
               <div class="nav-wrapper hide-on-med-and-down">
                 <div class="white-text" id="count-down" style="cursor: default; margin: 0;">
-                  <div class="count-down center-align" id="countdown" end-date="@time"></div>
+                  <div class="count-down center-align" id="countdown" end-date="@Setting.getTime()"></div>
                 </div>
               </div>
             </div>
