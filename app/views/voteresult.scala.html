@@ -3,195 +3,125 @@
 @import models.Vote.ResultBundle
 @import java.math.BigInteger; var totalVotes = 0; var numOfUnread = Inbox.findNumOfUnreadByReceiver(user); var comments = Inbox.findAllByReceiver(user);
 
-<!DOCTYPE html>
+@tmp(user, comments){
+    <div class="container padding-nav" style="padding-top: 64px;">
+        <div class="animated fadeInDown">
+            <h4 class="trigger-text  pageBanner center-align">Voting Result</h4>
+        </div>
+        <div class="section animated fadeIn">
+            @if(criteria.size == 0) {
+                <div class="center-align flow-text">It's lonely here.</div>
+                <h5 class="center-align">There is no voting criterion.</h5>
+            } else {
+                <ul class="collapsible" data-collapsible="accordion">
+                    <li>
+                        <div class="collapsible-header trigger-text "><i class="mdi-action-grade"></i>
+                            Show Winner</div>
+                        <div class="collapsible-body" style="background: #FFFFFF !important;">
+                            <div class="collapsible-container">
+                                <table class="hoverable centered">
+                                    <thead>
+                                        <tr>
+                                            <th class="topic-banner flow-text" data-field="project_name">Criterion</th>
+                                            <th class="topic-banner flow-text" data-field="score_percent">Winner</th>
+                                            <th class="topic-banner flow-text" data-field="score_sum">Votes</th>
+                                        </tr>
+                                    </thead>
 
-<html>
-    <head>
-        <title>Exceed Vote</title>
-        <link rel="stylesheet" media="screen" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.96.1/css/materialize.min.css">
-        <link rel="stylesheet" media="screen" href="@routes.Assets.at("stylesheets/animate.css")">
-        <link rel="stylesheet" media="screen" href="@routes.Assets.at("stylesheets/votepage.css")">
-        <link rel="stylesheet" media="screen" href="@routes.Assets.at("stylesheets/init.css")">
-        <link rel="icon" type="image/png" href="@routes.Assets.at("img/favicon.png")">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
-    </head>
-    <body>
-        <div class="background">
-        <nav class="teal lighten-1  large" id="head">
-            <div class="container">
-                <div class="nav-wrapper">
-                    <a href="@routes.Application.index()" class="brand-logo"><span class="glyphicon glyphicon-ice-lolly-tasted logo" aria-hidden="true"></span><span style="font-size: 2rem; top: 10px;">eXceed</span></a>
-                    <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="mdi-navigation-menu"></i></a>
-                    <div class="center">
-                        <ul class="right hide-on-med-and-down">
-                            <li><a href="@routes.RateCalculator.index()"><i class="medium mdi-editor-insert-chart left"></i>Rating&nbsp;Result</a></li>
-                            @if(numOfUnread == 0) {
-                                <li><a href="#!" id="inbox" class="dropdown-button backgroud-link" data-activates='inbox_message'><i id="i-inbox" class="medium mdi-communication-forum center badge"></i></a></li>
-                            }else{
-                                <li><a href="#!" id="inbox" class="dropdown-button backgroud-link" data-activates='inbox_message'><i id="i-inbox" class="medium mdi-communication-forum center badge" data-badge="@numOfUnread"></i></a></li>
-                            }
-                            <ul id='inbox_message' class='dropdown-content inbox-message'>
-                                <div id='inbox-message-arrow' class="pointer"></div>
-                                <div id="scrollbar-message" class="mousescroll">
-                                    @comments.map{ comment =>
-                                        @if(comment.isRead==Inbox.UNREAD) {
-                                            <li class="inbox-li collection-item tooltipped" id="inbox-id-@comment.getId" inbox-id="@comment.getId" data-position="left" data-delay="50" data-tooltip="Make as read">
-                                                <i class="mdi-content-markunread left" id="icon-inbox-@comment.getId" style="margin-right : -10px ; padding-left : 10px ;"></i>
-                                                <a href="#!">@comment.getComment.getComment <br /> <span class="secondary-text">from @comment.getComment.getUser.getUsername @comment.getTimestamp</span></a>
-                                            </li>
-                                            <li class="divider"></li>
-                                        }else{
-                                            <li class="inbox-li collection-item tooltipped" id="inbox-id-@comment.getId" inbox-id="@comment.getId" data-position="left" data-delay="50" data-tooltip="Make as unread">
-                                                <i class="mdi-content-drafts left" id="icon-inbox-@comment.getId" style="margin-right : -10px ; padding-left : 10px ;"></i>
-                                                <a href="#!">@comment.getComment.getComment <br /> <span class="secondary-text">from @comment.getComment.getUser.getUsername @comment.getTimestamp</span></a>
-                                            </li>
-                                            <li class="divider"></li>
-                                        }
-                                    }
-                                    @if(comments.size == 0){
-                                        <li class="inbox-li"><a><span class="secondary-text">Inbox is empty.</span></a></li>
-                                    }
-                                </div>
-                            </ul>
-                            <li><a href="@routes.Application.logout()" class="backgroud-link"><i class="medium mdi-action-settings-power center"></i></a></li>
-                        </ul>
-                        <ul class="side-nav" id="mobile-demo" style="margin-right: -40px;">
-                            <li><a href="@routes.RateCalculator.index()"><i class="medium mdi-editor-insert-chart left"></i>Rating&nbsp;Result</a></li>
-                            @if(numOfUnread == 0) {
-                                <li><a id='inbox' href="@routes.Application.inboxMobile()" data-activates='inbox_message'><i class="medium mdi-communication-forum left badge"></i>Inbox</a></li>
-                            }else{
-                                <li><a id="inbox" href="@routes.Application.inboxMobile()" data-activates='inbox_message'><i class="medium mdi-communication-forum left badge" data-badge="@numOfUnread"></i>Inbox</a></li>
-                            }
-                            <li><a href="../logout"><i class="medium mdi-action-settings-power left"></i>Logout</a></li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </nav>
-        <div class="container padding-nav" style="padding-top: 64px;">
-            <div class="animated fadeInDown">
-                <h4 class="trigger-text  pageBanner center-align">Voting Result</h4>
-            </div>
-            <div class="section animated fadeIn">
-                @if(criteria.size == 0) {
-                    <div class="center-align flow-text">It's lonely here.</div>
-                    <h5 class="center-align">There is no voting criterion.</h5>
-                } else {
-                    <ul class="collapsible" data-collapsible="accordion">
-                        <li>
-                            <div class="collapsible-header trigger-text "><i class="mdi-action-grade"></i>
-                                Show Winner</div>
-                            <div class="collapsible-body" style="background: #FFFFFF !important;">
-                                <div class="collapsible-container">
-                                    <table class="hoverable centered">
-                                        <thead>
-                                            <tr>
-                                                <th class="topic-banner flow-text" data-field="project_name">Criterion</th>
-                                                <th class="topic-banner flow-text" data-field="score_percent">Winner</th>
-                                                <th class="topic-banner flow-text" data-field="score_sum">Votes</th>
-                                            </tr>
-                                        </thead>
+                                    <tbody>
 
-                                        <tbody>
-
-                                        @criteria.map { criterion =>
-                                            <tr>
-                                                <td class="flow-text">@criterion.getName</td>
-                                                <td class="flow-text">
-                                                @if(winnerSummary.get(criterion).size > 1) {
-                                                    @winnerSummary.get(criterion).map { eachWinner =>
-                                                        <div>@eachWinner.project.getProjectName</div>
-                                                    }
-                                                } else {
-                                                    @winnerSummary.get(criterion)(0).project.getProjectName
+                                    @criteria.map { criterion =>
+                                        <tr>
+                                            <td class="flow-text">@criterion.getName</td>
+                                            <td class="flow-text">
+                                            @if(winnerSummary.get(criterion).size > 1) {
+                                                @winnerSummary.get(criterion).map { eachWinner =>
+                                                    <div>@eachWinner.project.getProjectName</div>
                                                 }
-                                                </td>
-                                                <td class="flow-text">@winnerSummary.get(criterion)(0).sum</td>
-                                            </tr>
-                                        }
+                                            } else {
+                                                @winnerSummary.get(criterion)(0).project.getProjectName
+                                            }
+                                            </td>
+                                            <td class="flow-text">@winnerSummary.get(criterion)(0).sum</td>
+                                        </tr>
+                                    }
 
-                                        </tbody>
+                                    </tbody>
 
-                                    </table>
-                                </div>
+                                </table>
                             </div>
-                        </li>
-                    </ul>
+                        </div>
+                    </li>
+                </ul>
 
-                    @criteria.map { criterion =>
-                        @{
-                            totalVotes = orderedSummary.get(criterion).get(0).asInstanceOf[Vote.ResultBundle].totalVotes
-                        }
-                    <div class="card-panel">
-
-                        <h4 class="center-align criterion-banner">@criterion.getName</h4>
-                        <table class="hoverable centered">
-                            <thead>
-                                <tr>
-                                    <th class="topic-banner flow-text" data-field="project_name">Project Name</th>
-                                    <th class="topic-banner flow-text" data-field="score_percent">Percent</th>
-                                    <th class="topic-banner flow-text" data-field="score_sum">Total Votes (@totalVotes)</th>
-                                </tr>
-                            </thead>
-
-                            <tbody>
-
-                            @orderedSummary.get(criterion).map { orderedBundle =>
-                                <tr>
-                                    <td class="flow-text">@orderedBundle.asInstanceOf[Vote.ResultBundle].project.getProjectName</td>
-                                    <td class="flow-text">
-                                        <div class="progress ">
-                                            <div class="determinate" style="width : @orderedBundle.asInstanceOf[Vote.ResultBundle].roundedPercent%"></div>
-                                        </div>
-                                        @orderedBundle.asInstanceOf[Vote.ResultBundle].roundedPercent %
-
-                                    </td>
-                                    <td class="flow-text">@orderedBundle.asInstanceOf[Vote.ResultBundle].sum</td>
-                                </tr>
-                            }
-
+                @criteria.map { criterion =>
+                    @{
+                        totalVotes = orderedSummary.get(criterion).get(0).asInstanceOf[Vote.ResultBundle].totalVotes
+                    }
+                <div class="card-panel">
+                    <h4 class="center-align criterion-banner">@criterion.getName</h4>
+                    <table class="hoverable centered">
+                        <thead>
                             <tr>
-                                <td class="flow-text grey-text darken-2"><i class="mdi-av-mic-off"></i> @noVoteMapping.get(criterion).asInstanceOf[Vote.ResultBundle].project.getProjectName</td>
-                                <td class="flow-text grey-text darken-2">
+                                <th class="topic-banner flow-text" data-field="project_name">Project Name</th>
+                                <th class="topic-banner flow-text" data-field="score_percent">Percent</th>
+                                <th class="topic-banner flow-text" data-field="score_sum">Total Votes (@totalVotes)</th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+
+                        @orderedSummary.get(criterion).map { orderedBundle =>
+                            <tr>
+                                <td class="flow-text">@orderedBundle.asInstanceOf[Vote.ResultBundle].project.getProjectName</td>
+                                <td class="flow-text">
                                     <div class="progress ">
-                                        <div class="determinate" style="width : @noVoteMapping.get(criterion).asInstanceOf[Vote.ResultBundle].roundedPercent%"></div>
+                                        <div class="determinate" style="width : @orderedBundle.asInstanceOf[Vote.ResultBundle].roundedPercent%"></div>
                                     </div>
-                                    @noVoteMapping.get(criterion).asInstanceOf[Vote.ResultBundle].roundedPercent %
+                                    @orderedBundle.asInstanceOf[Vote.ResultBundle].roundedPercent %
 
                                 </td>
-                                <td class="flow-text grey-text darken-2">@noVoteMapping.get(criterion).asInstanceOf[Vote.ResultBundle].sum</td>
+                                <td class="flow-text">@orderedBundle.asInstanceOf[Vote.ResultBundle].sum</td>
                             </tr>
+                        }
+                        <tr>
+                            <td class="flow-text grey-text darken-2"><i class="mdi-av-mic-off"></i> @noVoteMapping.get(criterion).asInstanceOf[Vote.ResultBundle].project.getProjectName</td>
+                            <td class="flow-text grey-text darken-2">
+                                <div class="progress ">
+                                    <div class="determinate" style="width : @noVoteMapping.get(criterion).asInstanceOf[Vote.ResultBundle].roundedPercent%"></div>
+                                </div>
+                                @noVoteMapping.get(criterion).asInstanceOf[Vote.ResultBundle].roundedPercent %
+
+                            </td>
+                            <td class="flow-text grey-text darken-2">@noVoteMapping.get(criterion).asInstanceOf[Vote.ResultBundle].sum</td>
+                        </tr>
 
 
-                            </tbody>
-                        </table>
-                    </div>
-                    }
+                        </tbody>
+                    </table>
+                </div>
                 }
-
-            </div>
+            }
 
         </div>
 
-        <div class="fixed-action-btn animated bounceInUp" style="bottom: 45px; right: 40px;">
-            <a class="btn-floating btn-large trigger" href="@routes.ProjectList.index()">
-                <i class="large mdi-action-home waves-effect waves-light"></i>
-            </a>
-            <ul>
-                @if(user.getIdtype != -1){
-                        <li><a class="btn-floating red " href="@routes.Application.logout()"><i class="large mdi-action-settings-power"></i></a></li>
-                    }
-                    @if(user.getIdtype == User.ADMINISTRATOR) {
-                        <li><a class="btn-floating yellow derken-1" href="@routes.AdminPage.index()"><i class="large mdi-action-settings waves-effect waves-light"></i></a></li>
-                    }
-            </ul>
-        </div>
+    </div>
 
-        <script src="http://code.jquery.com/jquery-2.1.3.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.96.1/js/materialize.min.js"></script>
-        <script src="@routes.Assets.at("javascripts/jquery-ui.js")"></script>
-        <script src="@routes.Assets.at("javascripts/jquery.scrollbar.js")"></script>
-        <script type="text/javascript" src="@routes.Assets.at("javascripts/init.js")"></script>
-        </div>
-    </body>
-</html>
+    <div class="fixed-action-btn animated bounceInUp" style="bottom: 45px; right: 40px;">
+        <a class="btn-floating btn-large trigger" href="@routes.ProjectList.index()">
+            <i class="large mdi-action-home waves-effect waves-light"></i>
+        </a>
+        <ul>
+            @if(user.getIdtype != -1){
+                <li><a class="btn-floating red " href="@routes.Application.logout()"><i class="large mdi-action-settings-power"></i></a></li>
+            }
+            @if(user.getIdtype == User.ADMINISTRATOR) {
+                <li><a class="btn-floating yellow derken-1" href="@routes.AdminPage.index()"><i class="large mdi-action-settings waves-effect waves-light"></i></a></li>
+            }
+        </ul>
+    </div>
+}{
+    <link rel="stylesheet" media="screen" href="@routes.Assets.at("stylesheets/votepage.css")">
+}{
+
+}
