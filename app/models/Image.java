@@ -85,7 +85,8 @@ public class Image extends Model {
     public static String getUrlDefaultImage(Project project){
         Image img = Image.find.where().eq("project",project).eq("imgType",DEFAULT).findUnique();
         if(img == null){
-            return "../assets/img/no_image_s.png";
+//            return "../assets/img/no_image_s.png";
+            return null;
         }else {
             return "../getimg/" + img.id;
         }
