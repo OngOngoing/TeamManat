@@ -139,9 +139,9 @@
     <section id="project-list">
         <div class="container animated fadeIn"  style="padding: 1rem 0 0 0;">
             <!-- Page Content goes here -->
-            <div class="row">
             @projects.map { project =>
                 @{criteriaLeft = ratingCriteria.size - mappedRates.get(project.getId)}
+                <div class="row">
                     <div class="col s12">
                         <a href="@routes.RateProject.index(project.getId)">
                             <div class="card-app hoverable waves-effect waves-block z-depth-1">
@@ -167,8 +167,8 @@
                             </div>
                         </a>
                     </div>
-                }
-            </div>
+                </div>
+            }
         </div>
     </section>
     <!-- End of Page Content -->
