@@ -17,7 +17,6 @@ public class ProjectList extends Controller {
         Long userId = Long.parseLong(session().get("userId"));
         User user = User.findByUserId(userId);
         Map<Long,Integer> mappedRate = Rate.getRateAndProjectMappingByUser(user);
-        String _time = Setting.getTime();
         List<Inbox> comments = Inbox.findAllByReceiver(user);
         int countVotes = Vote.findByUser(user).size();
         int countVotingCriterion = VoteCriterion.findAll().size();
@@ -35,7 +34,7 @@ public class ProjectList extends Controller {
         double percent = (1.0*countProgress/totalProgress)*100.0;
         int roundPercent = Integer.parseInt(String.format("%.0f", percent));
         response().setHeader("Cache-Control", "no-cache");
-        return ok(projectlist.render(projects,RateCriterion.findAll(),mappedRate, projectsLeft, voteLeft, roundPercent, user,_time, comments));
+        return ok(projectlist.render(projects,RateCriterion.findAll(),mappedRate, projectsLeft, voteLeft, roundPercent, user, comments));
     }
 
 }
