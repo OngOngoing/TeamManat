@@ -94,10 +94,13 @@
           <ul class="side-nav" id="mobile-demo" style="margin-right: -40px;">
             @if(user.getIdtype == User.ADMINISTRATOR ){
               <li>
-                <a href="adminpage">
-                  <i class="large mdi-action-settings left"></i>Settings
+                <a href="@routes.AdminPage.index()">
+                  <i class="large mdi-action-settings left"></i>Admin Panel
                 </a>
               </li>
+            }
+            @if(user.getGroup() != null) {
+              <li><a href="@routes.EditProject.index(user.getGroup().getProject().getId(), routes.ProjectList.index().toString())"><i class="large material-icons left" style="line-height: inherit;">settings_applications</i>Edit&nbsp;Project</a></li>
             }
             <li><a href="@routes.RateCalculator.index()"><i class="medium mdi-editor-insert-chart left"></i>Rating&nbsp;Result</a></li>
             <li><a href="@routes.VoteController.showResult()"><i class="medium mdi-action-class left"></i>Voting&nbsp;Result</a></li>
