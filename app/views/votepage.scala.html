@@ -1,150 +1,48 @@
-@(user : User)(userId: Long)(projects: List[Project])(voteMapping: Map[VoteCriterion,Long])(criteria: List[VoteCriterion])(isTimeUp: Boolean)
+@(user : User)(projects: List[Project])(voteMapping: Map[VoteCriterion,Long])(criteria: List[VoteCriterion])
 @import java.math.BigInteger; var selected = 0; var numOfUnread = Inbox.findNumOfUnreadByReceiver(user); var comments = Inbox.findAllByReceiver(user);
-<!DOCTYPE html>
+@tmp(user, comments){
+    <div class="container" style="padding: 4.5rem 1.5rem 0 1.5rem;">
+        <div class="animated fadeInDown">
+            <h5 class="trigger-text pageBanner center-align">Vote your Best</h5>
+        </div>
+        <div class="divider"></div>
 
-<html style="height: 100%;">
-    <head>
-        <title>Exceed Vote</title>
-        <link rel="stylesheet" media="screen" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.96.1/css/materialize.min.css">
-        <link rel="stylesheet" media="screen" href="@routes.Assets.at("stylesheets/animate.css")">
-        <link rel="stylesheet" media="screen" href="@routes.Assets.at("stylesheets/votepage.css")">
-        <link rel="stylesheet" media="screen" href="@routes.Assets.at("stylesheets/init.css")">
-        <link rel="icon" type="image/png" href="@routes.Assets.at("img/favicon.png")">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
-    </head>
-    <body style="height: 100%;">
-        <nav class="teal lighten-1 trigger large" id="head">
-            <div class="container">
-                <div class="nav-wrapper">
-                    <a href="@routes.Application.index()" class="brand-logo"><span class="glyphicon glyphicon-ice-lolly-tasted logo" aria-hidden="true"></span><span style="font-size: 2rem; top: 10px;">eXceed</span></a>
-                    <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="mdi-navigation-menu"></i></a>
-                    <div class="center">
-                        <ul class="right hide-on-med-and-down">
-                            <li><a href="@routes.ProjectList.index()"><i class="medium mdi-navigation-arrow-back left"></i>Back</a></li>
-                            @if(numOfUnread == 0) {
-                                <li><a href="#!" id="inbox" class="dropdown-button backgroud-link" data-activates='inbox_message'><i id="i-inbox" class="medium mdi-communication-forum center badge"></i></a></li>
-                            }else{
-                                <li><a href="#!" id="inbox" class="dropdown-button backgroud-link" data-activates='inbox_message'><i id="i-inbox" class="medium mdi-communication-forum center badge" data-badge="@numOfUnread"></i></a></li>
-                            }
-                            <ul id='inbox_message' class='dropdown-content inbox-message'>
-                                <div id='inbox-message-arrow' class="pointer"></div>
-                                <div id="scrollbar-message" class="mousescroll">
-                                    @comments.map{ comment =>
-                                        @if(comment.isRead==Inbox.UNREAD) {
-                                            <li class="inbox-li collection-item tooltipped" id="inbox-id-@comment.getId" inbox-id="@comment.getId" data-position="left" data-delay="50" data-tooltip="Make as read">
-                                                <i class="mdi-content-markunread left" id="icon-inbox-@comment.getId" style="margin-right : -10px ; padding-left : 10px ;"></i>
-                                                <a href="#!">@comment.getComment.getComment <br /> <span class="secondary-text">
-                                                    from @comment.getComment.getUser.getUsername @comment.getTimestamp</span></a>
-                                            </li>
-                                            <li class="divider"></li>
-                                        }else{
-                                            <li class="inbox-li collection-item tooltipped" id="inbox-id-@comment.getId" inbox-id="@comment.getId" data-position="left" data-delay="50" data-tooltip="Make as unread">
-                                                <i class="mdi-content-drafts left" id="icon-inbox-@comment.getId" style="margin-right : -10px ; padding-left : 10px ;"></i>
-                                                <a href="#!">@comment.getComment.getComment <br /> <span class="secondary-text">
-                                                    from @comment.getComment.getUser.getUsername @comment.getTimestamp</span></a>
-                                            </li>
-                                            <li class="divider"></li>
-                                        }
+        <div class="section animated fadeIn">
+            @if(!Setting.isTimeUp()) {
+                @if(voteMapping.isEmpty) {
+                    <div class="row">
+                        <form action="@routes.VoteController.addVote()" method="post">
+                            @criteria.map { criterion =>
+                                <div class="section">
+                                    <h4 class="trigger-text ">@criterion.getName</h4>
+                                    <p>
+                                    @criterion.getDescription
+                                    </p>
+
+                                    <div class="row container">
+                                    @projects.map { project =>
+                                        <p>
+                                            <input class="with-gap" value="@project.getId" name="criterionId@criterion.getId" type="radio" id="@criterion.getId-@project.getId" />
+                                            <label for="@criterion.getId-@project.getId">@project.getProjectName</label>
+                                        </p>
                                     }
-                                    @if(comments.size == 0){
-                                        <li class="inbox-li"><a><span class="secondary-text">Inbox is empty.</span></a></li>
-                                    }
+                                    <input class="with-gap" value="-1" name="criterionId@criterion.getId" type="radio" id="@criterion.getId-novote" />
+                                    <label for="@criterion.getId-novote">No vote</label>
+                                    </div>
                                 </div>
-                            </ul>
-                            <li><a href="@routes.Application.logout()" class="backgroud-link"><i class="medium mdi-action-settings-power center"></i></a></li>
-                        </ul>
-                        <ul class="side-nav" id="mobile-demo" style="margin-right : -40 px;">
-                            <li><a href="@routes.ProjectList.index()"><i class="medium mdi-navigation-arrow-back left"></i>Back</a></li>
-                            @if(numOfUnread == 0) {
-                                <li><a id='inbox' href="@routes.Application.inboxMobile()" data-activates='inbox_message'><i class="medium mdi-communication-forum left badge"></i>Inbox</a></li>
-                            }else{
-                                <li><a id="inbox" href="@routes.Application.inboxMobile()" data-activates='inbox_message'><i class="medium mdi-communication-forum left badge" data-badge="@numOfUnread"></i>Inbox</a></li>
+                                <div class="divider"></div>
                             }
-                            <li><a href="@routes.Application.logout()"><i class="medium mdi-action-settings-power left"></i>Logout</a></li>
-                        </ul>
+                            <div class="section"></div>
+                            <button type="submit" class="waves-effect waves-light btn-large trigger"><i class="mdi-action-thumb-up right"></i>
+                                Vote</button>
+                        </form>
                     </div>
-                </div>
-            </div>
-        </nav>
-        <div class="container" style="padding: 4.5rem 1.5rem 0 1.5rem;">
-            <div class="animated fadeInDown">
-                <h5 class="trigger-text pageBanner center-align">Vote your Best</h5>
-            </div>
-            <div class="divider"></div>
-
-            <div class="section animated fadeIn">
-                @if(!isTimeUp) {
-                    @if(voteMapping.isEmpty) {
-                        <div class="row">
-                            <form action="@routes.VoteController.addVote()" method="post">
-                                @criteria.map { criterion =>
-                                    <div class="section">
-                                        <h4 class="trigger-text ">@criterion.getName</h4>
-                                        <p>
-                                        @criterion.getDescription
-                                        </p>
-
-                                        <div class="row container">
-                                        @projects.map { project =>
-                                            <p>
-                                                <input class="with-gap" value="@project.getId" name="criterionId@criterion.getId" type="radio" id="@criterion.getId-@project.getId" />
-                                                <label for="@criterion.getId-@project.getId">@project.getProjectName</label>
-                                            </p>
-                                        }
-                                        <input class="with-gap" value="-1" name="criterionId@criterion.getId" type="radio" id="@criterion.getId-novote" />
-                                        <label for="@criterion.getId-novote">No vote</label>
-                                        </div>
-                                    </div>
-                                    <div class="divider"></div>
-                                }
-                                <div class="section"></div>
-                                <button type="submit" class="waves-effect waves-light btn-large trigger"><i class="mdi-action-thumb-up right"></i>
-                                    Vote</button>
-                            </form>
-                        </div>
-                    } else {
-                        <div class="row">
-                            <form action="@routes.VoteController.editVote()" method="post">
-                                @criteria.map { criterion =>
-                                    <div class="section">
-                                        <h4 class="trigger-text ">@criterion.getName</h4>
-                                        <p>
-                                        @criterion.getDescription
-                                        </p>
-                                        <div class="row container">
-                                        @projects.map { project =>
-                                            <p>
-                                                @if(voteMapping.get(criterion) == project.getId) {
-                                                    <input class="with-gap" value="@project.getId" name="criterionId@criterion.getId" type="radio" id="@criterion.getId-@project.getId" checked/>
-                                                    <label for="@criterion.getId-@project.getId">@project.getProjectName</label>
-                                                } else {
-                                                    <input class="with-gap" value="@project.getId" name="criterionId@criterion.getId" type="radio" id="@criterion.getId-@project.getId"/>
-                                                    <label for="@criterion.getId-@project.getId">@project.getProjectName</label>
-                                                }
-                                            </p>
-                                        }
-                                        @if(voteMapping.get(criterion) == -1) {
-                                            <input class="with-gap" value="-1" name="criterionId@criterion.getId" type="radio" id="@criterion.getId-novote" checked />
-                                            <label for="@criterion.getId-novote">No vote</label>
-                                        } else {
-                                            <input class="with-gap" value="-1" name="criterionId@criterion.getId" type="radio" id="@criterion.getId-novote" />
-                                            <label for="@criterion.getId-novote">No vote</label>
-                                        }
-                                        </div>
-                                    </div>
-                                    <div class="divider"></div>
-                                }
-                                <div class="section"></div>
-                                <button type="submit" class="waves-effect waves-light btn-large trigger"><i class="mdi-action-thumb-up right"></i>Edit</button>
-                            </form>
-                        </div>
-                    }
                 } else {
                     <div class="row">
                         <form action="@routes.VoteController.editVote()" method="post">
                             @criteria.map { criterion =>
                                 <div class="section">
-                                    <h4 class="trigger-text">@criterion.getName</h4>
+                                    <h4 class="trigger-text ">@criterion.getName</h4>
                                     <p>
                                     @criterion.getDescription
                                     </p>
@@ -152,19 +50,19 @@
                                     @projects.map { project =>
                                         <p>
                                             @if(voteMapping.get(criterion) == project.getId) {
-                                                <input disabled class="with-gap" value="@project.getId" name="criterionId@criterion.getId" type="radio" id="@criterion.getId-@project.getId" checked/>
+                                                <input class="with-gap" value="@project.getId" name="criterionId@criterion.getId" type="radio" id="@criterion.getId-@project.getId" checked/>
                                                 <label for="@criterion.getId-@project.getId">@project.getProjectName</label>
                                             } else {
-                                                <input disabled class="with-gap" value="@project.getId" name="criterionId@criterion.getId" type="radio" id="@criterion.getId-@project.getId"/>
+                                                <input class="with-gap" value="@project.getId" name="criterionId@criterion.getId" type="radio" id="@criterion.getId-@project.getId"/>
                                                 <label for="@criterion.getId-@project.getId">@project.getProjectName</label>
                                             }
                                         </p>
                                     }
                                     @if(voteMapping.get(criterion) == -1) {
-                                        <input disabled class="with-gap" value="-1" name="criterionId@criterion.getId" type="radio" id="@criterion.getId-novote" checked />
+                                        <input class="with-gap" value="-1" name="criterionId@criterion.getId" type="radio" id="@criterion.getId-novote" checked />
                                         <label for="@criterion.getId-novote">No vote</label>
                                     } else {
-                                        <input disabled class="with-gap" value="-1" name="criterionId@criterion.getId" type="radio" id="@criterion.getId-novote" />
+                                        <input class="with-gap" value="-1" name="criterionId@criterion.getId" type="radio" id="@criterion.getId-novote" />
                                         <label for="@criterion.getId-novote">No vote</label>
                                     }
                                     </div>
@@ -172,50 +70,64 @@
                                 <div class="divider"></div>
                             }
                             <div class="section"></div>
-                            <button disabled type="submit" class="waves-effect waves-light btn-large "><i class="mdi-action-thumb-up right"></i>Time is already up</button>
+                            <button type="submit" class="waves-effect waves-light btn-large trigger"><i class="mdi-action-thumb-up right"></i>Edit</button>
                         </form>
                     </div>
                 }
-            </div>
-
+            } else {
+                <div class="row">
+                    <form action="@routes.VoteController.editVote()" method="post">
+                        @criteria.map { criterion =>
+                            <div class="section">
+                                <h4 class="trigger-text">@criterion.getName</h4>
+                                <p>
+                                @criterion.getDescription
+                                </p>
+                                <div class="row container">
+                                @projects.map { project =>
+                                    <p>
+                                        @if(voteMapping.get(criterion) == project.getId) {
+                                            <input disabled class="with-gap" value="@project.getId" name="criterionId@criterion.getId" type="radio" id="@criterion.getId-@project.getId" checked/>
+                                            <label for="@criterion.getId-@project.getId">@project.getProjectName</label>
+                                        } else {
+                                            <input disabled class="with-gap" value="@project.getId" name="criterionId@criterion.getId" type="radio" id="@criterion.getId-@project.getId"/>
+                                            <label for="@criterion.getId-@project.getId">@project.getProjectName</label>
+                                        }
+                                    </p>
+                                }
+                                @if(voteMapping.get(criterion) == -1) {
+                                    <input disabled class="with-gap" value="-1" name="criterionId@criterion.getId" type="radio" id="@criterion.getId-novote" checked />
+                                    <label for="@criterion.getId-novote">No vote</label>
+                                } else {
+                                    <input disabled class="with-gap" value="-1" name="criterionId@criterion.getId" type="radio" id="@criterion.getId-novote" />
+                                    <label for="@criterion.getId-novote">No vote</label>
+                                }
+                                </div>
+                            </div>
+                            <div class="divider"></div>
+                        }
+                        <div class="section"></div>
+                        <button disabled type="submit" class="waves-effect waves-light btn-large "><i class="mdi-action-thumb-up right"></i>Time is already up</button>
+                    </form>
+                </div>
+            }
         </div>
 
-        <div class="fixed-action-btn animated bounceInUp" style="bottom: 45px; right: 40px;">
-            <a class="btn-floating btn-large trigger" href="@routes.ProjectList.index()">
-                <i class="large mdi-action-home waves-effect waves-light"></i>
-            </a>
-            <ul>
-                <li><a class="btn-floating red " href="@routes.Application.logout()"><i class="large mdi-action-settings-power"></i></a></li>
-                @if(user.getIdtype == User.ADMINISTRATOR){
-                        <li><a class="btn-floating yellow derken-1" href="@routes.AdminPage.index()"><i class="large mdi-action-settings waves-effect waves-light"></i></a></li>
-                    }
-            </ul>
-        </div>
+    </div>
 
-        <script src="http://code.jquery.com/jquery-2.1.3.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.96.1/js/materialize.min.js"></script>
-        <script src="@routes.Assets.at("javascripts/jquery-ui.js")"></script>
-        <script src="@routes.Assets.at("javascripts/jquery.scrollbar.js")"></script>
-        <script type="text/javascript" src="@routes.Assets.at("javascripts/init.js")"></script>
-        @if(flash.contains("vote_success")) {
-            <script type="text/javascript">
-            Materialize.toast('@flash.get("vote_success")', 4000)
-            </script>
-        }
-        @if(flash.contains("edit_success")) {
-            <script type="text/javascript">
-            Materialize.toast('@flash.get("edit_success")', 4000)
-            </script>
-        }
-        @if(flash.contains("vote_empty")) {
-            <script type="text/javascript">
-            Materialize.toast('@flash.get("vote_empty")', 4000)
-            </script>
-        }
-        @if(flash.contains("time_up")) {
-            <script type="text/javascript">
-            Materialize.toast('@flash.get("time_up")', 4000)
-            </script>
-        }
-    </body>
-</html>
+    <div class="fixed-action-btn animated bounceInUp" style="bottom: 45px; right: 40px;">
+        <a class="btn-floating btn-large trigger" href="@routes.ProjectList.index()">
+            <i class="large mdi-action-home waves-effect waves-light"></i>
+        </a>
+        <ul>
+            <li><a class="btn-floating red " href="@routes.Application.logout()"><i class="large mdi-action-settings-power"></i></a></li>
+            @if(user.getIdtype == User.ADMINISTRATOR){
+                    <li><a class="btn-floating yellow derken-1" href="@routes.AdminPage.index()"><i class="large mdi-action-settings waves-effect waves-light"></i></a></li>
+                }
+        </ul>
+    </div>
+}{
+    <link rel="stylesheet" media="screen" href="/assets/stylesheets/votepage.css">
+}{
+
+}

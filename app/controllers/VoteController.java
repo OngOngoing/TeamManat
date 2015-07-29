@@ -23,10 +23,10 @@ public class VoteController extends Controller {
         Map<VoteCriterion,Long> voteMapping = Vote.getVoteMappingByUser(thisUser);
         boolean isTimeUp = Setting.isTimeUp();
         if(isTimeUp) {
-            flash("time_up","Time is already up.");
+            flash("error","Time is already up.");
         }
         response().setHeader("Cache-Control","no-cache");
-        return ok(votepage.render(thisUser, userId, Project.findAll(), voteMapping, VoteCriterion.findAll(),isTimeUp));
+        return ok(votepage.render(thisUser, Project.findAll(), voteMapping, VoteCriterion.findAll()));
     }
 
     //@Security.Authenticated(Secured.class)
@@ -61,12 +61,12 @@ public class VoteController extends Controller {
         Long userId = Long.parseLong(session().get("userId"));
         User user = User.findByUserId(userId);
         if(Setting.isTimeUp()) {
-            flash("time_up","Time is already up. Sorry for the inconvenience.");
+            flash("error","Time is already up. Sorry for the inconvenience.");
             return redirect(routes.VoteController.index());
         }
         Map<String, String[]> map = request().body().asFormUrlEncoded();
         if(map.isEmpty()){
-            flash("vote_empty", "Please vote at least 1 criterion");
+            flash("error", "Please vote at least 1 criterion");
             return redirect(routes.VoteController.index());
         }
         for(VoteCriterion criterion : criteria) {
@@ -84,7 +84,7 @@ public class VoteController extends Controller {
                 }
             }
         }
-        flash("vote_success", "Vote submitted");
+        flash("success", "Vote submitted");
         response().setHeader("Cache-Control","no-cache");
         return redirect(routes.VoteController.index());
     }
@@ -94,7 +94,7 @@ public class VoteController extends Controller {
         Long userId = Long.parseLong(session().get("userId"));
         User user = User.findByUserId(userId);
         if(Setting.isTimeUp()) {
-            flash("time_up","Time is already up. Sorry for the inconvenience.");
+            flash("error","Time is already up. Sorry for the inconvenience.");
             return redirect(routes.VoteController.index());
         }
 

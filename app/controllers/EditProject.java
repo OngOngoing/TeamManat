@@ -133,7 +133,7 @@ public class EditProject extends Controller {
             _pro.delete();
             Logger.info("Project ("+proId+")"+name+" is deleted");
         }
-        flash("d_success", "Project is successfully deleted");
+        flash("success", "Project is successfully deleted");
         return redirect(routes.ProjectList.index());
     }
     @Security.Authenticated(Secured.class)

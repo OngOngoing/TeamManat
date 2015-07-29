@@ -130,9 +130,9 @@
     <script src="@routes.Assets.at("javascripts/Markdown.Converter.js")"></script>
     <script src="@routes.Assets.at("javascripts/Markdown.Sanitizer.js")"></script>
     @js
-    @if(flash.contains("d_success")) {
+    @if(flash.contains("success")) {
       <script type="text/javascript">
-        Materialize.toast('<i class="mdi-action-done green-text small"></i><span style="padding-left: 5px">@flash.get("d_success")', 4000)
+        Materialize.toast('<i class="mdi-action-done green-text small"></i><span style="padding-left: 5px">@flash.get("success")', 4000)
         </script>
     }
     @if(flash.contains("error")) {

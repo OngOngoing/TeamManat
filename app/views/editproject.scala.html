@@ -253,11 +253,6 @@
             </form>
         </div>
     </div>
-    @if(flash.contains("up_success")) {
-        <script type="text/javascript">
-        Materialize.toast ( '<i class="mdi-file-cloud-upload green-text small"></i><span style="padding-left: 5px">@flash.get("success")</span>', 4000)
-        </script>
-    }
 }{
     <link rel="stylesheet" media="screen" href="@routes.Assets.at("stylesheets/editproject.css")">
     <link rel="stylesheet" media="screen" href="@routes.Assets.at("stylesheets/upload.css")">
