@@ -19,12 +19,12 @@
             <nav class="navbar navbar-default" id="head">
                 <div class="container-fluid">
                     <div class="navbar-header">
-                        <a class="navbar-brand" href="@routes.Application.index()" link-to="#index-banner">
+                        <a class="navbar-brand hidden-xs" href="@routes.Application.index()" link-to="#index-banner">
                             <span class="logo">e</span>
                             <img src="@routes.Assets.at("img/xb.png")" style="width: auto; height: 30px; margin-top: -5px;">
                             <span class="logo">ceed</span>
                         </a>
-                        <div class="count-down col-sm-offset-4 col-sm-4 text-center" id="countdown" end-date="@Setting.getTime()"></div>
+                        <div class="count-down col-xs-offset-2 col-xs-8 col-sm-offset-4 col-sm-4 text-center" id="countdown" end-date="@Setting.getTime()"></div>
                     </div>
                     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                         <ul class="nav navbar-nav navbar-right">
@@ -73,9 +73,9 @@
                 </div>
             </nav>
 
-            @content
 
-            <div class="navbar navbar-default">
+
+            <div class="navbar navbar-default footer">
                 <div class="container">
                     <div class="navbar-text pull-left">eXceed Vote - power by TeamManat.</div>
                 </div>
