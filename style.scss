@@ -1,4 +1,56 @@
 @import "bower_components/bootstrap-sass/assets/stylesheets/bootstrap";
-body{
+
+$white: #eee;
+$dark: #5b5b65;
+$light-green: #111;
+
+$space: 8px;
+
+body {
   height: 100%;
+}
+
+.container {
+  background-color: #455a64;
+  padding: 0;
+}
+
+.count-down {
+  position: absolute;
+  width: 100%;
+  left: 0;
+  text-align: center;
+}
+
+.navbar {
+  margin: 0;
+}
+
+.page-footer {
+  background-color: $dark;
+  padding: 10px 0;
+  color: $white;
+}
+
+
+.progress-circle {
+  width: 50%;
+  height: auto;
+}
+
+.row {
+  margin-left: -$space;
+  margin-right: -$space;
+}
+
+.card {
+  @extend .text-center;
+  background-color: #fefefe;
+  box-shadow: 0 1px 3px #787887;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  border-style: solid none none none;
+  padding: 20px;
+  margin: $space 0;
+  width: calc(100% - #{$space} - #{$space});
 }

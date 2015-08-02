@@ -1,5 +1,5 @@
 $(document).ready(function(){
-    $(".button-collapse").sideNav();
+    //$(".button-collapse").sideNav();
     $('.dropdown-button').dropdown({
         inDuration: 0,
         belowOrigin: true,
