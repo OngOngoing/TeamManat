@@ -168,7 +168,6 @@ html, body {
   position: absolute;
   width: 100%;
   padding-left: 20px;
-  height: 100%;
 }
 .rate-btn {
   -webkit-border-radius: 7;
@@ -185,4 +184,10 @@ html, body {
 .rate-btn:hover {
   background: #5a8f78;
   text-decoration: none;
+}
+
+.page-header {
+  margin-top: 20px;
+  margin-bottom: 0px;
+  padding-bottom: -30px;
 }
