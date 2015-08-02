@@ -82,3 +82,29 @@ body {
     vertical-align: middle;
   }
 }
+
+.carousel-inner {
+  .item {
+    img {
+      max-width: 450px;
+    }
+  }
+}
+
+.carousel-control.right, .carousel-control.left {
+  background-image: none;
+}
+
+.carousel-control {
+  color: #757575;
+}
+
+
+.carousel-indicators {
+  li {
+    border: 1px solid #757575;
+  }
+  .active {
+    background-color: #757575;
+  }
+}

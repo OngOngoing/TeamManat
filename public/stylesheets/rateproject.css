@@ -26,10 +26,13 @@
   $ANIMATIONS
 \*-----------------------------------*/
 
-.slider .slides{
+.carousel-inner>.item {
     background: url('../img/no_image.png') no-repeat center;
     background-size:  contain;
     height: 450px;
+}
+.carousel-inner>.item>img {
+    max-height: 450px;
 }
 .slider .indicators .indicator-item {
     background-color: #757575 ;

@@ -17,3 +17,4 @@ bower_components
 node_modules
 .sass-cache
 conf/application.conf
+public/stylesheets/style.min.css
