@@ -34,4 +34,4 @@ gulp.task('watch-withoutjs', function () {
     gulp.watch(scss_file, ['scss'])
 })
 
-gulp.task('default', ['watch-withoutjs'])
+gulp.task('default', ['watch-withoutjs', 'scss'])
