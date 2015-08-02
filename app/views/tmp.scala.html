@@ -19,6 +19,12 @@
             <nav class="navbar navbar-default" id="head">
                 <div class="container-fluid">
                     <div class="navbar-header">
+                        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-menu" aria-expanded="false">
+                            <span class="sr-only">Toggle navigation</span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
                         <a class="navbar-brand hidden-xs" href="@routes.Application.index()" link-to="#index-banner">
                             <span class="logo">e</span>
                             <img src="@routes.Assets.at("img/xb.png")" style="width: auto; height: 30px; margin-top: -5px;">
@@ -26,7 +32,46 @@
                         </a>
                         <div class="count-down col-xs-offset-2 col-xs-8 col-sm-offset-4 col-sm-4 text-center" id="countdown" end-date="@Setting.getTime()"></div>
                     </div>
-                    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                    <div class=" visible-xs-block">
+                        <div class="collapse navbar-collapse" id="bs-menu">
+                            <ul class="nav navbar-nav navbar-right">
+                                @if(user.getIdtype() == User.ADMINISTRATOR) {
+                                    <li>
+                                        <a href="@routes.AdminPage.index()">
+                                            <span class="glyphicon glyphicon-cog" aria-hidden="true"></span> Admin&nbsp;Panel
+                                        </a>
+                                    </li>
+                                }
+                                @if(user.getGroup() != null) {
+                                    <li>
+                                        <a href="@routes.EditProject.index(user.getGroup().getProject().getId(), routes.ProjectList.index().toString())">
+                                            <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span> Edit&nbsp;Project
+                                        </a>
+                                    </li>
+                                    <li role="separator" class="divider"></li>
+                                }
+                                @if(Setting.isTimeUp || user.getIdtype() == User.ADMINISTRATOR) {
+                                    <li>
+                                        <a href="@routes.RateCalculator.index()">
+                                            <span class="glyphicon glyphicon-signal" aria-hidden="true"></span> Rating&nbsp;Result
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="@routes.VoteController.showResult()">
+                                            <span class="glyphicon glyphicon-stats" aria-hidden="true"></span> Voting&nbsp;Result
+                                        </a>
+                                    </li>
+                                    <li role="separator" class="divider"></li>
+                                }
+                                <li>
+                                    <a href="@routes.Application.logout()">
+                                        <span class="glyphicon glyphicon-off" aria-hidden="true"></span> Logout
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="collapse navbar-collapse">
                         <ul class="nav navbar-nav navbar-right">
                             <!-- Inbox -->
                             <li class="dropdown">
@@ -73,7 +118,7 @@
                 </div>
             </nav>
 
-
+            @content
 
             <div class="navbar navbar-default footer">
                 <div class="container">
