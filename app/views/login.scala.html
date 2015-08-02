@@ -1,90 +1,62 @@
-@(username:String)(timeUp : Boolean)
+@(username: String)(timeUp: Boolean)
 
 <!DOCTYPE html>
 
 <html>
     <head>
-        <title>Exceed Vote Login Page</title>
+        <title>eXceed Vote</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
         <link rel="stylesheet" media="screen" href="@routes.Assets.at("stylesheets/animate.css")">
         <link rel="stylesheet" media="screen" href="@routes.Assets.at("stylesheets/login.css")">
         <link rel="icon" type="image/png" href="@routes.Assets.at("img/favicon.png")">
         <link href='http://fonts.googleapis.com/css?family=Work+Sans:400,700' rel='stylesheet' type='text/css'>
-        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+        <link href='http://fonts.googleapis.com/css?family=Quicksand:300' rel='stylesheet' type='text/css'>
     </head>
     <body>
-        <section id="login-window" class="colorBg5 colorBg login-window ">
-            <div class="container animated zoomIn">
-                <div class="wrap">
-                    <div class="form-wrap">
-                        <div class="row">
-                            <div class="row text-center">
-                                <span class="glyphicon glyphicon-ice-lolly-tasted logo" aria-hidden="true"></span>
-                                <span class="text-center logo-text">eXceed</span>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <form action="./login" method="post">
-                                <div class="form-inline form-group">
-                                    <label for="username">Username</label>
-                                    <input id="username" name="username" type="text" class="form-control" placeholder="Username" value="@username">
-                                </div>
-                                <div class="form-inline form-group">
-                                    <label for="password">Password</label>
-                                    <input id="password" name="password" type="password" class="form-control" placeholder="Password">
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-4"></div>
-                                    <div class="col-md-4">
-                                        <button type="submit" name="action" class="btn btn-block signup">Login</button>
-                                    </div>
-                                    <div class="col-md-4"></div>
-                                </div>
-                            </form>
-                                @*<div class="row">*@
-                                    @*<div class="col-md-4"></div>*@
-                                    @*<div class="col-md-4" style="text-align: center;">*@
-                                        @*<a role="button" href="/ratecalculator" class="btn signup btn-block" style="margin-top: 1%; background: #fb8c00; ">*@
-                                            @*Rating&nbsp;Result*@
-                                            @*<span class="glyphicon glyphicon-menu-right" aria-hidden="true"></span>*@
-                                        @*</a>*@
-                                    @*</div>*@
-                                    @*<div class="col-md-4"></div>*@
-                                @*</div>*@
-                                @*<div class="row">*@
-                                    @*<div class="col-md-4"></div>*@
-                                    @*<div class="col-md-4" style="text-align: center;">*@
-                                        @*<a role="button" href="/vote/result" class="btn signup btn-block" style="margin-top: 1%; background: #0277bd;">*@
-                                            @*Voting&nbsp;Result*@
-                                            @*<span class="glyphicon glyphicon-menu-right" aria-hidden="true"></span>*@
-                                        @*</a>*@
-                                    @*</div>*@
-                                    @*<div class="col-md-4"></div>*@
-                                @*</div>*@
-                        </div>
-                            @if(flash.contains("error")) {
-                                <div class="row" style="padding-top: 10px;">
-                                    <div class="alert alert-danger" role="alert">
-                                        <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
-                                        <span class="sr-only">Error:</span>
-                                        @flash.get("error")
-                                    </div>
-                                </div>
-                            }
-                            @if(flash.contains("success")) {
-                                <div class="row" style="padding-top: 10px;">
-                                    <div class="alert alert-success-colorized" role="alert">
-                                        <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
-                                        <span class="sr-only">Error:</span>
-                                        @flash.get("success")
-                                    </div>
-                                </div>
-                            }
-                        </div>
+        <div class="container">
+            @*<div class="container animated zoomIn">*@
+            @*<div class="wrap">*@
+            @*<div class="form-wrap">*@
+            <div class="row">
+                <div class="col-lg-6 col-lg-offset-3 col-md-6 col-md-offset-3 col-sm-10 col-sm-offset-1 col-xs-10 col-xs-offset-1 card">
+                    <div class="text-center">
+                        <span class="logo">e</span>
+                        @*<span class="x"></span>*@
+                        <img src="@routes.Assets.at("img/x.png")" style="width: 80px; height: auto;">
+                        <span class="logo">ceed12</span>
+                        @*<span class="tw">12</span>*@
                     </div>
+
+                    <form action="./login" method="post">
+                        <div class="form-group">
+                            <input id="username" name="username" type="text" class="form-control" placeholder="Username" value="@username">
+                            <input id="password" name="password" type="password" class="form-control" placeholder="Password">
+                        </div>
+                        <button type="submit" name="action" class="btn btn-block login">Login</button>
+                    </form>
+
+                    @if(flash.contains("error")) {
+                        <div class="alert alert-danger flash" role="alert">
+                            <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+                            <span class="sr-only">Error:</span>
+                            @flash.get("error")
+                        </div>
+                    }
+                    @if(flash.contains("success")) {
+                        <div class="alert alert-success-colorized flash" role="alert">
+                            <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+                            <span class="sr-only">Error:</span>
+                            @flash.get("success")
+                        </div>
+                    }
+
+                </div>
             </div>
-        </section>
+        </div>
+        @*</div>*@
+        @*</div>*@
         <script src="http://code.jquery.com/jquery-2.1.3.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
         <script async defer id="github-bjs" src="https://buttons.github.io/buttons.js"></script>
