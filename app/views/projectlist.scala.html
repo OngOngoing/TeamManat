@@ -28,23 +28,27 @@
             </div>
             <div class="row">
                 <div class="col-sm-6 col-md-6 block text-center">
-                    <div class="card">
+                    <div class="vote-card">
                     @if(Setting.isTimeUp()) {
-                        <a link-to="@routes.RateCalculator.index()" class="linkable card-panel full-size waves-effect content-hoverable hide-on-large-only" href="#project-list">
+                        <a link-to="@routes.RateCalculator.index()" href="#project-list">
                             <div class="center promo promo-example">
                                 <p class="promo-caption flow-text"><img src="@routes.Assets.at("img/trophy.svg")" height="50" widtgh="50"></p>
                                 <label>Rate Result</label>
                             </div>
                         </a>
                     } else {
-                        <a class="linkable card-panel full-size waves-effect content-hoverable hide-on-large-only" href="@routes.RateCalculator.index()">
+                        <a href="@routes.RateCalculator.index()">
                             <div class="center promo promo-example">
                             @if(projectsLeft == 0) {
-                                <p class="promo-caption flow-text"><i class="teal-text badge mdi-action-done"></i>
-                                    Rate</p>
+                                <h2 class="promo-caption flow-text">
+                                    <i class="teal-text badge mdi-action-done"></i>
+                                    Rate
+                                </h2>
                                 <p class="teal-text darken-2 light center">COMPLETED</p>
                             } else {
-                                <p class="promo-caption flow-text"><i class="badge mdi-action-grade"></i>Rate</p>
+                                <h2 class="promo-caption flow-text"><i class="badge mdi-action-grade"></i>
+                                    Rate
+                                </h2>
                                 @if(projectsLeft == 1) {
                                     <p class="pink-text darken-2 light center">1 project left</p>
                                 }
@@ -58,24 +62,26 @@
                     </div>
                 </div>
                 <div class="col-sm-6 col-md-6 block text-center">
-                    <div class="card">
+                    <div class="vote-card">
                     @if(Setting.isTimeUp()) {
-                        <a class="card-panel full-size waves-effect content-hoverable hide-on-med-and-down" href="@routes.VoteController.showResult()">
+                        <a href="@routes.VoteController.showResult()">
                             <div class="center promo promo-example">
                                 <p class="promo-caption flow-text"><img src="@routes.Assets.at("img/trophy.svg")" height="50" widtgh="50"></p>
                                 <p class="center">Vote Result</p>
                             </div>
                         </a>
                     } else {
-                        <a class="card-panel full-size waves-effect content-hoverable hide-on-med-and-down" href="@routes.VoteController.index()">
+                        <a href="@routes.VoteController.index()">
                             <div class="center promo promo-example">
                             @if(votesLeft == 0) {
-                                <p class="promo-caption flow-text"><i class="teal-text badge mdi-action-done"></i>
-                                    Vote</p>
+                                <h2 class="promo-caption flow-text"><i class="teal-text badge mdi-action-done"></i>
+                                    Vote
+                                </h2>
                                 <p class="teal-text darken-2 light center">COMPLETED</p>
                             } else {
-                                <p class="promo-caption flow-text"><i class="badge mdi-editor-insert-chart"></i>
-                                    Vote</p>
+                                <h2 class="promo-caption flow-text"><i class="badge mdi-editor-insert-chart"></i>
+                                    Vote
+                                </h2>
                                 @if(votesLeft == 1) {
                                     <p class="pink-text darken-2 light center">1 criterion left</p>
                                 }
