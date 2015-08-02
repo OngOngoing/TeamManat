@@ -3,105 +3,102 @@
 
 @tmp(currentUser, comments) {
 
-    <div class="z-depth-1">
-        <section id="index-banner">
-            <div class="container animated fadeIn">
-                <div class="row">
-                    <div class="col-sm-8 col-md-8">
-                    @if(votesLeft + projectsLeft == 0) {
-                        <p class="flow-text teal-text"><b>Congratulation!</b></p>
-                        <p class="flow-text">You have successfully completed the eXceed Vote.</p>
+	@*animated fadeIn*@
+	<div id="index-banner" class="container page">
+		<div class="row">
+			<div class="col-sm-8 col-md-8 block info">
+                @if(votesLeft + projectsLeft == 0) {
+                    <p class="flow-text teal-text"><b>Congratulation!</b></p>
+                    <p class="flow-text">You have successfully completed the eXceed Vote.</p>
+                } else {
+                    <h4 class="teal-text hide-on-large-only">Welcome</h4>
+                    @if(votesLeft == 0 || projectsLeft == 0) {
+                        <p class="flow-text">You need only 1 more step to complete the eXceed vote</p>
                     } else {
-                        <h4 class="teal-text hide-on-large-only">Welcome</h4>
-                        @if(votesLeft == 0 || projectsLeft == 0) {
-                            <p class="flow-text">You need only 1 more step to complete the eXceed vote</p>
-                        } else {
-                            <p class="flow-text">There are 2 more steps left to complete the eXceed vote</p>
-                        }
+                        <p class="flow-text">There are 2 more steps left to complete the eXceed vote</p>
                     }
-                    </div>
-                    <div class="col-sm-4 col-md-4">
-                        <div class="progress-padding">
-                            <div class="progress-circle" id="progress-circle" value="@progress"></div>
+                }
+			</div>
+			<div class="col-sm-4 col-sm-offset-8 col-md-4 col-md-offset-8">
+				<div class="progress-padding">
+					<div class="progress-circle" id="progress-circle" value="@progress"></div>
+				</div>
+			</div>
+        </div>
+		<div class="row">
+            <div class="col-sm-6 col-md-6 block text-center">
+                <div class="card">
+                @if(Setting.isTimeUp()) {
+                    <a link-to="@routes.RateCalculator.index()" class="linkable card-panel full-size waves-effect content-hoverable hide-on-large-only" href="#project-list">
+                        <div class="center promo promo-example">
+                            <p class="promo-caption flow-text"><img src="@routes.Assets.at("img/trophy.svg")" height="50" widtgh="50"></p>
+                            <p class="center">Rate Result</p>
                         </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-sm-6 col-md-6">
-                            <div class="card">
-                                @if(Setting.isTimeUp()) {
-                                    <a link-to="@routes.RateCalculator.index()" class="linkable card-panel full-size waves-effect content-hoverable hide-on-large-only" href="#project-list">
-                                        <div class="center promo promo-example">
-                                            <p class="promo-caption flow-text"><img src="@routes.Assets.at("img/trophy.svg")" height="50" widtgh="50"></p>
-                                            <p class="center">Rate Result</p>
-                                        </div>
-                                    </a>
-                                } else {
-                                    <a class="linkable card-panel full-size waves-effect content-hoverable hide-on-large-only" href="@routes.RateCalculator.index()">
-                                        <div class="center promo promo-example">
-                                        @if(projectsLeft == 0) {
-                                            <p class="promo-caption flow-text"><i class="teal-text badge mdi-action-done"></i>
-                                                Rate</p>
-                                            <p class="teal-text darken-2 light center">COMPLETED</p>
-                                        } else {
-                                            <p class="promo-caption flow-text"><i class="badge mdi-action-grade"></i>Rate</p>
-                                            @if(projectsLeft == 1) {
-                                                <p class="pink-text darken-2 light center">1 project left</p>
-                                            }
-                                            @if(projectsLeft > 1) {
-                                                <p class="pink-text darken-2 light center">@projectsLeft projects left</p>
-                                            }
-                                        }
-                                        </div>
-                                    </a>
-                                }
-                            </div>
+                    </a>
+                } else {
+                    <a class="linkable card-panel full-size waves-effect content-hoverable hide-on-large-only" href="@routes.RateCalculator.index()">
+                        <div class="center promo promo-example">
+                        @if(projectsLeft == 0) {
+                            <p class="promo-caption flow-text"><i class="teal-text badge mdi-action-done"></i>
+                                Rate</p>
+                            <p class="teal-text darken-2 light center">COMPLETED</p>
+                        } else {
+                            <p class="promo-caption flow-text"><i class="badge mdi-action-grade"></i>Rate</p>
+                            @if(projectsLeft == 1) {
+                                <p class="pink-text darken-2 light center">1 project left</p>
+                            }
+                            @if(projectsLeft > 1) {
+                                <p class="pink-text darken-2 light center">@projectsLeft projects left</p>
+                            }
+                        }
                         </div>
-                        <div class="col-sm-6 col-md-6">
-                            <div class="card">
-                                @if(Setting.isTimeUp()) {
-                                    <a class="card-panel full-size waves-effect content-hoverable hide-on-med-and-down" href="@routes.VoteController.showResult()">
-                                        <div class="center promo promo-example">
-                                            <p class="promo-caption flow-text"><img src="@routes.Assets.at("img/trophy.svg")" height="50" widtgh="50"></p>
-                                            <p class="center">Vote Result</p>
-                                        </div>
-                                    </a>
-                                } else {
-                                    <a class="card-panel full-size waves-effect content-hoverable hide-on-med-and-down" href="@routes.VoteController.index()">
-                                        <div class="center promo promo-example">
-                                        @if(votesLeft == 0) {
-                                            <p class="promo-caption flow-text"><i class="teal-text badge mdi-action-done"></i>
-                                                Vote</p>
-                                            <p class="teal-text darken-2 light center">COMPLETED</p>
-                                        } else {
-                                            <p class="promo-caption flow-text"><i class="badge mdi-editor-insert-chart"></i>
-                                                Vote</p>
-                                            @if(votesLeft == 1) {
-                                                <p class="pink-text darken-2 light center">1 criterion left</p>
-                                            }
-                                            @if(votesLeft > 1) {
-                                                <p class="pink-text darken-2 light center">@votesLeft criteria left</p>
-                                            }
-                                        }
-                                        </div>
-                                    </a>
-                                }
-                            </div>
-                        </div>
-                    </div>
+                    </a>
+                }
                 </div>
             </div>
-        </section>
+            <div class="col-sm-6 col-md-6 block text-center">
+                <div class="card">
+                @if(Setting.isTimeUp()) {
+                    <a class="card-panel full-size waves-effect content-hoverable hide-on-med-and-down" href="@routes.VoteController.showResult()">
+                        <div class="center promo promo-example">
+                            <p class="promo-caption flow-text"><img src="@routes.Assets.at("img/trophy.svg")" height="50" widtgh="50"></p>
+                            <p class="center">Vote Result</p>
+                        </div>
+                    </a>
+                } else {
+                    <a class="card-panel full-size waves-effect content-hoverable hide-on-med-and-down" href="@routes.VoteController.index()">
+                        <div class="center promo promo-example">
+                        @if(votesLeft == 0) {
+                            <p class="promo-caption flow-text"><i class="teal-text badge mdi-action-done"></i>
+                                Vote</p>
+                            <p class="teal-text darken-2 light center">COMPLETED</p>
+                        } else {
+                            <p class="promo-caption flow-text"><i class="badge mdi-editor-insert-chart"></i>
+                                Vote</p>
+                            @if(votesLeft == 1) {
+                                <p class="pink-text darken-2 light center">1 criterion left</p>
+                            }
+                            @if(votesLeft > 1) {
+                                <p class="pink-text darken-2 light center">@votesLeft criteria left</p>
+                            }
+                        }
+                        </div>
+                    </a>
+                }
+                </div>
+            </div>
+        </div>
     </div>
 
-    <section id="project-list">
-        <div class="container animated fadeIn" style="padding : 1 rem 0 0 0 ;">
-                <!-- Page Content goes here -->
-            @projects.map { project =>
-                @{
-                    criteriaLeft = ratingCriteria.size - mappedRates.get(project.getId)
-                }
-                <div class="row">
-                    <div class="col s12">
+	<div id="project-list" class="container page">
+				<!-- Page Content goes here -->
+        @projects.map { project =>
+            @{
+                criteriaLeft = ratingCriteria.size - mappedRates.get(project.getId)
+            }
+            <div class="row animated fadeIn">
+                <div class="col-sm-12 block">
+                    <div class="card">
                         <a href="@routes.RateProject.index(project.getId)">
                             <div class="card-app hoverable waves-effect waves-block z-depth-1">
                                 <div class="img-container">
@@ -110,7 +107,7 @@
                                     </div>
                                 </div>
                                 <div class="row">
-                                    <div class="col s12 m12">
+                                    <div class="col-sm-12 col-md-12">
                                         <div class="app-banner">@project.getProjectName</div>
                                         @if(mappedRates.get(project.getId) == 0) {
                                             <div class="info red-text text-darken-1">NOT YET RATED</div>
@@ -130,18 +127,18 @@
                         </a>
                     </div>
                 </div>
-            }
-        </div>
-    </section>
-    <!-- End of Page Content -->
+            </div>
+        }
+	</div>
+	<!-- End of Page Content -->
 
-    <div class="fixed-action-btn animated bounceInUp">
-        <a class="btn-floating linkable btn-large trigger" href="@routes.Application.index()" link-to="#index-banner">
-            <i class="large mdi-hardware-keyboard-arrow-up waves-effect waves-light"></i>
-        </a>
-    </div>
+	<div class="fixed-action-btn animated bounceInUp">
+		<a class="btn-floating linkable btn-large trigger" href="@routes.Application.index()" link-to="#index-banner">
+			<i class="large mdi-hardware-keyboard-arrow-up waves-effect waves-light"></i>
+		</a>
+	</div>
 } {
-    <link rel="stylesheet" media="screen" href="@routes.Assets.at("stylesheets/projectlist.css")">
+	<link rel="stylesheet" media="screen" href="@routes.Assets.at("stylesheets/projectlist.css")">
 } {
-    <script src="@routes.Assets.at("javascripts/projectlist.js")" type="text/javascript"></script>
+	<script src="@routes.Assets.at("javascripts/projectlist.js")" type="text/javascript"></script>
 }

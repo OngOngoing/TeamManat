@@ -4,15 +4,13 @@ $white: #eee;
 $dark: #5b5b65;
 $light-green: #111;
 
-$space: 8px;
+$space: 15px;
+$db_space: $space*2;
+
+$bootstrap-padding: 15px;
 
 body {
   height: 100%;
-}
-
-.container {
-  background-color: #455a64;
-  padding: 0;
 }
 
 .count-down {
@@ -32,25 +30,55 @@ body {
   color: $white;
 }
 
-
-.progress-circle {
-  width: 50%;
-  height: auto;
+.container {
+  padding: 0;
 }
 
-.row {
-  margin-left: -$space;
-  margin-right: -$space;
-}
+.page {
 
-.card {
-  @extend .text-center;
-  background-color: #fefefe;
-  box-shadow: 0 1px 3px #787887;
-  border: 1px solid #ddd;
-  border-radius: 8px;
-  border-style: solid none none none;
-  padding: 20px;
-  margin: $space 0;
-  width: calc(100% - #{$space} - #{$space});
+  margin-top: 30px;
+  vertical-align: middle;
+
+  .progress-circle {
+    width: 100%;
+    height: auto;
+  }
+
+
+  .row {
+    margin-left: -$space;
+    margin-right: -$space;
+
+  }
+
+  .card {
+    background-color: #fefefe;
+    box-shadow: 0 1px 3px #787887;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    border-style: solid none none none;
+    padding: 20px;
+    margin-top: $space;
+    width: 100%;
+
+    a {
+      font-size: 2rem;
+    }
+
+    a:hover {
+      font-style: normal;
+    }
+  }
+
+  .block {
+    margin-left: $space -$bootstrap-padding;
+    margin-right: $space -$bootstrap-padding;
+  }
+
+  .info {
+    height: 100%;
+    position: absolute;
+    display: table-cell;
+    vertical-align: middle;
+  }
 }
