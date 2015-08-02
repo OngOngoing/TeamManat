@@ -1,9 +1,9 @@
 @(user : User)(projects: List[Project])(voteMapping: Map[VoteCriterion,Long])(criteria: List[VoteCriterion])
 @import java.math.BigInteger; var selected = 0; var numOfUnread = Inbox.findNumOfUnreadByReceiver(user); var comments = Inbox.findAllByReceiver(user);
 @tmp(user, comments){
-    <div class="container" style="padding: 4.5rem 1.5rem 0 1.5rem;">
-        <div class="animated fadeInDown">
-            <h5 class="trigger-text pageBanner center-align">Vote your Best</h5>
+    <div class="container" style="padding: 0.5rem 1.5rem 0 4rem;">
+        <div class="animated fadeInDown page-header">
+            <h2 class="text-center"> Vote your Best</h2>
         </div>
         <div class="divider"></div>
 
@@ -14,27 +14,24 @@
                         <form action="@routes.VoteController.addVote()" method="post">
                             @criteria.map { criterion =>
                                 <div class="section">
-                                    <h4 class="trigger-text ">@criterion.getName</h4>
+                                    <h2 class="trigger-text ">@criterion.getName</h2>
                                     <p>
                                     @criterion.getDescription
                                     </p>
-
-                                    <div class="row container">
-                                    @projects.map { project =>
-                                        <p>
-                                            <input class="with-gap" value="@project.getId" name="criterionId@criterion.getId" type="radio" id="@criterion.getId-@project.getId" />
-                                            <label for="@criterion.getId-@project.getId">@project.getProjectName</label>
-                                        </p>
-                                    }
-                                    <input class="with-gap" value="-1" name="criterionId@criterion.getId" type="radio" id="@criterion.getId-novote" />
-                                    <label for="@criterion.getId-novote">No vote</label>
+                                    <div class="row">
+                                        @projects.map { project =>
+                                            <p>
+                                                <input value="@project.getId" name="criterionId@criterion.getId" type="radio" id="@criterion.getId-@project.getId" />
+                                                <label for="@criterion.getId-@project.getId">@project.getProjectName</label>
+                                            </p>
+                                        }
+                                        <input value="-1" name="criterionId@criterion.getId" type="radio" id="@criterion.getId-novote" />
+                                        <label for="@criterion.getId-novote">No vote</label>
                                     </div>
                                 </div>
-                                <div class="divider"></div>
                             }
                             <div class="section"></div>
-                            <button type="submit" class="waves-effect waves-light btn-large trigger"><i class="mdi-action-thumb-up right"></i>
-                                Vote</button>
+                            <button type="submit" class="btn"><i class="mdi-action-thumb-up right"></i>Vote</button>
                         </form>
                     </div>
                 } else {
@@ -42,11 +39,10 @@
                         <form action="@routes.VoteController.editVote()" method="post">
                             @criteria.map { criterion =>
                                 <div class="section">
-                                    <h4 class="trigger-text ">@criterion.getName</h4>
+                                    <h4 >@criterion.getName</h4>
                                     <p>
                                     @criterion.getDescription
                                     </p>
-                                    <div class="row container">
                                     @projects.map { project =>
                                         <p>
                                             @if(voteMapping.get(criterion) == project.getId) {
@@ -65,12 +61,9 @@
                                         <input class="with-gap" value="-1" name="criterionId@criterion.getId" type="radio" id="@criterion.getId-novote" />
                                         <label for="@criterion.getId-novote">No vote</label>
                                     }
-                                    </div>
                                 </div>
-                                <div class="divider"></div>
                             }
-                            <div class="section"></div>
-                            <button type="submit" class="waves-effect waves-light btn-large trigger"><i class="mdi-action-thumb-up right"></i>Edit</button>
+                            <button type="submit" class="btn"><i class="mdi-action-thumb-up right"></i>Edit</button>
                         </form>
                     </div>
                 }
@@ -83,7 +76,6 @@
                                 <p>
                                 @criterion.getDescription
                                 </p>
-                                <div class="row container">
                                 @projects.map { project =>
                                     <p>
                                         @if(voteMapping.get(criterion) == project.getId) {
@@ -102,12 +94,9 @@
                                     <input disabled class="with-gap" value="-1" name="criterionId@criterion.getId" type="radio" id="@criterion.getId-novote" />
                                     <label for="@criterion.getId-novote">No vote</label>
                                 }
-                                </div>
                             </div>
-                            <div class="divider"></div>
                         }
-                        <div class="section"></div>
-                        <button disabled type="submit" class="waves-effect waves-light btn-large "><i class="mdi-action-thumb-up right"></i>Time is already up</button>
+                        <button disabled type="submit" class="btn"><i class="mdi-action-thumb-up right"></i>Time is already up</button>
                     </form>
                 </div>
             }
