@@ -145,3 +145,16 @@ html, body {
     background-color: #757575;
   }
 }
+
+.logo, .logo-text {
+  color: #333;
+  vertical-align: middle;
+  font-size: 3rem;
+  display: inline;
+}
+
+.navbar-brand {
+  @extend .navbar-brand;
+  display: -webkit-inline-box;
+  display: inline-flex;
+}
