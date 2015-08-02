@@ -4,7 +4,7 @@
 # --- !Ups
 
 create table comment (
-  id                        bigint not null,
+  id                        bigint auto_increment not null,
   user_id                   bigint,
   project_id                bigint,
   comment                   varchar(255),
@@ -12,39 +12,39 @@ create table comment (
 ;
 
 create table groups (
-  id                        bigint not null,
+  id                        bigint auto_increment not null,
   user_id                   bigint,
   project_id                bigint,
   constraint pk_groups primary key (id))
 ;
 
 create table image (
-  id                        bigint not null,
+  id                        bigint auto_increment not null,
   project_id                bigint,
-  data                      blob,
+  data                      longblob,
   img_type                  integer,
   constraint pk_image primary key (id))
 ;
 
 create table inbox_message (
-  id                        bigint not null,
+  id                        bigint auto_increment not null,
   sender_id                 bigint,
   receiver_id               bigint,
   comment_id                bigint,
   is_read                   integer,
-  timestamp                 timestamp not null,
+  timestamp                 datetime not null,
   constraint pk_inbox_message primary key (id))
 ;
 
 create table project (
-  id                        bigint not null,
+  id                        bigint auto_increment not null,
   project_name              varchar(255),
   project_description       varchar(255),
   constraint pk_project primary key (id))
 ;
 
 create table rate (
-  id                        bigint not null,
+  id                        bigint auto_increment not null,
   score                     integer,
   user_id                   bigint,
   project_id                bigint,
@@ -53,14 +53,14 @@ create table rate (
 ;
 
 create table rate_criterion (
-  id                        bigint not null,
+  id                        bigint auto_increment not null,
   name                      varchar(255),
   description               varchar(255),
   constraint pk_rate_criterion primary key (id))
 ;
 
 create table setting (
-  id                        bigint not null,
+  id                        bigint auto_increment not null,
   key_name                  varchar(255),
   key_value                 varchar(255),
   id_type                   integer,
@@ -70,7 +70,7 @@ create table setting (
 ;
 
 create table user_account (
-  id                        bigint not null,
+  id                        bigint auto_increment not null,
   username                  varchar(255) not null,
   password                  varchar(255) not null,
   firstname                 varchar(255) not null,
@@ -81,7 +81,7 @@ create table user_account (
 ;
 
 create table vote (
-  id                        bigint not null,
+  id                        bigint auto_increment not null,
   user_id                   bigint,
   criteria_id               bigint,
   project_id                bigint,
@@ -89,33 +89,11 @@ create table vote (
 ;
 
 create table vote_criterion (
-  id                        bigint not null,
+  id                        bigint auto_increment not null,
   name                      varchar(255),
   description               varchar(255),
   constraint pk_vote_criterion primary key (id))
 ;
-
-create sequence comment_seq;
-
-create sequence groups_seq;
-
-create sequence image_seq;
-
-create sequence inbox_message_seq;
-
-create sequence project_seq;
-
-create sequence rate_seq;
-
-create sequence rate_criterion_seq;
-
-create sequence setting_seq;
-
-create sequence user_account_seq;
-
-create sequence vote_seq;
-
-create sequence vote_criterion_seq;
 
 alter table comment add constraint fk_comment_user_1 foreign key (user_id) references user_account (id) on delete restrict on update restrict;
 create index ix_comment_user_1 on comment (user_id);
@@ -150,51 +128,29 @@ create index ix_vote_project_14 on vote (project_id);
 
 # --- !Downs
 
-SET REFERENTIAL_INTEGRITY FALSE;
+SET FOREIGN_KEY_CHECKS=0;
 
-drop table if exists comment;
+drop table comment;
 
-drop table if exists groups;
+drop table groups;
 
-drop table if exists image;
+drop table image;
 
-drop table if exists inbox_message;
+drop table inbox_message;
 
-drop table if exists project;
+drop table project;
 
-drop table if exists rate;
+drop table rate;
 
-drop table if exists rate_criterion;
+drop table rate_criterion;
 
-drop table if exists setting;
+drop table setting;
 
-drop table if exists user_account;
+drop table user_account;
 
-drop table if exists vote;
+drop table vote;
 
-drop table if exists vote_criterion;
+drop table vote_criterion;
 
-SET REFERENTIAL_INTEGRITY TRUE;
-
-drop sequence if exists comment_seq;
-
-drop sequence if exists groups_seq;
-
-drop sequence if exists image_seq;
-
-drop sequence if exists inbox_message_seq;
-
-drop sequence if exists project_seq;
-
-drop sequence if exists rate_seq;
-
-drop sequence if exists rate_criterion_seq;
-
-drop sequence if exists setting_seq;
-
-drop sequence if exists user_account_seq;
-
-drop sequence if exists vote_seq;
-
-drop sequence if exists vote_criterion_seq;
+SET FOREIGN_KEY_CHECKS=1;
 
