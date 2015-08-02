@@ -101,35 +101,30 @@
             <div class="row animated fadeIn">
                 <div class="col-sm-12 block">
                     <a href="@routes.RateProject.index(project.getId)">
-                        <div class="card  project-card">
-                            <div class="img-slope" style="background-image:url(@Image.getUrlDefaultImage(project))">
+                        <div class="project-card">
+
+                            <div class="col-sm-7 col-md-7 img-slope" style="background-image:url(@Image.getUrlDefaultImage(project))">
                                 @*<img src="@Image.getUrlDefaultImage(project)" alt="" style="width: 100%; height: auto;">*@
                             </div>
 
-                                <h2>
-                                    @project.getProjectName
-                                </h2>
+                            <div class="col-sm-5 col-md-5 project-info">
+
+                                <h2>@project.getProjectName</h2>
 
                                 @if(mappedRates.get(project.getId) == 0) {
-                                    <div class="info red-text text-darken-1">
                                         NOT YET RATED
-                                    </div>
                                 } @if(criteriaLeft == 1 && ratingCriteria.size > 1) {
-                                    <div class="info yellow-text text-darken-3">
-                                        <i class="mdi-action-done"></i>
-                                        1 CRITERION LEFT
-                                    </div>
-                                } @if(criteriaLeft > 1 && criteriaLeft < ratingCriteria.size) {
-                                    <div class="info yellow-text text-darken-3">
-                                        <i class="mdi-action-done"></i> @criteriaLeft
-                                        CRITERIA LEFT
-                                    </div>
-                                } @if(criteriaLeft == 0 && ratingCriteria.size > 0) {
-                                    <div class="info teal-text text-darken-1">
-                                        <i class="mdi-action-done-all"></i>
-                                        COMPLETED
-                                    </div>
-                                }
+                                    <i class="mdi-action-done"></i>
+                                    1 CRITERION LEFT
+                            } @if(criteriaLeft > 1 && criteriaLeft < ratingCriteria.size) {
+                                    <i class="mdi-action-done"></i> @criteriaLeft
+                                    CRITERIA LEFT
+                            } @if(criteriaLeft == 0 && ratingCriteria.size > 0) {
+                                    <i class="mdi-action-done-all"></i>
+                                    COMPLETED
+                            }
+                            </div>
+
                         </div>
                     </a>
                 </div>
@@ -137,6 +132,10 @@
         }
 	</div>
 	<!-- End of Page Content -->
+
+    <div class="page">
+
+    </div>
 
 	<div class="fixed-action-btn animated bounceInUp">
 		<a class="btn-floating linkable btn-large trigger" href="@routes.Application.index()" link-to="#index-banner">

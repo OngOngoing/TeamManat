@@ -2,24 +2,29 @@
 
 $white: #eee;
 $dark: #5b5b65;
-$light-green: #111;
+$light-green: #95e4c5;
 
 $space: 15px;
 $db_space: $space*2;
 
 $bootstrap-padding: 15px;
 
+$card-color: rgba(240, 242, 240, 0.98);
+
+h2 {
+  margin: 0;
+}
+
 html, body {
   height: 100%;
+  min-height: 100%;
   background-color: $white;
   font-family: 'Quicksand', sans-serif;
 }
 
 .count-down {
   position: absolute;
-  width: 100%;
   left: 0;
-  text-align: center;
 }
 
 .navbar {
@@ -33,7 +38,6 @@ html, body {
 }
 
 .bg {
-  //background-color: $dark;
   background: $dark url(../img/exceed.jpg) no-repeat bottom;
   background-size: cover;
   width: 100%;
@@ -49,6 +53,17 @@ html, body {
   margin-top: 30px;
   vertical-align: middle;
 
+  .block {
+    margin-left: $space -$bootstrap-padding;
+    margin-right: $space -$bootstrap-padding;
+  }
+
+  .info {
+    height: 100%;
+    position: absolute;
+    display: table-cell;
+    vertical-align: middle;
+  }
 
   .progress-circle {
     width: 100%;
@@ -61,14 +76,11 @@ html, body {
   }
 
   .card {
-    background-color: rgba(240, 242, 240, 0.98);
-    //box-shadow: 0 1px 3px #787887;
-    //border: 1px solid #ddd;
-    border-radius: 8px;
-    //border-style: solid none none none;
+    width: 100%;
     padding: 20px;
     margin-top: $space;
-    width: 100%;
+    background-color: $card-color;
+    border-radius: 8px;
 
     a {
       font-size: 2rem;
@@ -76,33 +88,41 @@ html, body {
 
     a:hover {
       font-style: normal;
+      text-decoration: none;
     }
   }
 
-  .card, .project-card {
-    padding: 0px;
-    overflow: hidden;
+  .project-card {
+    @extend .card;
     min-height: 100px;
+    padding: 0;
+    margin-bottom: 2px;
+    overflow: hidden;
 
     .img-slope {
-      position: absolute;
-      //right: 0;
-      //top: 0;
-      width: 70%;
+      background-size: cover;
+      height: 100px;
+      line-height: 0;
+    }
+
+    .project-info {
       height: 100%;
+      vertical-align: middle;
     }
   }
 
-  .block {
-    margin-left: $space -$bootstrap-padding;
-    margin-right: $space -$bootstrap-padding;
+  .project-card:hover {
+    margin-top: calc(#{$space} - 2px);
+    margin-bottom: 0;
+    border: 2px solid $light-green;
   }
 
-  .info {
-    height: 100%;
-    position: absolute;
-    display: table-cell;
-    vertical-align: middle;
+  .vote-card {
+    @extend .card;
+  }
+
+  .vote-card:hover {
+    background-color: $light-green;
   }
 }
 
@@ -130,6 +150,18 @@ html, body {
   .active {
     background-color: #757575;
   }
+}
+
+.logo, .logo-text {
+  color: #333;
+  vertical-align: middle;
+  font-size: 3rem;
+  display: inline;
+}
+
+.navbar-brand {
+  display: -webkit-inline-box;
+  display: inline-flex;
 }
 
 .rate-btn {
