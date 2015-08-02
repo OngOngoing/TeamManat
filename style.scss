@@ -2,12 +2,14 @@
 
 $white: #eee;
 $dark: #5b5b65;
-$light-green: #111;
+$light-green: #95e4c5;
 
 $space: 15px;
 $db_space: $space*2;
 
 $bootstrap-padding: 15px;
+
+$card-color: rgba(240, 242, 240, 0.98);
 
 html, body {
   height: 100%;
@@ -49,7 +51,6 @@ html, body {
   margin-top: 30px;
   vertical-align: middle;
 
-
   .progress-circle {
     width: 100%;
     height: auto;
@@ -61,7 +62,7 @@ html, body {
   }
 
   .card {
-    background-color: rgba(240, 242, 240, 0.98);
+    background-color: $card-color;
     //box-shadow: 0 1px 3px #787887;
     //border: 1px solid #ddd;
     border-radius: 8px;
@@ -79,19 +80,33 @@ html, body {
     }
   }
 
-  .card, .project-card {
-    padding: 0px;
+  .project-card {
+    @extend .card;
+    padding: 0;
     overflow: hidden;
     min-height: 100px;
+    //background-color: #00acc1;
+    overflow: hidden;
+    //border: 2px solid $card-color;
+    margin-bottom: 2px;
 
     .img-slope {
-      position: absolute;
-      //right: 0;
-      //top: 0;
-      width: 70%;
+      background-size: cover;
+      height: 100px;
+      line-height: 0;
+    }
+
+    .project-info {
       height: 100%;
     }
   }
+
+  .project-card:hover {
+    margin-top: calc(#{$space} - 2px);
+    margin-bottom: 0;
+    border: 2px solid $light-green;
+  }
+
 
   .block {
     margin-left: $space -$bootstrap-padding;
