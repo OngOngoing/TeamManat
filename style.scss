@@ -9,8 +9,10 @@ $db_space: $space*2;
 
 $bootstrap-padding: 15px;
 
-body {
+html, body {
   height: 100%;
+  background-color: $white;
+  font-family: 'Quicksand', sans-serif;
 }
 
 .count-down {
@@ -30,6 +32,14 @@ body {
   color: $white;
 }
 
+.bg {
+  //background-color: $dark;
+  background: $dark url(../img/exceed.jpg) no-repeat bottom;
+  background-size: cover;
+  width: 100%;
+  padding: $db_space;
+}
+
 .container {
   padding: 0;
 }
@@ -39,24 +49,23 @@ body {
   margin-top: 30px;
   vertical-align: middle;
 
+
   .progress-circle {
     width: 100%;
     height: auto;
   }
 
-
   .row {
     margin-left: -$space;
     margin-right: -$space;
-
   }
 
   .card {
-    background-color: #fefefe;
-    box-shadow: 0 1px 3px #787887;
-    border: 1px solid #ddd;
+    background-color: rgba(240, 242, 240, 0.98);
+    //box-shadow: 0 1px 3px #787887;
+    //border: 1px solid #ddd;
     border-radius: 8px;
-    border-style: solid none none none;
+    //border-style: solid none none none;
     padding: 20px;
     margin-top: $space;
     width: 100%;
@@ -67,6 +76,20 @@ body {
 
     a:hover {
       font-style: normal;
+    }
+  }
+
+  .card, .project-card {
+    padding: 0px;
+    overflow: hidden;
+    min-height: 100px;
+
+    .img-slope {
+      position: absolute;
+      //right: 0;
+      //top: 0;
+      width: 70%;
+      height: 100%;
     }
   }
 
