@@ -21,7 +21,6 @@ html, body {
   position: absolute;
   width: 100%;
   left: 0;
-  text-align: center;
 }
 
 .navbar {
@@ -36,6 +35,7 @@ html, body {
 
 .bg {
   //background-color: $dark;
+  //ddd
   background: $dark url(../img/exceed.jpg) no-repeat bottom;
   background-size: cover;
   width: 100%;
