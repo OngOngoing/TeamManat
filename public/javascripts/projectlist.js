@@ -3,7 +3,7 @@ $(function () {
 });
 
 var startColor = '#FC5B3F';
-var endColor = '#6FD57F';
+var endColor = '#29E68E';
 
 window.onload = function onLoad() {
     var circle = new ProgressBar.Circle('#progress-circle', {
@@ -17,7 +17,7 @@ window.onload = function onLoad() {
         easing: 'easeInOut',
         step: function(state, bar) {
             bar.setText((bar.value() * 100).toFixed(0) + '%');
-            $('.progressbar-text').css('color',state.color);
+            $('.progressbar-text').css('color',state.color).css('font-size', '5rem');
             bar.path.setAttribute('stroke',state.color);
             bar.path.setAttribute('stroke-width', state.width);
         }
