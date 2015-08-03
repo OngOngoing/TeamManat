@@ -78,7 +78,8 @@ public class EditProject extends Controller {
             flash("success", "Project is updated!");
         }
         response().setHeader("Cache-Control","no-cache");
-        return redirect(routes.EditProject.index(projectId ,h));
+        return redirect(routes.RateProject.index(projectId));
+//        return redirect(routes.EditProject.index(projectId ,h));
     }
     @Security.Authenticated(Secured.class)
     public static Result removeUser(Long userId, Long proId ,String h){
