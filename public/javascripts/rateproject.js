@@ -1,7 +1,7 @@
 $("div[name='criteriaButton']").click(function () {
     var criteria = this.id;
     var value = $(this).attr('score');
-    $("a[id='" + criteria + "']").each(function () {
+    $("div[id='" + criteria + "']").each(function () {
         if($(this).attr('score') != 0){
             $(this).addClass("btn-flat");
         }else{
