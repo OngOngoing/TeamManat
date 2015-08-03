@@ -201,6 +201,21 @@ body {
   background-size: cover;
 }
 
+.btn-select {
+  border-radius: 50%;
+  background-color: $light-green;
+}
+
+.btn-not-select {
+  border-radius: 50%;
+  background-color: transparent;
+}
+
+.btn-cancel {
+  border-radius: 40%;
+  background-color: $pink;
+}
+
 .carousel-inner {
   .item {
     img {
