@@ -1,4 +1,4 @@
-@(user : User, time : String, comments : List[Inbox], isTimeUp : Boolean)(content: => Html)
+@(user : User, comments : List[Inbox])(content: => Html)(css: => Html)(js: Html)
 @import java.math.BigInteger; var criteriaLeft = 0; var numOfUnread = Inbox.findNumOfUnreadByReceiver(user);
 
 <!DOCTYPE html>
@@ -8,8 +8,7 @@
         <title>Exceed Vote</title>
         <link rel="stylesheet" media="screen" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.96.1/css/materialize.min.css">
         <link rel="stylesheet" media="screen" href="@routes.Assets.at("stylesheets/animate.css")">
-        <link rel="stylesheet" media="screen" href="@routes.Assets.at("stylesheets/projectlist.css")">
-        <link rel="stylesheet" media="screen" href="@routes.Assets.at("stylesheets/init.css")">
+        <link rel="stylesheet" media="screen" href="@routes.Assets.at("stylesheets/style.min.css")">
         <link rel="stylesheet" media="screen" href="@routes.Assets.at("stylesheets/countdown.css")">
         <link rel="icon" type="image/png" href="@routes.Assets.at("img/favicon.png")">
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
@@ -67,12 +66,12 @@
                         <div class="time">
                             <div class="nav-wrapper hide-on-large-only">
                                 <div class="white-text" id="count-down-s" style="cursor: default; margin: 0;">
-                                    <div class="count-down-s center-align" id="countdown-s" end-date="@time"></div>
+                                    <div class="count-down-s center-align" id="countdown-s" end-date="@Setting.getTime()"></div>
                                 </div>
                             </div>
                             <div class="nav-wrapper hide-on-med-and-down">
                                 <div class="white-text" id="count-down" style="cursor: default; margin: 0;">
-                                    <div class="count-down center-align" id="countdown" end-date="@time"></div>
+                                    <div class="count-down center-align" id="countdown" end-date="@Setting.getTime()"></div>
                                 </div>
                             </div>
                         </div>
@@ -130,6 +129,7 @@
         <script src="@routes.Assets.at("javascripts/jquery.scrollbar.js")"></script>
         <script src="@routes.Assets.at("javascripts/Markdown.Converter.js")"></script>
         <script src="@routes.Assets.at("javascripts/Markdown.Sanitizer.js")"></script>
+        @js
         @if(flash.contains("d_success")) {
             <script type="text/javascript">
         Materialize.toast('<i class="mdi-action-done green-text small"></i><span style="padding-left: 5px">@flash.get("d_success")', 4000)
