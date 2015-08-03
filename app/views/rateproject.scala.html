@@ -66,9 +66,9 @@
                                             <div class="divider container"></div> <br>
                                             <div class = "col-sm-12 text-center">
                                                 @for(index <- 1 until 6) {
-                                                    <a id="@criteria.getId" class="waves-effect waves-teal btn btn-flat btn-floating btn-large " name="criteriaButton" score="@index" href="#!">@index</a>
+                                                    <div id="@criteria.getId" class="waves-effect waves-teal btn btn-flat btn-floating btn-large " name="criteriaButton" score="@index">@index</div>
                                                 }
-                                                <a id="@criteria.getId" class="waves-effect waves-red btn btn-flat btn-floating red" name="criteriaButtonRemove" score="0" href="#!"><i class="mdi-navigation-close"></i></a>
+                                                <div id="@criteria.getId" class="waves-effect waves-red btn btn-flat btn-floating red" name="criteriaButtonRemove" score="0"><i class="mdi-navigation-close"></i></div>
                                             </div>
                                         </div>
                                     }
@@ -111,12 +111,12 @@
                                                     <div class="col-sm-12 text-center">
                                                         @for(index <- 1 until 6) {
                                                             @if(rate.getScore == index) {
-                                                                <a id="@rate.getCriterion.getId" class=" waves-effect waves-teal btn btn-large btn-floating " name="criteriaButton" score="@index" href="#!">@index</a>
+                                                                <div id="@rate.getCriterion.getId" class=" waves-effect waves-teal btn btn-large btn-floating " name="criteriaButton" score="@index">@index</div>
                                                             } else {
-                                                                <a id="@rate.getCriterion.getId" class=" waves-effect waves-teal btn btn-large btn-flat btn-floating " name="criteriaButton" score="@index" href="#!">@index</a>
+                                                                <div id="@rate.getCriterion.getId" class=" waves-effect waves-teal btn btn-large btn-flat btn-floating " name="criteriaButton" score="@index">@index</div>
                                                             }
                                                         }
-                                                        <a id="@criteria.getId" class="waves-effect waves-red btn btn-floating red" name="criteriaButtonRemove" score="0" href="#!"><i class="mdi-navigation-close"></i></a>
+                                                        <div id="@criteria.getId" class="waves-effect waves-red btn btn-floating red" name="criteriaButtonRemove" score="0"><i class="mdi-navigation-close"></i></div>
                                                     </div>
                                                 </div>
 
@@ -129,9 +129,9 @@
                                                 <div class="divider container"></div><br>
                                                 <div class = "col-sm-12 text-center">
                                                     @for(index <- 1 until 6) {
-                                                        <a id="@criteria.getId" class="waves-effect waves-teal btn btn-flat btn-floating btn-large " name="criteriaButton" score="@index" href="#!">@index</a>
+                                                        <div id="@criteria.getId" class="waves-effect waves-teal btn btn-flat btn-floating btn-large " name="criteriaButton" score="@index">@index</div>
                                                     }
-                                                    <a id="@criteria.getId" class="waves-effect waves-red btn btn-floating red" name="criteriaButtonRemove" score="0" href="#!"><i class="mdi-navigation-close"></i></a>
+                                                    <div id="@criteria.getId" class="waves-effect waves-red btn btn-floating red" name="criteriaButtonRemove" score="0"><i class="mdi-navigation-close"></i></div>
                                                 </div>
                                             </div>
                                         }
