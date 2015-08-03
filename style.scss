@@ -21,6 +21,8 @@ h2 {
   margin: 0;
 }
 
+//;;;
+
 html, body {
   min-height: 100%;
   background-color: $white;
@@ -185,6 +187,10 @@ body {
     h2 {
       font-size: 5rem;
     }
+  }
+
+  .vote-btn {
+    margin-top: $space;
   }
 }
 
