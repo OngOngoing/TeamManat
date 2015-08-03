@@ -111,15 +111,16 @@
                                                     <div class="col-sm-12 text-center">
                                                         @for(index <- 1 until 6) {
                                                             @if(rate.getScore == index) {
-                                                                <div id="@rate.getCriterion.getId" class=" waves-effect waves-teal btn btn-large btn-floating " name="criteriaButton" score="@index">@index</div>
+                                                                <div id="@rate.getCriterion.getId" class="btn btn-select" name="criteriaButton" score="@index">@index</div>
                                                             } else {
-                                                                <div id="@rate.getCriterion.getId" class=" waves-effect waves-teal btn btn-large btn-flat btn-floating " name="criteriaButton" score="@index">@index</div>
+                                                                <div id="@rate.getCriterion.getId" class="btn btn-not-select" name="criteriaButton" score="@index">@index</div>
                                                             }
                                                         }
-                                                        <div id="@criteria.getId" class="waves-effect waves-red btn btn-floating red" name="criteriaButtonRemove" score="0"><i class="mdi-navigation-close"></i></div>
+                                                        <div id="@criteria.getId" class="btn btn-cancel" name="criteriaButtonRemove" score="0">
+                                                            <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+                                                        </div>
                                                     </div>
                                                 </div>
-
                                             }
                                         }
                                         @if(isRate == false) {
@@ -129,9 +130,11 @@
                                                 <div class="divider container"></div><br>
                                                 <div class = "col-sm-12 text-center">
                                                     @for(index <- 1 until 6) {
-                                                        <div id="@criteria.getId" class="waves-effect waves-teal btn btn-flat btn-floating btn-large " name="criteriaButton" score="@index">@index</div>
+                                                        <div id="@criteria.getId" class="btn btn-not-select" name="criteriaButton" score="@index">@index</div>
                                                     }
-                                                    <div id="@criteria.getId" class="waves-effect waves-red btn btn-floating red" name="criteriaButtonRemove" score="0"><i class="mdi-navigation-close"></i></div>
+                                                    <div id="@criteria.getId" class="btn btn-cancel" name="criteriaButtonRemove" score="0">
+                                                        <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+                                                    </div>
                                                 </div>
                                             </div>
                                         }
