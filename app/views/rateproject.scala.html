@@ -12,7 +12,7 @@
     }
 
 @tmp(user, comments){
-    <div class="container">
+    <div class="container page">
         <div class="animated fadeInDown">
             <div style="margin: 1.78rem 0 1.424rem 0;">
                 <span class="pageBanner" style="font-size: 3.56rem;">@project.getProjectName</span>
@@ -44,17 +44,14 @@
                 </a>
             </div>
         }
-        <div class="animated fadeIn">
-            <div class="card-panel">
-                <i class="mdi-action-description small"></i>
-                <span class="black-text text-darken-2 ">
-                    <div class="projectDescription" data="@project.getProjectDescription"></div>
-                </span>
+        <div class="animated fade in">
+            <div class="vote-card">
+                <div class="projectDescription" data="@project.getProjectDescription"></div>
             </div>
         </div>
         @if(canRate) {
             @if(thisRate.size == 0 && thisComment == null) {
-                <div class="card-panel ">
+                <div class="vote-card">
                     <div class="row">
                         <div class="input-field col-sm-12">
                             <form action="/rateproject" method="post">
@@ -93,7 +90,7 @@
                     </div>
                 </div>
             } else {
-                <div class="card-panel ">
+                <div class="vote-card">
                     <div class="row">
                         <div class="input-field col-sm-12">
                             <form action="/rateproject/edit" method="post">
@@ -162,7 +159,7 @@
                 </div>
             }
         }
-        <div>
+        <div class="vote-card">
             <h5>Project Members</h5>
             <ul>
                 @teamMember.map { member =>
