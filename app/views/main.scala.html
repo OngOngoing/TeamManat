@@ -13,6 +13,7 @@
         @css
         <link rel="icon" type="image/png" href="@routes.Assets.at("img/favicon.png")">
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+        <link href='http://fonts.googleapis.com/css?family=Quicksand' rel='stylesheet' type='text/css'>
         <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
     </head>
     <body>
@@ -61,18 +62,17 @@
                 <div class="container" style="padding : 0 ;">
                     <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="mdi-navigation-menu"></i></a>
                     <div class="left">
-                        <a href="@routes.Application.index()" link-to="#index-banner" class="linkable brand-logo hide-on-med-and-down"><span class="glyphicon glyphicon-ice-lolly-tasted logo" aria-hidden="true"></span><span class="hide-on-large-only" style="font-size: 1.5rem; top: 10px;">eXceed</span><span class="hide-on-med-and-down" style="font-size: 2rem; top: 10px;">eXceed</span></a>
+                        <a class="brand-logo hide-on-med-and-down" href="@routes.Application.index()" link-to="#index-banner">
+                            <span class="logo">e</span>
+                            <img src="@routes.Assets.at("img/xb.png")" style="width: auto; height: 35px; vertical-align: middle;">
+                            <span class="logo">ceed</span>
+                        </a>
                     </div>
                     <div class="center brand-logo">
                         <div class="time">
-                            <div class="nav-wrapper hide-on-large-only">
-                                <div class="white-text" id="count-down-s" style="cursor: default; margin: 0;">
+                            <div class="nav-wrapper">
+                                <div class="black-text" id="count-down-s" style="cursor: default; margin: 0;">
                                     <div class="count-down-s center-align" id="countdown-s" end-date="@Setting.getTime()"></div>
-                                </div>
-                            </div>
-                            <div class="nav-wrapper hide-on-med-and-down">
-                                <div class="white-text" id="count-down" style="cursor: default; margin: 0;">
-                                    <div class="count-down center-align" id="countdown" end-date="@Setting.getTime()"></div>
                                 </div>
                             </div>
                         </div>
@@ -114,8 +114,7 @@
         <section class="content">@content</section>
         <footer class="page-footer">
             <div class="container center">
-                eXceed Vote 2015<br/>
-                power by TeamManat
+                eXceed Vote 2015 - power by TeamManat
             </div>
         </footer>
 

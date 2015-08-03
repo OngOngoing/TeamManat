@@ -59,12 +59,30 @@
     src: url('../font/glyphicons-halflings-regular.eot');
     src: url('../font/glyphicons-halflings-regular.eot?#iefix') format('embedded-opentype'), url('../font/glyphicons-halflings-regular.woff2') format('woff2'), url('../assets/font/glyphicons-halflings-regular.woff') format('woff'), url('../assets/font/glyphicons-halflings-regular.ttf') format('truetype'), url('../font/glyphicons-halflings-regular.svg#glyphicons_halflingsregular') format('svg');
 }
+body {
+    font-family: 'Quicksand', sans-serif;
+    color: #333;
+    background-color: #eee ;
+}
+nav a {
+    color: #333;
+}
+
+nav ul a {
+    color: #333;
+}
+nav .brand-logo {
+    color: #333;
+}
+.dropdown-content li>a {
+    color: #333;
+}
 .background{
     min-height: 100%;
     background: #EDF6FF !important;
 }
 #head{
-    background-color: #4188D2 !important;
+    background-color: #f8f8f8 !important;
     position: fixed;
     top: 0;
     width: 100%;
@@ -114,7 +132,7 @@
 }
 
 .trigger{
-    background-color: #4188D2 !important;
+    background-color: #f8f8f8 !important;
 }
 
 
@@ -216,9 +234,16 @@ ul {
     color: rgba(0, 0, 0, .9);
 }
 .page-footer{
-    color: #ffffff !important;
-    background-color: #75AFEB !important;
+    color: #333;
+    background-color: #f8f8f8 !important;
+    border-color: #e7e7e7 !important;
 }
 .trigger-text{
-    color: #0277bd;
+    color: #333;
+}
+.trigger {
+    color: #333;
+}
+.btn-floating i {
+    color: #333;
 }
