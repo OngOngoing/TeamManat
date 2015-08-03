@@ -1,7 +1,7 @@
-$("div[name='criteriaButton']").click(function () {
+$("a[name='criteriaButton']").click(function () {
     var criteria = this.id;
     var value = $(this).attr('score');
-    $("div[id='" + criteria + "']").each(function () {
+    $("a[id='" + criteria + "']").each(function () {
         if($(this).attr('score') != 0){
             $(this).addClass("btn-flat");
         }else{
@@ -13,7 +13,7 @@ $("div[name='criteriaButton']").click(function () {
 
 });
 
-$("div[name='criteriaButtonRemove']").click(function () {
+$("a[name='criteriaButtonRemove']").click(function () {
     var criteria = this.id;
     var value = $(this).attr('score');
     $("a[id='" + criteria + "']").each(function () {
@@ -30,7 +30,7 @@ $(function() {
     $('.projectDescription').html(convert($textarea));
 });
 
-$("div[name='criteriaButtonRemove']").each(function(){
+$("a[name='criteriaButtonRemove']").each(function(){
     var criteria = this.id;
     var score = $("#" + criteria).attr('value');
     if(score == 0){
@@ -38,11 +38,11 @@ $("div[name='criteriaButtonRemove']").each(function(){
     }
 });
 
-//$(document).ready(function(){
-//    $('.slider').slider({
-//        full_width: true
-//    });
-//    $('.materialboxed').materialbox();
-//
-//
-//});
+$(document).ready(function(){
+    $('.slider').slider({
+        full_width: true
+    });
+    $('.materialboxed').materialbox();
+
+
+});
