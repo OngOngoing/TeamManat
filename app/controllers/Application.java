@@ -292,7 +292,6 @@ public class Application extends Controller {
         User.create("fengjeb", "james.b", "Jim", "Brucker", User.NORMAL_USER);
         User.create("geedev", "keeratipong.u", "Keeratipong", "Ukachoke", User.NORMAL_USER);
 
-        User thisUser;
         thisUser = User.create("b5710547247", "sanraboss", "sanrasern", "chaihetphon", User.NORMAL_USER);
         Groups.create(thisUser, Project.findByName("have a Zeed"));
         thisUser = User.create("b5710503576", "magician123", "Siraphat", "Siripatumrat", User.NORMAL_USER);
