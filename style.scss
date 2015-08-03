@@ -87,6 +87,11 @@ body {
   }
 }
 
+//.vote {
+//  padding-bottom: 30px;
+//  margin: 0;
+//}
+
 .page {
   margin-top: 15px;
   margin-bottom: 15px;
@@ -153,7 +158,6 @@ body {
 
     h2 {
       color: $dark;
-
     }
 
     .img-slope {
@@ -234,10 +238,10 @@ body {
 }
 
 .color-bg {
-  height: 100vh;
-  padding: $bootstrap-padding;
   background: $dark url(../img/blur_l.jpg);
   background-size: cover;
+  padding-top: 15px;
+  padding-bottom: 30px;
 }
 
 .btn-select {
