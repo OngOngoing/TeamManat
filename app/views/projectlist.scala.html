@@ -41,12 +41,12 @@
                             <div class="center promo promo-example">
                             @if(projectsLeft == 0) {
                                 <h2 class="promo-caption flow-text">
-                                    <i class="teal-text badge mdi-action-done"></i>
+                                    <span class="glyphicon glyphicon-signal"></span>
                                     Rate
                                 </h2>
                                 <p class="pink-text darken-2 light center">COMPLETED</p>
                             } else {
-                                <h2 class="promo-caption flow-text"><i class="badge mdi-action-grade"></i>
+                                <h2 class="promo-caption flow-text"><span class="glyphicon glyphicon-signal"></span>
                                     Rate
                                 </h2>
                                 @if(projectsLeft == 1) {
@@ -74,12 +74,12 @@
                         <a href="@routes.VoteController.index()">
                             <div class="center promo promo-example">
                             @if(votesLeft == 0) {
-                                <h2 class="promo-caption flow-text"><i class="teal-text badge mdi-action-done"></i>
+                                <h2 class="promo-caption flow-text"><span class="glyphicon glyphicon-stats"></span>
                                     Vote
                                 </h2>
                                 <p class="pink-text darken-2 light center">COMPLETED</p>
                             } else {
-                                <h2 class="promo-caption flow-text"><i class="badge mdi-editor-insert-chart"></i>
+                                <h2 class="promo-caption flow-text"><span class="glyphicon glyphicon-stats"></span>
                                     Vote
                                 </h2>
                                 @if(votesLeft == 1) {
@@ -148,12 +148,6 @@
 	<!-- End of Page Content -->
 
     <div class="page"></div>
-
-	<div class="fixed-action-btn animated bounceInUp">
-		<a class="btn-floating linkable btn-large trigger" href="@routes.Application.index()" link-to="#index-banner">
-			<i class="large mdi-hardware-keyboard-arrow-up waves-effect waves-light"></i>
-		</a>
-	</div>
 } {
 	<link rel="stylesheet" media="screen" href="@routes.Assets.at("stylesheets/projectlist.css")">
 } {
