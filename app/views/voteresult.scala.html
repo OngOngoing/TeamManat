@@ -3,7 +3,7 @@
 @import models.Vote.ResultBundle
 @import java.math.BigInteger; var totalVotes = 0; var numOfUnread = Inbox.findNumOfUnreadByReceiver(user); var comments = Inbox.findAllByReceiver(user);
 
-@tmp(user, comments){
+@main(user, comments){
     <div class="container padding-nav" style="padding-top: 64px;">
         <div class="animated fadeInDown">
             <h4 class="trigger-text  pageBanner center-align">Voting Result</h4>
