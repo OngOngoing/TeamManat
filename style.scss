@@ -3,6 +3,9 @@
 $white: #eee;
 $dark: #5b5b65;
 $light-green: #95e4c5;
+$teal: #29E68E;
+$pink: #F14055;
+$orange: #E69729;
 
 $space: 15px;
 $db_space: $space*2;
@@ -10,6 +13,8 @@ $db_space: $space*2;
 $bootstrap-padding: 15px;
 
 $card-color: rgba(240, 242, 240, 0.98);
+$light-green-rgba: rgba(149, 228, 197, 0.8);
+$teal-rgba: rgba(31, 230, 142, 0.8);
 
 h2 {
   margin: 0;
@@ -60,6 +65,7 @@ html, body {
   .info {
     height: 100%;
     vertical-align: middle;
+    position: absolute;
 
     h1 {
       color: $white;
@@ -127,10 +133,23 @@ html, body {
 
   .vote-card {
     @extend .card;
+    background-color: $light-green-rgba;
+
+    h2 {
+      color: $dark;
+    }
+
+    .pink-text {
+      color: $pink;
+    }
+
+    .orange-text {
+      color: $orange;
+    }
   }
 
   .vote-card:hover {
-    background-color: $light-green;
+    background-color: $teal-rgba;
   }
 }
 
