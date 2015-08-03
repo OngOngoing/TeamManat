@@ -155,7 +155,7 @@ html, body {
     border: 2px solid $light-green;
   }
 
-  .vote-card {
+  .to-vr-card {
     @extend .card;
     background-color: $light-green-rgba;
 
@@ -172,8 +172,20 @@ html, body {
     }
   }
 
-  .vote-card:hover {
+  .to-vr-card:hover {
     background-color: $teal-rgba;
+  }
+
+  .vote-card {
+    @extend .card;
+
+    clear: both;
+    background-color: $card-color;
+    box-shadow: 0 1px 2px $grey;
+
+    h2 {
+      font-size: 5rem;
+    }
   }
 }
 

@@ -1,18 +1,19 @@
 @(user : User)(projects: List[Project])(voteMapping: Map[VoteCriterion,Long])(criteria: List[VoteCriterion])
 @import java.math.BigInteger; var selected = 0; var numOfUnread = Inbox.findNumOfUnreadByReceiver(user); var comments = Inbox.findAllByReceiver(user);
 @tmp(user, comments){
-    <div class="container" style="padding: 0.5rem 1.5rem 0 4rem;">
+    <div class="container vote page">
         <div class="animated fadeInDown page-header">
             <h2 class="text-center"> Vote your Best</h2>
         </div>
+
         <div class="divider"></div>
 
-        <div class="section animated fadeIn page">
+        <div class="row animated fadeIn">
             @if(!Setting.isTimeUp()) {
                 @if(voteMapping.isEmpty) {
-                    <div class="row">
-                        <form action="@routes.VoteController.addVote()" method="post">
-                            @criteria.map { criterion =>
+                    <form action="@routes.VoteController.addVote()" method="post">
+                        @criteria.map { criterion =>
+                            <div class="col-lg-4 col-lg-offset-4 col-md-4 col-md-offset-4 col-sm-8 col-sm-offset-2 col-xs-12 block">
                                 <div class="vote-card">
                                     <h2 class="trigger-text ">@criterion.getName</h2>
                                     <p>
@@ -29,15 +30,18 @@
                                         <label for="@criterion.getId-novote">No vote</label>
                                     </div>
                                 </div>
-                            }
-                            <div class="section"></div>
-                            <button type="submit" class="btn"><i class="mdi-action-thumb-up right"></i>Vote</button>
-                        </form>
-                    </div>
+                            </div>
+                        }
+                        <div class="section"></div>
+                        <button type="submit" class="btn btn-primary">
+                            <i class="mdi-action-thumb-up right"></i>
+                            Vote
+                        </button>
+                    </form>
                 } else {
-                    <div class="row">
-                        <form action="@routes.VoteController.editVote()" method="post">
-                            @criteria.map { criterion =>
+                    <form action="@routes.VoteController.editVote()" method="post">
+                        @criteria.map { criterion =>
+                            <div class="col-lg-4 col-lg-offset-4 col-md-4 col-md-offset-4 col-sm-8 col-sm-offset-2 col-xs-12 block">
                                 <div class="vote-card">
                                     <h4 >@criterion.getName</h4>
                                     <p>
@@ -62,16 +66,19 @@
                                         <label for="@criterion.getId-novote">No vote</label>
                                     }
                                 </div>
-                            }
-                            <button type="submit" class="btn"><i class="mdi-action-thumb-up right"></i>Edit</button>
-                        </form>
-                    </div>
+                            </div>
+                        }
+                        <button type="submit" class="btn btn-primary">
+                            <i class="mdi-action-thumb-up right"></i>
+                            Edit
+                        </button>
+                    </form>
                 }
             } else {
-                <div class="row">
-                    <form action="@routes.VoteController.editVote()" method="post">
-                        @criteria.map { criterion =>
-                            <div class="vote-card">
+                <form action="@routes.VoteController.editVote()" method="post">
+                    @criteria.map { criterion =>
+                        <div class="col-lg-4 col-lg-offset-4 col-md-4 col-md-offset-4 col-sm-8 col-sm-offset-2 col-xs-12 block">
+                            <div class="card">
                                 <h4>@criterion.getName</h4>
                                 <p>
                                 @criterion.getDescription
@@ -95,11 +102,15 @@
                                     <label for="@criterion.getId-novote">No vote</label>
                                 }
                             </div>
-                        }
-                        <button disabled type="submit" class="btn"><i class="mdi-action-thumb-up right"></i>Time is already up</button>
-                    </form>
-                </div>
+                        </div>
+                    }
+                    <button disabled type="submit" class="btn btn-block">
+                        <i class="mdi-action-thumb-up right"></i>
+                        Time is already up
+                    </button>
+                </form>
             }
+            </div>
         </div>
     </div>
 }{
