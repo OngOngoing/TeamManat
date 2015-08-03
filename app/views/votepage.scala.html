@@ -2,9 +2,9 @@
 @import java.math.BigInteger; var selected = 0; var numOfUnread = Inbox.findNumOfUnreadByReceiver(user); var comments = Inbox.findAllByReceiver(user);
 
 @tmp(user, comments) {
-    <div class="container-fluid color-bg">
+    <div class="color-bg">
         <div class="container vote page">
-            <div class="animated fadeInDown page-header">
+            <div class="animated fadeInDown">
                 <h2 class="text-center"> Vote your Best</h2>
             </div>
 
@@ -124,6 +124,8 @@
             </div>
         </div>
     </div>
+
+
 }{
     <link rel="stylesheet" media="screen" href="/assets/stylesheets/votepage.css">
 }{

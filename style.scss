@@ -197,6 +197,8 @@ body {
 }
 
 .color-bg {
+  height: 100vh;
+  padding: $bootstrap-padding;
   background: $dark url(../img/blur_l.jpg);
   background-size: cover;
 }
