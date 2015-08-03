@@ -38,11 +38,11 @@ $("a[name='criteriaButtonRemove']").each(function(){
     }
 });
 
-$(document).ready(function(){
-    $('.slider').slider({
-        full_width: true
-    });
-    $('.materialboxed').materialbox();
-
-   
-});
+//$(document).ready(function(){
+//    $('.slider').slider({
+//        full_width: true
+//    });
+//    $('.materialboxed').materialbox();
+//
+//
+//});
