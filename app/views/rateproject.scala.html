@@ -1,98 +1,94 @@
 @(user: User)(project: Project)(thisRate: List[Rate])(criterias: List[RateCriterion])(images: List[Image])(teamMember: List[User])(thisComment: Comment)(time : String)(setting: Map[String, String])
-    @import java.math.BigInteger; var isRate = false; var numOfUnread = Inbox.findNumOfUnreadByReceiver(user); var comments = Inbox.findAllByReceiver(user);
-    @canRate = @{
-        import java.util.Calendar
-        import java.text.SimpleDateFormat
+@import java.math.BigInteger; var isRate = false; var numOfUnread = Inbox.findNumOfUnreadByReceiver(user); var comments = Inbox.findAllByReceiver(user);
+@canRate = @{
+    import java.util.Calendar
+    import java.text.SimpleDateFormat
 
-        val today = Calendar.getInstance.getTime
-        val curTimeFormat = new SimpleDateFormat("MM-d-y HH:mm")
-        val stopTime = curTimeFormat.parse(setting.get("stopTime").toString)
+    val today = Calendar.getInstance.getTime
+    val curTimeFormat = new SimpleDateFormat("MM-d-y HH:mm")
+    val stopTime = curTimeFormat.parse(setting.get("stopTime").toString)
 
-        today.before(stopTime)
-    }
+    today.before(stopTime)
+}
 
-@tmp(user, comments){
-    <div class="container page">
+@main(user, comments){
+    <div class="container" style="padding: 7rem 0 0 0;">
         <div class="animated fadeInDown">
-            <div style="margin: 1.78rem 0 1.424rem 0;">
+            <div class="hide-on-small-only" style="margin: 1.78rem 0 1.424rem 0;">
                 <span class="pageBanner" style="font-size: 3.56rem;">@project.getProjectName</span>
             </div>
         </div>
-        @if(images.size != 0) {
-            <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
-                    <!-- Indicators -->
-                <ol class="carousel-indicators">
-                @images.zipWithIndex.map { case (image, index) =>
-                    <li data-target="#carousel-example-generic" data-slide-to="@index" class="@if(index == 0) {active}"></li>
-                }
-                </ol>
-
-                    <!-- Wrapper for slides -->
-                <div class="carousel-inner" role="listbox">
-                @images.zipWithIndex.map { case (image, index) =>
-                    <div class="item @if(index == 0) {active}" style="height: 450px; background-image: url(@routes.Application.getImg(image.getId)); background-size : auto 450px ; background-position : center; background-repeat : no-repeat ;"></div>
-                }
+        <div class="divider"></div>
+        <div class="section">
+            @if(images.size != 0) {
+                <div class="slider">
+                    <ul class="slides" style="height : 450px ;">
+                    @images.map { image =>
+                        <li>
+                            <img class = "responsive" src="@routes.Application.getImg(image.getId)" style="background-size : auto 450px ; background-position-y : 0 ; background-repeat : no-repeat ;" />
+                        </li>
+                    }
+                    </ul>
                 </div>
-                    <!-- Controls -->
-                <a class="left carousel-control new-control" href="#carousel-example-generic" role="button" data-slide="prev">
-                    <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
-                    <span class="sr-only">Previous</span>
-                </a>
-                <a class="right carousel-control new-control" href="#carousel-example-generic" role="button" data-slide="next">
-                    <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
-                    <span class="sr-only">Next</span>
-                </a>
-            </div>
-        }
-        <div class="animated fade in">
-            <div class="vote-card">
-                <div class="projectDescription" data="@project.getProjectDescription"></div>
+            }
+        </div>
+        <div class="animated fadeIn">
+            <div class="card-panel">
+                <i class="mdi-action-description small"></i>
+                <span class="black-text text-darken-2 ">
+                    <div class="projectDescription" data="@project.getProjectDescription"></div></span>
             </div>
         </div>
         @if(canRate) {
             @if(thisRate.size == 0 && thisComment == null) {
-                <div class="vote-card">
-                    <div class="row">
-                        <div class="input-field col-sm-12">
-                            <form action="/rateproject" method="post">
-                                <div class="input-field col-sm-12">
-                                    <input id="projectId" type="hidden" name="projectId" value="@project.getId">
-                                    <input id="userId" type="hidden" name="userId" value="@user.getId">
-                                    <input id="type" type="hidden" name="type" value="1">
-                                    @criterias.map { criteria =>
-                                        <input id="@criteria.getId" type="hidden" name="@criteria.getId" value="0">
-                                        <div class = "row" id="rating">
-                                            <div class = "col-sm-12 text-center">@criteria.getName</div>
-                                            <div class="divider container"></div> <br>
-                                            <div class = "col-sm-12 text-center">
+                <div class="card-panel ">
+                    <div class="input-field col s12">
+                        <form action="/rateproject" method="post">
+                            <div class="input-field">
+                                <input id="projectId" type="hidden" name="projectId" value="@project.getId">
+                                <input id="userId" type="hidden" name="userId" value="@user.getId">
+                                <input id="type" type="hidden" name="type" value="1">
+                                @criterias.map { criteria =>
+                                    <input id="@criteria.getId" type="hidden" name="@criteria.getId" value="0">
+                                    <div class = "row" id="rating">
+                                        <div class = "criterion-name col s12 center trigger-text ">@criteria.getName</div>
+                                        <div class="divider container"></div><br>
+                                        <div class = "col s12 center">
+                                            <div class = "hide-on-med-and-up">
                                                 @for(index <- 1 until 6) {
-                                                    <div id="@criteria.getId" class="waves-effect waves-teal btn btn-flat btn-floating btn-large " name="criteriaButton" score="@index">@index</div>
+                                                    <a id="@criteria.getId" class="waves-effect waves-teal btn btn-flat btn-floating " name="criteriaButton" score="@index" href="#!">@index</a>
                                                 }
-                                                <div id="@criteria.getId" class="waves-effect waves-red btn btn-flat btn-floating red" name="criteriaButtonRemove" score="0"><i class="mdi-navigation-close"></i></div>
+                                                <a id="@criteria.getId" class="waves-effect waves-red btn btn-floating red" name="criteriaButtonRemove" score="0" href="#!"><i class="mdi-navigation-close"></i></a>
+                                            </div>
+                                            <div class = "hide-on-small-only">
+                                                @for(index <- 1 until 6) {
+                                                    <a id="@criteria.getId" class="waves-effect waves-teal btn btn-flat btn-floating btn-large " name="criteriaButton" score="@index" href="#!">@index</a>
+                                                }
+                                                <a id="@criteria.getId" class="waves-effect waves-red btn btn-flat btn-floating red" name="criteriaButtonRemove" score="0" href="#!"><i class="mdi-navigation-close"></i></a>
                                             </div>
                                         </div>
-                                    }
-                                    <div class="row">
-                                        <div class="input-field col-sm-12 text-center">
-                                            <textarea id="textarea1" class="materialize-textarea " name="comment" length="255" placeholder="Give Project Feedback" ></textarea>
-                                            <label for="textarea1">Comment</label>
-                                        </div>
                                     </div>
-                                    <div class="row center text-center">
-                                    <button type="submit" class="rate-btn">
+                                }
+                                <div class="row">
+                                    <div class="input-field col s12">
+                                        <textarea id="textarea1" class="materialize-textarea " name="comment" length="255" placeholder="Give Project Feedback" ></textarea>
+                                        <label for="textarea1">Comment</label>
+                                    </div>
+                                </div>
+                                <div class="row center">
+                                    <button type="submit" class="waves-effect waves-light btn-large trigger">
                                         <i class="mdi-action-thumb-up right"></i>
                                         Rate
                                     </button>
-                                    </div>
                                 </div>
-                            </form>
-                        </div>
+                            </div>
+                        </form>
                     </div>
                 </div>
             } else {
-                <div class="vote-card">
+                <div class="card-panel ">
                     <div class="row">
-                        <div class="input-field col-sm-12">
+                        <div class="input-field col s12">
                             <form action="/rateproject/edit" method="post">
                                 <input id="projectId" type="hidden" name="projectId" value="@project.getId">
                                 <input id="userId" type="hidden" name="userId" value="@user.getId">
@@ -105,22 +101,34 @@
                                             @if(rate.getCriterion.getId == criteria.getId) {
                                                 @(isRate = true)
                                                 <input id="@rate.getCriterion.getId" type="hidden" name="@rate.getCriterion.getId" value="@rate.getScore">
-                                                <div class = "col-sm-12 text-center">@criteria.getName</div>
+                                                <div class = "criterion-name col s12 center text-darken-2 trigger-text ">@criteria.getName</div>
                                                 <div class="divider container"></div> <br>
                                                 <div class="row">
-                                                    <div class="col-sm-12 text-center">
-                                                        @for(index <- 1 until 6) {
-                                                            @if(rate.getScore == index) {
-                                                                <div id="@rate.getCriterion.getId" class="btn btn-select" name="criteriaButton" score="@index">@index</div>
-                                                            } else {
-                                                                <div id="@rate.getCriterion.getId" class="btn btn-not-select" name="criteriaButton" score="@index">@index</div>
+                                                    <div class="col s12 center">
+                                                        <div class = "hide-on-med-and-up">
+                                                            @for(index <- 1 until 6) {
+                                                                @if(rate.getScore == index) {
+                                                                    <a id="@rate.getCriterion.getId" class=" waves-effect waves-teal btn btn-floating " name="criteriaButton" score="@index" href="#!">@index</a>
+                                                                } else {
+                                                                    <a id="@rate.getCriterion.getId" class=" waves-effect waves-teal btn btn-flat btn-floating " name="criteriaButton" score="@index" href="#!">@index</a>
+                                                                }
                                                             }
-                                                        }
-                                                        <div id="@criteria.getId" class="btn btn-cancel" name="criteriaButtonRemove" score="0">
-                                                            <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+                                                            <a id="@criteria.getId" class="waves-effect waves-red btn btn-floating red" name="criteriaButtonRemove" score="0" href="#!"><i class="mdi-navigation-close"></i></a>
                                                         </div>
+                                                        <div class = "hide-on-small-only">
+                                                            @for(index <- 1 until 6) {
+                                                                @if(rate.getScore == index) {
+                                                                    <a id="@rate.getCriterion.getId" class=" waves-effect waves-teal btn btn-large btn-floating " name="criteriaButton" score="@index" href="#!">@index</a>
+                                                                } else {
+                                                                    <a id="@rate.getCriterion.getId" class=" waves-effect waves-teal btn btn-large btn-flat btn-floating " name="criteriaButton" score="@index" href="#!">@index</a>
+                                                                }
+                                                            }
+                                                            <a id="@criteria.getId" class="waves-effect waves-red btn btn-floating red" name="criteriaButtonRemove" score="0" href="#!"><i class="mdi-navigation-close"></i></a>
+                                                        </div>
+
                                                     </div>
                                                 </div>
+
                                             }
                                         }
                                         @if(isRate == false) {
@@ -128,12 +136,18 @@
                                             <div class = "row" id="rating">
                                                 <div class = "criterion-name col s12 center trigger-text ">@criteria.getName</div>
                                                 <div class="divider container"></div><br>
-                                                <div class = "col-sm-12 text-center">
-                                                    @for(index <- 1 until 6) {
-                                                        <div id="@criteria.getId" class="btn btn-not-select" name="criteriaButton" score="@index">@index</div>
-                                                    }
-                                                    <div id="@criteria.getId" class="btn btn-cancel" name="criteriaButtonRemove" score="0">
-                                                        <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+                                                <div class = "col s12 center">
+                                                    <div class = "hide-on-med-and-up">
+                                                        @for(index <- 1 until 6) {
+                                                            <a id="@criteria.getId" class="waves-effect waves-teal btn btn-flat btn-floating " name="criteriaButton" score="@index" href="#!">@index</a>
+                                                        }
+                                                        <a id="@criteria.getId" class="waves-effect waves-red btn btn-floating red" name="criteriaButtonRemove" score="0" href="#!"><i class="mdi-navigation-close"></i></a>
+                                                    </div>
+                                                    <div class = "hide-on-small-only">
+                                                        @for(index <- 1 until 6) {
+                                                            <a id="@criteria.getId" class="waves-effect waves-teal btn btn-flat btn-floating btn-large " name="criteriaButton" score="@index" href="#!">@index</a>
+                                                        }
+                                                        <a id="@criteria.getId" class="waves-effect waves-red btn btn-floating red" name="criteriaButtonRemove" score="0" href="#!"><i class="mdi-navigation-close"></i></a>
                                                     </div>
                                                 </div>
                                             </div>
@@ -141,18 +155,19 @@
                                     </div>
                                 }
                                 <div class="row">
-                                    <div class="col-sm-12 text-center">
+                                    <div class="input-field col s12">
                                     @if(thisComment != null) {
                                         <textarea id="textarea1" class="materialize-textarea " name="comment" length="255" placeholder="Give Project Feedback">@thisComment.getComment</textarea>
+                                        <label for="textarea1">Comment</label>
                                     } else {
                                         <textarea id="textarea1" class="materialize-textarea " name="comment" length="255" placeholder="Give Project Feedback"></textarea>
+                                        <label for="textarea1">Comment</label>
                                     }
-                                    <label for="textarea1">Comment</label>
+
                                     </div>
                                 </div>
-                                <div class="row center text-center">
-                                    <button type="submit" class="rate-btn">
-                                        <i class="mdi-action-thumb-up right"></i>
+                                <div class="row center">
+                                    <button type="submit" class="waves-effect waves-light btn-large trigger"><i class="mdi-action-thumb-up right"></i>
                                         Update
                                     </button>
                                 </div>
@@ -162,16 +177,45 @@
                 </div>
             }
         }
-        <div class="vote-card">
-            <h5>Project Members</h5>
-            <ul>
-                @teamMember.map { member =>
-                    <li>
-                    @member.getFirstname() @member.getLastname()
-                    </li>
-                }
+        <div class="animated fadeIn">
+            <ul class="collapsible" data-collapsible="accordion">
+                <li>
+                    <div class="collapsible-header"><i class="mdi-action-face-unlock"></i>
+                        Project Members<i class="mdi-navigation-expand-more right"></i></div>
+                    <div class="collapsible-body" style="  background-color: white;">
+                        <table class = "centered hoverable">
+                            <thead>
+                                <tr>
+                                    <th data-field="cname">Firstname</th>
+                                    <th data-field="score">Lastname</th>
+                                </tr>
+                            </thead>
+                            <tbody >
+                            @teamMember.map { member =>
+                                <tr>
+                                    <td >@member.getFirstname</td>
+                                    <td >@member.getLastname</td>
+                                </tr>
+                            }
+                            </tbody>
+                        </table>
+                    </div>
+                </li>
             </ul>
         </div>
+    </div>
+
+    <div class="fixed-action-btn animated bounceInUp" style="bottom : 45 px ; right : 40 px ;">
+        <a class="btn-floating btn-large trigger" href="@routes.ProjectList.index()">
+            <i class="large mdi-action-home waves-effect waves-light"></i>
+        </a>
+        <ul>
+            <li><a class="btn-floating red " href="@routes.Application.logout()"><i class="large mdi-action-settings-power"></i></a></li>
+            @if(user.getIdtype == User.ADMINISTRATOR) {
+                <li><a class="btn-floating yellow derken-1" href="@routes.AdminPage.index()"><i class="large mdi-action-settings waves-effect waves-light"></i></a></li>
+            }
+
+        </ul>
     </div>
 }{
     <link rel="stylesheet" media="screen" href="@routes.Assets.at("stylesheets/rateproject.css")">
