@@ -13,15 +13,13 @@ $db_space: $space*2;
 
 $bootstrap-padding: 15px;
 
-$card-color: rgba(240, 242, 240, 0.98);
+$card-color: rgba(240, 242, 240, 0.8);
 $light-green-rgba: rgba(149, 228, 197, 0.8);
 $teal-rgba: rgba(31, 230, 142, 0.8);
 
 h2 {
   margin: 0;
 }
-
-//;;;
 
 html, body {
   min-height: 100%;
@@ -61,8 +59,8 @@ body {
 }
 
 .page {
-
-  margin-top: 30px;
+  margin-top: 15px;
+  margin-bottom: 15px;
   vertical-align: middle;
 
   .block {
@@ -185,13 +183,22 @@ body {
     box-shadow: 0 1px 2px $grey;
 
     h2 {
-      font-size: 5rem;
+      font-size: 2.5rem;
     }
   }
 
   .vote-btn {
     margin-top: $space;
+
+    .btn {
+      width: 100%;
+    }
   }
+}
+
+.color-bg {
+  background: $dark url(../img/blur_l.jpg);
+  background-size: cover;
 }
 
 .carousel-inner {
