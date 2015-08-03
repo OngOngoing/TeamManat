@@ -58,17 +58,19 @@
         @if(canRate) {
             @if(thisRate.size == 0 && thisComment == null) {
                 <div class="card-panel ">
+                    <div class="row">
                         <div class="input-field col-sm-12">
                             <form action="/rateproject" method="post">
-                                <div class="input-field">
+                                <div class="input-field col-sm-12">
                                     <input id="projectId" type="hidden" name="projectId" value="@project.getId">
                                     <input id="userId" type="hidden" name="userId" value="@user.getId">
                                     <input id="type" type="hidden" name="type" value="1">
                                     @criterias.map { criteria =>
                                         <input id="@criteria.getId" type="hidden" name="@criteria.getId" value="0">
                                         <div class = "row" id="rating">
-                                            <div class = "col-sm-12">@criteria.getName</div>
-                                            <div class = "col-sm-12">
+                                            <div class = "col-sm-12 text-center">@criteria.getName</div>
+                                            <div class="divider container"></div> <br>
+                                            <div class = "col-sm-12 text-center">
                                                 @for(index <- 1 until 6) {
                                                     <a id="@criteria.getId" class="waves-effect waves-teal btn btn-flat btn-floating btn-large " name="criteriaButton" score="@index" href="#!">@index</a>
                                                 }
@@ -77,13 +79,13 @@
                                         </div>
                                     }
                                     <div class="row">
-                                        <div class="input-field col s12">
+                                        <div class="input-field col-sm-12 text-center">
                                             <textarea id="textarea1" class="materialize-textarea " name="comment" length="255" placeholder="Give Project Feedback" ></textarea>
                                             <label for="textarea1">Comment</label>
                                         </div>
                                     </div>
-                                    <div class="row center">
-                                    <button type="submit" class="waves-effect waves-light btn-large trigger">
+                                    <div class="row center text-center">
+                                    <button type="submit" class="rate-btn">
                                         <i class="mdi-action-thumb-up right"></i>
                                         Rate
                                     </button>
@@ -91,6 +93,7 @@
                                 </div>
                             </form>
                         </div>
+                    </div>
                 </div>
             } else {
                 <div class="card-panel ">
@@ -141,7 +144,7 @@
                                     </div>
                                 }
                                 <div class="row">
-                                    <div class="col-sm-12">
+                                    <div class="col-sm-12 text-center">
                                     @if(thisComment != null) {
                                         <textarea id="textarea1" class="materialize-textarea " name="comment" length="255" placeholder="Give Project Feedback">@thisComment.getComment</textarea>
                                     } else {
@@ -150,10 +153,11 @@
                                     <label for="textarea1">Comment</label>
                                     </div>
                                 </div>
-                                <div class="row text-center">
-                                <button type="submit" class="waves-effect waves-light btn-large trigger"><i class="mdi-action-thumb-up right"></i>
-                                    Update
-                                </button>
+                                <div class="row center text-center">
+                                    <button type="submit" class="rate-btn">
+                                        <i class="mdi-action-thumb-up right"></i>
+                                        Update
+                                    </button>
                                 </div>
                             </form>
                         </div>
