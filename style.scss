@@ -151,6 +151,11 @@ body {
 
     vertical-align: middle;
 
+    h2 {
+      color: $dark;
+
+    }
+
     .img-slope {
       background-position: center;
       background-size: cover;
@@ -163,6 +168,7 @@ body {
       //height: 100%;
       margin-top: 20px;
       margin-bottom: 20px;
+      color: $dark;
 
       .undone {
         color: $pink;
@@ -182,6 +188,7 @@ body {
     margin-top: calc(#{$space} - 2px);
     margin-bottom: 0;
     border: 2px solid $light-green;
+    color: $dark;
   }
 
   .to-vr-card {
