@@ -29,6 +29,9 @@ html, body {
   font-family: 'Quicksand', sans-serif;
 }
 
+body {
+  padding-bottom: 60px;
+}
 .count-down {
   position: absolute;
   left: 0;
@@ -230,8 +233,8 @@ html, body {
 }
 
 .footer {
-  //bottom: 0;
-  position: absolute;
+  bottom: 0;
+  position: fixed;
   width: 100%;
 
   .navbar-text {

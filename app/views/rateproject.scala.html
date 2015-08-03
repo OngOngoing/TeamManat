@@ -23,18 +23,14 @@
                     <!-- Indicators -->
                 <ol class="carousel-indicators">
                 @images.zipWithIndex.map { case (image, index) =>
-                    @if(image.getImgType() != Image.DEFAULT) {
-                        <li data-target="#carousel-example-generic" data-slide-to="@index" class="@if(index == 0) {active}"></li>
-                    }
+                    <li data-target="#carousel-example-generic" data-slide-to="@index" class="@if(index == 0) {active}"></li>
                 }
                 </ol>
 
                     <!-- Wrapper for slides -->
                 <div class="carousel-inner" role="listbox">
                 @images.zipWithIndex.map { case (image, index) =>
-                    @if(image.getImgType() != Image.DEFAULT) {
-                        <div class="item @if(index == 0) {active}" style="height: 450px; background-image: url(@routes.Application.getImg(image.getId)); background-size : auto 450px ; background-position : center; background-repeat : no-repeat ;"></div>
-                    }
+                    <div class="item @if(index == 0) {active}" style="height: 450px; background-image: url(@routes.Application.getImg(image.getId)); background-size : auto 450px ; background-position : center; background-repeat : no-repeat ;"></div>
                 }
                 </div>
                     <!-- Controls -->
