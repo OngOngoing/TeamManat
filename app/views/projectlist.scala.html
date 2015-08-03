@@ -7,7 +7,7 @@
     <div class="bg">
         <div id="index-banner" class="container status page">
             <div class="row">
-                <div class="col-sm-8 col-md-8 block info">
+                <div class="col-sm-8 col-md-8 block info animated fadeInDown">
                 @if(votesLeft + projectsLeft == 0) {
                     <h1 class="flow-text teal-text"><b>Congratulation!</b></h1>
                     <p class="flow-text">You have successfully completed the eXceed Vote.</p>
@@ -28,7 +28,7 @@
             </div>
             <div class="row">
                 <div class="col-sm-6 col-md-6 block text-center">
-                    <div class="to-vr-card">
+                    <div class="to-vr-card animated fadeInDown">
                     @if(Setting.isTimeUp()) {
                         <a link-to="@routes.RateCalculator.index()" href="#project-list">
                             <div class="center promo promo-example">
@@ -62,7 +62,7 @@
                     </div>
                 </div>
                 <div class="col-sm-6 col-md-6 block text-center">
-                    <div class="to-vr-card">
+                    <div class="to-vr-card animated fadeInDown">
                     @if(Setting.isTimeUp()) {
                         <a href="@routes.VoteController.showResult()">
                             <div class="center promo promo-example">
@@ -107,7 +107,7 @@
             <div class="row animated fadeIn">
                 <div class="col-sm-12 block">
                     <a href="@routes.RateProject.index(project.getId)">
-                        <div class="project-card">
+                        <div class="project-card animated fadeInDown">
 
                             <div class="col-sm-7 col-md-7 img-slope" style="background-image:url(@Image.getUrlDefaultImage(project))">
                                 @*<img src="@Image.getUrlDefaultImage(project)" alt="" style="width: 100%; height: auto;">*@
