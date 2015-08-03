@@ -52,6 +52,12 @@ html, body {
   padding: 0;
 }
 
+.status {
+  .block {
+    margin-top: $space;
+  }
+}
+
 .page {
 
   margin-top: 30px;
@@ -65,7 +71,7 @@ html, body {
   .info {
     height: 100%;
     vertical-align: middle;
-    position: absolute;
+    //position: absolute;
 
     h1 {
       color: $white;
@@ -112,6 +118,8 @@ html, body {
     margin-bottom: 2px;
     overflow: hidden;
 
+    vertical-align: middle;
+
     .img-slope {
       background-size: cover;
       height: 100px;
@@ -119,9 +127,21 @@ html, body {
     }
 
     .project-info {
-      min-height: 100px;
-      height: 100%;
-      vertical-align: middle;
+      //min-height: 100px;
+      //height: 100%;
+      margin-top: 20px;
+
+      .undone {
+        color: $pink;
+      }
+
+      .done {
+        color: $orange;
+      }
+
+      .done-all {
+        color: $teal;
+      }
     }
   }
 
@@ -195,7 +215,13 @@ html, body {
   //bottom: 0;
   position: absolute;
   width: 100%;
-  padding-left: 20px;
+
+  .navbar-text {
+    @extend .text-center;
+    margin-left: 0;
+    margin-right: 0;
+    width: 100%;
+  }
 }
 .rate-btn {
   -webkit-border-radius: 7;
