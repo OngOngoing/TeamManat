@@ -118,6 +118,19 @@
                 </div>
             </nav>
 
+            @if(flash.contains("error")) {
+                <div class="alert alert-danger fade in" role="alert">
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <strong>Error!</strong> @flash.get("error")!
+                </div>
+            }
+            @if(flash.contains("success")) {
+                <div class="alert alert-success fade in" role="alert">
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <strong>Success!</strong> @flash.get("success")!
+                </div>
+            }
+
             @content
 
             <div class="navbar navbar-default footer">
@@ -137,15 +150,5 @@
             <script src="@routes.Assets.at("javascripts/Markdown.Converter.js")"></script>
             <script src="@routes.Assets.at("javascripts/Markdown.Sanitizer.js")"></script>
             @js
-            @if(flash.contains("success")) {
-                <script type="text/javascript">
-        Materialize.toast('<i class="mdi-action-done green-text small"></i><span style="padding-left: 5px">@flash.get("success")', 4000)
-        </script>
-            }
-            @if(flash.contains("error")) {
-                <script type="text/javascript">
-        Materialize.toast('<i class="mdi-alert-warning red-text small"></i>@flash.get("error")', 4000)
-      </script>
-            }
         </body>
     </html>
