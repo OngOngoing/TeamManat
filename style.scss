@@ -37,7 +37,7 @@ html, body {
 }
 
 .bg {
-  background: $dark url(../img/exceed.jpg) no-repeat bottom;
+  background: $dark url(../img/exceed.jpg) no-repeat center;
   background-size: cover;
   width: 100%;
   padding: $db_space;
@@ -59,9 +59,17 @@ html, body {
 
   .info {
     height: 100%;
-    position: absolute;
-    display: table-cell;
     vertical-align: middle;
+
+    h1 {
+      color: $white;
+      font-size: 5rem;
+    }
+
+    p {
+      color: $white;
+      font-size: 2rem;
+    }
   }
 
   .progress-circle {
@@ -109,7 +117,6 @@ html, body {
       height: 100%;
       vertical-align: middle;
     }
-
   }
 
   .project-card:hover {
