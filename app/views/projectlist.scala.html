@@ -20,7 +20,7 @@
                     }
                 }
                 </div>
-                <div class="col-sm-4 col-sm-offset-8 col-md-4 col-md-offset-8">
+                <div class="col-sm-4 col-md-4 block">
                     <div class="progress-padding">
                         <div class="progress-circle" id="progress-circle" value="@progress"></div>
                     </div>
@@ -118,17 +118,25 @@
                                 <h2>@project.getProjectName</h2>
 
                                 @if(mappedRates.get(project.getId) == 0) {
+                                    <div class="undone">
                                         NOT YET RATED
+                                    </div>
                                 } @if(criteriaLeft == 1 && ratingCriteria.size > 1) {
-                                    <i class="mdi-action-done"></i>
-                                    1 CRITERION LEFT
-                            } @if(criteriaLeft > 1 && criteriaLeft < ratingCriteria.size) {
-                                    <i class="mdi-action-done"></i> @criteriaLeft
-                                    CRITERIA LEFT
-                            } @if(criteriaLeft == 0 && ratingCriteria.size > 0) {
-                                    <i class="mdi-action-done-all"></i>
-                                    COMPLETED
-                            }
+                                    <div class="done">
+                                        <i class="mdi-action-done"></i>
+                                        1 CRITERION LEFT
+                                    </div>
+                                } @if(criteriaLeft > 1 && criteriaLeft < ratingCriteria.size) {
+                                    <div class="done">
+                                        <i class="mdi-action-done"></i> @criteriaLeft
+                                        CRITERIA LEFT
+                                    </div>
+                                } @if(criteriaLeft == 0 && ratingCriteria.size > 0) {
+                                    <div class="done-all">
+                                        <i class="mdi-action-done-all"></i>
+                                        COMPLETED
+                                    </div>
+                                }
                             </div>
 
                         </div>
