@@ -105,9 +105,11 @@ html, body {
     }
 
     .project-info {
+      min-height: 100px;
       height: 100%;
       vertical-align: middle;
     }
+
   }
 
   .project-card:hover {
